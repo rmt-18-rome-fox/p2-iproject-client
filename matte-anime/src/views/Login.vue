@@ -35,6 +35,14 @@
           </div>
         </div>
 
+        <!-- <div class="flex items-center justify-between">
+          <facebook-login class="button"
+            appId="298771618827246"
+            @login="getUserData"
+            @logout="onLogout"
+            @get-initial-status="getUserData">
+          </facebook-login>
+        </div> -->
       </form>
     </div>
   </div>
@@ -43,6 +51,7 @@
 
 <script>
 import swal from 'sweetalert2'
+import facebookLogin from 'facebook-login-vuejs';
 
 export default {
   name: "Login",
@@ -51,6 +60,9 @@ export default {
       email: "",
       password: ""
     }
+  },
+  components: {
+    facebookLogin
   },
   methods: {
     toRegister(){

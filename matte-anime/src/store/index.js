@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import localUrl from '../apis/local'
+import jikanUrl from '../apis/jikan'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    upComingAnimes: []
   },
   mutations: {
     SET_IS_LOGIN(state, payload){
       state.isLogin = payload
+    },
+    SET_UP_COMING_ANIMES(state, payload){
+      state.upComingAnimes = payload
     }
   },
   actions: {
@@ -38,6 +43,15 @@ export default new Vuex.Store({
         .catch((err)=> {
           console.log({err});
         })
+      })
+    },
+    fetchAnimes({commit}, payload){
+      jikanUrl.get('/season/later')
+      .then((res) => {
+        console.log({res});
+      })
+      .catch((err) => {
+        console.log({err});
       })
     }
   },
