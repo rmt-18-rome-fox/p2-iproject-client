@@ -10,7 +10,6 @@
             <h5 class="card-category">Category: {{ task.Category.name }}</h5>
             <!-- <h6 class="card-description">Description: {{ task.description }}</h6> -->
             <button @click.prevent="getTaskDetail(task.id)" class="btn btn-primary my-2">Tasks Details</button>
-            <!-- <button @click.prevent="postWishlist(product.id)" class="btn btn-success">Add to Wishlist</button> -->
           </div>
         </div>
       </div>
