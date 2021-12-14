@@ -26,6 +26,19 @@ export default {
   components: {
     TaskCard,
   },
+  methods: {
+      getTasks(){
+          this.$store.dispatch('getTasks')
+      }
+  },
+  created(){
+      this.getTasks()
+  },
+  computed: {
+      tasks(){
+          return this.$store.state.tasks
+      }
+  }
 };
 </script>
 

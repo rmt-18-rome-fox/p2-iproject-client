@@ -49,7 +49,7 @@ export default {
     methods: {
         doRegister(){
             this.$store.dispatch('doRegister',{
-                name: this.username,
+                name: this.name,
                 email: this.email,
                 password: this.password,
                 address: this.address

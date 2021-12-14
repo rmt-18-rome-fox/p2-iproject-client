@@ -9,18 +9,13 @@
         <ul class="navbar-nav">
           
                 <li class="nav-item active">
-                  <router-link class="nav-link" to="/login">Login<span class="sr-only">(current)</span></router-link>
+                  <router-link v-if="!isLogin" to="/login" class="nav-link">Login<span class="sr-only">(current)</span></router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link class="nav-link" to="/register">Register</router-link>
+                  <router-link v-if="!isLogin" to="/register" class="nav-link">Register</router-link>
                 </li>
-                <li  class="nav-item">
-                    <router-link class="nav-link" to="/TaskList">Task List</router-link>
-                </li>
-      
-          
-           <li style="margin-left:1000px" class="nav-item">
-            <a class="nav-link" @click.prevent="doLogout" >Logout</a>
+           <li style="margin-left:1250px" class="nav-item">
+            <a class="nav-link" @click.prevent="doLogout" v-if="isLogin">Logout</a>
           </li>
 
         </ul>
@@ -32,7 +27,22 @@
 
 export default {
     name: "Navbar",
-    
+    created(){
+        if(localStorage.getItem("access_token")) this.$store.commit("set_isLogin", true)
+        else this.$store.commit('set_isLogin', false)
+    },
+    computed: {
+        isLogin (){
+            return this.$store.state.isLogin
+        }
+    },
+    methods: {
+        doLogout(){
+            localStorage.clear()
+            this.$store.commit('set_isLogin', false)
+            this.$router.push('/login')
+        }
+    }
 }
 </script>
 
