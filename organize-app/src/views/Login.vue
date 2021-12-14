@@ -1,5 +1,5 @@
 <template>
-   <div>
+  <div>
     <section class="wrapper" id="login-form">
       <div
         class="container"
@@ -13,9 +13,9 @@
           <h2>Log in</h2>
           <form @submit.prevent="doLogin">
             <div class="mb-3">
-              <div v-if="error" class="alert alert-danger" role="alert">
+              <!-- <div v-if="error" class="alert alert-danger" role="alert">
                 <p>{{ error }}</p>
-              </div>
+              </div> -->
               <label for="InputEmail" class="form-label">Email</label>
               <input
                 v-model="email"
@@ -35,7 +35,6 @@
             </div>
             <br />
             <button type="submit" class="btn btn-primary">Sign In</button>
-         
           </form>
         </div>
       </div>
@@ -44,26 +43,31 @@
 </template>
 
 <script>
-import router from "../router/index"
+// import router from "../router/index"
 
 export default {
-    name: "Login",
-    methods: {
-        doLogin(){
-            this.$store.dispatch('doLogin',{
-                email: this.email,
-                password: this.password
-            })
-            .then(()=>{
-                this.$router.push('/')
-                router.push("/")
-            })
-        }
-    }
-
-}
+  name: "Login",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    doLogin() {
+      this.$store
+        .dispatch("doLogin", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.push("/");
+          // router.push("/")
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>

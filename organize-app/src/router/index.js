@@ -10,15 +10,22 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next({ name: 'Home' })
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/login',
     name: 'Login',
     component: Login,
-    beforeEnter: (to, from, next) =>{
-      if (localStorage.getItem('access_token')){
-        next({name: 'Home'})
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('access_token')) {
+        next({ name: 'Home' })
       } else {
         next()
       }
@@ -28,13 +35,18 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
-    beforeEnter: (to, from, next)=>{
-      if(localStorage.getItem('access_token')){
-        next({name: 'Home'})
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('access_token')) {
+        next({ name: 'Home' })
       } else {
         next()
       }
     }
+  },
+  {
+    path: '/task/:id',
+    name: 'TaskDetail',
+    component: TaskDetail
   }
 ]
 
