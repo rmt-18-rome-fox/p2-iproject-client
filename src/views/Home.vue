@@ -7,7 +7,7 @@
       </form>
     </div><br>
     <div class="col">
-      <Draggable v-for="note in notes" :key="note.id" :note="note"></Draggable>
+      <Draggable @deleteNote="deleteNote" v-for="note in notes" :key="note.id" :note="note"></Draggable>
     </div>
   </div>
 </template>
@@ -30,6 +30,14 @@ export default {
       this.$store.dispatch('addNote', {
         title: this.title
       })
+        .then(() => {
+          this.$store.dispatch('getNotes')
+        })
+      
+      this.title = ''
+    },
+    deleteNote: function (id) {
+      this.$store.dispatch('deleteNote', id)
         .then(() => {
           this.$store.dispatch('getNotes')
         })

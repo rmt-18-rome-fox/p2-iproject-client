@@ -116,6 +116,28 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+    deleteNote: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseURL}/notes/${payload}`,
+          method: 'delete',
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        .then(() => {
+          resolve()
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: "Sorry..",
+            text: err.response.data.message
+          })
+          reject(err)
+        })
+      })
     }
   },
   modules: {
