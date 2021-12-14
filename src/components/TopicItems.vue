@@ -81,6 +81,8 @@
             <div class="post-content">
                 Happy birthday dear
                 <img src="../assets/images/girl_with_light.jpg" alt="Mountains">
+
+                <Geolocation></Geolocation>
             </div>
             <div class="post-bottom">
                 <div class="action">
@@ -132,8 +134,12 @@
 </template>
 
 <script>
+import Geolocation from './GeoLocation.vue'
 export default {
-    name: "TopicItems"
+    name: "TopicItems",
+    components: {
+        Geolocation
+    }
 }
 </script>
 
