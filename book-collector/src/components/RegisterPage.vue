@@ -1,6 +1,6 @@
 <template>
   <div class="registerForm">
-    <b-form>
+    <b-form @submit.prevent="doRegister">
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -10,6 +10,7 @@
           id="input-1"
           type="email"
           placeholder="Enter email"
+          v-model="registerForm.email"
           required
         ></b-form-input>
       </b-form-group>
@@ -18,6 +19,7 @@
         <b-form-input
           id="input-2"
           placeholder="Enter name"
+          v-model="registerForm.name"
           required
         ></b-form-input>
       </b-form-group>
@@ -27,6 +29,7 @@
           type="password"
           id="input-3"
           placeholder="Enter Password"
+          v-model="registerForm.password"
           required
         ></b-form-input>
       </b-form-group>
@@ -38,7 +41,27 @@
 
 <script>
 export default {
+  name: "RegisterPage",
+  data(){
+    return{
+      registerForm:{
+        email: "",
+        name: "",
+        password: ""
+      }
+    }
+  },
+  methods: {
+    doRegister(){
+      this.$store.dispatch("goRegister", this.registerForm)
+      .then(resp =>{
 
+      })
+      .catch(err =>{
+        
+      })
+    }
+  }
 }
 </script>
 

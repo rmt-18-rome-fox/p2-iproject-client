@@ -1,28 +1,37 @@
 <template>
-<div class="d-flex flex-row bd-highlight mb-3">
-    <div class="p-2 bd-highlight">
-    <b-card
-        title="Card Title"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-    >
-        <b-card-text>
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
+<div>
+<b-card
+    :title="book.title"
+    :img-src="book.formats['image/jpeg']"
+    img-alt="Image"
+    img-top
+    tag="article"
+    style="max-width: 20rem;"
+    class="p-2 bd-highlight"
+>
+    <b-card-text>
+    Author's name: {{book.authors[0].name}}
+    </b-card-text>
+    <b-card-text>
+    Author's birth year: {{book.authors[0].birth_year}}
+    </b-card-text>
+    <b-card-text>
+    Authors's death year: {{book.authors[0].death_year}}
+    </b-card-text>
+    <b-card-text>
+    {{book.subjects}}
+    </b-card-text>
 
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
-    </div>
+    <b-button @click.prevent="" variant="primary">Book detail</b-button><br><br>
+    <b-button @click.prevent="addBookmark" variant="primary">Add to bookmark</b-button>
+</b-card>
 </div>
 </template>
 
 <script>
 export default {
-
+    name: "BookCard",
+    props: ["book"]
 }
 </script>
 
