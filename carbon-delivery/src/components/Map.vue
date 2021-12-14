@@ -56,6 +56,7 @@ export default {
     },
   },
   mounted() {
+      console.log('loading map . . .')
     this.loadMap();
   },
 };
