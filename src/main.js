@@ -6,6 +6,7 @@ import VueGeolocation from 'vue-browser-geolocation'
 import VueSpeech from 'vue-speech'
 
 import './assets/css/main.css'
+import './assets/css/login.css'
 
 Vue.config.productionTip = false
 Vue.use(VueGeolocation)
