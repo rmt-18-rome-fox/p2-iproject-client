@@ -8,5 +8,13 @@
 
 export default {
   name: 'Home',
+  created(){
+    this.$store.dispatch("fetchAnimes")
+  },
+  computed: {
+    upComingAnimes(){
+      return this.state.upComingAnimes
+    }
+  }
 }
 </script>
