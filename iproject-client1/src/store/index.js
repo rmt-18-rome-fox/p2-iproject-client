@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     isLogin: null,
     coffeePowders: [],
+    coffeePowdersById: [],
+    coffeePowderUpdateId: null,
   },
   mutations: {
     SET_IS_LOGIN: function (state, payload = false) {
@@ -15,6 +17,12 @@ export default new Vuex.Store({
     },
     SET_COFFEE_POWDERS: function (state, payload = []) {
       state.coffeePowders = payload;
+    },
+    SET_COFFEE_POWDERS_BY_ID: function (state, payload = []) {
+      state.coffeePowdersById = payload;
+    },
+    SET_UPDATE_COFFEEPOWDER_ID: function (state, payload = null) {
+      state.coffeePowderUpdateId = payload;
     },
   },
   actions: {
@@ -29,9 +37,11 @@ export default new Vuex.Store({
           data: { email, password },
         })
           .then(({ data }) => {
-            console.log(data);
+            // console.log(data);
             localStorage.setItem('access_token', data.access_token);
-            // localStorage.setItem('idUser', data.data.id) // JIKA BUTUH USER ID TITIPIN DISINI
+            localStorage.setItem('idUser', data.id);
+            localStorage.setItem('roleUser', data.role);
+            // localStorage.setItem('emailUser', data.email)
             commit('SET_IS_LOGIN', true);
             resolve();
           })
@@ -60,6 +70,7 @@ export default new Vuex.Store({
           });
       });
     },
+    // ===================================================== ### FETCH COFFEE POWDERS ### =====================================================
     fetchCoffeePowders: function ({ commit }) {
       axios({
         url: `http://localhost:3000/coffeepowder`,
@@ -76,6 +87,97 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err);
         });
+    },
+    // ===================================================== ### FETCH ONE COFFEE POWDERS ### =====================================================
+    fetchCoffeePowdersById: function ({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `http://localhost:3000/admin/coffeepowder/${id}`,
+          method: 'get',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(({ data }) => {
+            // console.log(data);
+            commit('SET_COFFEE_POWDERS_BY_ID', data);
+            resolve();
+            // router.push('/');
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
+    // ===================================================== ### ADD NEW PRODUCT ### =====================================================
+    addNewProduct: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: 'http://localhost:3000/admin/coffeepowder',
+          data: payload,
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            //   console.log(res)
+            resolve();
+          })
+          .catch((err) => {
+            // console.log(err)
+            reject(err);
+          });
+      });
+    },
+    // ===================================================== ### DIRECT TO FORM UPDATE ### =====================================================
+    toFormUpdate: function ({ commit }, id) {
+      // console.log(heroId, power, role, '<<<<<<<<<<ini di state');
+      // console.log(payload);
+      return new Promise((resolve, reject) => {
+        commit('SET_UPDATE_COFFEEPOWDER_ID', id);
+        axios({
+          url: `http://localhost:3000/admin/coffeepowder/${id}`,
+          method: 'get',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(({ data }) => {
+            // console.log(data);
+            commit('SET_COFFEE_POWDERS_BY_ID', data);
+            resolve();
+            // router.push('/');
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+      // this.fetchCoffeePowdersById(id);
+    },
+    // ===================================================== ### EDIT PRODUCT ### =====================================================
+    editProduct: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log(payload);
+        axios({
+          method: 'PUT',
+          url: `http://localhost:3000/admin/coffeepowder/${payload.id}`,
+          data: payload,
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            //   console.log(res)
+            resolve();
+          })
+          .catch((err) => {
+            // console.log(err)
+            reject(err);
+          });
+      });
     },
   },
 

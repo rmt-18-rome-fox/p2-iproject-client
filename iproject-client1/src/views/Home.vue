@@ -4,7 +4,7 @@
     <div class="main-container-home d-flex">
       <div class="container1-home col-3"></div>
       <div class="container2-home col-9">
-        <Card v-for="coffeePowder in coffeePowders" :key="coffeePowder.id" :coffeePowder="coffeePowder"></Card>
+        <Card v-for="coffeePowder in coffeePowders" :key="coffeePowder.id" :coffeePowder="coffeePowder" class="shadow"></Card>
       </div>
     </div>
   </div>
