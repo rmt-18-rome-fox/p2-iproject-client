@@ -53,8 +53,11 @@
                   style="border: 2px solid rgba(70, 62, 135, 1)"
                 ></b-avatar>
               </template>
-              <b-dropdown-item href="#">
-                <div class="d-flex justify-content-between align-items-center">
+              <b-dropdown-item>
+                <div
+                  class="d-flex justify-content-between align-items-center"
+                  @click.prevent="toCart"
+                >
                   <font-awesome-icon :icon="['fas', 'shopping-cart']" />
                   &nbsp; Cart
                 </div>
@@ -72,8 +75,6 @@
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </div>
-
-        <!-- Right aligned nav items -->
       </div>
     </b-navbar>
   </div>
@@ -86,6 +87,9 @@ export default {
     doLogout() {
       localStorage.clear();
       this.$router.push("/auth/login");
+    },
+    toCart() {
+      this.$router.push("/cart");
     },
   },
 };
