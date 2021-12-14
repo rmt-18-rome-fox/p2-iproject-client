@@ -2,7 +2,7 @@
   <div>
     <Navbar></Navbar>
     <div id="library">
-      <h1 class="text-center">Library</h1>
+      <h1 class="text-center my-5">Library</h1>
       <div class="container">
         <Book></Book>
       </div>

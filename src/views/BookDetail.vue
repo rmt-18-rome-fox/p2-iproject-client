@@ -61,7 +61,7 @@
                 </b-button>
                 <b-button
                   variant="outline-warning"
-                  @click.prevent="addToCartHandler(book.id)"
+                  @click.prevent="addToCart(book.id)"
                 >
                   <font-awesome-icon :icon="['fas', 'shopping-basket']" />
                   &nbsp; Add To Cart
@@ -87,6 +87,16 @@ export default {
         .dispatch("showDetail", id)
         .then(({ data }) => {
           this.$store.commit("SUCCESS_SHOW_DETAIL", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    addToCart(bookId) {
+      this.$store
+        .dispatch("addToCart", bookId)
+        .then(({ data }) => {
+          console.log(data);
         })
         .catch((err) => {
           console.log(err);

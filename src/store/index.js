@@ -10,6 +10,7 @@ export default new Vuex.Store({
     cities: [],
     books: [],
     book: [],
+    carts: [],
   },
   mutations: {
     SUCCESS_FETCH_CITIES(state, cities) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     SUCCESS_SHOW_DETAIL(state, book) {
       state.book = book;
+    },
+    SUCCESS_FETCH_CART(state, carts) {
+      state.carts = carts;
     },
   },
   actions: {
@@ -63,6 +67,24 @@ export default new Vuex.Store({
       return axios({
         method: "GET",
         url: `${baseUrl}/users/books/${id}`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    fetchCart() {
+      return axios({
+        method: "GET",
+        url: `${baseUrl}/customers/carts`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    addToCart(context, bookId) {
+      return axios({
+        method: "POST",
+        url: `${baseUrl}/customers/carts/${bookId}`,
         headers: {
           access_token: localStorage.access_token,
         },
