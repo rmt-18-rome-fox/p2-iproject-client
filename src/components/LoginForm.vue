@@ -50,6 +50,9 @@ export default {
         .dispatch("doLogin", this.formData)
         .then(({ data }) => {
           localStorage.access_token = data.access_token;
+          localStorage.user_name = data.userData.name;
+          localStorage.user_cityId = data.userData.cityId;
+          localStorage.user_cityName = data.userData.cityName;
           this.$router.push("/");
         })
         .catch((err) => {
