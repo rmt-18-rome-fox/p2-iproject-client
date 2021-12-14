@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="#" class="navbar-brand">SENJA<b>NEWS</b></a>  		
+        <a href="#" class="navbar-brand">HEROES<b>ROAM</b></a>  		
         <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
           <div class="navbar-nav">
               <router-link to="/" class="nav-item nav-link" >HOME</router-link> 	

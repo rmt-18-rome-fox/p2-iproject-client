@@ -1,7 +1,7 @@
 <template>
      <div class="simple-login-container">
         <form  action="">
-            <h2>LOGIN</h2>
+            <h2>Register</h2>
             <div class="row">
                 <div class="col-md-12 form-group">
                     <input   type="text" class="form-control" placeholder="Username">
