@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import AddPost from '../views/AddPost.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     name: 'Login',
     component: Login
   },
+  {
+    path: '/add',
+    name: 'AddPost',
+    component: AddPost
+  },
 ]
 
 const router = new VueRouter({
@@ -31,5 +37,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   const token = localStorage.getItem('access_token')
+//   if(!token && to.name !== 'Login') {
+//     next({path: '/login'})
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

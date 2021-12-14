@@ -1,7 +1,9 @@
 <template>
-  <div class="grid grid-cols-1 place-items-center m-3 mx-auto ml-56">
+  <div class="grid grid-cols-1 place-items-center pt-6 mx-auto ml-56">
     <!-- card -->
-    <div class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mx-1 my-3">
+    <div
+      class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mb-4 pb-20 mx-1"
+    >
       <div class="overflow-x-hidden rounded-2xl relative">
         <img
           class="h-64 rounded-2xl w-full place-items-center object-cover"
@@ -28,7 +30,9 @@
     <!-- end card -->
 
     <!-- card -->
-    <div class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mx-1 my-3">
+    <div
+      class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mb-4 pb-20 mx-1"
+    >
       <div class="overflow-x-hidden rounded-2xl relative">
         <img
           class="h-64 rounded-2xl w-full place-items-center object-cover"
@@ -55,7 +59,9 @@
     <!--End Card  -->
 
     <!-- card -->
-    <div class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mx-1 my-3">
+    <div
+      class="relative w-5/12 bg-white shadow-md rounded-3xl p-2 mb-4 pb-20 mx-1"
+    >
       <div class="overflow-x-hidden rounded-2xl relative">
         <img
           class="h-64 rounded-2xl w-full place-items-center object-cover"

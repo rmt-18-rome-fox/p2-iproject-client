@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="bg-gray-100 mt-0">
-    <Sidebar class=""></Sidebar>
+  <div id="app" class="bg-green-800 bg-opacity-25">
+    <Sidebar class="pt-6"></Sidebar>
     <router-view />
   </div>
 </template>

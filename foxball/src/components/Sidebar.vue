@@ -1,19 +1,12 @@
 <template>
   <div class="fixed left-0 ml-28">
     <div
-      class="
-        flex flex-col
-        w-80
-        shadow-lg
-        bg-white
-        rounded-r-3xl
-        overflow-hidden
-      "
+      class="flex flex-col w-80 shadow-lg bg-white rounded-3xl overflow-hidden"
     >
       <div class="flex items-center justify-center h-20 shadow-md">
         <h1 class="text-3xl uppercase text-indigo-500">FOXBALLER</h1>
       </div>
-      <ul class="flex flex-col space-y-20">
+      <ul class="flex flex-col space-y-12">
         <li>
           <a
             href="#"
@@ -43,7 +36,7 @@
             ></span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
+              class="h-10 w-10 pr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -55,7 +48,7 @@
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
               />
             </svg>
-            <span class="text-2xl font-medium">Home</span>
+            <span class="text-xl font-medium">Home</span>
           </a>
         </li>
         <li>
@@ -87,7 +80,7 @@
             ></span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-10 w-6"
+              class="h-10 w-10 pr-2"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -97,7 +90,7 @@
                 clip-rule="evenodd"
               />
             </svg>
-            <span class="text-2xl font-medium">EPL Standing</span>
+            <span class="text-xl font-medium">EPL Standing</span>
           </a>
         </li>
         <li>
@@ -129,7 +122,49 @@
             ></span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
+              class="h-10 w-10 pr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="text-xl font-medium">Club Informations</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="
+              flex flex-row
+              items-center
+              h-12
+              transform
+              hover:translate-x-2
+              transition-transform
+              ease-in
+              duration-200
+              text-gray-500
+              hover:text-gray-800
+            "
+          >
+            <span
+              class="
+                inline-flex
+                items-center
+                justify-center
+                h-12
+                w-12
+                text-lg text-gray-400
+              "
+              ><i class="bx bx-drink"></i
+            ></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10 pr-2"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -141,7 +176,7 @@
                 d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
               />
             </svg>
-            <span class="text-2xl font-medium">Chitchat Zone</span>
+            <span class="text-xl font-medium">Chitchat Zone</span>
           </a>
         </li>
         <li>
@@ -171,7 +206,21 @@
               "
               ><i class="bx bx-user"></i
             ></span>
-            <span class="text-2xl font-medium">Post Now</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 pr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"
+              />
+            </svg>
+            <span class="text-xl font-medium">Post Now</span>
           </a>
         </li>
       </ul>
