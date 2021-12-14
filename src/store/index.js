@@ -90,6 +90,24 @@ export default new Vuex.Store({
         },
       });
     },
+    shippingCost(context, { sellerCityId, customerCityId }) {
+      console.log(sellerCityId);
+      console.log(customerCityId);
+      const data = {
+        destination: sellerCityId,
+        origin: customerCityId,
+        weight: 500,
+        courier: "jne",
+      };
+      return axios({
+        method: "POST",
+        url: `${baseUrl}/apis/shipping`,
+        data,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
   },
   modules: {},
 });
