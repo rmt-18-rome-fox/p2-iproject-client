@@ -6,21 +6,14 @@
         <button style="margin: 10px" class="btn btn-primary">Add</button>
       </form>
     </div><br>
-    <div class="row">
-      <div class="col form-inline">
-          <draggable class="card text-white bg-info mb-3" style="max-width: 18rem; cursor: pointer;">
-            <div class="card-body" v-for="note in notes" :key="note.id">
-              <h5 class="card-title">{{ note.title }}</h5>
-              <button class="btn btn-secondary btn-sm" @click="showUpdate">Update</button>
-            </div>
-          </draggable>
-      </div>
+    <div class="col">
+      <Draggable v-for="note in notes" :key="note.id" :note="note"></Draggable>
     </div>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import Draggable from '../components/Draggable.vue'
 export default {
   name: 'Home',
   data: function () {
@@ -30,7 +23,7 @@ export default {
     }
   },
   components: {
-    draggable
+    Draggable
   },
   methods: {
     addNote: function () {
@@ -40,10 +33,6 @@ export default {
         .then(() => {
           this.$store.dispatch('getNotes')
         })
-    },
-    showUpdate: function () {
-      // this.$store.dispatch('getNoteById')
-      console.log('Update')
     }
   },
   created: function () {
