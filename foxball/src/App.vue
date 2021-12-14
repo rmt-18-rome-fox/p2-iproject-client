@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="bg-green-800 bg-opacity-25">
-    <Sidebar class="pt-6"></Sidebar>
+    <Sidebar class="pt-6" v-if="isLogin === true"></Sidebar>
     <router-view />
   </div>
 </template>
