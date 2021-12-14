@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
+const baseUrl = `http://localhost:3000`;
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -10,6 +12,7 @@ export default new Vuex.Store({
     coffeePowders: [],
     coffeePowdersById: [],
     coffeePowderUpdateId: null,
+    orderDetail: [],
   },
   mutations: {
     SET_IS_LOGIN: function (state, payload = false) {
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     SET_UPDATE_COFFEEPOWDER_ID: function (state, payload = null) {
       state.coffeePowderUpdateId = payload;
     },
+    SET_CART_ORDERDETAIL: function (state, payload = null) {
+      state.orderDetail = payload;
+    },
   },
   actions: {
     // ===================================================== ### LOGIN ### =====================================================
@@ -33,7 +39,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'POST',
-          url: 'http://localhost:3000/login',
+          url: `${baseUrl}/login`,
           data: { email, password },
         })
           .then(({ data }) => {
@@ -57,7 +63,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'POST',
-          url: 'http://localhost:3000/register',
+          url: `${baseUrl}/register`,
           data: payload,
         })
           .then(() => {
@@ -73,7 +79,7 @@ export default new Vuex.Store({
     // ===================================================== ### FETCH COFFEE POWDERS ### =====================================================
     fetchCoffeePowders: function ({ commit }) {
       axios({
-        url: `http://localhost:3000/coffeepowder`,
+        url: `${baseUrl}/coffeepowder`,
         method: 'get',
         headers: {
           access_token: localStorage.getItem('access_token'),
@@ -92,7 +98,7 @@ export default new Vuex.Store({
     fetchCoffeePowdersById: function ({ commit }, id) {
       return new Promise((resolve, reject) => {
         axios({
-          url: `http://localhost:3000/admin/coffeepowder/${id}`,
+          url: `${baseUrl}/admin/coffeepowder/${id}`,
           method: 'get',
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -115,7 +121,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'POST',
-          url: 'http://localhost:3000/admin/coffeepowder',
+          url: `${baseUrl}/admin/coffeepowder`,
           data: payload,
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -138,7 +144,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit('SET_UPDATE_COFFEEPOWDER_ID', id);
         axios({
-          url: `http://localhost:3000/admin/coffeepowder/${id}`,
+          url: `${baseUrl}/admin/coffeepowder/${id}`,
           method: 'get',
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -163,7 +169,7 @@ export default new Vuex.Store({
         console.log(payload);
         axios({
           method: 'PUT',
-          url: `http://localhost:3000/admin/coffeepowder/${payload.id}`,
+          url: `${baseUrl}/admin/coffeepowder/${payload.id}`,
           data: payload,
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -178,6 +184,24 @@ export default new Vuex.Store({
             reject(err);
           });
       });
+    },
+    // ===================================================== ### FETCH ORDER DETAIL ### =====================================================
+    fetchOrderDetail: function ({ commit }) {
+      axios({
+        url: `${baseUrl}/orderdetail`,
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem('access_token'),
+        },
+      })
+        .then(({ data }) => {
+          // console.log(data);
+          commit('SET_CART_ORDERDETAIL', data);
+          // router.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 

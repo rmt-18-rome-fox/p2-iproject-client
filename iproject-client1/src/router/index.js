@@ -5,6 +5,7 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import FormAdd from '../views/FormAdd.vue';
 import FormEdit from '../views/FormEdit.vue';
+import Cart from '../views/Cart.vue';
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,20 @@ const routes = [
       if (!localStorage.getItem('access_token')) {
         next({ name: 'Login' });
       } else if (localStorage.getItem('roleUser') !== 'admin') {
+        next({ name: 'Home' });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: Cart,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next({ name: 'Login' });
+      } else if (localStorage.getItem('roleUser') == 'admin') {
         next({ name: 'Home' });
       } else {
         next();
