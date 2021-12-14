@@ -4,12 +4,12 @@
             <h2>LOGIN</h2>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <input v-model="email"  type="email" class="form-control" placeholder="Email">
+                    <input  type="email" class="form-control" placeholder="Email">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <input v-model="password" type="password" placeholder="Enter your Password" class="form-control">
+                    <input  type="password" placeholder="Enter your Password" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -30,5 +30,21 @@ export default {
 </script>
 
 <style>
+.simple-login-container{
+    width:300px;
+    max-width:100%;
+    margin:50px auto;
+}
+.simple-login-container h2{
+    text-align:center;
+    font-size:20px;
+}
 
+.simple-login-container .btn-login{
+    background-color:#FF5964;
+    color:#fff;
+}
+a{
+    color:#fff;
+}
 </style>
