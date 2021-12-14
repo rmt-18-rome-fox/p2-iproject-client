@@ -47,10 +47,21 @@ export default new Vuex.Store({
     },
     fetchAnimes({commit}, payload){
       jikanUrl.get('/season/later')
-      .then((res) => {
-        console.log({res});
+      .then(({data}) => {
+        console.log({ini: data.anime});
+        commit("SET_UP_COMING_ANIMES", data.anime);
       })
       .catch((err) => {
+        console.log({err});
+      })
+    },
+    animeDetail({commit}, jikanAnimeId){
+      console.log('masuk');
+      jikanUrl.get(`/anime/${jikanAnimeId}`)
+      .then(({data}) => {
+        console.log({data});
+      })
+      .catch(({err}) => {
         console.log({err});
       })
     }
