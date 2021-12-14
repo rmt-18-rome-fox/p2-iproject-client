@@ -8,11 +8,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: false
+    isLoggedIn: false,
+    notes: []
   },
   mutations: {
     SET_LOGIN: function (state, payload = false) {
       state.isLoggedIn = payload
+    },
+    SET_NOTES: function (state, payload) {
+      state.notes = payload
     }
   },
   actions: {
@@ -65,6 +69,51 @@ export default new Vuex.Store({
               text: `${err.response.data.message} though, just saying`
             })
             reject()
+          })
+      })
+    },
+    getNotes: function (context) {
+      axios({
+        url: `${baseURL}/notes`,
+        method: 'get',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(resp => {
+          context.commit('SET_NOTES', resp.data)
+        })
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: "Sorry..",
+            text: err.response.data.message
+          })
+        })
+    },
+    addNote: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseURL}/notes`,
+          method: 'post',
+          headers: {
+            access_token: localStorage.access_token
+          },
+          data: {
+            title: payload.title,
+            content: 'Add some content'
+          }
+        })
+          .then(() => {
+            resolve()
+          })
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: "Sorry..",
+              text: err.response.data.message
+            })
+            reject(err)
           })
       })
     }
