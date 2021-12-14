@@ -16,6 +16,9 @@
             <a class="nav-link" href="#" @click.prevent="toFormAdd" v-if="roleUser == 'admin'">Add New Product</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#" @click.prevent="toCart" v-if="roleUser !== 'admin'">YourCart</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#" @click.prevent="toLogout">Logout</a>
           </li>
           <li class="nav-item dropdown">
@@ -45,6 +48,9 @@ export default {
     toFormAdd() {
       this.$router.push('/formadd');
     },
+    toCart() {
+      this.$router.push('/cart');
+    },
   },
   data() {
     return {
@@ -57,4 +63,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.navbar {
+  background-color: #bfd973;
+}
+</style>
