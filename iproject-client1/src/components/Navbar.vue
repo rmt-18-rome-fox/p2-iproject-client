@@ -13,6 +13,9 @@
             <router-link class="nav-link active" to="/">Home</router-link>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#" @click.prevent="toFormAdd" v-if="roleUser == 'admin'">Add New Product</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#" @click.prevent="toLogout">Logout</a>
           </li>
           <li class="nav-item dropdown">
@@ -39,6 +42,17 @@ export default {
       this.$store.commit('SET_IS_LOGIN', false);
       this.$router.push('/login');
     },
+    toFormAdd() {
+      this.$router.push('/formadd');
+    },
+  },
+  data() {
+    return {
+      roleUser: '',
+    };
+  },
+  created() {
+    this.roleUser = localStorage.roleUser;
   },
 };
 </script>

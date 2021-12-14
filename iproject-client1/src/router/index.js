@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
+import FormAdd from '../views/FormAdd.vue';
+import FormEdit from '../views/FormEdit.vue';
 
 Vue.use(VueRouter);
 
@@ -37,6 +39,34 @@ const routes = [
     component: Register,
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem('access_token')) {
+        next({ name: 'Home' });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/formadd',
+    name: 'FormAdd',
+    component: FormAdd,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next({ name: 'Login' });
+      } else if (localStorage.getItem('roleUser') !== 'admin') {
+        next({ name: 'Home' });
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: '/formedit/:id',
+    name: 'FormEdit',
+    component: FormEdit,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('access_token')) {
+        next({ name: 'Login' });
+      } else if (localStorage.getItem('roleUser') !== 'admin') {
         next({ name: 'Home' });
       } else {
         next();

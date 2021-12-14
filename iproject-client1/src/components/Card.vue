@@ -12,7 +12,9 @@
       <p>Price: {{ coffeePowder.price }}</p>
       <p>Grind Size: {{ coffeePowder.grindSize }}</p>
       <p>Roast Level: {{ coffeePowder.roastLevel }}</p>
-      <a href="#" class="btn-buy btn btn-primary">Buy</a>
+      <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'customer'">Buy</a>
+      <a href="#" class="btn-buy btn btn-primary mr-3" v-if="roleUser == 'admin'" @click.prevent="toFormUpdate(coffeePowder.id)">Edit</a>
+      <!-- <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'admin'">Delete</a> -->
     </div>
   </div>
 </template>
@@ -21,6 +23,21 @@
 export default {
   name: 'Card',
   props: ['coffeePowder'],
+  data() {
+    return {
+      roleUser: '',
+    };
+  },
+  created() {
+    this.roleUser = localStorage.roleUser;
+  },
+  methods: {
+    toFormUpdate(id) {
+      this.$store.dispatch('toFormUpdate', id).then(() => {
+        this.$router.push(`/formedit/${id}`);
+      });
+    },
+  },
 };
 </script>
 
