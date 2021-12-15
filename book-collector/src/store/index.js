@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const baseUrl = "http://localhost:3000/"
+const baseUrl = "http://localhost:3000"
 
 Vue.use(Vuex)
 
@@ -21,9 +21,11 @@ export default new Vuex.Store({
   },
   actions: {
     goRegister(context, payload){
+      console.log(payload);
       return axios.post(`${baseUrl}/register`, payload)
     },
     goLogin(context, payload){
+      console.log(payload);
       return axios.post(`${baseUrl}/login`, payload)
     },
     fetchBooks(context, payload){

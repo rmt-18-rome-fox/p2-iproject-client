@@ -27,6 +27,7 @@
 
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
+    <router-link to="/register">Don't have an account? Sign up!</router-link>
   </div>
 </template>
 
@@ -44,9 +45,9 @@ export default {
     methods:{
         doLogin(){
             this.$store.dispatch("goLogin", this.loginForm)
-            .then(resp =>{
-                console.log(resp.data);
-                localStorage.setItem("access_token", resp.data)
+            .then((resp) =>{
+                localStorage.setItem("access_token", resp.data.access_token)
+                this.$router.push("/books")
             })
             .catch(err =>{
               console.log(err);
