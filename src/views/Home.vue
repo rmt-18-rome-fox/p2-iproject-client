@@ -2,7 +2,7 @@
 <div>
     <Navbar></Navbar>
     <div class="container">
-        <LeftPanel></LeftPanel>
+        <!-- <LeftPanel></LeftPanel> -->
 
 
         <div class="middle-panel">
@@ -58,7 +58,7 @@
         </div>
 
         
-        <RightPanel></RightPanel>
+        <!-- <RightPanel></RightPanel> -->
     </div>
 </div>
 
