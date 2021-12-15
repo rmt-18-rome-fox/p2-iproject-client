@@ -53,14 +53,16 @@
                         </div>
                         <div id="emailHelp" class="form-text">
                           Or Sign In with Google Account
+                          <center>
+                          <GoogleLogin
+                            :params="params"
+                            :renderParams="renderParams"
+                            :onSuccess="onSuccess"
+                          ></GoogleLogin>
+                        </center>
                         </div>
                         <br />
-                        <!-- <GoogleLogin
-                        :params="params"
-                        :renderParams="renderParams"
-                        :onSuccess="onSuccess"
-                        
-                      ></GoogleLogin> -->
+                       
                       </div>
                     </div>
                   </div>
@@ -116,13 +118,16 @@
 
                       <div id="emailHelp" class="form-text">
                         Or Sign In with Google Account
-                      </div>
-                      <br />
-                      <!-- <GoogleLogin
+                        <center>
+                         <GoogleLogin
                         :params="params"
                         :renderParams="renderParams"
                         :onSuccess="onSuccess"
-                      ></GoogleLogin> -->
+                      ></GoogleLogin>
+                      </center>
+                      </div>
+                      <br />
+                     
                     </div>
                   </div>
                 </div>
@@ -139,12 +144,12 @@
 import { mapActions, mapState } from "vuex";
 import Swal from "sweetalert2";
 import axios from "axios";
-// import GoogleLogin from "vue-google-login";
+import GoogleLogin from "vue-google-login";
 
 export default {
   name: "Login",
   components: {
-    // GoogleLogin,
+    GoogleLogin,
   },
 
   data() {
@@ -176,6 +181,7 @@ export default {
   },
   methods: {
     ...mapActions(["loginUser", "registerUser"]),
+   
 
     checkToken() {
       if (localStorage.token) {
@@ -208,10 +214,14 @@ export default {
         },
       })
         .then(({ data }) => {
-          this.checkToken();
+          // this.checkToken();
+
           localStorage.token = data.token;
           localStorage.email = data.dataUser.email;
           localStorage.role = data.dataUser.role;
+          this.googleLogin(true)
+
+          this.$router.push("/");
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

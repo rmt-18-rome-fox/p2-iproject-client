@@ -45,12 +45,13 @@ export default {
   props: ["product"],
 
   methods: {
-      ...mapActions(["fetchFavorite"]),
+      ...mapActions(["fetchFavorite", "getDetail"]),
 
       toDetail(id) {
-          console.log('KKLIKK');
-          this.$router.push(`/movies/${id}`)
-        //   this.$store.dispatch("getDetail", id)
+          this.$router.push(`/detail/${id}`)
+          // this.getDetail(id)
+
+          this.$store.dispatch("getDetail", id)
       },
 
       addFavorite(id) {

@@ -13,7 +13,9 @@ export default new Vuex.Store({
     isRegister: false,
     product : [],
     cart : [],
-    cartLength : ""
+    cartLength : "",
+    detailProduct: [],
+    dataQR : '',
   },
   mutations: {
     ISLOGIN(state, payload) {
@@ -39,6 +41,14 @@ export default new Vuex.Store({
     FETCH_CART_LENGTH(state, payload) {
       state.cartLength = payload
     },
+
+    GET_DETAIL(state, payload) {
+      state.detailProduct = payload
+    },
+
+    QR_CODE(state, payload) {
+      state.dataQR = payload
+    }
 
   },
   actions: {
@@ -176,7 +186,7 @@ export default new Vuex.Store({
             token : localStorage.token
           }
         })
-          console.log('WE DID IT');
+          console.log(response.data);
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -191,7 +201,7 @@ export default new Vuex.Store({
   
           Toast.fire({
             icon: "success",
-            title: `Success add ${response.data.MovieId} to Favorite!`,
+            title: `Success add ${response.data.ProductId} to Favorite!`,
           });
 
       } catch (err) {
@@ -326,7 +336,34 @@ Low Fat :
        } catch (err) {
           console.log(err);
         }
-    }
+    },
+
+    async getDetail(context, payload) {
+      try {
+        let url = `${baseUrl}/public/products/${payload}`
+        let response = await axios.get(url)
+
+        context.commit("GET_DETAIL", response.data)
+        
+
+        let urlQR = `https://api.happi.dev/v1/qrcode`
+
+        let responseQR = await axios.get(urlQR, {
+          params: {
+            data : response.data.imgUrl
+          },
+          headers: {
+            'x-happi-key' : `c0ea0cld6rw7OJ6QcFh62XyPPbP98Oj5JYUAP9KjQ9T5AY0Niue227iC`
+          }
+        })
+
+        context.commit("QR_CODE", responseQR.data)
+
+      } catch (err) {
+        console.log(err);
+      }
+      
+    },
   },
   modules: {
   }
