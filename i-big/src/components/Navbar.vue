@@ -8,7 +8,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li v-if="isLogin" class="nav-item"><router-link class="nav-link active" aria-current="page" to="/">Dashboard</router-link></li>
-                        <li class="nav-item dropdown">
+                        <li v-if="isLogin" class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Calculator</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a  class="dropdown-item disabled" href="#!">Calculator</a></li>
@@ -19,8 +19,10 @@
                             </ul>
                         </li>
                         <li v-if="isLogin" class="nav-item"><a @click.prevent="logOut" class="nav-link" href="#!">Logout</a></li>
+                        <li v-if="isLoginGL" class="nav-item"><GoogleLogin :params="params" :logoutButton=true>Logout</GoogleLogin>
+                        </li>
                         <li v-if="!isLogin" class="nav-item"><router-link class="nav-link" to="/login">Login</router-link></li>
-                        <li v-if="!isLogin" class="nav-item"><router-link class="nav-link" to="/register">Register</router-link></li>
+                        
                     </ul>
                     <form class="d-flex">
                         <button 
@@ -40,19 +42,36 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from "vuex"
+import Swal from "sweetalert2";
+import GoogleLogin from "vue-google-login";
 
 export default {
     name : "Navbar",
+
+    components: {
+    GoogleLogin,
+    },
 
     data() {
         return {
         titleSearch: "",
         ratingSearch: "",
-        };
+
+        params: {
+        client_id:
+          "929104104787-fsdvl1cng9ggba7hropufjkpiilu6vnm.apps.googleusercontent.com",
+         },
+
+        renderParams: {
+            width: 250,
+            height: 50,
+            longtitle: true,
+        },
+        }
     },
 
     computed : {
-        ...mapState(["isLogin", "cartLength"])
+        ...mapState(["isLogin", "cartLength", "isLoginGL"])
     },
 
 
@@ -62,6 +81,9 @@ export default {
         },
         {
         cartLength : "cartLength"
+        },
+        {
+        googleLogin : "ISLOGIN_GL"  
         }),
 
         ...mapActions(["fetchFavorite"]),
@@ -74,6 +96,7 @@ export default {
           let emailUser = localStorage.email;
           localStorage.clear();
           this.isLoginMutation(false)
+          this.googleLogin(false)
           this.$router.push('/')
 
           const Toast = Swal.mixin({
@@ -93,10 +116,10 @@ export default {
             title: `Thank you, ${emailUser}! You have been logged out`,
           });
 
-          // let auth2 = gapi.auth2.getAuthInstance();
-          // auth2.signOut().then(function () {
-          //   console.log("User signed out.");
-          // });
+          let auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+            console.log("User signed out.");
+          });
         },
     },
 

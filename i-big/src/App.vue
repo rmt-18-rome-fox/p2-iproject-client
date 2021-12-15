@@ -10,7 +10,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import HFooter from 'vue-hacktiv8-footer'
-import { mapMutations } from "vuex"
+import { mapMutations, mapActions } from "vuex"
 
 export default {
   name : 'App',
@@ -21,13 +21,17 @@ export default {
   methods: {
     ...mapMutations({
       isLogin : "ISLOGIN"
-    })
+    }),
+
+    ...mapActions(["fetchFavorite"])
   },
 
   created () {
     if(localStorage.token) {
       this.isLogin(true)
     }
+
+    this.fetchFavorite()
   }
 
 }
