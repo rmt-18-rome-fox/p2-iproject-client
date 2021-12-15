@@ -1,8 +1,9 @@
 import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
-let baseURL = 'http://localhost:3000'
 import Swal from 'sweetalert2'
+let baseURL = 'http://localhost:3000'
+
 
 Vue.use(Vuex)
 
@@ -45,7 +46,7 @@ export default new Vuex.Store({
             Swal.fire({
               icon: 'success',
               title: 'Hello!',
-              text: 'Welcome back!'
+              text: `Welcome back ${resp.data.payload.email}!`
             })
             resolve()
           })
@@ -201,6 +202,39 @@ export default new Vuex.Store({
               text: err.response.data.message
             })
             reject(err)
+          })
+      })
+    },
+    githubLogin: function () {
+    },
+    googleLogin: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseURL}/authGoogle`,
+          method: 'post',
+          data: payload
+        })
+          .then(resp => {
+            console.log(resp.data)
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Hello!',
+              text: `Welcome back ${resp.data.payloadUser.email}!`,
+              showConfirmButton: false,
+              timer: 1500
+            })
+            localStorage.setItem('access_token', resp.data.access_token)
+            context.commit('SET_LOGIN', true)
+            resolve()
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry...',
+              text: error.response.data.message
+            })
+            reject(error)
           })
       })
     }
