@@ -6,7 +6,7 @@
       class="inputCustom customInput"
       type="text"
       name="txt"
-      placeholder="Username"
+      placeholder="name"
     />
     <input
       v-model="email"
@@ -67,7 +67,7 @@ export default {
   methods: {
       doRegister () {
           const payload = {
-              username: this.username,
+              name: this.name,
               email: this.email,
               password: this.password,
               photoUrl: this.photoUrl,

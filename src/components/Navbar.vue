@@ -27,7 +27,7 @@
             <span class="profile"></span>
 
             <a href="#">
-                <i class="fa fa-bell"></i>
+                <i @click.prevent="doLogout" class="fas fa-sign-out-alt"></i>
             </a>
 
             <a href="#">
@@ -39,7 +39,14 @@
 
 <script>
 export default {
-    name: "Navbar"
+    name: "Navbar",
+    methods: {
+        doLogout () {
+            localStorage.clear()
+            this.$store.commit("IS_LOGIN", false)
+            this.$router.push("/login")
+        }
+    }
 }
 </script>
 
