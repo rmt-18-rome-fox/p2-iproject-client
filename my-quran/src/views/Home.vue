@@ -1,6 +1,16 @@
 <template>
-  <div>
+  <div class="h-screen">
     <navbar></navbar>
+    <div class="flex justify-center items-center border h-screen">
+      <div class="h-2/3 border w-2/3 rounded-lg shadow-md flex bg-green-500">
+        <div class="w-1/2 flex justify-center items-center rounded-md bg-white">
+          <button class="border px-8 py-5 rounded-lg bg-green-500 text-white text-xl shadow-md">See detail ayah by Juzs</button>
+        </div>
+        <div class="w-1/2 flex justify-center items-center rounded-md">
+          <button class="border px-8 py-5 rounded-lg bg-white text-green-500 text-xl shadow-md">See detail ayah by Surah</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
