@@ -7,7 +7,11 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    meta: {
+      title: "Skypall",
+      icon:"../../public/favicon.ico" 
+    }
   },
   {
     path: '/login',
