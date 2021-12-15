@@ -1,9 +1,6 @@
 <template>
   <div>
-    <h1 class="text-[461111]">Hello World</h1>
-    <div>
-    <Map class="w-full" />
-    </div>
+      <Map />
     <router-view />
   </div>
 </template>
