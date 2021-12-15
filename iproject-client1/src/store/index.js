@@ -47,7 +47,7 @@ export default new Vuex.Store({
             localStorage.setItem('access_token', data.access_token);
             localStorage.setItem('idUser', data.id);
             localStorage.setItem('roleUser', data.role);
-            // localStorage.setItem('emailUser', data.email)
+            localStorage.setItem('emailUser', data.email);
             commit('SET_IS_LOGIN', true);
             resolve();
           })
@@ -132,7 +132,7 @@ export default new Vuex.Store({
             resolve();
           })
           .catch((err) => {
-            // console.log(err)
+            console.log(err);
             reject(err);
           });
       });

@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
   name: 'Register',
   data() {
@@ -87,10 +88,36 @@ export default {
       this.$store
         .dispatch('toRegister', payload)
         .then(() => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Success Register',
+            footer: `Please login first`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
           this.$router.push('/login');
         })
         .catch((err) => {
-          console.log(err);
+          if (err.response.data.message == 'Email must be unique') {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Email already been used',
+              footer: `Error ${err.response.status}: ${err.response.statusText}`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          } else {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: err.response.data.message,
+              footer: `Error ${err.response.status}: ${err.response.statusText}`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
         });
     },
   },
@@ -102,7 +129,7 @@ export default {
   justify-content: center;
   align-items: center;
   /* height: 100vh; */
-  background-color: #fcf1cf;
+  background-color: #4b450e;
 }
 .container1-register {
   justify-content: center;
@@ -137,5 +164,8 @@ export default {
 }
 .container2-register .to-login:hover {
   font-weight: bold;
+}
+.main-container-register img {
+  margin-bottom: 30px;
 }
 </style>

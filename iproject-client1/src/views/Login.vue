@@ -30,10 +30,10 @@
           <div class="text-center">
             <p>Not a member? <router-link class="to-register" to="/register">Register</router-link></p>
             <!-- <router-link class="to-register" to="/">Home</router-link> -->
-            <p>or sign up with:</p>
+            <!-- <p>or sign up with:</p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
               <i class="fab fa-facebook-f"></i>
-            </button>
+            </button> -->
           </div>
         </form>
       </div>
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
   name: 'Login',
   data() {
@@ -56,10 +57,25 @@ export default {
       this.$store
         .dispatch('toLogin', { email: this.email, password: this.password })
         .then(() => {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Welcome to CoffPow !',
+            footer: `Success Login`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
           this.$router.push('/');
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: err.response.data.message,
+            footer: `Error ${err.response.status}: ${err.response.statusText}`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
         });
     },
   },
@@ -71,7 +87,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #fcf1cf;
+  background-color: #4b450e;
 }
 .container1-login {
   justify-content: center;
@@ -106,5 +122,9 @@ export default {
 }
 .container2-login .to-register:hover {
   font-weight: bold;
+}
+
+.main-container-login img {
+  margin-left: 120px;
 }
 </style>

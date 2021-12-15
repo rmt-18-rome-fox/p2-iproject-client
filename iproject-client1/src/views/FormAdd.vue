@@ -2,7 +2,7 @@
   <div>
     <Navbar></Navbar>
     <div class="semi-body-form d-flex">
-      <div class="main-container-form d-flex m-5">
+      <div class="main-container-form d-flex">
         <div class="container1-form m-5 d-flex flex-column col-3">
           <a href="https://www.freepnglogos.com/pics/coffee-logo-png" title="Image from freepnglogos.com"
             ><img src="https://www.freepnglogos.com/uploads/coffee-logo-png/coffee-logo-design-creative-idea-logo-elements-2.png" height="500" alt="coffee logo design creative idea logo elements"
@@ -11,6 +11,7 @@
         </div>
         <div class="container2-form m-5 d-flex flex-column col-7">
           <h1>Form</h1>
+          <h3>Please fill all input data</h3>
           <br />
           <form class="col-8" @submit.prevent="addNewProduct">
             <!-- Name input -->
@@ -112,7 +113,7 @@ export default {
       this.$store
         .dispatch('addNewProduct', payload)
         .then(() => {
-          this.$router.push('/');
+          // this.$router.push('/');
         })
         .catch((err) => {
           console.log(err);
@@ -145,9 +146,11 @@ export default {
   background-color: #bfd973;
   width: 75vw;
   /* height: 75vh; */
+  margin-top: 120px;
   border-radius: 40px;
 }
-.container2-form h1 {
+.container2-form h1,
+h3 {
   color: #4b450e;
 }
 .container2-form .btn-signin {

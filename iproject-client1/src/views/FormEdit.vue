@@ -2,7 +2,7 @@
   <div>
     <Navbar></Navbar>
     <div class="semi-body-form d-flex">
-      <div class="main-container-form d-flex m-5">
+      <div class="main-container-form d-flex">
         <div class="container1-form m-5 d-flex flex-column col-3">
           <a href="https://www.freepnglogos.com/pics/coffee-logo-png" title="Image from freepnglogos.com"><img :src="imageUrl" height="300" alt="coffee logo design creative idea logo elements" /></a>
           <img src="https://www.freepnglogos.com/pics/coffee-logo-png" alt="" srcset="" />
@@ -167,6 +167,7 @@ export default {
   background-color: #bfd973;
   width: 75vw;
   /* height: 75vh; */
+  margin-top: 120px;
   border-radius: 40px;
 }
 .container2-form h1 {
@@ -181,5 +182,8 @@ export default {
   border-width: 1px;
   color: #4b450e;
   font-weight: bold;
+}
+.container1-form img {
+  margin-left: 150px;
 }
 </style>
