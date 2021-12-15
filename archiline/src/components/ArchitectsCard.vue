@@ -1,27 +1,39 @@
 <template>
   <div>
-  <b-card
-    title="Card Title"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 20rem;"
-    class="mb-2"
+  <div
+    style="max-width: 20rem; height: 47vh; border-radius: 10px; overflow:hidden;"
+    class="m-0 mb-2 border"
   >
-    <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
-    </b-card-text>
+    <div style="height: 20vh" class="mb-3">
+        <img :src="architect.Profile.imageUrl" class="w-100 h-100"/>
+    </div>
+    <h1 class="h4">{{architect.Profile.name}}</h1>
+    <div style="height: 8vh; overflow-y: scroll" class="mb-3 px-2">
+       {{architect.Profile.description}}
+    </div>
 
-    <b-button href="#" variant="primary" class="m-1">See Details</b-button>
-    <b-button href="#" variant="primary" class="m-1">See Portofolio</b-button>
-  </b-card>
+    <b-button href="#" variant="primary" class="m-1" @click.prevent="toDetail(architect.id)">See Details</b-button>
+    <b-button href="#" variant="primary" class="m-1" @click.prevent="toPortofolio(architect.id)">See Portofolio</b-button>
+    <b-button href="#" variant="primary" class="m-1 w-75" @click.prevent="toBook(architect.id)">Book Consultation</b-button>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'ArchitectCard'
+  name: 'ArchitectCard',
+  props: ['architect'],
+  methods: {
+    toBook (payload) {
+      this.$router.push({ path: `/customer/consultation/${payload}` })
+    },
+    toDetail (payload) {
+      this.$router.push({ path: `/customer/architect/${payload}` })
+    },
+    toPortofolio (payload) {
+      this.$router.push({ path: `/customer/architect/portofolios/${payload}` })
+    }
+  }
 }
 </script>
 

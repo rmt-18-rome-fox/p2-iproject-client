@@ -21,6 +21,15 @@ export default {
       password: ''
     }
   },
+  created () {
+    const param = this.$route.query.validate
+    if (param) {
+      this.$store.dispatch('onValidate', param)
+        .then(() => {
+          this.$router.push('/login')
+        })
+    }
+  },
   methods: {
     onLogin () {
       const payload = {
