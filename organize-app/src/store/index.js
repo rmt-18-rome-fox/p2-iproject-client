@@ -118,6 +118,31 @@ export default new Vuex.Store({
           rej()
         })
       })
+    },
+    addTask: function({commit}, payload){
+      console.log({payload})
+      const formData = new FormData()
+      formData.append('title', payload.title)
+      formData.append('description', payload.description)
+      formData.append('image', payload.image)
+      formData.append('CategoryId', payload.CategoryId)
+      return new Promise((res, rej)=>{
+        axios({
+          method: 'POST',
+          url: '/tasks',
+          data: formData,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        .then((response)=>{
+          res(response)
+        })
+        .catch((error)=>{
+          console.log(error);
+          rej(error)
+        })
+      })
     }
   },
   modules: {
