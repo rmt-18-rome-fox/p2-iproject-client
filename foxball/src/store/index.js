@@ -11,7 +11,8 @@ export default new Vuex.Store({
     currentUser: '',
     messages: [],
     status: '',
-    standingTables: []
+    standingTables: [],
+    arrNews: []
   },
   mutations: {
     LOGIN(state, payload) {
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     FETCH_TABLE(state, payload) {
       state.standingTables = payload
+    },
+    FETCH_NEWS(state, payload) {
+      state.arrNews = payload
     }
   },
   actions: {
@@ -112,6 +116,20 @@ export default new Vuex.Store({
             access_token: localStorage.getItem('access_token')
           }
         })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchNews(context) {
+      try {
+        const response = await axios({
+          url:'/news',
+          methods: 'GET',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.commit('FETCH_NEWS', response.data)
       } catch (err) {
         console.log(err);
       }

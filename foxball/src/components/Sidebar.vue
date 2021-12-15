@@ -96,8 +96,8 @@
           </router-link>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/news"
             class="
               flex flex-row
               items-center
@@ -134,8 +134,8 @@
                 clip-rule="evenodd"
               />
             </svg>
-            <span class="text-xl font-medium">Club Informations</span>
-          </a>
+            <span class="text-xl font-medium">ESPN News</span>
+          </router-link>
         </li>
         <li>
           <router-link
