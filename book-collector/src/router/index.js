@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'LoginPage',
+    name: 'LandingPage',
     component: () => import('../components/LoginPage.vue')
   },
   {
@@ -34,6 +34,11 @@ const routes = [
     path: '/bookmarks',
     name: 'Bookmarks',
     component: () => import('../components/Bookmark.vue')
+  },
+  {
+    path: '/detectlang',
+    name: "DetectLangPage",
+    component: () => import('../components/DetectLang.vue')
   }
 ]
 
@@ -46,9 +51,15 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.access_token
   
-  if (to.name == 'Bookmarks' && !isAuthenticated) next({ name: 'LoginPage' })
+  if(isAuthenticated && to.name == 'LoginPage'){
+    next({name: 'Books'})
+  }
+  if(to.name == 'Bookmarks' && !isAuthenticated){
+    next({ name: 'LoginPage' })
+  }
   else{
     next()
   }
 })
+
 export default router
