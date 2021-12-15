@@ -14,7 +14,7 @@
             </div>    
             <div class="col-md-8 py-5">
                   <div class="row">
-                    <Cards></Cards>
+                    <Cards v-for="el in hero" :key="el.id" :el="el"></Cards>
                 </div>
             </div>
         </div>
@@ -47,6 +47,22 @@ export default {
   name: 'Home',
   components: {
      Cards
+  },
+  computed: {
+        hero (){
+            return this.$store.state.hero
+        }
+  },
+  methods :{
+    fetchHero () {
+              
+              this.$store.dispatch('fetchHero')
+          },
+    
+  }, 
+  created (){
+      this.fetchHero()
+        
   }
 }
 </script>
