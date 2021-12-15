@@ -54,7 +54,7 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" minlength="6" required />
+                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" required />
                 <div @click="togglePassword()">
                   <svg style="margin-left: 0.75rem; cursor: pointer" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

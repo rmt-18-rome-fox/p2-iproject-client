@@ -14,7 +14,8 @@
             Please log in using that account has<br />
             registered on the website.
           </p>
-          <form style="margin-top: 1.5rem" action="" method="post">
+          <form style="margin-top: 1.5rem" @submit.prevent="doLogin">
+            <!-- email -->
             <div style="margin-bottom: 1.75rem">
               <label for="" class="d-block input-label">Email Address</label>
               <div class="d-flex w-100 div-input">
@@ -26,9 +27,10 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="email" name="" id="" placeholder="Your Email Address" autocomplete="on" required />
+                <input class="input-field border-0" type="email" name="" id="" placeholder="Your Email Address" autocomplete="on" required v-model="formLogin.email" />
               </div>
             </div>
+            <!-- password -->
             <div style="margin-top: 1rem">
               <label for="" class="d-block input-label">Password</label>
               <div class="d-flex w-100 div-input">
@@ -40,7 +42,7 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" minlength="6" required />
+                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" required v-model="formLogin.password" />
                 <div onclick="togglePassword()">
                   <svg style="margin-left: 0.75rem; cursor: pointer" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -61,7 +63,7 @@
           </form>
           <p class="text-center bottom-caption">
             Don't have an account yet?
-            <span class="green-bottom-caption">Register Here</span>
+            <span class="green-bottom-caption" @click.prevent="toRegister">Register Here</span>
           </p>
         </div>
       </div>
@@ -74,6 +76,14 @@
 <script>
 export default {
   name: "LoginPage",
+  data() {
+    return {
+      formLogin: {
+        email: "",
+        password: "",
+      },
+    };
+  },
   methods: {
     togglePassword() {
       var x = document.getElementById("password-content-3-5");
@@ -84,6 +94,22 @@ export default {
         x.type = "password";
         document.getElementById("icon-toggle").setAttribute("fill", "#CACBCE");
       }
+    },
+    toRegister() {
+      this.$router.push("/register");
+    },
+    doLogin() {
+      this.$store
+        .dispatch("doLogin", this.formLogin)
+        .then((resp) => {
+          console.log(resp);
+          localStorage.access_token = resp.data;
+          this.$store.commit("SET_ACCESS_TOKEN", localStorage.access_token);
+          this.$router.push("/HomePage");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
