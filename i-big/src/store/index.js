@@ -12,6 +12,8 @@ export default new Vuex.Store({
     isLogin : false,
     isRegister: false,
     product : [],
+    cart : [],
+    cartLength : ""
   },
   mutations: {
     ISLOGIN(state, payload) {
@@ -29,6 +31,15 @@ export default new Vuex.Store({
     FETCH_FILTER(state, payload) {
       state.product = payload
     },
+
+    FETCH_CART(state, payload) {
+      state.cart = payload
+    },
+
+    FETCH_CART_LENGTH(state, payload) {
+      state.cartLength = payload
+    },
+
   },
   actions: {
     async loginUser(context, payload) {
@@ -192,7 +203,130 @@ export default new Vuex.Store({
       }
     },
 
+    fetchFavorite(context) {
+      let url = `${baseUrl}/public/favorite`;
+      axios({
+        method: "GET",
+        url,
+        headers: {
+          token : localStorage.token
+        }
+      })
+        .then(({ data }) => {
+          context.commit("FETCH_CART", data)
+          context.commit("FETCH_CART_LENGTH", data.length)
 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    async calBMI(context,payload) {
+        try {
+          let response = await axios({
+            method: 'GET',
+            url: 'https://fitness-calculator.p.rapidapi.com/bmi',
+            params: {age: payload.age, weight: payload.weight, height: payload.height},
+            headers: {
+              'x-rapidapi-host': 'fitness-calculator.p.rapidapi.com',
+              'x-rapidapi-key': '8a2cc8bca1mshf123ad465cdd47bp1cc9a5jsn305fd03044ca'
+            }
+          })
+          Swal.fire(`BMI : ${response.data.data.bmi}
+Health : ${response.data.data.health}
+Healthy Range : ${response.data.data.healthy_bmi_range}
+`)
+          console.log(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+    },
+
+    async calIdeal(context,payload) {
+        try {
+          let response = await axios({
+            method: 'GET',
+            url: 'https://fitness-calculator.p.rapidapi.com/idealweight',
+            params: {gender: payload.gender, height: payload.height},
+            headers: {
+              'x-rapidapi-host': 'fitness-calculator.p.rapidapi.com',
+              'x-rapidapi-key': '8a2cc8bca1mshf123ad465cdd47bp1cc9a5jsn305fd03044ca'
+            }
+          })
+          Swal.fire(`Devine : ${response.data.data.Devine}
+Hamwi : ${response.data.data.Hamwi}
+Miller : ${response.data.data.Miller}
+Robinson : ${response.data.data.Devine}
+`)
+        } catch (err) {
+          console.log(err);
+        }
+    },
+
+    async calMacros(context,payload) {
+        try {
+          let response = await axios({
+            method: 'GET',
+              url: 'https://fitness-calculator.p.rapidapi.com/macrocalculator',
+              params: {
+              age: payload.age,
+              gender: payload.gender,
+              height: payload.height,
+              weight: payload.weight,
+              activitylevel: payload.level,
+              goal: payload.goals
+              },
+              headers: {
+              'x-rapidapi-host': 'fitness-calculator.p.rapidapi.com',
+              'x-rapidapi-key': '8a2cc8bca1mshf123ad465cdd47bp1cc9a5jsn305fd03044ca'
+              }
+          })
+          Swal.fire(`Calorie : ${response.data.data.calorie}
+Balanced : 
+      - carbs : ${Math.ceil(response.data.data.balanced.carbs)}
+      - fat : ${Math.ceil(response.data.data.balanced.fat)}
+      - protein : ${Math.ceil(response.data.data.balanced.protein)}
+
+High Protein :
+      - carbs : ${Math.ceil(response.data.data.highprotein.carbs)}
+      - fat : ${Math.ceil(response.data.data.highprotein.fat)}
+      - protein : ${Math.ceil(response.data.data.highprotein.protein)}
+
+Low Carbs :
+      - carbs : ${Math.ceil(response.data.data.lowcarbs.carbs)}
+      - fat : ${Math.ceil(response.data.data.lowcarbs.fat)}
+      - protein : ${Math.ceil(response.data.data.lowcarbs.protein)}
+
+Low Fat :
+      - carbs : ${Math.ceil(response.data.data.lowfat.carbs)}
+      - fat : ${Math.ceil(response.data.data.lowfat.fat)}
+      - protein : ${Math.ceil(response.data.data.lowfat.protein)}
+`)
+
+          // console.log(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+    },
+
+    async checkoutCart(context) {
+        try {
+          let url = `${baseUrl}/public/checkout`;
+          const response = await axios({
+          method: "PUT",
+          url,
+          headers: {
+            token : localStorage.token
+          }
+        })
+
+        console.log(response.data);
+        window.snap.pay(response.data.token)
+       } catch (err) {
+          console.log(err);
+        }
+    }
   },
   modules: {
   }
