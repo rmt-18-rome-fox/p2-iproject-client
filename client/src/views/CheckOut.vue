@@ -1,33 +1,36 @@
 <template>
     <div class="col-12 col-lg-12">
         
-        <div>
+        <div class="py-5">
             <h1>Checkout</h1>
         </div>
 
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-6">
-                        <div>
-                            <h1>Order Id</h1>
-                            <h2>{{ checkoutData.order_id }}</h2>
+                    <div class="col-4 pr-5">
+                        <div class="row">
+                            <div class="col-6"><h1 class="text-left">Order Id</h1></div>
+                            <div class="col-6"><h2 class="text-right">{{ checkoutData.order_id }}</h2></div>
                         </div>
-                        <div>
-                            <h1>Total Payment</h1>
-                            <h2>{{ checkoutData.totalPrice }}</h2>
+                        <div class="row">
+                            <div class="col-6"><h1 class="text-left">Total Payment</h1></div>
+                            <div class="col-6"><h2 class="text-right">{{ checkoutData.totalPrice }}</h2></div>
                         </div>
-                        <button @click.prevent="onCharge()">Pay</button>
+                        <div class="row pt-5">
+                            <div class="col text-left"><button @click.prevent="onCharge()">Pay</button></div>
+                        </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-8 pl-5">
+                        <div class="row">
                             <b-card v-for="product in checkoutData.product" :key="product.id"
                                 :title="product.name"
                                 :img-src="product.imgUrl"
                                 img-alt="Image"
                                 img-top
-                                tag="article"
                                 style="max-width: 20rem;"
-                                class="mb-2"
+                                tag="div"
+                                class="mb-2 mx-2 px-0 col-3"
                             >
                             <b-card-text>
                                 {{ product.summary }}
@@ -39,6 +42,7 @@
 
                              
                             </b-card>
+                        </div>
                     </div>
                 </div>
             </div>

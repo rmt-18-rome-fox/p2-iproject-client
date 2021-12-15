@@ -1,22 +1,23 @@
 <template>
   <div class="col-12 col-lg-12">
-      <div>
-          <div>All Transactions</div>
+      <div class="py-5">
+          <h1>All Transactions</h1>
       </div>
       <div class="row">
         <div class="col-12">
+            <div class="row">
               <b-card 
                 v-for="data in historyData" :key="data.id"
                 :title="data.order_id"
-                tag="article"
-                style="max-width: 20rem;"
-                class="mb-2"
+                tag="div"
+                class="mb-2 mx-2 col-3"
               >
                 <b-card-text> {{ data.status }} </b-card-text>
                 <b-card-text> {{ data.ammount }} </b-card-text>
                 <b-card-text> {{ data.createdAt }} </b-card-text>
                 <button @click.prevent="OnRefreshStatus(data.order_id)"> Refresh Status </button>
               </b-card>
+            </div>
         </div>
       </div>
   </div>

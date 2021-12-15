@@ -11,6 +11,7 @@
                 <div class="product-info w-100">
                 <h1>{{ product.name }}</h1>
                 <p>{{ product.summary }}</p>
+                <h3>{{ product.price }}</h3>
             </div>
         </div>
         </div>

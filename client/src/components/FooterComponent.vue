@@ -9,11 +9,23 @@
                         </router-link>
                     </div>
                     <div class="col-sm-6 col-md-3 item">
-                        <h3>lorem ipsum</h3>
+                        <h3>Menu</h3>
                         <ul>
-                            <li><a href="#">lorem ipsum</a></li>
-                            <li><a href="#">lorem ipsum</a></li>
-                            <li><a href="#">lorem ipsum</a></li>
+                          <li v-if="this.isLog" class="nav-item">
+                            <router-link class="nav-link pr-3" to="/adopt-list">Adopted List</router-link>
+                          </li>
+                          <li v-if="this.isLog" class="nav-item">
+                            <router-link class="nav-link pr-3" to="/status-transaction">Status Transaction</router-link>
+                          </li>
+                          <li v-if="!this.isLog" class="nav-item">
+                            <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
+                          </li>
+                          <li v-if="!this.isLog" class="nav-item">
+                            <router-link class="nav-link pr-3" to="/register">Sign up</router-link>
+                          </li>
+                          <li v-if="this.isLog" class="nav-item">
+                            <a href="#" @click.prevent="onLogout" class="nav-link pr-3">Sign Out</a>
+                          </li>
                         </ul>
                     </div>
                     <div class="col-md-6 item text">
@@ -34,8 +46,23 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
-    name: "FooterComponent"
+    name: "FooterComponent",
+  computed: {
+    
+    ...mapState(["isLog"]),
+  
+  },
+  methods: {
+    ...mapMutations(["LOG_IN"]),
+
+    onLogout(){
+      localStorage.clear();
+      this.LOG_IN(false)
+      this.$router.push("/login");
+    }
+  },
 }
 </script>
 
