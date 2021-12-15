@@ -1,15 +1,12 @@
 <template>
   <div>
-      <Map />
     <router-view />
   </div>
 </template>
 
 <script>
-import Map from './components/Map.vue'
 export default {
   components: {
-    Map 
   },
   
 }

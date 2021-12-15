@@ -5,14 +5,17 @@ import axios from "axios";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    originCoord: localStorage.getItem("originCoord"),
+    destinationCoord: localStorage.getItem("destCoord")
+  },
   mutations: {
     SET_CURRENT_USER() {
       console.log("ok");
     },
   },
   actions: {
-    calculate({ dispatch }, { originQuery, destQuery }) {
+    calculate({ dispatch }, { originQuery, destQuery, weight }) {
       const path = `https://api.mapbox.com/directions/v5/mapbox/driving/${originQuery[0]}%2C${originQuery[1]}%3B${destQuery[0]}%2C${destQuery[1]}?alternatives=true&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token=pk.eyJ1IjoiaWh6YW5hbnRhbWEiLCJhIjoiY2t4NW02Y3B3MDNhajJ2bzNtZzllcmhyYiJ9.keA6mU1OUSS8JqO9U9n8hg`;
       const carbon_interface_token = "bT4U08ocSLa5cd6Qp6nnA";
 
@@ -26,7 +29,7 @@ export default new Vuex.Store({
         })
           .then(({ data }) => {
             let distance = data.routes[0].distance / 1000;
-            return dispatch("getCarbonFootprint", distance);
+            return dispatch("getCarbonFootprint", {distance, weight});
           })
           .then((response) => {
             console.log("masuk", response);
@@ -42,11 +45,11 @@ export default new Vuex.Store({
           });
       });
     },
-    getCarbonFootprint(context, distance) {
+    getCarbonFootprint(context, {distance, weight}) {
       const path = `https://www.carboninterface.com/api/v1/estimates`;
       const payload = {
         type: "shipping",
-        weight_value: 2, //tambahkan weight
+        weight_value: weight, //tambahkan weight
         weight_unit: "kg",
         distance_value: distance,
         distance_unit: "km",

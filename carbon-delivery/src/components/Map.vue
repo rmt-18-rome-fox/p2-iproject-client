@@ -13,7 +13,7 @@
         <div class="row-start-5 flex justify-center">
           <button
             @click="submit"
-            v-if="weight !== 0 && originCoord && destinationCoord && !load"
+            v-if="weight !== 0 && !load"
             class="transition ease-in-out bg-[#114646] rounded-lg p-2 text-white text-center hover:bg-[#1b6e6e]"
           >
             Submit
@@ -21,7 +21,7 @@
           <button
             @click="submit"
             v-if="load"
-            class="animate-pulse transition ease-in-out bg-[#114646] rounded-lg p-2 text-white text-center hover:bg-[#1b6e6e]"
+            class="animate-pulse transition ease-in-out bg-[#114646] rounded-lg p-2 text-white text-center"
             disabled
           >
             Please Wait
@@ -30,25 +30,10 @@
       </div>
       <div v-if="success" class="flex-row">
         <div class="p-2 bg-green-500 rounded text-white mx-2">
-          You contributed <b>{{ carbonEmitted }} Kg</b> of CO2 in this shipment
-          !
+          You contributed <b>{{ carbonEmitted }} Kg</b> of CO2 in this shipment !
         </div>
-        <div class="text-center bg-slate-600 rounded text-white">
-          Want to record this carbon footprint ?
-          <div class="">
-            <button
-              @click="goToRegister"
-              class="transition ease-in-out underline cursor-pointer hover:scale-110"
-            >
-              yes, make an account</button
-            ><br />
-            <!-- <button
-              @click=""
-              class="transition ease-in-out underline cursor-pointer hover:scale-110"
-            >
-              no
-            </button> -->
-          </div>
+        <div v-if="unfilled" class="text-center bg-red-300 rounded-lg text-gray-900">
+            Fill in the locations please, hehe :)
         </div>
       </div>
       <!-- <div v-if="load" class="">
@@ -64,18 +49,20 @@
 
 <script>
 import mapboxgl from "mapbox-gl";
+// import setter from "../../helpers/setter";
 
 export default {
   name: "Map",
   data() {
     return {
-      originCoord: localStorage.getItem("originCoord"),
-      destinationCoord: localStorage.getItem("destCoord"),
+      unfilled: false,
       weight: 0,
       success: false,
       load: false,
       carbonEmitted: 0,
     };
+  },
+  computed: {
   },
   methods: {
     loadMap() {
@@ -101,7 +88,7 @@ export default {
           center: center,
           zoom: 15,
         });
-
+        
         setTimeout(() => {
           const MapboxDirections = window.MapboxDirections;
           const directions = new MapboxDirections({
@@ -128,32 +115,39 @@ export default {
       }
     },
     submit() {
-      this.success = false;
-      this.load = true;
-
-      this.originCoord = localStorage.getItem("originCoord");
-      this.destinationCoord = localStorage.getItem("destCoord");
-
-      const weight = this.weight;
-      const originQuery = [this.originCoord.split(",")];
-      const destQuery = [this.destinationCoord.split(",")];
-      const payload = {
-        originQuery,
-        destQuery,
-        weight,
-      };
-
-      this.$store.dispatch("calculate", payload).then((carbonEmitted) => {
-        this.carbonEmitted = carbonEmitted;
-        this.load = false;
-        this.success = true;
-      });
+      if(!localStorage.getItem("originCoord") || !localStorage.getItem("destCoord")) {
+        this.unfilled = true
+      } else {
+        this.unfilled = false
+        this.success = false;
+        this.load = true;
+  
+        this.originCoord = localStorage.getItem("originCoord");
+        this.destinationCoord = localStorage.getItem("destCoord");
+  
+        const weight = this.weight;
+        const originQuery = [this.originCoord.split(",")];
+        const destQuery = [this.destinationCoord.split(",")];
+        const payload = {
+          originQuery,
+          destQuery,
+          weight,
+        };
+  
+        this.$store.dispatch("calculate", payload).then((carbonEmitted) => {
+          this.carbonEmitted = carbonEmitted;
+          this.load = false;
+          this.success = true;
+        });
+      }
     },
+     goToRegister () {
+      console.log('otw register')
+    }
   },
-  watcher: {},
   mounted() {
-    // localStorage.removeItem('originCoord')
-    // localStorage.removeItem('destCoord')
+    localStorage.removeItem('originCoord')
+    localStorage.removeItem('destCoord')
     console.log("loading map . . .");
     this.success = false;
     this.loadMap();
