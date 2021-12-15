@@ -22,7 +22,7 @@
           v-model="email"
         />
         <input
-          type="text"
+          type="password"
           id="password"
           class="fadeIn third"
           placeholder="password"
@@ -34,7 +34,8 @@
       <!-- Remind Passowrd -->
       <p>
         Doesnt Have an Account?
-        <a href="#!" @click="toRegister" class="fw-bold text-body"
+        <a href="#!" class="fw-bold text-body"
+        @click.prevent="toRegister"
           ><u>Register here</u></a>
       </p>
     </div>
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   name: "Login",
   data() {
@@ -50,6 +52,39 @@ export default {
       password: "",
     };
   },
+  methods:{
+    toRegister(){
+        this.$router.push("Register");
+    },
+
+    handleLogin(){
+    const user = {
+        email: this.email,
+        password: this.password,
+      };
+
+      this.$store
+        .dispatch("loginUser", user)
+        .then((data) => {
+          console.log(data,`AAAAAAAAAAAA`)
+          localStorage.setItem("acces_token", data.access_token);
+          localStorage.setItem("email", data.payload.email);
+          Swal.fire({
+            title: "Success Login!",
+            text: `Welcome back ${localStorage.email}`,
+            icon: "success",
+          });
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
+    }
+  }
 };
 </script>
 
@@ -164,7 +199,8 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -185,7 +221,9 @@ input[type="text"] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus 
+,
+input[type="password"]:focus  {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
