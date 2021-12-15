@@ -6,8 +6,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    name: 'LoginPage',
+    component: () => import('../components/LoginPage.vue')
+  },
+  {
     path: '/books',
-    name: 'Home',
+    name: 'Books',
     component: Home
   },
   {
@@ -42,6 +47,8 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.access_token
   
   if (to.name == 'Bookmarks' && !isAuthenticated) next({ name: 'LoginPage' })
-  else next()
+  else{
+    next()
+  }
 })
 export default router
