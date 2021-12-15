@@ -17,18 +17,18 @@
             <div class="col-start-2 col-span-8">
                 <h2 class="text-green-500 text-opacity-80 text-2xl text-center mb-7">Login Now</h2>
                 <div class="card rounded-md px-5">
-                    <form class="mt-6 mb-6 space-y-6">
+                    <form class="mt-6 mb-6 space-y-6" @submit.prevent="fnLogin">
                         <div class="mb-5">
                             <label for="email-address" class="sr-only">Email address</label>
                             <input id="email-address" name="email" type="email" autocomplete="off" required
                                 class="block w-full px-3 py-2 border rounded-sm text-green-900 focus:outline-none focus:ring focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-lg tracking-wider"
-                                placeholder="Email address" />
+                                placeholder="Email address" v-model="email"/>
                         </div>
                         <div>
                             <label for="password" class="sr-only">Password</label>
                             <input id="password" name="password" type="password" autocomplete="off" required
                                 class="block w-full px-3 py-2 border rounded-sm text-green-900 focus:outline-none focus:ring focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-lg tracking-wider"
-                                placeholder="Password" />
+                                placeholder="Password" v-model="password"/>
                         </div>
                         <div>
                             <a class="underline text-blue-600" href=""><router-link to="/register">Dont't have an account?</router-link></a>
@@ -49,8 +49,41 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
-    name: "Login"
+    name: "Login",
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        fnLogin() {
+            let payload = {
+                email: this.email,
+                password: this.password
+            }
+            this.$store.dispatch('login', payload)
+            .then(data => {
+                Swal.fire({
+                    title: "Login Success!",
+                    text: "Login Success!",
+                    icon: "success",
+                });
+                localStorage.setItem('access_token', data.access_token)
+                this.$router.push('/')
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+                console.log(err)
+            })
+        },
+    }
 }
 </script>
 
