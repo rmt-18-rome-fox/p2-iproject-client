@@ -112,16 +112,13 @@ export default {
 
       if(this.allError.msg) throw { err: this.allError }
 
-      if (this.isLog === true) {
-        const success = `Hi, ${localStorage.getItem(`username`)} `
-        this.alertSuccess(success)
-        this.$router.push("/");
-      } else {
-        this.$router.push("/register");
-      }
+      const success = `Hi, welcome back`
+      this.alertSuccess(success)
+      this.$router.push("/");
        
     },
     onFailure(error){
+      this.$router.push("/register");
       console.log('OH NOES', error)
     },
   },
