@@ -7,14 +7,35 @@
         <div class="flex items-center">
             <a class="mx-5 font-bold" href="">My Favorite</a>
             <p class="underline font-bold mx-5">salam, Admin</p>
-            <button class="border rounded-lg bg-green-500 text-white px-2 py-1 mx-5">Logout</button>
+            <button class="border rounded-lg bg-green-500 text-white px-2 py-1 mx-5" @click.prevent="fnLogout">Logout</button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex"
+import Swal from 'sweetalert2'
+
 export default {
-    name: "Navbar"
+    name: "Navbar",
+    methods: {
+        ...mapMutations({
+            login: "LOGIN"
+        }),
+        fnLogout () {
+            Swal.fire({
+                title: "Logout Success!",
+                text: "Logout Success!",
+                icon: "success",
+            });
+            localStorage.clear()
+            this.login(false)
+            this.$router.push("/login")
+        }
+    },
+    computed: {
+        ...mapState(['isLogin'])
+    }
 }
 </script>
 
