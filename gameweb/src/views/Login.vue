@@ -30,7 +30,15 @@
         />
         <input type="submit" class="fadeIn fourth" value="Log In" />
       </form>
-
+          <p>Or</p>
+             <center>
+                    <GoogleLogin
+                      :params="params"
+                      :renderParams="renderParams"
+                      :onSuccess="onSuccess"
+                    ></GoogleLogin>
+                  </center>
+                  <br>
       <!-- Remind Passowrd -->
       <p>
         Doesnt Have an Account?
@@ -44,12 +52,26 @@
 
 <script>
 import Swal from "sweetalert2";
+import GoogleLogin from "vue-google-login";
+
 export default {
   name: "Login",
+  components :{
+    GoogleLogin
+  },
   data() {
     return {
       email: "",
       password: "",
+      params: {
+        client_id:
+          "306277501455-3tep6b17k5avj734itbeqju5g6asoind.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
     };
   },
   methods:{
@@ -84,7 +106,29 @@ export default {
             text: err.response.data.message,
           });
         });
-    }
+    },
+      onSuccess(googleUser) {
+      this.$store
+        .dispatch("googleLogin", googleUser)
+        .then((data) => {
+          localStorage.setItem("acces_token", data.access_token);
+          localStorage.setItem("email", data.newUser.email);
+          localStorage.setItem("id", data.newUser.id);
+          Swal.fire({
+            title: "Success Login!",
+            text: `Welcome back ${localStorage.email}`,
+            icon: "success",
+          });
+          this.$router.push("/");
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
+    },
   }
 };
 </script>

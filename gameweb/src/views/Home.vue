@@ -48,7 +48,6 @@
             ><span>Previous</span></a
           >
           <a
-            @click.prevent="nextPage"
             href=""
             class="
               py-2
