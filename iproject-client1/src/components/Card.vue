@@ -1,5 +1,5 @@
 <template>
-  <div class="card w-100 my-5">
+  <div class="card w-100 my-5" v-if="coffeePowder.isDelete == false">
     <div class="card-header">
       Item {{ coffeePowder.id }}
       <h5 class="card-title">Jenis: {{ coffeePowder.type }}</h5>
@@ -41,6 +41,7 @@
             <div class="col-12 pt-5">
               <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'customer'" @click.prevent="addNewCart(coffeePowder.id)">Add to YourCart</a>
               <a href="#" class="btn-buy btn btn-primary mr-3" v-if="roleUser == 'admin'" @click.prevent="toFormUpdate(coffeePowder.id)">Edit</a>
+              <a href="#" class="btn-buy btn btn-primary mr-3" v-if="roleUser == 'admin'" @click.prevent="toPatchDelete(coffeePowder.id)">Delete</a>
             </div>
           </div>
           <!-- <p></p>
@@ -74,6 +75,11 @@ export default {
     toFormUpdate(id) {
       this.$store.dispatch('toFormUpdate', id).then(() => {
         this.$router.push(`/formedit/${id}`);
+      });
+    },
+    toPatchDelete(id) {
+      this.$store.dispatch('toPatchDelete', id).then(() => {
+        this.$store.dispatch('fetchCoffeePowders');
       });
     },
     addNewCart(id) {
