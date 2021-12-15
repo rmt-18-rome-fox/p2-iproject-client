@@ -2,7 +2,7 @@
   <div>
     <Navbar></Navbar>
     <div class="main-container-home d-flex justify-content-center">
-      <div class="container2-home col-8">
+      <div class="container2-home col-6">
         <Card v-for="coffeePowder in coffeePowders" :key="coffeePowder.id" :coffeePowder="coffeePowder" class="shadow"></Card>
       </div>
     </div>
@@ -31,8 +31,9 @@ export default {
 
 <style>
 .main-container-home {
-  background-color: #fcf1cf;
+  /* background-color: #fcf1cf; */
   color: #4b450e;
+  padding-top: 100px;
   /* height: 100vh; */
 }
 
