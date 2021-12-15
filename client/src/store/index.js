@@ -72,9 +72,9 @@ export default new Vuex.Store({
 
         context.commit("LOG_IN", true)
 
+        console.log(`hello?`)
+
         localStorage.access_token = response.data.access_token;
-        localStorage.username = response.data.data.username;
-        localStorage.role = response.data.data.role;
 
       } catch (err) {
         const errorLog = { msg: err.response.data.message, status: err.response.status }
