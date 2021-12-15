@@ -28,6 +28,18 @@ export default new Vuex.Store({
         })
       })
     },
+
+    register(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${baseUrl}/register`, payload)
+        .then(({data}) => {
+          resolve(data)
+        })
+        .catch(err => {
+          reject(err)
+        })
+      })
+    },
   },
   modules: {
   }
