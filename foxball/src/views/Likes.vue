@@ -59,6 +59,7 @@ export default {
     ...mapActions(["fetchLike", "removeLike"]),
     async remove(payload) {
       await this.removeLike(payload);
+      this.$router.push("/");
     },
   },
   computed: {

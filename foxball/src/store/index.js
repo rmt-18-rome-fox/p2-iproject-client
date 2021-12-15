@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../apis/axios'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
@@ -51,9 +52,20 @@ export default new Vuex.Store({
         context.commit('LOGIN', true);
         context.commit('INITIATE_USER', localStorage.getItem('username'));
         this._vm.$socket.client.emit('user', payload)
+        Swal.fire({
+          title: `Hello ${response.data.dataUser.username}`,
+          text: "Welcome!",
+          icon: "success",
+          confirmButtonText: "Continue Sign In!",
+        });
       } catch (err) {
         context.commit('LOGIN', false);
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async fetchPost(context) {
@@ -65,7 +77,12 @@ export default new Vuex.Store({
         })
         context.commit('FETCH_POST', response.data)
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     socket_connect() {
@@ -101,10 +118,14 @@ export default new Vuex.Store({
             access_token: localStorage.getItem('access_token')
           }
         })
-        console.log(response);
         context.commit('FETCH_TABLE', response.data)
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async addPost(context, payload) {
@@ -121,7 +142,12 @@ export default new Vuex.Store({
           }
         })
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async fetchNews(context) {
@@ -135,7 +161,12 @@ export default new Vuex.Store({
         })
         context.commit('FETCH_NEWS', response.data)
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async fetchLike(context) {
@@ -149,21 +180,37 @@ export default new Vuex.Store({
         })
         context.commit('FETCH_LIKE', response.data)
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async likedPost(context, payload) {
       try {
-        const response = await axios({
+        await axios({
           url: `/likes/${payload}`,
           method: 'POST',
           headers: {
             access_token: localStorage.getItem('access_token')
           }
         })
-        console.log(response);
+        Swal.fire({
+          position: "top-end",
+          title: `Success like post`,
+          text: `Great`,
+          icon: "success",
+          confirmButtonText: "ok",
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async registerFans(context, payload) {
@@ -174,21 +221,37 @@ export default new Vuex.Store({
           data: payload
         })
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     },
     async removeLike(context, payload) {
       try {
-        const response = await axios({
+        await axios({
           url: `/likes/${payload}`,
           method: 'DELETE',
           headers: {
             access_token: localStorage.getItem('access_token')
           }
         })
-        console.log(response);
+        Swal.fire({
+          position: "top-end",
+          title: `Success remove like`,
+          text: `hmmm`,
+          icon: "success",
+          confirmButtonText: "Next!",
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
       }
     }
   },
