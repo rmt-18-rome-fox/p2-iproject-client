@@ -1,6 +1,6 @@
 <template>
   <b-navbar id="navbar" class="container-fluid" toggleable="lg" type="dark">
-    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+    <b-navbar-brand href="#">NewsHub</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -8,6 +8,7 @@
       <b-navbar-nav>
           <!-- this is router-link, using to="/" -->
           <b-nav-item to="/">Home</b-nav-item>
+          <b-nav-item to="/dashboard">Dashboard</b-nav-item>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
         <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
       </b-navbar-nav>
