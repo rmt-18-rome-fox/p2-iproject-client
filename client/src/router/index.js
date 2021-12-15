@@ -11,14 +11,35 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('../views/About.vue')
+    path: '/login',
+    name: 'Login',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginForm.vue')
   },
   {
-    path: '/store',
-    name: 'Store',
-    component: () => import('../views/Store.vue')
+    path: '/register',
+    name: 'Register',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/RegisterForm.vue')
+  },
+  {
+    path: '/adopt-list',
+    name: 'AdoptedList',
+    component: () => import('../views/AdoptedList.vue')
+  },
+  {
+    path: '/status-transaction',
+    name: 'StatusTransactions',
+    component: () => import('../views/StatusTransactions.vue')
+  },
+  {
+    path: '/checkout',
+    name: 'CheckOut',
+    component: () => import('../views/CheckOut.vue')
   },
   {
     path: '/404',

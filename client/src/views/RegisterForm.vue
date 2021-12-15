@@ -6,24 +6,12 @@
                 <p class="text-center text-white">Become a part of our community!</p>
                 <form>
                     <div class="user-box">
-                        <input v-model="registerForm.username" type="text" name="" required="">
-                        <label>Username</label>
-                    </div>
-                    <div class="user-box">
                         <input v-model="registerForm.email" type="email" name="" required="">
                         <label>Email</label>
                     </div>
                     <div class="user-box">
                         <input v-model="registerForm.password" type="password" name="" required="">
                         <label>Password</label>
-                    </div>
-                    <div class="user-box">
-                        <input v-model="registerForm.phoneNumber" type="text" name="" required="">
-                        <label>Phone</label>
-                    </div>
-                    <div class="user-box">
-                        <input v-model="registerForm.address" type="text" name="" required="">
-                        <label>Address</label>
                     </div>
                     <a href="#" @click.prevent="onRegister">
                         <span></span>
@@ -51,11 +39,8 @@ export default {
   data(){
     return {
       registerForm: {
-        username: "",
         email: "",
         password: "",
-        phoneNumber: "",
-        address: ""
       }
     }
   },
