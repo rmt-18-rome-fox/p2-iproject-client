@@ -1,8 +1,11 @@
 <template>
 <div>
+  <div
+    v-for="bookmark in bookmarks"
+    :key="bookmark.id">
   <b-card
-    title="Card Title"
-    img-src="https://picsum.photos/600/300/?image=25"
+    :title="bookmark.title"
+    :img-src="bookmark.imageUrl"
     img-alt="Image"
     img-top
     tag="article"
@@ -10,17 +13,41 @@
     class="mb-2"
   >
     <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      {{bookmark.authors}}
+    </b-card-text>
+    <b-card-text>
+      {{bookmark.subjects}}
     </b-card-text>
 
-    <b-button href="#" variant="primary">Go somewhere</b-button>
+    <b-button href="#" variant="primary">Book Detail</b-button>
+    <b-button href="#" variant="primary">Delete Bookmark</b-button>
   </b-card>
+  </div>
 </div>
 </template>
 
 <script>
 export default {
-
+  name: "BookmarkPage",
+  methods:{
+    fetchBookmarks(){
+      this.$store.dispatch("fetchBookmarks")
+      .then((resp)=>{
+        this.$store.commit("setBookmarks", resp.data)
+      })
+      .catch(err =>{
+        console.log(err);
+      })
+    }
+  },
+  computed:{
+    bookmarks(){
+      return this.$store.state.bookmarks
+    }
+  },
+  created(){
+    this.fetchBookmarks()
+  }
 }
 </script>
 
