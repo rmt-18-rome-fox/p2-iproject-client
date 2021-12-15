@@ -66,6 +66,10 @@ router.beforeEach((to, from, next) => {
     next({ name: 'Login' })
   } else if (to.path === '/status' && !localStorage.access_token){
     next({ name: 'Login' })
+  } else if (to.path === '/adopt-list' && !localStorage.access_token){
+    next({ name: 'Login' })
+  } else if (to.path === '/status-transaction' && !localStorage.access_token){
+    next({ name: 'Login' })
   } else if (to.path === '/checkout' && !localStorage.access_token){
     next({ name: 'Login' })
   } else if (to.path === '/checkout/charge' && !localStorage.access_token){
