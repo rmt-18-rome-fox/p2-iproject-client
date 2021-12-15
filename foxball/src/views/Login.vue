@@ -44,13 +44,13 @@
       </section>
 
       <section class="mt-10">
-        <form class="flex flex-col">
+        <form class="flex flex-col" @submit.prevent="toLogin">
           <div class="mb-6 pt-3 rounded bg-indigo-100">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
-              >Email</label
+              >Username</label
             >
             <input
-              type="email"
+              type="username"
               class="
                 bg-white
                 w-full
@@ -61,6 +61,7 @@
                 px-3
                 pb-3
               "
+              v-model="formLogin.username"
             />
           </div>
           <div class="mb-6 pt-3 rounded bg-indigo-100">
@@ -79,6 +80,7 @@
                 px-3
                 pb-3
               "
+              v-model="formLogin.password"
             />
           </div>
 
@@ -121,8 +123,29 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Login",
+  data() {
+    return {
+      formLogin: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["logginIn"]),
+    async toLogin() {
+      await this.logginIn(this.formLogin);
+      if (this.isLogin === true) {
+        this.$router.push("/");
+      }
+    },
+  },
+  computed: {
+    ...mapState(["isLogin"]),
+  },
 };
 </script>
 

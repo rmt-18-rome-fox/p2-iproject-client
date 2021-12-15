@@ -7,15 +7,24 @@
 
 <script>
 import Sidebar from "./components/Sidebar.vue";
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "App",
   components: {
     Sidebar,
   },
-  data() {
-    return {
-      isLogin: false,
-    };
+  methods: {
+    ...mapMutations({
+      isLoggedIn: "LOGIN",
+    }),
+  },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.isLoggedIn(true);
+    }
+  },
+  computed: {
+    ...mapState(["isLogin"]),
   },
 };
 </script>
