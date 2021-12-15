@@ -7,7 +7,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    posts: []
+    posts: [],
+    currentUser: '',
+    messages: [],
+    status: '',
   },
   mutations: {
     LOGIN(state, payload) {
@@ -15,6 +18,15 @@ export default new Vuex.Store({
     },
     FETCH_POST(state, payload) {
       state.posts = payload
+    },
+    INITIATE_USER(state, payload) {
+      state.currentUser = payload
+    },
+    SOCKET_GOTMESSAGE(state, payload) {
+      state.messages = payload
+    },
+    SOCKET_USERSTATUS(state, payload) {
+      state.status = payload.status
     }
   },
   actions: {
@@ -25,6 +37,8 @@ export default new Vuex.Store({
         localStorage.setItem('username', response.data.dataUser.username)
         localStorage.setItem('email', response.data.dataUser.email)
         context.commit('LOGIN', true);
+        context.commit('INITIATE_USER', localStorage.getItem('username'));
+        this._vm.$socket.client.emit('user', payload)
       } catch (err) {
         context.commit('LOGIN', false);
         console.log(err);
@@ -37,7 +51,6 @@ export default new Vuex.Store({
             access_token: localStorage.getItem('access_token')
           }
         })
-        console.log(response);
         context.commit('FETCH_POST', response.data)
       } catch (err) {
         console.log(err);
@@ -52,6 +65,21 @@ export default new Vuex.Store({
     socket_customEventServer(context, payload) {
       console.log('customEventServer', payload);
     },
+    customEventServer(context, payload) {
+      this._vm.$socket.client.emit('customEventClient', payload)
+    },
+    sendChatMsg(context, payload) {
+      this._vm.$socket.client.emit('sendingChatMsg', {
+        username: localStorage.getItem('username'),
+        message: payload.trim()
+      })
+    },
+    socket_userStatus(context, payload) {
+      context.commit('SOCKET_USERSTATUS', payload)
+    },
+    socket_gotMessage(context, payload) {
+      context.commit('SOCKET_GOTMESSAGE', payload)
+    }
   },
   modules: {
   }

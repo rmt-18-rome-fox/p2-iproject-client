@@ -7,32 +7,22 @@
 
 <script>
 import Sidebar from "./components/Sidebar.vue";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   name: "App",
   components: {
     Sidebar,
   },
-  // sockets: {
-  //   connect() {
-  //     console.log("socket connected", this.$socket);
-  //   },
-  //   customEventServer(payload) {
-  //     console.log("customEventServer", payload);
-  //   },
-  //   disconnect() {
-  //     console.log("socket disconnected", this.$socket);
-  //   },
-  // },
   methods: {
     ...mapMutations({
       isLoggedIn: "LOGIN",
     }),
+    ...mapActions(["customEventServer"]),
   },
   created() {
-    // this.$socket.client.emit("customEventClient", {
-    //   message: "Custom from client",
-    // });
+    this.customEventServer({
+      msg: "From Client",
+    });
     if (localStorage.getItem("access_token")) {
       this.isLoggedIn(true);
     }
