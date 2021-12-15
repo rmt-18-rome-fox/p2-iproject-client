@@ -23,10 +23,16 @@
             </li>
           </ul>
           <div class="d-flex" style="margin-left: 10%">
-            <a class="btn btn-get-started btn-get-started-yellow" href="#">Login</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="!access_token">Login</a>
           </div>
           <div class="d-flex" style="margin-left: 1%">
-            <a class="btn btn-get-started btn-get-started-yellow" href="#">Register</a>
+            <a class="btn btn-get-started btn-get-started-yellow" href="#" v-if="!access_token">Register</a>
+          </div>
+          <div class="d-flex" style="margin-left: 10%">
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="access_token">Home</a>
+          </div>
+          <div class="d-flex" style="margin-left: 1%">
+            <a class="btn btn-get-started btn-get-started-yellow" href="#" v-if="access_token">Logout</a>
           </div>
         </div>
       </div>
@@ -37,6 +43,16 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    toLogin() {
+      this.$router.push("/login");
+    },
+  },
+  computed: {
+    access_token() {
+      return localStorage.getItem("access_token");
+    },
+  },
 };
 </script>
 
