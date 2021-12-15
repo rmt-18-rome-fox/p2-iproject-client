@@ -6,19 +6,19 @@
         </router-link>
         <ul class="nav navbar-nav flex-row float-right">
           <li v-if="this.isLog" class="nav-item">
-            <router-link class="nav-link pr-3" to="/adopt-list">Adopted List</router-link>
+            <router-link class="nav-link pr-5" to="/adopt-list">Adopted List</router-link>
           </li>
           <li v-if="this.isLog" class="nav-item">
-            <router-link class="nav-link pr-3" to="/status-transaction">Status Transaction</router-link>
+            <router-link class="nav-link pr-5" to="/status-transaction">Status Transaction</router-link>
           </li>
           <li v-if="!this.isLog" class="nav-item">
-            <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
+            <router-link class="nav-link pr-5" to="/login">Sign in</router-link>
           </li>
           <li v-if="!this.isLog" class="nav-item">
-            <router-link class="nav-link pr-3" to="/register">Sign up</router-link>
+            <router-link class="nav-link pr-5" to="/register">Sign up</router-link>
           </li>
           <li v-if="this.isLog" class="nav-item">
-            <a href="#" @click.prevent="onLogout" class="nav-link pr-3">Sign Out</a>
+            <a href="#" @click.prevent="onLogout" class="nav-link pr-5">Sign Out</a>
           </li>
         </ul>
       </div>
