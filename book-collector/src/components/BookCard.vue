@@ -30,7 +30,18 @@
 <script>
 export default {
     name: "BookCard",
-    props: ["book"]
+    props: ["book"],
+    methods:{
+        addBookmark(){
+            this.$store.dispatch("addBookmark", this.book.id)
+            .then((resp) =>{
+                console.log(resp);
+            })
+            .catch(err =>{
+                console.log(err);
+            })
+        }
+    }
 }
 </script>
 

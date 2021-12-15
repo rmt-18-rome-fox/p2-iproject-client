@@ -19,9 +19,8 @@ export default {
   methods:{
     fetchBooks(){
       this.$store.dispatch("fetchBooks")
-      .then(resp =>{
-        console.log(resp);
-        this.$store.commit("setBooks", resp.data.results)
+      .then((resp) =>{
+        this.$store.commit("setBooks", resp.data)
       })
       .catch(err =>{
         console.log(err);
