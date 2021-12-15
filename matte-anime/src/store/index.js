@@ -86,13 +86,26 @@ export default new Vuex.Store({
       })
     },
     fetchWatchLists({commit}, payload) {
-      localUrl.get('watchlists', {headers: {access_token: localStorage.getItem("access_token")}})
+      localUrl.get('/watchlists', {headers: {access_token: localStorage.getItem("access_token")}})
       .then(({data}) => {
         // console.log({data});
         commit("SET_WATCH_LISTS", data)
       })
       .catch((err) => {
         console.log({err});
+      })
+    },
+    updateStatus({commit}, {status, JikanAnimeId}){
+      return new Promise((resolve, reject) => {
+        localUrl.patch(`/watchlists/${JikanAnimeId}`, {status}, {headers: {access_token: localStorage.getItem("access_token")}})
+        .then((res) => {
+          console.log({res});
+          resolve()
+        })
+        .catch((err) => {
+          console.log({err});
+          reject(err)
+        })
       })
     }
   },
