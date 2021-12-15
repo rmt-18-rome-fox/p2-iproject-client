@@ -38,6 +38,11 @@ const routes = [
     path: '/customer/portofolio/:portofolioId',
     name: 'CustomerPortofolioDetail',
     component: () => import('../views/CustomerPortofolioDetail.vue')
+  },
+  {
+    path: '/customer/consultation/:architectId',
+    name: 'CustomerBooking',
+    component: () => import('../views/CustomerBooking.vue')
   }
 ]
 
