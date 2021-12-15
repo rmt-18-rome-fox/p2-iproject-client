@@ -7,6 +7,7 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import ArticleDetail from '../views/ArticleDetail'
 import VueSocialSharing from 'vue-social-sharing'
+import adminRegister from '../views/adminRegister'
 
 Vue.use(VueRouter)
 Vue.use(VueSocialSharing);
@@ -49,6 +50,11 @@ const routes = [
     path: '/article/:id',
     name: 'ArticleDetail',
     component: ArticleDetail
+  },
+  {
+    path: '/adminregister',
+    name: 'adminRegister',
+    component: adminRegister
   },
 ]
 

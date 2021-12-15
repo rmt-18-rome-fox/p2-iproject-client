@@ -6,19 +6,23 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-          <!-- this is router-link, using to="/" -->
-          <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="/dashboard">Dashboard</b-nav-item>
+        <!-- this is router-link, using to="/" -->
+        <b-nav-item to="/" >Home</b-nav-item>
+        <b-nav-item to="/dashboard" @click="changeMutateArticle">Dashboard</b-nav-item>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
         <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-          <!-- <b-nav-item to="/favorites" v-if="isLoggedIn">My Favourites</b-nav-item>
+        <!-- <b-nav-item to="/favorites" v-if="isLoggedIn">My Favourites</b-nav-item>
           <b-nav-item to="/favorites" disabled v-if="!isLoggedIn">My Favourites</b-nav-item> -->
         <!-- <b-nav-item href="#" v-on:click.prevent="doLogout" v-if="isLoggedIn">Sign Out</b-nav-item> -->
-        <b-nav-item href="#" v-on:click.prevent="goToLogin"  >Sign In</b-nav-item>
+        <b-nav-item href="#" v-on:click.prevent="goToLogin">Sign In</b-nav-item> &nbsp; 
+        <b-nav-item href="#" v-on:click.prevent="goToAdminLogin">Sign In Admin</b-nav-item> &nbsp; 
+        <b-nav-item href="#" v-on:click.prevent="signOutHandler"
+          >Sign Out</b-nav-item
+        >
         <!-- <b-nav-form>
           <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
           <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
@@ -44,18 +48,36 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
-    name: "Navbar",
-    methods: {
-        goToLogin() {
-            this.$router.push({name: "Login"})
-        }
+  name: "Navbar",
+  methods: {
+      ...mapMutations({
+      loginData: "MUTATE_ISLOGGEDIN",
+      mutateArticleData: "MUTATE_ALTERNATIVENEWS"
+
+    }),
+    goToLogin() {
+      this.$router.push({ name: "Login" });
+    },
+    signOutHandler() {
+      localStorage.clear();
+      this.loginData(false);
+      this.$router.push({ name: "Login" });
+    },
+    goToAdminLogin() {
+        this.$router.push({ name: "adminLogin" });
+    },
+    changeMutateArticle() {
+        this.mutateArticleData(false)
     }
-}
+  },
+};
 </script>
 
 <style>
-    #navbar {
+#navbar {
   background-color: #2c3e50;
   border-bottom: 3px solid red;
 }

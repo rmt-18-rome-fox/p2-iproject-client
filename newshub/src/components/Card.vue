@@ -39,7 +39,7 @@ export default {
              imageUrl: this.article.image,
              articleUrl: this.article.url,
          }
-       } else {
+       } else if (!this.alternativeNews) {
          articleData = {
              title: this.article.title,
              content: this.article.description,

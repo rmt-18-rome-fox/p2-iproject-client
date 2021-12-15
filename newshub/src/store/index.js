@@ -72,6 +72,13 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
+    async doAdminRegister(context, payload) {
+      try {
+        await axiosArticles.post('/admins/register', payload)
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async doUserLogin(context, payload) {
       try {
         const response = await axiosArticles.post('/users/login', payload)

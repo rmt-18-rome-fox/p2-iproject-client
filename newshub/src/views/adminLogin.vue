@@ -20,9 +20,9 @@
       <b-button class="w-25 mt-2" type="submit" variant="primary"
         >Submit</b-button
       >
-      <!-- <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
+     <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
         >Register</b-button
-      > -->
+      >
       <!-- <GoogleLogin
         :params="params"
         :renderParams="renderParams"
@@ -57,6 +57,9 @@ export default {
            if (this.isLoggedIn === true) {
                this.$router.push("/dashboard");
            }
+        },
+        goToRegister() {
+          this.$router.push({ name: "adminRegister" });
         }
     }
 }
