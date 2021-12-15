@@ -101,7 +101,6 @@ export default new Vuex.Store({
           url: baseUrl +`/recipes?searchTerm=${query}`,
           method: "get"
         })
-        console.log(recipes," >>>>>>>>>>>>>>>>>>>.dari store");
         commit('GET_RECIPES', recipes.data.recipes)
       } catch ({response}) {
         console.log(response);
@@ -171,7 +170,6 @@ export default new Vuex.Store({
     },
     async filter({commit} , filter) {
       try {
-        console.log(filter);
         const {searchTerm} = filter
         const filterUrl= `/recipes?searchTerm=${searchTerm}`
         
@@ -189,7 +187,7 @@ export default new Vuex.Store({
         })
       }
     },
-    async subscribe ({commit}) {
+    async subscribe ({commit}, dispatch) {
       try{
         const response = await axios ({
           method: 'get',
@@ -198,12 +196,48 @@ export default new Vuex.Store({
             access_token: localStorage.access_token
           }
         })
-        window.open(response.data.invoiceUrl, '_blank')
-
-      } catch (err) {
-
+        await window.open(response.data.invoiceUrl, '_blank')
+        const updateResponse = await axios ({
+          url: baseUrl + '/users/status',
+          method: "patch",
+          headers: {access_token: localStorage.access_token}
+        })
+        localStorage.status = "Premium"
+        dispatch('alertBookmark', `you're now premium member`)
+      } catch ({response}) {
+        console.log(response,">>>>>>>>>>>error");
+        const {message} = response.data
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: message
+        })
       }
-    }
+    },
+    async deleteFavourite ({dispatch}, id) {
+      try {
+        const response = await axios ({
+          url: baseUrl + "/users/delete",
+          method: "delete",
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        Swal.fire({
+          icon: 'success',
+          title: 'success',
+          text: message.data.message
+        })
+        await dispatch('fetchFavourite')
+      } catch ({response}) {
+        const message = response.data.message
+        swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
+      })
+      }
+    },
   },
   modules: {
   }

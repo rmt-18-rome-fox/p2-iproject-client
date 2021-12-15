@@ -16,6 +16,10 @@
                         <div class="col-12">
                             <button type="submit" class="btn btn-dark float-end">Login</button>
                         </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark float-end">Facebook</button>
+                        </div>
                     </form>
                     <hr class="mt-4">
                     <div class="col-12">

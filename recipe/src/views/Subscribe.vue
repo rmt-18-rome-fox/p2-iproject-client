@@ -19,6 +19,7 @@ name: "Subscribe",
 methods : {
   subscribe () {
     this.$store.dispatch("subscribe")
+    this.$route.push('/')
   }
 }
 }

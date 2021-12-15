@@ -11,9 +11,9 @@
         <router-link  class="nav-link text-black" v-if="isLoggedIn === false" to="/register"  tabindex="-1" aria-disabled="true" > Register </router-link>
         <router-link  class="nav-link text-black" v-if="isLoggedIn === true" to="/favourites" tabindex="-1" aria-disabled="true"> Favourite </router-link>
         <router-link  class="nav-link text-black" v-if="isLoggedIn === false" to="/login"  tabindex="-1" aria-disabled="true" > Login </router-link>
-        <router-link  class="nav-link text-black" v-if="isLoggedIn === true" to="/subscribe" tabindex="-1" aria-disabled="true"> Subscribe </router-link>
-        
+        <router-link  class="nav-link text-black" v-if="isLoggedIn === true && !status" to="/subscribe" tabindex="-1" aria-disabled="true"> Subscribe </router-link>
         <a class="nav-link text-black"  tabindex="-1" v-if="isLoggedIn === true" aria-disabled="true"  @click="logout">Logout</a>
+        <h4>{{status}}</h4>
       </ul>
       <form class="d-flex" @submit.prevent="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="searchTerm">
@@ -32,7 +32,9 @@ name: "Navbar",
 data () {
   return {
       isLoggedIn: !!localStorage.access_token,
-      searchTerm:""
+      searchTerm:"",
+      status: localStorage.status,
+      status : "Premium"
     }
 },
   methods : {

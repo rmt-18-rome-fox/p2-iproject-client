@@ -8,7 +8,7 @@
         <p class="card-text">Cuisines: {{recipe.cuisines.join(", ")}}</p>
         <p class="card-text">Dish Type: {{recipe.dishTypes.join(", ")}}</p>
         <a class="btn btn-primary" @click.prevent="$router.push({ path: `/recipe/${recipe.id}` })">Detail</a>
-        <a class="btn btn-danger" @click.prevent="$router.push({ path: `/recipe/${recipe.id}` })">Delete</a>
+        <a class="btn btn-danger" @click.prevent="deleteFavourite(recipe.id)">Delete</a>
       </div>
     </div>
   </div>
@@ -25,6 +25,9 @@ components: {
     fetchFavourite () {
       this.$store.dispatch("fetchFavourite")
     },
+    deleteFavourite(id) {
+      this.$store.dispatch("deleteFavourite", id)
+    }
   },
   computed: {
     recipesList() {
@@ -50,5 +53,7 @@ components: {
   padding: 15px;
   border-radius: 20px;
 }
-
+.btn {
+  margin-right: 10px;
+}
 </style>
