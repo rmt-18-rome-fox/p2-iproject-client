@@ -1,14 +1,14 @@
 <template>
   <div class="hello">
   <navbar></navbar>
-    <div>
+    <b-row>
       <div
-      class="d-flex bd-highlight"
+      class="col-md-3"
       v-for="book in books"
       :key="book.id">
-      <book-card :book="book"></book-card>
+      <book-card :book="book" class="flex-item"></book-card>
       </div>
-    </div>
+    </b-row>
   </div>
 </template>
 
@@ -43,7 +43,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.hello{
-  margin: 50px;
-}
 </style>
