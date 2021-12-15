@@ -22,6 +22,29 @@
               class="btn btn-danger"
               @click="deleteBooking(booking.movie.id)"
               >Cancel Booking</a
+            ><br /><br />
+            <a
+              href="#"
+              class="btn btn-primary"
+              @click="payNow"
+              v-if="booking.isPaid === false"
+              >Pay Now</a
+            >
+            <a
+              href="#"
+              class="btn btn-success"
+              v-if="booking.isPaid === true"
+              >Paid</a
+            ><br />
+            <a
+              v-if="redirect&&!booking.isPaid"
+              :href="redirect"
+              target="_blank"
+              @click="paidSuccess(booking.movie.id)"
+            >
+              <h6 style="margin-top: 10px">
+                Click this to continue payment
+              </h6></a
             >
           </div>
         </div>
@@ -35,6 +58,7 @@ export default {
   data() {
     return {
       bookings: [],
+      redirect: "",
     };
   },
   methods: {
@@ -53,6 +77,28 @@ export default {
         .dispatch("aDelete", id)
         .then(() => {
           this.$router.push("/movies");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    payNow() {
+      this.$store
+        .dispatch("aPayNow")
+        .then((res) => {
+          console.log(res);
+          this.redirect = res.redirect_url;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    paidSuccess(id) {
+      this.$store
+        .dispatch("aPaidSuccess", id)
+        .then(() => {
+          this.redirect=""
+          this.fetchBookings();
         })
         .catch((err) => {
           console.log(err);

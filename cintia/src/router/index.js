@@ -52,12 +52,18 @@ export default router;
 
 //navguard
 router.beforeEach((to, from, next) => {
-  if (to.name === "Movies" && !localStorage.access_token) {
+  if (
+    (to.name === "Movies" || to.name === "Bookings" || to.name === "Detail") &&
+    !localStorage.access_token
+  ) {
     next({ name: "Home" });
   } else {
     next();
   }
-  if (to.name === "Login" && localStorage.access_token) {
+  if (
+    (to.name === "Login" || to.name === "Register") &&
+    localStorage.access_token
+  ) {
     next({ name: "Movies" });
   } else {
     next();

@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     user: false,
     baseUrl: "https://cintia-cinema-ticketing-apps.herokuapp.com",
+    // baseUrl: "http://localhost:3012",
   },
   mutations: {
     mLogin(state) {
@@ -135,6 +136,42 @@ export default new Vuex.Store({
         const config = {
           method: "delete",
           url: `${state.baseUrl}/bookings/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        };
+        axios(config)
+          .then((res) => {
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    aPayNow({ state }) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "post",
+          url: `${state.baseUrl}/payments/midtrans`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        };
+        axios(config)
+          .then((res) => {
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    aPaidSuccess({ state }, id) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "patch",
+          url: `${state.baseUrl}/payments/midtrans/${id}`,
           headers: {
             access_token: localStorage.access_token,
           },

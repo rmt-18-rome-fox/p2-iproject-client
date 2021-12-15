@@ -11,14 +11,13 @@
       >
         <img class="card-img-top" :src="movie.poster" alt="Card image cap" />
         <div class="card-body">
-          <strong><h5 class="card-title">{{ movie.title }}</h5></strong>
+          <strong
+            ><h5 class="card-title">{{ movie.title }}</h5></strong
+          >
           <p class="card-text">
             {{ movie.genre }}
           </p>
-          <a
-            href="#"
-            class="btn btn-primary mb-2"
-            @click="addBooking(movie.id)"
+          <a href="#" class="btn btn-primary mb-2" @click="addBooking(movie.id)"
             >Book this Movie</a
           >
 
