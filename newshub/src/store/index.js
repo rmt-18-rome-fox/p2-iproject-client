@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     fetchedNews: [],
-    isLoggedIn: "false"
+    isLoggedIn: "false",
+    publishedArticles: [],
+    articleData: {}
   },
   mutations: {
     MUTATE_FETCHNEWS(state, payload) {
@@ -16,6 +18,12 @@ export default new Vuex.Store({
     },
     MUTATE_ISLOGGEDIN(state, payload) {
       state.isLoggedIn = payload
+    },
+    MUTATE_PUBLISHEDARTICLES(state, payload) {
+      state.publishedArticles = payload
+    },
+    MUTATE_ARTICLEDATA(state, payload) {
+      state.articleData = payload
     }
   },
   actions: {
@@ -38,7 +46,22 @@ export default new Vuex.Store({
     async doLogin(context, payload) {
       try {
         const response = await axiosArticles.post('/admins/login', payload)
-        console.log(response.data, "111<<<<<");
+        localStorage.setItem("access_token", response.data.access_token)
+        context.commit("MUTATE_ISLOGGEDIN", true)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async doUserRegister(context, payload) {
+      try {
+        await axiosArticles.post('/users/register', payload)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async doUserLogin(context, payload) {
+      try {
+        const response = await axiosArticles.post('/users/login', payload)
         localStorage.setItem("access_token", response.data.access_token)
         context.commit("MUTATE_ISLOGGEDIN", true)
       } catch (err) {
@@ -50,6 +73,24 @@ export default new Vuex.Store({
         await axiosArticles.post('/articles', payload, {
           headers: {'access_token': localStorage.getItem("access_token")}
         })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getMainArticles(context) {
+      try {
+        const response = await axiosArticles.get('/articles')
+        context.commit("MUTATE_PUBLISHEDARTICLES", response.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getArticleDetail(context, payload) {
+      try {
+        const response = await axiosArticles.get(`/articles/${payload}`, {
+          headers: {'access_token': localStorage.getItem("access_token")}
+        })
+        context.commit("MUTATE_ARTICLEDATA", response.data)
       } catch (err) {
         console.log(err);
       }

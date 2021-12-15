@@ -20,9 +20,9 @@
       <b-button class="w-25 mt-2" type="submit" variant="primary"
         >Submit</b-button
       >
-      <!-- <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
+      <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
         >Register</b-button
-      > -->
+      >
       <!-- <GoogleLogin
         :params="params"
         :renderParams="renderParams"
@@ -38,7 +38,10 @@
 import {mapActions, mapState} from 'vuex';
 
 export default {
-    name: "adminLogin",
+    name: "Login",
+    computed: {
+        ...mapState(["isLoggedIn"])
+    },
     data() {
         return {
             dataUser: {
@@ -47,18 +50,19 @@ export default {
             }
         }
     },
-    computed: {
-        ...mapState(["isLoggedIn"])
-    },
     methods: {
-        ...mapActions(["doLogin"]),
+        ...mapActions(["doUserLogin"]),
         async formSubmitHandler() {
-           await this.doLogin(this.dataUser) 
+           await this.doUserLogin(this.dataUser) 
            if (this.isLoggedIn === true) {
-               this.$router.push("/dashboard");
+               this.$router.push("/");
            }
-        }
-    }
+        },
+        goToRegister() {
+      this.$router.push({ name: "Register" });
+    },
+    },
+    
 }
 </script>
 
