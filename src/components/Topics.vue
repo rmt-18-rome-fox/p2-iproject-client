@@ -25,6 +25,7 @@ export default {
         return this.$store.state.topics
     }    
   },
+  
   created () {
     this.$store.dispatch("fetchTopics")
   }
