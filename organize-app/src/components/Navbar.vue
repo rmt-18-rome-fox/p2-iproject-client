@@ -14,7 +14,10 @@
                 <li class="nav-item">
                   <router-link v-if="!isLogin" to="/register" class="nav-link">Register</router-link>
                 </li>
-           <li style="margin-left:1250px" class="nav-item">
+                <li class="nav-item">
+                  <router-link v-if="isLogin" to="/tasks" class="nav-link">AddTask</router-link>
+                </li>
+           <li style="margin-left:1200px" class="nav-item">
             <a class="nav-link" @click.prevent="doLogout" v-if="isLogin">Logout</a>
           </li>
 
@@ -41,6 +44,9 @@ export default {
             localStorage.clear()
             this.$store.commit('set_isLogin', false)
             this.$router.push('/login')
+        },
+        addTask(){
+            this.$router.push('/tasks')
         }
     }
 }
