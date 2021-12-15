@@ -1,14 +1,14 @@
 <template>
         <div class="conatainer">
             <div style=" margin: 0 auto; display: flex; align-items: center; justify-content: space-between">
-                <!-- <div>
+                <div>
                     <h3>Your coordinates:</h3>
                     <p>{{ myCoordinates.lat }} Latitude, {{ myCoordinates.lng }} Longitude</p>
                 </div>
                 <div>
                     <h3>Map coordinates:</h3>
                     <p>{{ mapCoordinates.lat }} Latitude, {{ mapCoordinates.lng }} Longitude</p>
-                </div> -->
+                </div>
             </div>
             <GmapMap
                 :center="myCoordinates"
@@ -22,9 +22,15 @@
 </template>
 <script>
     export default {
+        name: "Geolocation",
+        props: ["locLat", "locLng"],
         data() {
             return {
                 map: null,
+                // myCoordinates: {
+                //     lat: 0,
+                //     lng: 0
+                // },
                 myCoordinates: {
                     lat: 0,
                     lng: 0
