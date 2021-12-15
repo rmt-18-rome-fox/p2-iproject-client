@@ -26,7 +26,7 @@
         shadow-2xl
         text-center
         w-9/12
-        h-4/6
+        min-h-4/6
       "
     >
       <section>
@@ -34,7 +34,7 @@
       </section>
 
       <section class="mt-10">
-        <form class="flex flex-col">
+        <form class="flex flex-col" @submit.prevent="newPost">
           <div class="mb-6 pt-3">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
               >Caption it</label
@@ -51,13 +51,14 @@
                 px-3
                 pb-3
               "
+              v-model="caption"
             />
           </div>
           <div class="mb-6 pt-3">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
               >Your Picture</label
             >
-            <input type="file" class="border" />
+            <input type="file" class="border" @change="onChange" />
           </div>
 
           <button
@@ -85,8 +86,31 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "AddPost",
+  data() {
+    return {
+      imgUrl: "",
+      caption: "",
+    };
+  },
+  methods: {
+    ...mapActions(["addPost"]),
+    onChange(el) {
+      const file = el.target.files[0];
+      this.imgUrl = file;
+    },
+    async newPost() {
+      let payload = {
+        caption: this.caption,
+        imgUrl: this.imgUrl,
+      };
+      console.log(payload);
+      await this.addPost(payload);
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 

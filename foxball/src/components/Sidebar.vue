@@ -4,7 +4,9 @@
       class="flex flex-col w-80 shadow-lg bg-white rounded-3xl overflow-hidden"
     >
       <div class="flex items-center justify-center h-20 shadow-md">
-        <h1 class="text-3xl uppercase text-indigo-500">FOXBALLER</h1>
+        <h1 class="text-3xl font-semibold uppercase text-indigo-500">
+          FOXBALLER
+        </h1>
       </div>
       <ul class="flex flex-col space-y-12">
         <li>
