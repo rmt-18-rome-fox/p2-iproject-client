@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-  <navbar></navbar>
     <b-row>
       <div
       class="col-md-3"
@@ -14,10 +13,9 @@
 
 <script>
 import BookCard from '../components/BookCard.vue'
-import Navbar from '../components/Navbar.vue'
 export default {
-  components: { Navbar, BookCard },
-  name: 'HelloWorld',
+  components: { BookCard },
+  name: 'HomePage',
   methods:{
     fetchBooks(){
       this.$store.dispatch("fetchBooks")
