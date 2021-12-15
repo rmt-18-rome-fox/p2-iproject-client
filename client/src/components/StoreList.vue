@@ -8,7 +8,6 @@
                       <video autoplay poster="" class="position-relative" loop muted>
                           <source src="https://static.videezy.com/system/resources/previews/000/037/964/original/baby_dog13.mp4" type="video/mp4">
                       </video>
-                      <!-- <iframe :src="oneMovie.trailerUrl + `?autoplay=1&mute=1&enablejsapi=1&modestbranding=1&showinfo=0`" frameborder="0"></iframe> -->
                   </div>
                 </div>
                 <div class="col-lg-8 col-12 video-wrapper">
@@ -26,68 +25,17 @@
                             <rect x="0" y="0" width="100%" height="100%" />
                         </svg>
                 </div>
-
-                <!-- <div class="col-4">
-                    <div class="font-big">LIST</div>
-                </div> -->
             </div>
         </div>
 
-        <!-- <div class="col-12 col-lg-4">
-            <b-container fluid>
-                <div class="search-wrapper">
-                        <div class="search-box">
-                            <form>
-                                <div class="user-box">
-                                    <input v-model="filterForm.searchTitle" type="text" name="">
-                                    <label>Search by Title Movie</label>
-                                </div>
-                                <div class="user-box">
-                                    <input v-model="filterForm.filter" type="text" name="">
-                                    <label>Search by Caregory Movie</label>
-                                </div>
-                                <a href="#" @click.prevent="onPage()">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    Search
-                                </a>
-                            </form>
-                        </div>
-                </div>
-            </b-container>
-        </div> -->
-
         <div class="col-12 col-lg-8 pr-5">
+            <div class="product-container">
+              <ProductCard v-for="product in productData.response" :key="product.id" :product="product"></ProductCard>
+            </div>
+        </div>
 
-           <div class="row pr-4">
-               <div class="card-columns">
-                   <!-- <ProductCard v-for="product in productData.response" :key="product.id" :product="product"></ProductCard> -->
-               </div>
-
-               <!-- <div class="product-container">
-                 <ProductCard v-for="product in productData.response" :key="product.id" :product="product"></ProductCard>
-               </div> -->
-           </div>
-                <div class="product-container">
-                  <ProductCard v-for="product in productData.response" :key="product.id" :product="product"></ProductCard>
-                </div>
-
-           <!-- <nav aria-label="Page navigation example">
-               <hr>
-                <div>
-                    <h3>Page</h3>
-                </div>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <button type="button" class="page-link mx-2 px-3" :class="{ active : active_el == n }" v-for="n in moviesData.totalPage" @click.prevent="onPage(n)" :key="n"> {{n}} </button>
-                    </li>
-                </ul>
-               <hr>
-                
-            </nav> -->
-
+          <div class="col-12 col-lg-8 pr-5">
+            <div>x</div>
         </div>
   </div>
 

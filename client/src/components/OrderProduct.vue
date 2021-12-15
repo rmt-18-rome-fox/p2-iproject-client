@@ -1,17 +1,5 @@
 <template>
     <transition name="bounce" mode="out-in">
-        <!-- <div class="card shadow rounded">
-            <img class="card-img-top" :src="product.imgUrl" alt="Card image cap">
-            <a class="fav-wrapper position-absolute" @click.prevent="addFavMov(product.id)" href="#"><i class="fa fa-heart" aria-hidden="true"></i></a>
-            <div class="card-body">
-                <h5 class="card-title font-weight-bold"> {{ product.name }} </h5>
-                <p> {{ product.quantity }} </p>
-                <p> {{ product.summary }} </p>
-                <div class="card-footer bg-white">
-                    <a href="#" @click.prevent="onSinglePage(movie.id)" class="btn btn-primary mx-1" to="/single-mov">Detail</a>
-                </div>
-            </div>
-        </div> -->
         <div class="product-wrap"
             @mousemove="handleMouseMove"
             @mouseenter="handleMouseEnter"
