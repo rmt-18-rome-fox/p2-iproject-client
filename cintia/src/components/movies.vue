@@ -51,11 +51,11 @@ export default {
           console.log(err);
         });
     },
-    add(id) {
+    addBooking(id) {
       this.$store
         .dispatch("aAdd", id)
         .then(() => {
-          this.$router.push("/favourites");
+          this.$router.push("/bookings");
         })
         .catch((err) => {
           console.log(err);

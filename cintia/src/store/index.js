@@ -77,7 +77,7 @@ export default new Vuex.Store({
           });
       });
     },
-    aFetchOne({ state },  id ) {
+    aFetchOne({ state }, id) {
       return new Promise((resolve, reject) => {
         const config = {
           method: "get",
@@ -86,6 +86,61 @@ export default new Vuex.Store({
         axios(config)
           .then((res) => {
             // console.log(res.data);
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    aFetchBookings({ state }) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "get",
+          url: `${state.baseUrl}/bookings`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        };
+        axios(config)
+          .then((res) => {
+            // console.log(res.data);
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    aAdd({ state }, id) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "post",
+          url: `${state.baseUrl}/bookings/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        };
+        axios(config)
+          .then((res) => {
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    aDelete({ state }, id) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "delete",
+          url: `${state.baseUrl}/bookings/${id}`,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        };
+        axios(config)
+          .then((res) => {
             resolve(res.data);
           })
           .catch((err) => {
