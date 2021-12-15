@@ -26,6 +26,22 @@ export default new Vuex.Store({
           });
       });
     },
+    aFetch({ state }) {
+      return new Promise((resolve, reject) => {
+        const config = {
+          method: "get",
+          url: `${state.baseUrl}/movies`,
+        };
+        axios(config)
+          .then((res) => {
+            // console.log(res.data);
+            resolve(res.data);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
   },
   modules: {},
 });

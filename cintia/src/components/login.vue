@@ -15,7 +15,6 @@
             </h2>
             <div
               class="card px-1 py-5 sm:px-20 sm:py-10 rounded-md"
-              style="background-color: #17a2b8"
             >
               <form class="mt-6 mb-6 space-y-6">
                 <div class="mb-5 col-12">

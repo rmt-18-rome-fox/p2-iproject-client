@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand href="#"><h2 style="color:black">CINTIA</h2></b-navbar-brand>
+    <b-navbar toggleable="sm" type="dark" variant="dark">
+      <b-navbar-brand href="#" @click="toHome">CINTIA</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -24,10 +24,16 @@
             <b-dropdown-item href="#" v-if="this.$store.state.user == true"
               >Sign Out</b-dropdown-item
             >
-            <b-dropdown-item href="#" @click="toRegister" v-if="this.$store.state.user == false"
+            <b-dropdown-item
+              href="#"
+              @click="toRegister"
+              v-if="this.$store.state.user == false"
               >Register</b-dropdown-item
             >
-            <b-dropdown-item href="#" @click="toLogin" v-if="this.$store.state.user == false"
+            <b-dropdown-item
+              href="#"
+              @click="toLogin"
+              v-if="this.$store.state.user == false"
               >Log In</b-dropdown-item
             >
           </b-nav-item-dropdown>
@@ -39,14 +45,17 @@
 
 <script>
 export default {
-    methods:{
-        toLogin(){
-            this.$router.push('/login')
-        },
-        toRegister(){
-            this.$router.push('/register')
-        }
-    }
+  methods: {
+    toLogin() {
+      this.$router.push("/login");
+    },
+    toRegister() {
+      this.$router.push("/register");
+    },
+    toHome() {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
