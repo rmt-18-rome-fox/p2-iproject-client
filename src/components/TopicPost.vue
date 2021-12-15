@@ -13,8 +13,8 @@
 
     <div class="post-bottom">
       <div class="action">
-        <i class="fa fa-video"></i>
-        <span> Live video</span>
+        <i class="fa fa-quote-left"></i>
+        <span> Random Quote</span>
       </div>
       <div class="action">
         <i class="fa fa-image"></i>
@@ -38,6 +38,11 @@ export default {
       transcription_: [],
       lang_: "en-US",
     };
+  },
+  computed: {
+    quotes () {
+      return this.$store.state.quotes
+    }
   },
   methods: {
     startSpeechToTxt() {

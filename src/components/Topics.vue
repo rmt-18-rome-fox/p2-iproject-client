@@ -2,7 +2,11 @@
   <div>
         <TopicPost></TopicPost>
 
-        <TopicItems></TopicItems>
+        <TopicItems
+          v-for="topic in topics"
+          :key="topic.id"
+          :topic="topic"
+        ></TopicItems>
   </div>
 </template>
 
@@ -14,7 +18,16 @@ export default {
     components: {
         TopicPost,
         TopicItems
-    }
+    },
+    
+  computed: {
+    topics () {
+        return this.$store.state.topics
+    }    
+  },
+  created () {
+    this.$store.dispatch("fetchTopics")
+  }
 }
 </script>
 
