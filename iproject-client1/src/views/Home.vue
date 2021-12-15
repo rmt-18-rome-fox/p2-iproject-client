@@ -1,9 +1,8 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <div class="main-container-home d-flex">
-      <div class="container1-home col-3"></div>
-      <div class="container2-home col-9">
+    <div class="main-container-home d-flex justify-content-center">
+      <div class="container2-home col-8">
         <Card v-for="coffeePowder in coffeePowders" :key="coffeePowder.id" :coffeePowder="coffeePowder" class="shadow"></Card>
       </div>
     </div>
