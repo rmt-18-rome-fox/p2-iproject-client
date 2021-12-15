@@ -3,8 +3,7 @@
     <h1>WatchList</h1>
     <div class="w-4/6 containter mx-auto pt-4">
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 rounded-md justify-self-end">
-        <!-- <card /> -->
-        <h1>1</h1>
+        <watch-list-card v-for="anime in watchLists" :key="anime.id" :anime="anime"/>
       </div>
     </div>
   </div>
@@ -20,8 +19,7 @@ export default {
   computed: {
     watchLists(){
       return this.$store.state.watchLists
-    },
-    jikanWatchLists
+    }
   },
   components: {
     WatchListCard
