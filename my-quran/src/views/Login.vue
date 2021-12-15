@@ -31,6 +31,9 @@
                                 placeholder="Password" />
                         </div>
                         <div>
+                            <a class="underline text-blue-600" href=""><router-link to="/register">Dont't have an account?</router-link></a>
+                        </div>
+                        <div>
                             <button type="submit"
                             class="w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-sm text-green-500 bg-white bg-opacity-90 hover:bg-white hover:bg-opacity-80 focus:outline-none focus:ring focus:border-green-500 focus:ring-green-500 text-lg tracking-wider flex font-bold">Log
                             In</button>

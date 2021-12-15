@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <login></login>
-    <home></home>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Home from './views/Home.vue'
-import Login from './views/Login.vue'
+// import Home from './views/Home.vue'
+// import Login from './views/Login.vue'
+// import Register from './views/Register.vue'
+// import DetailBySurah from './views/DetailBySurah.vue'
 export default {
   components: {
-    Home,
-    Login
+    // Home,
+    // Login,
+    // Register,
+    // DetailBySurah
   }
 }
 </script>
@@ -23,6 +26,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 
 </style>
