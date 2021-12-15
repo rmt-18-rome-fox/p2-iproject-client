@@ -37,7 +37,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
 // router.beforeEach((to, from, next) => {
 //   const isAuthenticated = localStorage.access_token
   

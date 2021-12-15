@@ -55,10 +55,10 @@ export default {
     doRegister(){
       this.$store.dispatch("goRegister", this.registerForm)
       .then(resp =>{
-
+        console.log(resp);
       })
       .catch(err =>{
-        
+        console.log(err);
       })
     }
   }
