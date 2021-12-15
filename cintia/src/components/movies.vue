@@ -1,46 +1,32 @@
 <template>
   <!-- MoviesCard -->
-  <div class="d-flex flex-wrap">
-    <div class="group" v-for="movie in movies" :key="movie.id">
-      <div class="relative">
-        <div class="w-full">
-          <img
-            style="height: 400px; width: auto"
-            :src="movie.poster"
-            class="w-full h-full object-center object-cover opacity-70 group-hover:opacity-100 rounded-md"
-          />
-          <div
-            class="absolute bottom-0 px-2 py-4 flex flex-col bg-gradient-to-t from-black w-full rounded-md"
+  <div class="container vh-100">
+    <div class="d-flex justify-content-center mx-1 my-5 flex-wrap">
+      <div
+        class="card"
+        style="width: 18rem; margin: 10px"
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+      >
+        <img class="card-img-top" :src="movie.poster" alt="Card image cap" />
+        <div class="card-body">
+          <strong><h5 class="card-title">{{ movie.title }}</h5></strong>
+          <p class="card-text">
+            {{ movie.genre }}
+          </p>
+          <a
+            href="#"
+            class="btn btn-primary mb-2"
+            @click="addBooking(movie.id)"
+            >Book this Movie</a
           >
-            <p
-              class="text-xl text-white uppercase inline-block align-start text-center pl-2 font-bold"
-            >
-              {{ movie.title }}
-            </p>
-            <p
-              class="text-md text-white inline-block align-start text-center pl-2"
-            >
-              {{ movie.genre }}
-            </p>
-            <p
-              class="text-md text-white inline-block align-start text-center pl-2"
-            >
-              {{ movie.actors }}
-            </p>
-            <p
-              class="text-md text-white inline-block align-start text-center pl-2"
-            >
-              {{ movie.plot }}
-            </p>
-            <div class="flex justify-center items-center h-16">
-              <button
-                @click.prevent="add(movie.id)"
-                class="px-3 py-2 text-gray-900 bg-gray-100 rounded-sm focus:outline-none focus:ring focus:ring-gray-500 uppercase tracking-widest font-bold"
-              >
-                Book this Movie
-              </button>
-            </div>
-          </div>
+
+          <router-link :to="'movies/' + movie.id"
+            ><a href="#" class="btn btn-success mb-2" to="path"
+              >Find out more</a
+            ></router-link
+          >
         </div>
       </div>
     </div>
