@@ -7,7 +7,7 @@
 
 <script>
 import Sidebar from "./components/Sidebar.vue";
-import { mapMutations, mapState } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   name: "App",
   components: {
@@ -17,8 +17,12 @@ export default {
     ...mapMutations({
       isLoggedIn: "LOGIN",
     }),
+    ...mapActions(["customEventServer"]),
   },
   created() {
+    this.customEventServer({
+      msg: "From Client",
+    });
     if (localStorage.getItem("access_token")) {
       this.isLoggedIn(true);
     }

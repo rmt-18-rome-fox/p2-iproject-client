@@ -2,9 +2,9 @@
   <div
     class="
       body-bg
-      bg-green-800 bg-opacity-25
       min-h-screen
       pt-12
+      ml-56
       md:pt-20
       px-2
       md:px-0

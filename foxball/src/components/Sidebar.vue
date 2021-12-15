@@ -136,8 +136,8 @@
           </a>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/chat"
             class="
               flex flex-row
               items-center
@@ -177,7 +177,7 @@
               />
             </svg>
             <span class="text-xl font-medium">Chitchat Zone</span>
-          </a>
+          </router-link>
         </li>
         <li>
           <router-link

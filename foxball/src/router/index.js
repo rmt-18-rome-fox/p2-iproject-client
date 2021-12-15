@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import AddPost from '../views/AddPost.vue'
 import Standing from '../views/Standing.vue'
+import Chat from '../views/Chat.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/standing-table',
     name: 'Standing',
     component: Standing
+  },
+  {
+    path: '/chat',
+    name: 'Chat',
+    component: Chat
   },
 ]
 
