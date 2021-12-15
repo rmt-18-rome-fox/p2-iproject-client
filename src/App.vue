@@ -8,6 +8,7 @@
 
 <script>
 import Home from '../src/views/Home.vue'
+
 export default {
   name: 'App',
   components: {
@@ -19,4 +20,3 @@ export default {
 <style>
 
 </style>
-

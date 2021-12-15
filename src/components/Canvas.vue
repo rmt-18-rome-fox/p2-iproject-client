@@ -1,6 +1,6 @@
 <template>
   <div>
-    <canvas 
+    <canvas
       class="canvas-style"
       :id="canvasId"
       v-on:mousedown="mouseDown"
@@ -26,7 +26,6 @@ export default {
       console.log('chat: ', data)
     },
     draw: function (data) {
-      // console.log('di receiver client', data)
       this.drawer(data)
     },
     mouseDown: function () {
@@ -100,7 +99,6 @@ export default {
   width: 100% !important;
   height: 500px !important;
   border: 5px solid black;
-  border-radius: 10px;
   display: block;
   margin: auto;
   box-shadow: 0 10px 8px -8px black;
