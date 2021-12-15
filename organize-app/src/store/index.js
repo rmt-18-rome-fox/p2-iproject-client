@@ -8,7 +8,7 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     tasks: [],
-    taskDetail: {}
+    taskDetail: {},
   },
   mutations: {
     set_isLogin(state, payload = ''){
@@ -17,7 +17,7 @@ export default new Vuex.Store({
     fetch_task(state, payload){
       state.tasks = payload
     },
-    fetch_task_detail(state, payload=[]){
+    fetch_task_detail(state, payload = []){
       state.taskDetail = payload
     }
   },
@@ -85,10 +85,32 @@ export default new Vuex.Store({
       return new Promise((res, rej) =>{
         axios({
           method: 'GET',
-          url: `/tasks/${id}`
+          url: `/tasks/${id}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
         })
         .then(({data})=>{
-          commit(fetch_task_detail, data.findTask)
+          // console.log(data);
+          commit('fetch_task_detail', data)
+          res()
+        })
+        .catch((error)=>{
+          console.log(error);
+          rej()
+        })
+      })
+    },
+    deleteTask({commit}, id){
+      return new Promise((res, rej) =>{
+        axios({
+          method: 'DELETE',
+          url: `/tasks/${id}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        .then(()=>{
           res()
         })
         .catch((error)=>{

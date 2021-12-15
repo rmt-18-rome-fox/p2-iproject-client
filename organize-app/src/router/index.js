@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import TaskDetail from '../views/TaskDetail'
 
 Vue.use(VueRouter)
 
@@ -13,7 +14,7 @@ const routes = [
     component: Home,
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem('access_token')) {
-        next({ name: 'Home' })
+        next({ name: 'Login' })
       } else {
         next()
       }
@@ -44,7 +45,7 @@ const routes = [
     }
   },
   {
-    path: '/task/:id',
+    path: '/tasks/:id',
     name: 'TaskDetail',
     component: TaskDetail
   }

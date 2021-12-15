@@ -35,6 +35,14 @@
             </div>
             <br />
             <button type="submit" class="btn btn-primary">Sign In</button>
+            <!-- <facebook-login
+              class="button"
+              appId="326022817735322"
+              @login="getUserData"
+              @logout="onLogout"
+              @get-initial-status="getUserData"
+            >
+            </facebook-login> -->
           </form>
         </div>
       </div>
@@ -44,6 +52,7 @@
 
 <script>
 // import router from "../router/index"
+// import facebookLogin from 'facebook-login-vuejs';
 
 export default {
   name: "Login",
@@ -61,9 +70,9 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push("/");
-          // router.push("/")
-        });
+          this.$router.push('/');
+        })
+        // .catch(() => {});
     },
   },
 };
