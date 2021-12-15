@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <CardPost v-for="post in posts" :key="post.id" :post="post"></CardPost>
+  <div class="">
+    <CardPost
+      class="grid grid-cols-1 place-items-center pt-6 mx-auto ml-56 h-full"
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+    ></CardPost>
   </div>
 </template>
 

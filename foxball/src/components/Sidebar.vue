@@ -52,8 +52,8 @@
           </router-link>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/standing-table"
             class="
               flex flex-row
               items-center
@@ -91,7 +91,7 @@
               />
             </svg>
             <span class="text-xl font-medium">EPL Standing</span>
-          </a>
+          </router-link>
         </li>
         <li>
           <a
