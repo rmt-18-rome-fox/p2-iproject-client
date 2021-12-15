@@ -23,7 +23,9 @@
       </div>
       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
         <div class="text-center">
-          <a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
+          <a 
+          @click.prevent="addFavorite(product.id)"
+          class="btn btn-outline-dark mt-auto" href="#">Add to cart</a>
         </div>
       </div>
     </div>
@@ -35,6 +37,20 @@ export default {
   name: "ProductCard",
 
   props: ["product"],
+
+  methods: {
+    //   ...mapActions["getDetail"],
+
+      toDetail(id) {
+          this.$router.push(`/movies/${id}`)
+          this.$store.dispatch("getDetail", id)
+      },
+
+      addFavorite(id) {
+          this.$store.dispatch("addFavorite", id)
+      }
+
+  },
 };
 </script>
 
