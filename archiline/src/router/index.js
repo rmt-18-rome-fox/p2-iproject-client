@@ -10,6 +10,11 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: () => import('../views/Register.vue')
+  },
+  {
     path: '/customer',
     name: 'CustomerHome',
     component: () => import('../views/CustomerHome.vue')
@@ -45,8 +50,13 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const accessToken = localStorage.getItem('access_token')
   const role = localStorage.getItem('role')
-  if (to.name !== 'Login' && !accessToken) next({ name: 'Login' })
-  else if (to.name === 'Login' && accessToken && role === 'customer') next({ name: 'CustomerHome' })
+  if ((to.name !== 'Login') && !accessToken) {
+    if (to.name === 'Register') {
+      next()
+    } else {
+      next({ name: 'Login' })
+    }
+  } else if (to.name === 'Login' && accessToken && role === 'customer') next({ name: 'CustomerHome' })
   else if (to.name === 'Login' && accessToken && role === 'architect') next({ name: 'ArchitectHome' })
   else if (to.name === 'Register' && accessToken && role === 'customer') next({ name: 'CustomerHome' })
   else if (to.name === 'Register' && accessToken && role === 'architect') next({ name: 'ArchitectHome' })
