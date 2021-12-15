@@ -1,5 +1,5 @@
 <template>
-   <div class="wrapper fadeInDown">
+  <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
 
@@ -13,38 +13,76 @@
       </div>
 
       <!-- Login Form -->
-      <form>
+      <form @submit.prevent="handleRegister">
         <input
           type="text"
           id="email"
           class="fadeIn second"
           placeholder="email"
+          v-model="email"
         />
         <input
-          type="text"
+          type="password"
           id="password"
           class="fadeIn third"
           placeholder="password"
+          v-model="password"
         />
         <input type="submit" class="fadeIn fourth" value="Sign Up" />
       </form>
 
-      <!-- Remind Passowrd -->
       <p>
         Already Have an Account?
-        <a href="#!" @click="toLogin" class="fw-bold text-body"
-          ><u>Login here</u></a>
+        <a href="#!" class="fw-bold text-body" @click.prevent="toLogin"
+          ><u>Login here</u></a
+        >
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
- name : 'Register'
-}
+  name: "Register",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    toLogin() {
+        this.$router.push("Login");
+    },
+    handleRegister() {
+      const user = {
+        email: this.email,
+        password: this.password,
+      };
+
+      this.$store
+        .dispatch("registerUser", user)
+        .then((data) => {
+          this.$router.push("Login");
+          Swal.fire({
+            title: "Hooray!",
+            text: `Success Creating Account with email ${data.email}`,
+            icon: "success",
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message,
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style>
-
 </style>
