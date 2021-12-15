@@ -101,6 +101,19 @@ export default new Vuex.Store({
         console.log(err.response.data);
       })
     },
+    postTopic (context, payload) {
+      console.log(`payload`, payload)
+
+      return axios({
+        method: "POST",
+        url: "/topics",
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        },
+        data: payload
+      }) 
+
+    }
   },
   
   modules: {

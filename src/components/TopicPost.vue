@@ -10,7 +10,13 @@
         placeholder="What's on your mind, Aashish ?"
       />
     </div>
-
+    <div class="post-bottom">
+      
+      <div @click.prevent="postTopic" class="action">
+        <i  class="fa fa-edit"></i>
+        <span> Post</span>
+      </div>
+    </div>
     <div class="post-bottom">
       <div @click.prevent="postQuote" class="action">
         <i class="fa fa-quote-left"></i>
@@ -75,6 +81,21 @@ export default {
       console.log(`hitten`)
       this.topic = this.quotes
       this.$store.dispatch("getQuotes")
+    },
+    postTopic () {
+      const payload = {
+        post: this.topic,
+        like: 0,
+        imageUrl: ""
+      }
+      console.log(`payload`, payload)
+      this.$store.dispatch("postTopic", payload)
+      .then(({data}) => {
+        console.log(data, `response server onTopicPost`)
+        this.$store.dispatch("fetchTopics")
+      }).catch((err) => {
+        console.log(err.response.data);
+      });
     }
   },
   created () {
