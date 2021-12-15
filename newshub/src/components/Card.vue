@@ -20,20 +20,34 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
  name: "Card",
  props: ["article"],
+ computed: {
+   ...mapState(["alternativeNews"])
+ },
  methods: {
      ...mapActions(["publishArticle"]),
      async publishHandler() {
-         const articleData = {
+       let articleData ={}
+       if (this.alternativeNews) {
+          articleData = {
+             title: this.article.title,
+             content: this.article.abstract,
+             imageUrl: this.article.image,
+             articleUrl: this.article.url,
+         }
+       } else {
+         articleData = {
              title: this.article.title,
              content: this.article.description,
              imageUrl: this.article.image,
              articleUrl: this.article.url,
          }
+       }
+          
         await this.publishArticle(articleData)
      }
  },

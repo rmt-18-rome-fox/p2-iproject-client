@@ -10,11 +10,15 @@ export default new Vuex.Store({
     fetchedNews: [],
     isLoggedIn: "false",
     publishedArticles: [],
-    articleData: {}
+    articleData: {},
+    alternativeNews: false
   },
   mutations: {
     MUTATE_FETCHNEWS(state, payload) {
       state.fetchedNews = payload
+    },
+    MUTATE_ALTERNATIVENEWS(state, payload) {
+      state.alternativeNews = payload
     },
     MUTATE_ISLOGGEDIN(state, payload) {
       state.isLoggedIn = payload
@@ -30,7 +34,6 @@ export default new Vuex.Store({
     async fetchNews(context, payload) {
       try {
         let response = []
-        console.log(payload, '<<<<<<111');
         if(payload) {
           response = await axios.get(`http://api.mediastack.com/v1/news?access_key=082efd54ede2e28fbf9f1690cd147412&languages=en&keywords=${payload}`);
         } else {
@@ -39,6 +42,16 @@ export default new Vuex.Store({
         // console.log("masuk sini <<<<11111");
         
         context.commit("MUTATE_FETCHNEWS", response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async alternativeFetchNews(context) {
+      try {
+        const response = await axios.get("https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=XIgkrjOQL13AOXeCYFykMwGPORZ6Vaal");
+        
+        context.commit("MUTATE_FETCHNEWS", response.data.results);
+        context.commit("MUTATE_ALTERNATIVENEWS", true)
       } catch (err) {
         console.log(err);
       }

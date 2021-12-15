@@ -22,6 +22,23 @@
         <b-card-text>
           {{ articleData.content }}
         </b-card-text>
+        <ShareNetwork
+          network="twitter"
+          :url="articleData.articleUrl"
+          :title="articleData.title"
+          hashtags="newshub"
+        >
+          Share on Twitter
+        </ShareNetwork> |
+
+        <ShareNetwork
+          network="facebook"
+          :url="articleData.articleUrl"
+          :title="articleData.title"
+          :description="articleData.content"
+        >
+          Share on Facebook
+        </ShareNetwork>
       </b-card-body>
 
       <b-card-body>

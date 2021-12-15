@@ -23,6 +23,7 @@
         </div>
         <hr />
         <div class="col">
+          <b-button variant="success" @click="alternativeFetch">NYT news source</b-button>
           <!-- <router-link to="/">Home</router-link> -->
 
           <!-- <a class="row mb-2" href="">Movie List</a>
@@ -34,7 +35,13 @@
       </div>
 
       <div class="col-10">
-          <card v-for="article in fetchedNews.data" :key="article.url" v-bind:article="article"></card>
+        <div class="mt-3" v-if="!alternativeNews">
+          <card v-for="article in fetchedNews.data" :key="article.url" v-bind:article="article" ></card>
+        </div>
+        <div class="mt-3" v-if="alternativeNews">
+          <card v-for="article in fetchedNews" :key="article.url" v-bind:article="article" ></card>
+        </div>
+          
         <!-- <b-row cols="3">
           
         </b-row> -->
@@ -53,17 +60,22 @@ export default {
     components: {card},
     data() {
         return {
-            keywords: ""
+            keywords: "",
+            alternativeNews: false,
         }
     },
     computed: {
         ...mapState(["fetchedNews"])
     },
     methods: {
-        ...mapActions(["fetchNews"]),
+        ...mapActions(["fetchNews", "alternativeFetchNews"]),
         filterHandler() {
             // console.log(this.keywords);
             this.fetchNews(this.keywords)
+        },
+        async alternativeFetch() {
+          await this.alternativeFetchNews(),
+          this.alternativeNews = true
         }
     },
     async created() {

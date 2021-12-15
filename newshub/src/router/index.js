@@ -6,8 +6,10 @@ import Dashboard from '../views/Dashboard'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import ArticleDetail from '../views/ArticleDetail'
+import VueSocialSharing from 'vue-social-sharing'
 
 Vue.use(VueRouter)
+Vue.use(VueSocialSharing);
 
 const routes = [
   {
