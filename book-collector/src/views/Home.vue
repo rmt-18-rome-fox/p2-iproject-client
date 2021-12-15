@@ -5,7 +5,7 @@
       class="col-md-3"
       v-for="book in books"
       :key="book.id">
-      <book-card :book="book" class="flex-item"></book-card>
+      <book-card :book="book"></book-card>
       </div>
     </b-row>
   </div>

@@ -1,8 +1,9 @@
 <template>
-<div>
+<b-row>
   <div
     v-for="bookmark in bookmarks"
-    :key="bookmark.id">
+    :key="bookmark.id"
+    class="col-md-3">
   <b-card
     :title="bookmark.title"
     :img-src="bookmark.imageUrl"
@@ -19,11 +20,13 @@
       {{bookmark.subjects}}
     </b-card-text>
 
-    <b-button href="#" variant="primary">Book Detail</b-button>
+    <b-button variant="primary">
+        <router-link :to="{path: `/books/${bookmark.bookId}`}">Book detail</router-link>
+    </b-button><br><br>
     <b-button href="#" variant="primary">Delete Bookmark</b-button>
   </b-card>
   </div>
-</div>
+</b-row>
 </template>
 
 <script>
