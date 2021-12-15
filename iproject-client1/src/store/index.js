@@ -316,6 +316,31 @@ export default new Vuex.Store({
           });
       });
     },
+    // ===================================================== ### PATCH/DELETE CARD ### =====================================================
+    toPatchDelete: function (context, id) {
+      // console.log(heroId, power, role, '<<<<<<<<<<ini di state');
+      // console.log(payload);
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/admin/coffeepowder/${id}`,
+          method: 'patch',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            // console.log(data);
+            // commit('SET_COFFEE_POWDERS_BY_ID', data);
+            resolve();
+            // router.push('/');
+          })
+          .catch((err) => {
+            console.log(err);
+            reject(err);
+          });
+      });
+      // this.fetchCoffeePowdersById(id);
+    },
   },
 
   modules: {},
