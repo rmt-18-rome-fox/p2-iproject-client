@@ -71,6 +71,25 @@ export default new Vuex.Store({
         })
       })
     },
+    login (context,{email,password}){
+      return new Promise((resolve,reject)=>{
+        heroAxios({
+          method: "post",
+          url: "/login",
+          data: {
+            email,
+            password,
+          },
+        })
+        .then(({data}) =>{
+          localStorage.setItem("access_token", data.access_token)
+          resolve()
+        })
+        .catch((err)=>{
+          reject(err)
+        })
+      })
+    },
   },
   modules: {
   }

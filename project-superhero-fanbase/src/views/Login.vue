@@ -1,15 +1,15 @@
 <template>
        <div class="simple-login-container">
-        <form  action="">
+        <form @submit.prevent="login" action="">
             <h2>LOGIN</h2>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <input  type="email" class="form-control" placeholder="Email">
+                    <input v-model="email" type="email" class="form-control" placeholder="Email">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    <input  type="password" placeholder="Enter your Password" class="form-control">
+                    <input v-model="password" type="password" placeholder="Enter your Password" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -25,7 +25,22 @@
 
 <script>
 export default {
-    name: "Login"
+    name: "Login",
+     data: function(){
+        return {
+            email:"",
+            password: "",
+        }
+    },
+    methods: {
+        login: function(){
+            this.$store.dispatch('login',{email: this.email,password: this.password})
+            .then(()=>{
+                this.$router.push("/")
+              
+            })
+        },
+    },    
 }
 </script>
 
