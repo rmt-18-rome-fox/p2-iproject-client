@@ -4,7 +4,8 @@
   <h1>INI DI CUSTOMER BOOKING</h1>
   <form class="d-flex flex-column" style="width: 100vw" @submit.prevent="onBook">
     <label for="startDate">Start Date</label>
-    <input type="date" name="startDate" id="startDate" v-model="startDate" class="w-25" style="margin: auto">
+    <datetime type="datetime" name="startDate" id="startDate" v-model="startDate" class="w-25" style="margin: auto"></datetime>
+    <!-- <input type="date" name="startDate" id="startDate" v-model="startDate" class="w-25" style="margin: auto"> -->
     <label for="session">Session (1 session is 1 hour)</label>
     <input type="integer" name="session" id="session" v-model="session" class="w-25" style="margin: auto">
     <label for="notes">Notes</label>
@@ -44,13 +45,13 @@ export default {
   methods: {
     onBook () {
       const payload = {
-        // startDate: this.startDate,
-        // session: this.session,
-        // notes: this.notes
-        ArchitectId: this.$route.params.architectId,
-        startDate: '2021-12-15T16:20:00',
-        session: 1,
-        notes: 'hehe'
+        startDate: this.startDate,
+        session: this.session,
+        notes: this.notes,
+        ArchitectId: this.$route.params.architectId
+        // startDate: '2021-12-15T16:20:00',
+        // session: 1,
+        // notes: 'hehe'
       }
       console.log(payload)
       this.$store.dispatch('onBook', payload)
@@ -66,5 +67,7 @@ export default {
 </script>
 
 <style>
-
+    .vdatetime-input {
+        width: 25vw
+    }
 </style>

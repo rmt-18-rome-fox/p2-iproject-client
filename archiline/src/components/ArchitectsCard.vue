@@ -12,8 +12,8 @@
        {{architect.Profile.description}}
     </div>
 
-    <b-button href="#" variant="primary" class="m-1">See Details</b-button>
-    <b-button href="#" variant="primary" class="m-1">See Portofolio</b-button>
+    <b-button href="#" variant="primary" class="m-1" @click.prevent="toDetail(architect.id)">See Details</b-button>
+    <b-button href="#" variant="primary" class="m-1" @click.prevent="toPortofolio(architect.id)">See Portofolio</b-button>
     <b-button href="#" variant="primary" class="m-1 w-75" @click.prevent="toBook(architect.id)">Book Consultation</b-button>
   </div>
 </div>
@@ -26,6 +26,12 @@ export default {
   methods: {
     toBook (payload) {
       this.$router.push({ path: `/customer/consultation/${payload}` })
+    },
+    toDetail (payload) {
+      this.$router.push({ path: `/customer/architect/${payload}` })
+    },
+    toPortofolio (payload) {
+      this.$router.push({ path: `/customer/architect/portofolios/${payload}` })
     }
   }
 }

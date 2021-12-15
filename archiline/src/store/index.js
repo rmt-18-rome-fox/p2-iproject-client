@@ -9,7 +9,9 @@ export default new Vuex.Store({
     featuredArchitect: [],
     architects: [],
     portofolios: [],
-    bookForm: {}
+    bookForm: {},
+    architectPortofolio: [],
+    portofolioDetail: {}
   },
   mutations: {
     SET_FEATURED_ARCHITECT (state, payload) {
@@ -23,6 +25,12 @@ export default new Vuex.Store({
     },
     SET_BOOK_FORM (state, payload) {
       state.bookForm = payload
+    },
+    SET_ARCHITECT_PORTOFOLIOS (state, payload) {
+      state.architectPortofolio = payload
+    },
+    SET_PORTOFOLIO_DETAIL (state, payload) {
+      state.portofolioDetail = payload
     }
   },
   actions: {
@@ -133,6 +141,59 @@ export default new Vuex.Store({
         })
           .then(data => {
             resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    fetchArchitectPortofolios (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/customer/architects/portofolios/${payload}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            context.commit('SET_ARCHITECT_PORTOFOLIOS', data.data)
+            resolve()
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    fetchPortofolioDetail (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/customer/portofolios/${payload}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            context.commit('SET_PORTOFOLIO_DETAIL', data.data)
+            resolve()
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    onValidate (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'PATCH',
+          url: `${basicUrl}/validate?validate=${payload}`
+        })
+          .then(data => {
+            resolve()
           })
           .catch(err => {
             reject(err)

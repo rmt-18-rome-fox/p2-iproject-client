@@ -13,7 +13,14 @@
         <a href = '' @click.prevent="toPortofolios" class="h3">Portofolios</a>
       </div>
       <div class="col-3 d-flex justify-content-end align-items-center">
-        <a href = '' @click.prevent="toProfile" class="h3">INI PROFILE</a>
+          <div>
+          <img src="https://cf.shopee.co.id/file/1740a66d75c848b38c85ade20a2505e2" width="45vw" height="45vh" style="border-radius: 50%" class="mb-2">
+          </div>
+        <b-dropdown id="dropdown-1" text="Profile" variant="primary" class="mx-2 mb-2" style="width: 10vw;">
+            <b-dropdown-item>Edit Profile</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item @click.prevent="onLogout">Logout</b-dropdown-item>
+        </b-dropdown>
       </div>
   </div>
 </template>
@@ -34,6 +41,10 @@ export default {
     },
     toProfile () {
       console.log('hehe')
+    },
+    onLogout () {
+      localStorage.clear()
+      this.$router.push({ path: '/login' })
     }
   }
 }
