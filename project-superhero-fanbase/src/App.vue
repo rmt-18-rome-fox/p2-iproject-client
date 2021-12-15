@@ -15,11 +15,17 @@
 <script>
 import Navbar from './components/Navbar.vue'
 export default {
-  name: "app",
+  name: "App",
   components: {
       Navbar,
-     
+      
     },
+  created(){
+    this.$store.dispatch("sendCustomEventFromServe", {
+      message: "Hello from client"
+    })
+  }
+  
 }
 </script>
 <style>
