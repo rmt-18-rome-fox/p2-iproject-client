@@ -53,7 +53,7 @@
                   style="border: 2px solid rgba(70, 62, 135, 1)"
                 ></b-avatar>
               </template>
-              <b-dropdown-item>
+              <b-dropdown-item v-if="role === 'customer'">
                 <div
                   class="d-flex justify-content-between align-items-center"
                   @click.prevent="toCart"
@@ -62,13 +62,22 @@
                   &nbsp; Cart
                 </div>
               </b-dropdown-item>
-              <b-dropdown-item>
+              <b-dropdown-item v-if="role === 'customer'">
                 <div
                   class="d-flex justify-content-between align-items-center"
                   @click.prevent="toTransaction"
                 >
                   <font-awesome-icon :icon="['fas', 'shopping-cart']" />
                   &nbsp; Transaction
+                </div>
+              </b-dropdown-item>
+              <b-dropdown-item v-if="role === 'seller'">
+                <div
+                  class="d-flex justify-content-between align-items-center"
+                  @click.prevent="toTransaction"
+                >
+                  <font-awesome-icon :icon="['fas', 'store']" />
+                  &nbsp; Sell Book
                 </div>
               </b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
@@ -124,6 +133,9 @@ export default {
   computed: {
     userName() {
       return localStorage.user_name;
+    },
+    role() {
+      return localStorage.user_role;
     },
   },
 };
