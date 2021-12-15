@@ -20,10 +20,10 @@
             
             <div class="post-weather">
                 <img
-                    :src="`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`"
-                    class="card-img-top"
-                    alt="..."
-                />
+                :src="`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`"
+                class="card-img-top"
+                alt="..."
+            />
                 <div class="card-body">
                     <h5 class="card-title">{{weather.city_name}}</h5>
                     <p class="card-text">
@@ -34,6 +34,7 @@
 
 
         </div>
+
 </template>
 <script>
     export default {
@@ -56,9 +57,11 @@
         created() {
             // does the user have a saved center? use it instead of the default
             if(localStorage.center) {
+                console.log(`kena throw`)
                 this.myCoordinates = JSON.parse(localStorage.center);
             } else {
                 // get user's coordinates from browser request
+                console.log(`maasuk sni weather`)
                 this.$store.dispatch("getWeather")
                 this.$getLocation({})
                     .then(coordinates => {
@@ -106,7 +109,7 @@
                 }
             },
             weather () {
-                console.log(this.$store.state, "ambil ini");
+                console.log(this.$store.state.weather, "weather onGeoLocation");
                 return this.$store.state.weather
             }
         }
