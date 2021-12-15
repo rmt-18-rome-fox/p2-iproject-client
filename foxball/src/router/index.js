@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import AddPost from '../views/AddPost.vue'
 import Standing from '../views/Standing.vue'
 import Chat from '../views/Chat.vue'
+import News from '../views/News.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/chat',
     name: 'Chat',
     component: Chat
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: News
   },
 ]
 
