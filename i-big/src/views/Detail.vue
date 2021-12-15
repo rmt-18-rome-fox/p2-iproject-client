@@ -1,12 +1,12 @@
 <template>
   <div>
-      INI NTAR CHART
+      MASUK SINI 
   </div>
 </template>
 
 <script>
 export default {
-    name : 'Chart'
+    name : "Detail"
 }
 </script>
 

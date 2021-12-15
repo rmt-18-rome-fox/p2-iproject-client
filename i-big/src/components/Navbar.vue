@@ -1,5 +1,6 @@
 <template>
   <!-- Navigation-->
+  
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
                 <router-link class="navbar-brand" to="/">I-BIG</router-link>
@@ -7,6 +8,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li v-if="isLogin" class="nav-item"><router-link class="nav-link active" aria-current="page" to="/">Dashboard</router-link></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Calculator</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a  class="dropdown-item disabled" href="#!">Calculator</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><router-link class="dropdown-item" to="/calculator/bmi">BMI</router-link></li>
+                                <li><router-link class="dropdown-item" to="/calculator/ideal">Ideal Weight</router-link></li>
+                                <li><router-link class="dropdown-item" to="/calculator/macros">Macros</router-link></li>
+                            </ul>
+                        </li>
                         <li v-if="isLogin" class="nav-item"><a @click.prevent="logOut" class="nav-link" href="#!">Logout</a></li>
                         <li v-if="!isLogin" class="nav-item"><router-link class="nav-link" to="/login">Login</router-link></li>
                         <li v-if="!isLogin" class="nav-item"><router-link class="nav-link" to="/register">Register</router-link></li>
@@ -18,7 +29,7 @@
                         class="btn btn-outline-dark" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{cartLength}}</span>
                         </button>
                         
                     </form>
@@ -41,17 +52,22 @@ export default {
     },
 
     computed : {
-        ...mapState(["isLogin"])
+        ...mapState(["isLogin", "cartLength"])
     },
 
 
     methods : {
         ...mapMutations({
         isLoginMutation: "ISLOGIN"
+        },
+        {
+        cartLength : "cartLength"
         }),
 
+        ...mapActions(["fetchFavorite"]),
+
         toWish () {
-            this.$router.push("/chart")
+            this.$router.push("/cart")
         },
 
         logOut() {
@@ -82,6 +98,10 @@ export default {
           //   console.log("User signed out.");
           // });
         },
+    },
+
+    created() {
+        this.fetchFavorite()
     }
 }
 </script>
