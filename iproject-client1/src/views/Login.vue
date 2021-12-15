@@ -13,13 +13,13 @@
         <form class="col-8" @submit.prevent="toLogin">
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" id="inputEmailLogin" class="form-control" placeholder="Email" v-model="email" />
+            <input type="email" id="inputEmailLogin" class="form-control" placeholder="e.g. user1@mail.com" v-model="email" />
             <label class="form-label" for="inputEmailLogin">Email address</label>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="inputPasswordLogin" class="form-control" placeholder="Password" v-model="password" />
+            <input type="password" id="inputPasswordLogin" class="form-control" placeholder="********" v-model="password" />
             <label class="form-label" for="inputPasswordLogin">Password</label>
           </div>
 

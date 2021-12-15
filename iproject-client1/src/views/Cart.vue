@@ -27,8 +27,10 @@ export default {
     CartCard,
   },
   created() {
-    this.$store.dispatch('checkPayment').then(() => {
-      this.$store.dispatch('fetchOrderDetail');
+    this.$store.dispatch('fetchOrderDetail').then(() => {
+      this.$store.dispatch('checkPayment').then(() => {
+        this.$store.dispatch('fetchOrderDetail');
+      });
     });
   },
   computed: {

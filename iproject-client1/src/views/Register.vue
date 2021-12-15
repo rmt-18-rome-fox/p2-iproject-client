@@ -13,37 +13,37 @@
         <form class="col-8" @submit.prevent="toRegister">
           <!-- First Name input -->
           <div class="form-outline mb-4">
-            <input type="text" id="inputFirstNameRegister" class="form-control" v-model="firstName" />
+            <input type="text" id="inputFirstNameRegister" class="form-control" placeholder="e.g. John" v-model="firstName" />
             <label class="form-label" for="inputFirstNameRegister">First Name</label>
           </div>
 
           <!-- Last Name input -->
           <div class="form-outline mb-4">
-            <input type="text" id="inputLastNameRegister" class="form-control" v-model="lastName" />
+            <input type="text" id="inputLastNameRegister" class="form-control" placeholder="e.g. Doe" v-model="lastName" />
             <label class="form-label" for="inputLastNameRegister">Last Name</label>
           </div>
 
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" id="inputEmailRegister" class="form-control" v-model="email" />
+            <input type="email" id="inputEmailRegister" class="form-control" placeholder="e.g. johndoe@mail.com" v-model="email" />
             <label class="form-label" for="inputEmailRegister">Email address</label>
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-4">
-            <input type="password" id="inputPasswordRegister" class="form-control" v-model="password" />
+            <input type="password" id="inputPasswordRegister" class="form-control" placeholder="**********" v-model="password" />
             <label class="form-label" for="inputPasswordRegister">Password</label>
           </div>
 
           <!-- Phone Number input -->
           <div class="form-outline mb-4">
-            <input type="text" id="inputPhoneNumberRegister" class="form-control" v-model="phoneNumber" />
+            <input type="text" id="inputPhoneNumberRegister" class="form-control" placeholder="e.g. 08123456789" v-model="phoneNumber" />
             <label class="form-label" for="inputPhoneNumberRegister">Phone Number</label>
           </div>
 
           <!-- Address input -->
           <div class="form-outline mb-4">
-            <input type="text" id="inputAddressRegister" class="form-control" v-model="address" />
+            <input type="text" id="inputAddressRegister" class="form-control" placeholder="e.g. Jl. Asia Afrika No.17" v-model="address" />
             <label class="form-label" for="inputAddressRegister">Address</label>
           </div>
 

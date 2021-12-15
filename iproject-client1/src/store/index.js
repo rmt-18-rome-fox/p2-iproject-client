@@ -187,21 +187,25 @@ export default new Vuex.Store({
     },
     // ===================================================== ### FETCH ORDER DETAIL ### =====================================================
     fetchOrderDetail: function ({ commit }) {
-      axios({
-        url: `${baseUrl}/orderdetail`,
-        method: 'get',
-        headers: {
-          access_token: localStorage.getItem('access_token'),
-        },
-      })
-        .then(({ data }) => {
-          // console.log(data);
-          commit('SET_CART_ORDERDETAIL', data);
-          // router.push('/');
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/orderdetail`,
+          method: 'get',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then(({ data }) => {
+            // console.log(data);
+            commit('SET_CART_ORDERDETAIL', data);
+            resolve();
+            // router.push('/');
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
     },
     // ===================================================== ### ADD NEW CART ### =====================================================
     addNewCart: function (context, id) {
