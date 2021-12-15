@@ -8,6 +8,7 @@ export default new Vuex.Store({
 	state: {
 		recipes: [],
 		apiUrl: "https://api.edamam.com/search",
+		ingredients: [],
 	},
 	mutations: {
 		SET_RECIPES(state, payload) {
@@ -15,20 +16,22 @@ export default new Vuex.Store({
 		},
 	},
 	actions: {
-		async getRecipes({ state, commit }, plan) {
+		async getRandomRecipes({ state, commit }) {
 			try {
 				let response = await axios.get(`${state.apiUrl}`, {
 					params: {
-						q: plan,
+						q: "plan",
 						app_id: "5b6623d5",
 						app_key: "46674aa2193dbb7b88ffd897331e661a",
 						from: 0,
 						to: 9,
 					},
 				})
-				commit("setRecipes", response.data.hits)
-			} catch (error) {
-				commit("setRecipes", [])
+        console.log(response.data.hits, "<<<<<<<<< data hits")
+				commit("SET_RECIPES", response.data.hits)
+			} catch (err) {
+        console.log(err)
+				commit("SET_RECIPES", [])
 			}
 		},
 	},
