@@ -2,7 +2,7 @@
 <div>
 <b-card
     tag="article"
-    style="max-width: 20rem;"
+    style="max-width: 30rem;"
 >   
     <b-card-img
         :src="book.formats['image/jpeg']"
@@ -20,9 +20,11 @@
     <b-card-text>
     Authors's death year: {{book.authors[0].death_year}}
     </b-card-text>
-    <b-card-text>
-    {{book.subjects}}
-    </b-card-text>
+    <ul v-for="subject in book.subjects" :key="subject">
+        <li>
+        {{subject}}
+        </li>
+    </ul>
     
     <b-button variant="dark">
         <router-link :to="{path: `/books/${book.id}`}">Book detail</router-link>

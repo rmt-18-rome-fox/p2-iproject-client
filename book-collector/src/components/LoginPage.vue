@@ -1,5 +1,5 @@
 <template>
-  <div class="loginForm">
+  <div class="container mt-5">
     <b-form @submit.prevent="doLogin">
       <b-form-group
         id="input-group-1"

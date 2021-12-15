@@ -10,6 +10,11 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/bookmarks">Bookmark</router-link>
         </li>
+        <li class="nav-item">
+          <a @click.prevent="doLogout"
+            class="nav-link"
+            v-if="token">Logout</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -18,7 +23,29 @@
 
 <script>
 export default {
-
+  name:"Navbar",
+  data(){
+    return{
+      token: false
+    }
+  },
+  methods:{
+    checkToken(){
+      if(localStorage.access_token){
+        this.token = true
+      }else{
+        this.token = false
+      }
+    },
+    doLogout(){
+      localStorage.clear()
+      this.$router.push("/login")
+      this.checkToken()
+    }
+  },
+  created(){
+    this.checkToken()
+  }
 }
 </script>
 
