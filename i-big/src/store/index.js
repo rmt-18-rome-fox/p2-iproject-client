@@ -154,6 +154,45 @@ export default new Vuex.Store({
       
     },
 
+    async addFavorite(context, payload) {
+      try {
+        console.log(payload);
+        let url = `${baseUrl}/public/favorite/${payload}`;
+        const response = await axios({
+          method: "POST",
+          url,
+          headers: {
+            token : localStorage.token
+          }
+        })
+          console.log('WE DID IT');
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+  
+          Toast.fire({
+            icon: "success",
+            title: `Success add ${response.data.MovieId} to Favorite!`,
+          });
+
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: 'Sorry, you must Sign In first',
+        });
+      }
+    },
+
+
   },
   modules: {
   }
