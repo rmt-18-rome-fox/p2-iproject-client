@@ -100,12 +100,13 @@ export default new Vuex.Store({
             resp.data.forEach(note => {
               if (note.status === 'Fresh') {
                 fresh.push(note)
-              } else if (note.status === 'Work in progress') {
+              } else if (note.status === 'inProgress') {
                 inProgress.push(note)
               } else if (note.status === 'Done') {
                 done.push(note)
               }
             })
+            context.commit('SET_NOTES', resp.data)
             context.commit('SET_FRESH', fresh)
             context.commit('SET_IN_PROGRESS', inProgress)
             context.commit('SET_DONE', done)
@@ -135,7 +136,8 @@ export default new Vuex.Store({
             content: 'Add some content'
           }
         })
-          .then(() => {
+          .then((resp) => {
+            context.commit('SET_FRESH', resp.data)
             resolve()
           })
           .catch(err => {
@@ -168,6 +170,38 @@ export default new Vuex.Store({
           })
           reject(err)
         })
+      })
+    },
+    patchNote: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseURL}/notes/${payload.id}`,
+          method: 'patch',
+          headers: {
+            access_token: localStorage.access_token
+          },
+          data: {
+            status: payload.status
+          }
+        })
+          .then((resp) => {
+            if (payload.status === 'Fresh') {
+              context.commit('SET_FRESH', resp.data)
+            } else if (payload.status === 'inProgress') {
+              context.commit('SET_IN_PROGRESS', resp.data)
+            } else {
+              context.commit('SET_DONE', resp.data)
+            }
+            resolve()
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: 'error',
+              title: "We get that you're busy, but..",
+              text: err.response.data.message
+            })
+            reject(err)
+          })
       })
     }
   },
