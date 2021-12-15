@@ -41,13 +41,11 @@
         </div>
         <!-- Recipe Card -->
         <div class="row">
-          <div class="col">
-            <recipe-card
-              v-for="(item, idx) in recipes"
-              :key="idx"
-              :item="item"
-            ></recipe-card>
-          </div>
+          <recipe-card
+            v-for="(item, idx) in recipes"
+            :key="idx"
+            :item="item"
+          ></recipe-card>
         </div>
       </div>
     </div>
@@ -74,8 +72,3 @@ export default {
   },
 };
 </script>
-
-// cari angka maksimal dari ingredient dan measure, coba akses satu2 objeknya, jadikan array of object baru v-for di templatenya
-
-// edamam
-// siapkan keyword yang agak umum dan searching berdasarkan keyword yang disediakan dan sembunyikan keywordnya
