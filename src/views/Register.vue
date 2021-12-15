@@ -10,7 +10,7 @@
       </div>
       <div class="form-group">
           <label for="password">Password</label>
-          <input v-model="password" type="text" id="password" class="form-control" placeholder="Min. 8 characters">
+          <input v-model="password" type="password" id="password" class="form-control" placeholder="Min. 8 characters">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form><br>

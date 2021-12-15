@@ -2,15 +2,13 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Swal from 'sweetalert2'
-let baseURL = 'http://localhost:3000'
-
+let baseURL = 'https://halita-kanban.herokuapp.com'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
-    notes: [],
     inProgress: [],
     done: [],
     fresh: []
@@ -107,7 +105,6 @@ export default new Vuex.Store({
                 done.push(note)
               }
             })
-            context.commit('SET_NOTES', resp.data)
             context.commit('SET_FRESH', fresh)
             context.commit('SET_IN_PROGRESS', inProgress)
             context.commit('SET_DONE', done)
@@ -204,8 +201,6 @@ export default new Vuex.Store({
             reject(err)
           })
       })
-    },
-    githubLogin: function () {
     },
     googleLogin: function (context, payload) {
       return new Promise((resolve, reject) => {

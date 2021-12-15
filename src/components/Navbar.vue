@@ -1,5 +1,6 @@
 <template>
-  <div class="navbar navbar-expand-lg bg-light">
+  <div class="navbar d-flex bg-light">
+      <img src="../assets/Logo_Hacktiv8.jpg" alt="Hacktiv8_Logo" width=50 class="rounded">
       <h4 style="margin: 10px;">Hallita</h4>
       <a style="margin: 10px" href="" @click.prevent="logout">Logout</a>
   </div>

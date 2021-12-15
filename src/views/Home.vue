@@ -107,9 +107,6 @@ export default {
     },
     doneNotes: function () {
       return this.$store.state.done
-    },
-    notes: function () {
-      return this.$store.state.notes
     }
   }
 }
