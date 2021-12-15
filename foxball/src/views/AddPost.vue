@@ -62,7 +62,7 @@
 
           <button
             class="
-              bg-indigo-600
+              bg-gray-600
               hover:bg-black
               text-white
               font-bold

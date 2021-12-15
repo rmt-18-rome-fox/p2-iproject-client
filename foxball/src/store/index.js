@@ -7,10 +7,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
+    posts: []
   },
   mutations: {
     LOGIN(state, payload) {
       state.isLogin = payload
+    },
+    FETCH_POST(state, payload) {
+      state.posts = payload
     }
   },
   actions: {
@@ -23,6 +27,19 @@ export default new Vuex.Store({
         context.commit('LOGIN', true);
       } catch (err) {
         context.commit('LOGIN', false);
+        console.log(err);
+      }
+    },
+    async fetchPost(context) {
+      try {
+        const response = await axios.get('/post', {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        console.log(response);
+        context.commit('FETCH_POST', response.data)
+      } catch (err) {
         console.log(err);
       }
     }

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import AddPost from '../views/AddPost.vue'
+import Standing from '../views/Standing.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/add',
     name: 'AddPost',
     component: AddPost
+  },
+  {
+    path: '/standing-table',
+    name: 'Standing',
+    component: Standing
   },
 ]
 
