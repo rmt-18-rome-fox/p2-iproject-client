@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="overflow: hidden">
   <navbar></navbar>
   <h1>WELCOME TO ARCHILINE, HERE ARE SOME OF OUR FEATURED ARCHITECTS</h1>
     <div>

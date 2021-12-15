@@ -11,7 +11,10 @@ export default new Vuex.Store({
     portofolios: [],
     bookForm: {},
     architectPortofolio: [],
-    portofolioDetail: {}
+    portofolioDetail: {},
+    portofoliosByArchitect: [],
+    portofolioEditForm: {},
+    tags: []
   },
   mutations: {
     SET_FEATURED_ARCHITECT (state, payload) {
@@ -31,6 +34,15 @@ export default new Vuex.Store({
     },
     SET_PORTOFOLIO_DETAIL (state, payload) {
       state.portofolioDetail = payload
+    },
+    SET_ARCHITECT_PORTOFOLIOS_BY_ARCHITECT (state, payload) {
+      state.portofoliosByArchitect = payload
+    },
+    SET_EDIT_PORTOFOLIO (state, payload) {
+      state.portofolioEditForm = payload
+    },
+    SET_TAGS (state, payload) {
+      state.tags = payload
     }
   },
   actions: {
@@ -51,6 +63,23 @@ export default new Vuex.Store({
           })
       })
     },
+
+    onRegister (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'POST',
+          url: `${basicUrl}/register`,
+          data: payload
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
     fetchFeaturedArchitect (context, payload) {
       return new Promise((resolve, reject) => {
         axios({
@@ -199,10 +228,145 @@ export default new Vuex.Store({
             reject(err)
           })
       })
+    },
+
+    fetchArchitectPortofoliosByArchitect (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/architect/portofolio`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            context.commit('SET_ARCHITECT_PORTOFOLIOS_BY_ARCHITECT', data.data)
+            resolve()
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    deletePortofolio (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'DELETE',
+          url: `${basicUrl}/architect/portofolio/${payload}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    fetchEditPortofolioForm (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/architect/portofolio/${payload}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            context.commit('SET_EDIT_PORTOFOLIO', data.data)
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    addPortofolio (context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log(payload)
+        const form = new FormData()
+        form.append('title', payload.title)
+        form.append('description', payload.description)
+        form.append('file', payload.file)
+        payload.tags.forEach((tag, index) => {
+          form.append(`TagId[${index}]`, tag)
+        })
+        axios({
+          method: 'POST',
+          url: `${basicUrl}/architect/portofolio/add`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
+          data: form
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    editPortofolio (context, payload) {
+      return new Promise((resolve, reject) => {
+        console.log(payload)
+        const form = new FormData()
+        form.append('title', payload.title)
+        form.append('description', payload.description)
+        form.append('file', payload.file)
+        payload.tags.forEach((tag, index) => {
+          form.append(`TagId[${index}]`, tag)
+        })
+        axios({
+          method: 'PUT',
+          url: `${basicUrl}/architect/portofolio/${payload.id}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
+          data: form
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    fetchTags (context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/architect/tags`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            context.commit('SET_TAGS', data.data)
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   },
   getters: {
-
+    tablePortofolio (state) {
+      const newPortofolio = []
+      state.portofoliosByArchitect.forEach((portofolio, index) => {
+        newPortofolio.push({ No: index + 1, Title: portofolio.title, Description: portofolio.description, Image: portofolio.imageUrl, id: portofolio.id, tags: portofolio.Tags })
+      })
+      return newPortofolio
+    }
   },
   modules: {
   }
