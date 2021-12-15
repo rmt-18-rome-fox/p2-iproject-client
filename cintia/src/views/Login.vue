@@ -1,20 +1,20 @@
 <template>
-  <div class="home">
+  <div class="login">
     <Navbar />
-    <HomeComponent />
+    <LoginComponent />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Navbar from "@/components/navbar.vue";
-import HomeComponent from "@/components/home.vue";
-
+import LoginComponent from "@/components/login.vue";
 export default {
-  name: "Home",
+  name: "Login",
   components: {
     Navbar,
-    HomeComponent,
+    LoginComponent,
   },
 };
 </script>
+
+<style></style>
