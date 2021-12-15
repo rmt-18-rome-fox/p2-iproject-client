@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
   <div class="container">
       <router-link class="navbar-brand" to="/books">Book-Collector</router-link>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <router-link
@@ -15,6 +15,12 @@
             class="nav-link"
             to="/bookmarks"
             v-if="token">Bookmark</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link
+            class="nav-link"
+            to="/detectlang"
+            v-if="token">Try detect language</router-link>
         </li>
         <li class="nav-item">
           <a @click.prevent="doLogout"
