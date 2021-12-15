@@ -25,7 +25,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" variant="dark">Submit</b-button>
     </b-form>
     <router-link to="/register">Don't have an account? Sign up!</router-link>
   </div>

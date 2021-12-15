@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="container mt-5">
     <b-row>
       <div
       class="col-md-3"
@@ -40,4 +40,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.container{
+
+}
 </style>
