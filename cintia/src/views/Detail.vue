@@ -1,20 +1,20 @@
 <template>
   <div class="home">
     <Navbar />
-    <MovieComponent />
+    <Detail />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from "@/components/navbar.vue";
-import MovieComponent from "@/components/movies.vue";
+import Detail from "@/components/movie.vue";
 
 export default {
-  name: "Movies",
+  name: "Home",
   components: {
     Navbar,
-    MovieComponent,
+    Detail,
   },
 };
 </script>
