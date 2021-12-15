@@ -17,24 +17,24 @@
             <div class="col-start-2 col-span-8">
                 <h2 class="text-green-500 text-opacity-80 text-2xl text-center mb-7">Register Now</h2>
                 <div class="card rounded-md px-5">
-                    <form class="mt-6 mb-6 space-y-6">
+                    <form class="mt-6 mb-6 space-y-6" @submit.prevent="fnRegister">
                         <div class="mb-5">
                             <label for="username" class="sr-only">Username</label>
                             <input id="username" name="username" type="text" autocomplete="off" required
                                 class="block w-full px-3 py-2 border rounded-sm text-green-900 focus:outline-none focus:ring focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-lg tracking-wider"
-                                placeholder="Username" />
+                                placeholder="Username" v-model="username"/>
                         </div>
                         <div class="mb-5">
                             <label for="email-address" class="sr-only">Email address</label>
                             <input id="email-address" name="email" type="email" autocomplete="off" required
                                 class="block w-full px-3 py-2 border rounded-sm text-green-900 focus:outline-none focus:ring focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-lg tracking-wider"
-                                placeholder="Email address" />
+                                placeholder="Email address" v-model="email"/>
                         </div>
                         <div>
                             <label for="password" class="sr-only">Password</label>
                             <input id="password" name="password" type="password" autocomplete="off" required
                                 class="block w-full px-3 py-2 border rounded-sm text-green-900 focus:outline-none focus:ring focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-lg tracking-wider"
-                                placeholder="Password" />
+                                placeholder="Password" v-model="password"/>
                         </div>
                         <div>
                             <a class="underline text-blue-600" href=""><router-link to="/login">Already have an account?</router-link></a>
@@ -54,8 +54,46 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
-    name: 'Register'
+    name: 'Register',
+    data() {
+        return {
+            username: '',
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        fnRegister() {
+            let payload = {
+                username: this.username,
+                email: this.email,
+                password: this.password,
+            }
+            this.$store.dispatch('register', payload)
+            .then(() => {
+                // console.log(data)
+                this.$router.push('/login')
+                .then(() => {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Create user Success!",
+                        icon: "success",
+                    });
+                })
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+                console.log(err)
+            })
+        }
+    }
 }
 </script>
 
