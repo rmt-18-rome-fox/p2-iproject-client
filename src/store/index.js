@@ -18,9 +18,11 @@ export default new Vuex.Store({
 	actions: {
 		async getRandomRecipes({ state, commit }) {
 			try {
+        const items = ["plan", "pizza", "chicken", "beef", "meats"]
+        const item = items[Math.floor(Math.random() * items.length)]
 				let response = await axios.get(`${state.apiUrl}`, {
 					params: {
-						q: "plan",
+						q: item,
 						app_id: "5b6623d5",
 						app_key: "46674aa2193dbb7b88ffd897331e661a",
 						from: 0,

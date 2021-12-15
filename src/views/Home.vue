@@ -40,14 +40,12 @@
           <button class="border-1">Search</button>
         </div>
         <!-- Recipe Card -->
-        <div class="row">
-          <div class="col">
-            <recipe-card
-              v-for="(item, idx) in recipes"
-              :key="idx"
-              :item="item"
-            ></recipe-card>
-          </div>
+        <div class="grid gap-x-8 gap-y-4 grid-cols-3">
+          <recipe-card
+            v-for="(item, idx) in recipes"
+            :key="idx"
+            :item="item"
+          ></recipe-card>
         </div>
       </div>
     </div>
