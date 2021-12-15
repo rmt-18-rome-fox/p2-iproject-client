@@ -20,11 +20,10 @@ export default {
   props: ['note'],
   methods: {
     showUpdate: function () {
-      // this.$store.dispatch('getNoteById')
-      console.log('Update')
+      this.$store.dispatch('getNoteById')
     },
     deleteNote: function () {
-    //   this.$store.dispatch('deleteNote', this.note.id)
+      this.$store.dispatch('deleteNote', this.note.id)
       this.$emit('deleteNote', this.note.id)
     }
   }

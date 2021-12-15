@@ -9,7 +9,10 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
-    notes: []
+    notes: [],
+    inProgress: [],
+    done: [],
+    fresh: []
   },
   mutations: {
     SET_LOGIN: function (state, payload = false) {
@@ -17,6 +20,15 @@ export default new Vuex.Store({
     },
     SET_NOTES: function (state, payload) {
       state.notes = payload
+    },
+    SET_FRESH: function (state, payload) {
+      state.fresh = payload
+    },
+    SET_IN_PROGRESS: function (state, payload) {
+      state.inProgress = payload
+    },
+    SET_DONE: function (state, payload) {
+      state.done = payload
     }
   },
   actions: {
@@ -73,23 +85,42 @@ export default new Vuex.Store({
       })
     },
     getNotes: function (context) {
-      axios({
-        url: `${baseURL}/notes`,
-        method: 'get',
-        headers: {
-          access_token: localStorage.access_token
-        }
-      })
-        .then(resp => {
-          context.commit('SET_NOTES', resp.data)
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseURL}/notes`,
+          method: 'get',
+          headers: {
+            access_token: localStorage.access_token
+          }
         })
-        .catch(err => {
-          Swal.fire({
-            icon: 'error',
-            title: "Sorry..",
-            text: err.response.data.message
+          .then(resp => {
+            let fresh = []
+            let inProgress = []
+            let done = []
+            resp.data.forEach(note => {
+              if (note.status === 'Fresh') {
+                fresh.push(note)
+              } else if (note.status === 'Work in progress') {
+                inProgress.push(note)
+              } else if (note.status === 'Done') {
+                done.push(note)
+              }
+            })
+            context.commit('SET_FRESH', fresh)
+            context.commit('SET_IN_PROGRESS', inProgress)
+            context.commit('SET_DONE', done)
+
+            resolve()
           })
-        })
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: "Sorry..",
+              text: err.response.data.message
+            })
+            reject(err)
+          })
+      })
     },
     addNote: function (context, payload) {
       return new Promise((resolve, reject) => {
