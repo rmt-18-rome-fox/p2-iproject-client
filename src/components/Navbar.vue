@@ -46,7 +46,7 @@
           <b-navbar-nav class="ml-auto">
             <b-nav-item-dropdown right>
               <template #button-content>
-                Howdy, Johannes &nbsp;
+                Howdy, {{ userName }} &nbsp;
                 <b-avatar
                   src="https://semantic-ui.com/images/avatar2/small/rachel.png"
                   size="3.3rem"
@@ -58,8 +58,17 @@
                   class="d-flex justify-content-between align-items-center"
                   @click.prevent="toCart"
                 >
-                  <font-awesome-icon :icon="['fas', 'shopping-cart']" />
+                  <font-awesome-icon :icon="['fas', 'shopping-basket']" />
                   &nbsp; Cart
+                </div>
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <div
+                  class="d-flex justify-content-between align-items-center"
+                  @click.prevent="toTransaction"
+                >
+                  <font-awesome-icon :icon="['fas', 'shopping-cart']" />
+                  &nbsp; Transaction
                 </div>
               </b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
@@ -91,6 +100,14 @@ export default {
     toCart() {
       this.$router.push("/cart");
     },
+    toTransaction() {
+      this.$router.push("/transaction");
+    },
+  },
+  computed: {
+    userName() {
+      return localStorage.user_name;
+    },
   },
 };
 </script>
@@ -98,6 +115,10 @@ export default {
 <style scope>
 b-navbar {
   z-index: 200;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 a.router-link-exact-active {

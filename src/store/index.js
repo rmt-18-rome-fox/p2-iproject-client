@@ -100,11 +100,9 @@ export default new Vuex.Store({
       });
     },
     shipping(context, { sellerCityId, customerCityId }) {
-      console.log(sellerCityId);
-      console.log(customerCityId);
       const data = {
-        destination: sellerCityId,
-        origin: customerCityId,
+        destination: customerCityId,
+        origin: sellerCityId,
         weight: 500,
         courier: "jne",
       };
@@ -112,6 +110,35 @@ export default new Vuex.Store({
         method: "POST",
         url: `${baseUrl}/apis/shipping`,
         data,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    confirmPayment(context, amount) {
+      return axios({
+        method: "POST",
+        url: `${baseUrl}/apis/xendit/ovo`,
+        data: { amount },
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    createTransaction(context, { cost, bookId }) {
+      return axios({
+        method: "POST",
+        url: `${baseUrl}/customers/transactions?bookId=${bookId}`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+        data: { amount: cost },
+      });
+    },
+    patchTransaction(context, id) {
+      return axios({
+        method: "PATCH",
+        url: `${baseUrl}/customers/transactions/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },
