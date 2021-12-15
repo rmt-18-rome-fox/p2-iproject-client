@@ -49,7 +49,7 @@ export default {
                 localStorage.setItem("access_token", resp.data)
             })
             .catch(err =>{
-
+              console.log(err);
             })
         }
     }
