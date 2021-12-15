@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const serverUrl = "http://localhost:3000"
+const serverUrl = "https://server-mylovelypetshop.herokuapp.com"
 
 export default new Vuex.Store({
   state: {
