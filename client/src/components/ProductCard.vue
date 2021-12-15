@@ -22,6 +22,7 @@
                 <div class="product-bg" :style="[cardBgTransform, cardBgImage]"></div>
                 <div class="product-info w-100">
                 <h1>{{ product.name }}</h1>
+                <h3>{{ product.price }}</h3>
                 <p>{{ product.summary }}</p>
                 <div class="card-footer">
                     <a href="#" @click.prevent="addProduct(product.id)" class="btn btn-primary mx-1" to="/single-mov">Add to adopt list</a>

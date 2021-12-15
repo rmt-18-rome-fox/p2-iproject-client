@@ -5,14 +5,6 @@
               <img src="../assets/brandLogo.png" alt="">
         </router-link>
         <ul class="nav navbar-nav flex-row float-right">
-          <!-- <li class="nav-item">
-            <router-link class="navbar-brand float-left" to="/">
-              <img src="./assets/HomeLogo.png" alt="">
-            </router-link>
-          </li> -->
-          <li class="nav-item">
-            <!-- <router-link class="nav-link pr-3" to="/single">Single</router-link>
-          </li> -->
           <li v-if="this.isLog" class="nav-item">
             <router-link class="nav-link pr-3" to="/adopt-list">Adopted List</router-link>
           </li>
