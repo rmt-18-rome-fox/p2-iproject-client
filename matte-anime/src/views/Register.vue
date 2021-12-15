@@ -34,8 +34,8 @@
 
         <div class="flex items-center justify-between">
           <div class="text-sm">
-            <p class="font-medium text-indigo-600 hover:text-indigo-500">
-              Back to Login: <span role="button" class="text-blue-500" @click.prevent="toLogin">Back</span>
+            <p class="font-medium">
+              Back to Login: <span role="button" class="text-blue-500 hover:text-blue-700" @click.prevent="toLogin">Back</span>
             </p>
           </div>
         </div>
