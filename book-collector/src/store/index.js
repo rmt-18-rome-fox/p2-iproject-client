@@ -69,6 +69,23 @@ export default new Vuex.Store({
           access_token: localStorage.access_token
         }
       })
+    },
+    getPagination(context, payload){
+      return axios.get(`${baseUrl}/books?page=${payload}`, {
+        headers:{
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    doSearchBook(context, payload){
+      return axios.get(`${baseUrl}/books?search=${payload}`, {
+        headers:{
+          access_token: localStorage.access_token
+        }
+      })
+    },
+    detectLang(context, payload){
+      return axios.post(`${baseUrl}/detectlang`, payload)
     }
   },
   modules: {

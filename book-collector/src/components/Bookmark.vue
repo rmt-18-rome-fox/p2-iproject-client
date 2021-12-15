@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   name: "BookmarkPage",
   methods:{
@@ -51,10 +52,20 @@ export default {
       this.$store.dispatch("deleteBookmark", id)
       .then((resp)=>{
         console.log(resp);
+        Swal.fire(
+          'Good job!',
+          `Deleted ${resp.data.title} from bookmark`,
+          'success'
+        )
         this.fetchBookmarks()
       })
       .catch(err =>{
         console.log(err);
+        Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+        })
       })
     }
   },

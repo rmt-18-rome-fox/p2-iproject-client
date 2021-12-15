@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     name: "DetectLangPage",
     data(){
@@ -25,7 +26,24 @@ export default {
     },
     methods: {
         doSubmit(){
-            console.log(this.text);
+            this.$store.dispatch("detectLang", {text: this.text})
+            .then((resp)=>{
+                console.log(resp);
+                Swal.fire(
+                'The Language?',
+                `${resp.data.lang[0].name} |
+                reliable: ${resp.data.reliable[0].isReliable}`,
+                'question'
+                )
+            })
+            .catch(err =>{
+                console.log(err);
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+                })
+            })
         }
     }
 }

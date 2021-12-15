@@ -3,10 +3,12 @@
 <b-card
     tag="article"
     style="max-width: 30rem;"
+    class="mb-5"
 >   
     <b-card-img
         :src="book.formats['image/jpeg']"
-        class="rounded-0" style="height: 350px; overflow:none; object-fit: cover">
+        class="rounded-0"
+        style="height: 450px; overflow:none; object-fit: cover">
     </b-card-img>
 
     <b-card-body :title="book.title"></b-card-body>
@@ -20,12 +22,6 @@
     <b-card-text>
     Authors's death year: {{book.authors[0].death_year}}
     </b-card-text>
-    <ul v-for="subject in book.subjects" :key="subject">
-        <li>
-        {{subject}}
-        </li>
-    </ul>
-    
     <b-button variant="dark">
         <router-link :to="{path: `/books/${book.id}`}">Book detail</router-link>
     </b-button><br><br>
@@ -35,6 +31,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     name: "BookCard",
     props: ["book"],
@@ -43,6 +40,11 @@ export default {
             this.$store.dispatch("addBookmark", this.book.id)
             .then((resp) =>{
                 console.log(resp);
+                Swal.fire(
+                'Good job!',
+                `Added ${resp.data.title} into bookmark`,
+                'success'
+                )
             })
             .catch(err =>{
                 console.log(err);
@@ -53,5 +55,4 @@ export default {
 </script>
 
 <style>
-
 </style>
