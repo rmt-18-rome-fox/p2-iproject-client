@@ -28,14 +28,10 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8 pr-5">
+        <div class="col-12 pr-5">
             <div class="product-container">
               <ProductCard v-for="product in productData.response" :key="product.id" :product="product"></ProductCard>
             </div>
-        </div>
-
-          <div class="col-12 col-lg-8 pr-5">
-            <div>x</div>
         </div>
   </div>
 
@@ -292,7 +288,7 @@ button.page-link.active {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
 }
 
 

@@ -8,20 +8,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-4 pr-5">
-                        <div class="row">
-                            <div class="col-6"><h1 class="text-left">Order Id</h1></div>
-                            <div class="col-6"><h2 class="text-right">{{ checkoutData.order_id }}</h2></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6"><h1 class="text-left">Total Payment</h1></div>
-                            <div class="col-6"><h2 class="text-right">{{ checkoutData.totalPrice }}</h2></div>
-                        </div>
-                        <div class="row pt-5">
-                            <div class="col text-left"><button @click.prevent="onCharge()">Pay</button></div>
-                        </div>
-                    </div>
-                    <div class="col-8 pl-5">
+
+                    <div class="col-7 pl-5">
                         <div class="row">
                             <b-card v-for="product in checkoutData.product" :key="product.id"
                                 :title="product.name"
@@ -42,6 +30,19 @@
 
                              
                             </b-card>
+                        </div>
+                    </div>
+                    <div class="col-5 pr-5">
+                        <div class="row">
+                            <div class="col-6"><h1 class="text-left">Order Id</h1></div>
+                            <div class="col-6"><h2 class="text-right">{{ checkoutData.order_id }}</h2></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6"><h1 class="text-left">Total Payment</h1></div>
+                            <div class="col-6"><h2 class="text-right">{{ checkoutData.totalPrice }}</h2></div>
+                        </div>
+                        <div class="row pt-5">
+                            <div class="col text-left"><button @click.prevent="onCharge()">Pay</button></div>
                         </div>
                     </div>
                 </div>
