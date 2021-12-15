@@ -20,7 +20,7 @@ export default {
     fetchBooks(){
       this.$store.dispatch("fetchBooks")
       .then((resp) =>{
-        this.$store.commit("setBooks", resp.data)
+        this.$store.commit("setBooks", resp.data.books)
       })
       .catch(err =>{
         console.log(err);
