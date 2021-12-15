@@ -2,7 +2,7 @@
   <nav>
     <router-link v-if="!isLogin" to="/login">Login</router-link>
     <br>
-    <router-link to="/my-watch-list">My WatchList</router-link>
+    <router-link to="/my-watch-lists">My WatchList</router-link>
     <br>
     <span role="button" @click="doLogout" v-if="isLogin">Logout</span>
     <br><br>
