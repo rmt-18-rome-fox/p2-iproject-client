@@ -35,17 +35,37 @@
         rounded-xl
         shadow-2xl
         text-center
+        max-h-full
         w-9/12
       "
     >
       <section>
         <h3 class="font-bold text-2xl">Welcome To Foxballer</h3>
-        <p class="text-gray-600 pt-2">Sign in to your account !</p>
+        <p class="text-gray-600 pt-2">Sign up now !</p>
       </section>
 
-      <section class="mt-10">
-        <form class="flex flex-col" @submit.prevent="toLogin">
-          <div class="mb-6 pt-3 rounded bg-indigo-100">
+      <section class="mt-10" @submit.prevent="register">
+        <form class="flex flex-col">
+          <div class="pt-2 rounded">
+            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
+              >Name</label
+            >
+            <input
+              type="text"
+              class="
+                bg-white
+                w-full
+                text-center text-gray-700
+                focus:outline-none
+                border-b-4 border-r-2 border-l-2 border-t-2 border-indigo-100
+                focus:border-blue-400
+                px-3
+                pb-1
+              "
+              v-model="name"
+            />
+          </div>
+          <div class="pt-2 rounded">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
               >Username</label
             >
@@ -59,12 +79,31 @@
                 border-b-4 border-r-2 border-l-2 border-t-2 border-indigo-100
                 focus:border-blue-400
                 px-3
-                pb-3
+                pb-1
               "
-              v-model="formLogin.username"
+              v-model="username"
             />
           </div>
-          <div class="mb-6 pt-3 rounded bg-indigo-100">
+          <div class="pt-2 rounded">
+            <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
+              >Email</label
+            >
+            <input
+              type="email"
+              class="
+                bg-white
+                w-full
+                text-center text-gray-700
+                focus:outline-none
+                border-b-4 border-r-2 border-l-2 border-t-2 border-indigo-100
+                focus:border-blue-400
+                px-3
+                pb-1
+              "
+              v-model="email"
+            />
+          </div>
+          <div class="pt-2 rounded">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
               >Password</label
             >
@@ -78,9 +117,9 @@
                 border-b-4 border-r-2 border-l-2 border-t-2 border-indigo-100
                 focus:border-blue-400
                 px-3
-                pb-3
+                pb-1
               "
-              v-model="formLogin.password"
+              v-model="password"
             />
           </div>
 
@@ -96,26 +135,19 @@
               hover:shadow-xl
               transition
               duration-200
+              mt-5
             "
             type="submit"
           >
-            Sign In
+            Sign Up
           </button>
         </form>
-        <div class="flex grid grid-cols-1 py-3">
-          <p class="text-sm text-black-600 mb-6">Or Sign In with Twitter</p>
-        </div>
-        <div class="flex justify-center py-3">
-          <p class="text-sm text-black-600 mb-6">Don't have an account ?</p>
+        <div class="flex justify-center py-10">
           <router-link
-            to="/register"
-            class="
-              text-sm text-indigo-600
-              hover:text-pink-600 hover:underline
-              mb-6
-            "
+            to="/login"
+            class="text-sm text-indigo-600 hover:text-pink-600 hover:underline"
           >
-            Sign Up Here !</router-link
+            Back To Sign In Page !</router-link
           >
         </div>
       </section>
@@ -124,28 +156,29 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
-      formLogin: {
-        username: "",
-        password: "",
-      },
+      name: "",
+      username: "",
+      email: "",
+      password: "",
     };
   },
   methods: {
-    ...mapActions(["logginIn"]),
-    async toLogin() {
-      await this.logginIn(this.formLogin);
-      if (this.isLogin === true) {
-        this.$router.push("/");
-      }
+    ...mapActions(["registerFans"]),
+    async register() {
+      const newFans = {
+        name: this.name,
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
+      await this.registerFans(newFans);
+      this.$router.push("/login");
     },
-  },
-  computed: {
-    ...mapState(["isLogin"]),
   },
 };
 </script>

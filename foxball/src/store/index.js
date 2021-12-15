@@ -12,7 +12,8 @@ export default new Vuex.Store({
     messages: [],
     status: '',
     standingTables: [],
-    arrNews: []
+    arrNews: [],
+    arrLikes: []
   },
   mutations: {
     LOGIN(state, payload) {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     },
     FETCH_NEWS(state, payload) {
       state.arrNews = payload
+    },
+    FETCH_LIKE(state, payload) {
+      state.arrLikes = payload
     }
   },
   actions: {
@@ -130,6 +134,59 @@ export default new Vuex.Store({
           }
         })
         context.commit('FETCH_NEWS', response.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async fetchLike(context) {
+      try {
+        const response = await axios({
+          url: '/likes',
+          method: 'GET',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        context.commit('FETCH_LIKE', response.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async likedPost(context, payload) {
+      try {
+        const response = await axios({
+          url: `/likes/${payload}`,
+          method: 'POST',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async registerFans(context, payload) {
+      try {
+        await axios({
+          url: '/fans/register',
+          method: 'POST',
+          data: payload
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async removeLike(context, payload) {
+      try {
+        const response = await axios({
+          url: `/likes/${payload}`,
+          method: 'DELETE',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        console.log(response);
       } catch (err) {
         console.log(err);
       }

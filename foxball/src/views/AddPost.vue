@@ -56,7 +56,7 @@
           </div>
           <div class="mb-6 pt-3">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3"
-              >Your Picture</label
+              >Your Picture (max size 5kb)</label
             >
             <input type="file" class="border" @change="onChange" />
           </div>
