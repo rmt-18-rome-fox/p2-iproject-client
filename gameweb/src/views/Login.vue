@@ -69,6 +69,7 @@ export default {
           console.log(data,`AAAAAAAAAAAA`)
           localStorage.setItem("acces_token", data.access_token);
           localStorage.setItem("email", data.payload.email);
+           localStorage.setItem("id", data.payload.id);
           Swal.fire({
             title: "Success Login!",
             text: `Welcome back ${localStorage.email}`,
