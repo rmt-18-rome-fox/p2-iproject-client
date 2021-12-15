@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/books/:bookId',
     name: 'BookDetail',
-    component: () => import('../components')
+    component: () => import('../components/BookDetail.vue')
   },
   {
     path: '/login',
@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/bookmarks',
     name: 'Bookmarks',
-    component: () => import('../components/HelloWorld.vue')
+    component: () => import('../components/Bookmark.vue')
   }
 ]
 
@@ -38,10 +38,10 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.access_token
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = localStorage.access_token
   
-  if (to.name !== 'LoginPage' && !isAuthenticated) next({ name: 'LoginPage' })
-  else next()
-})
+//   if (to.name !== 'LoginPage' && !isAuthenticated) next({ name: 'LoginPage' })
+//   else next()
+// })
 export default router
