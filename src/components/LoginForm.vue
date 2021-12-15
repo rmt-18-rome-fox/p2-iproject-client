@@ -62,6 +62,24 @@ export default {
           localStorage.user_name = data.userData.name;
           localStorage.user_cityId = data.userData.cityId;
           localStorage.user_cityName = data.userData.cityName;
+          localStorage.user_id = data.userData.id;
+          localStorage.user_role = data.userData.role;
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Login success",
+          });
           this.$router.push("/");
         })
         .catch((err) => {

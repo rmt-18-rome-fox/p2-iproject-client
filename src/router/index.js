@@ -26,7 +26,7 @@ const routes = [
       },
       {
         path: "register/:role",
-        name: "RegisterForm",
+        name: "RegisterFormRole",
         component: () =>
           import(
             /* webpackChunkName: "about" */ "../components/RegisterForm.vue"
@@ -77,5 +77,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
+//   else next();
+// });
 
 export default router;

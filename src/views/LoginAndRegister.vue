@@ -30,6 +30,21 @@ import "animate.css";
 import "@lottiefiles/lottie-player";
 export default {
   name: "Login",
+  methods: {
+    fetchCities() {
+      this.$store
+        .dispatch("fetchCities")
+        .then(({ data }) => {
+          this.$store.commit("SUCCESS_FETCH_CITIES", data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
+  created() {
+    this.fetchCities();
+  },
 };
 </script>
 

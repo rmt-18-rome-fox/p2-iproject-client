@@ -89,8 +89,6 @@ export default {
       this.$store
         .dispatch("doRegister", payload)
         .then(({ data }) => {
-          localStorage.user_id = data.id;
-          localStorage.user_name = data.name;
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
