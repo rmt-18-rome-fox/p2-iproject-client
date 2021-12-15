@@ -4,29 +4,67 @@
     <div
       class="container d-flex justify-content-center align-content-center mt-5"
     >
-      <div class="border" style="width: 50%">
+      <div style="width: 50%">
         <div class="row">
           <div class="col-12">
             <h1 class="text-center">Checkout</h1>
 
             <b-img
               center
-              class="rounded"
+              class="rounded my-5"
               :src="book.imageUrl"
               alt="Center image"
               width="250px"
               height="325px"
             ></b-img>
-            {{ book }}
-            <div>
-              <p>User City: {{ userCityName }}</p>
-              <p>Seller City: {{ book.User.cityName }}</p>
-              <button
-                class="btn btn-primary"
-                @click.prevent="shippingCost(book.User.CityId)"
-              >
-                Check shipping cost
-              </button>
+            <div class="row mb-5">
+              <div class="col-12">
+                <b-card no-body>
+                  <b-tabs card>
+                    <b-tab title="Book Detail" active>
+                      <b-card-text>Title: {{ book.title }}</b-card-text>
+                      <b-card-text>Price: {{ book.price }}</b-card-text>
+                      <b-card-text>Author: {{ book.author }}</b-card-text>
+                      <b-card-text>Genre: {{ book.genre }}</b-card-text>
+                      <b-card-text
+                        >Published Year: {{ book.publishedYear }}</b-card-text
+                      >
+                    </b-tab>
+                    <b-tab title="Shipping Detail">
+                      <b-card-text>Origin: {{ userCityName }}</b-card-text>
+                      <b-card-text
+                        >Destination: {{ book.User.cityName }}</b-card-text
+                      >
+                      <b-card-text
+                        >Shipping Cost: {{ shippingCost }}</b-card-text
+                      >
+                      <b-card-text
+                        >Estimated Delivery Time:
+                        {{ estimatedTime }} days</b-card-text
+                      >
+                      <b-card-text>Courier: {{ courier }}</b-card-text>
+                    </b-tab>
+                    <b-tab title="Payment Detail">
+                      <b-card-text>Book's Price: {{ book.price }}</b-card-text>
+                      <b-card-text
+                        >Shipping Cost: {{ shippingCost }}</b-card-text
+                      >
+                      <b-card-text
+                        >Total Price:
+                        {{ book.price + shippingCost }}</b-card-text
+                      >
+                    </b-tab>
+                  </b-tabs>
+                </b-card>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 d-flex justify-content-center mb-5">
+                <b-button variant="outline-success">
+                  <font-awesome-icon :icon="['fas', 'money-check-alt']" />
+                  &nbsp; Continue To Payment
+                </b-button>
+              </div>
             </div>
           </div>
         </div>
@@ -51,13 +89,16 @@ export default {
           console.log(err);
         });
     },
-    shippingCost(sellerCityId) {
+    shipping() {
       const customerCityId = +localStorage.user_cityId;
+      const sellerCityId = this.$store.state.book.User.CityId;
       this.$store
-        .dispatch("shippingCost", { sellerCityId, customerCityId })
+        .dispatch("shipping", {
+          sellerCityId,
+          customerCityId,
+        })
         .then(({ data }) => {
-          console.log("masokk");
-          console.log(data);
+          this.$store.commit("SUCCESS_GET_SHIPPING_DATA", data);
         })
         .catch((err) => {
           console.log(err);
@@ -66,6 +107,7 @@ export default {
   },
   created() {
     this.showDetail();
+    this.shipping();
   },
   computed: {
     book() {
@@ -76,6 +118,15 @@ export default {
     },
     userCityName() {
       return localStorage.user_cityName;
+    },
+    shippingCost() {
+      return this.$store.state.shippingCost;
+    },
+    estimatedTime() {
+      return this.$store.state.estimatedTime;
+    },
+    courier() {
+      return this.$store.state.courier;
     },
   },
 };

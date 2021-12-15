@@ -11,6 +11,10 @@ export default new Vuex.Store({
     books: [],
     book: [],
     carts: [],
+    loadingScreen: false,
+    shippingCost: "",
+    estimatedTime: "",
+    courier: "",
   },
   mutations: {
     SUCCESS_FETCH_CITIES(state, cities) {
@@ -29,6 +33,11 @@ export default new Vuex.Store({
     },
     SUCCESS_FETCH_CART(state, carts) {
       state.carts = carts;
+    },
+    SUCCESS_GET_SHIPPING_DATA(state, { shipping }) {
+      state.shippingCost = shipping.results[0].costs[0].cost[0].value;
+      state.estimatedTime = shipping.results[0].costs[0].cost[0].etd;
+      state.courier = shipping.results[0].name;
     },
   },
   actions: {
@@ -90,7 +99,7 @@ export default new Vuex.Store({
         },
       });
     },
-    shippingCost(context, { sellerCityId, customerCityId }) {
+    shipping(context, { sellerCityId, customerCityId }) {
       console.log(sellerCityId);
       console.log(customerCityId);
       const data = {

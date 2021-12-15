@@ -34,7 +34,11 @@
                 </p>
               </div>
               <div class="buttons">
-                <b-button variant="outline-success" class="mb-3">
+                <b-button
+                  variant="outline-success"
+                  class="mb-3"
+                  @click.prevent="doCheckout(cart.Book.id)"
+                >
                   <font-awesome-icon :icon="['fas', 'shopping-cart']" /> &nbsp;
                   Buy Now
                 </b-button>
@@ -66,6 +70,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    doCheckout(id) {
+      this.$router.push(`/checkout/${id}`);
     },
   },
   created() {
