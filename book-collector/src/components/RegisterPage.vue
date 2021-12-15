@@ -1,5 +1,5 @@
 <template>
-  <div class="registerForm">
+  <div class="container mt-5">
     <b-form @submit.prevent="doRegister">
       <b-form-group
         id="input-group-1"
