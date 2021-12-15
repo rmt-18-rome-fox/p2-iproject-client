@@ -9,7 +9,8 @@ const baseUrl = 'http://localhost:3000'
 export default new Vuex.Store({
   state: {
     recipes: [],
-    recipe: []
+    recipe: [],
+    bookmarks: []
   },
   mutations: {
     GET_RECIPES (state, recipes) {
@@ -17,7 +18,10 @@ export default new Vuex.Store({
     },
     GET_RECIPE_DETAIL (state, recipe){
       state.recipe = recipe
-    }
+    },
+    GET_BOOKMARKS (state, bookmarks) {
+      state.bookmarks = bookmarks
+    },
   },
   actions: {
     async login(data, loginForm) {
@@ -73,15 +77,14 @@ export default new Vuex.Store({
         })
       }
     },
-    async fetchRecipeDetail ({commit,id}) {
-      console.log("masuk store");
+    async fetchRecipeDetail ({commit},id) {
+      console.log(id);
       try {
-        const data = await axios ({
+        const recipe = await axios ({
           url: baseUrl + '/recipes/detail/'+ id,
           method: "get",
         })
-        console.log(data,">>>>>>>>>>>>>");
-        commit('GET_RECIPES', data.data)
+        commit('GET_RECIPE_DETAIL', recipe.data)
       } catch ({response}) {
         console.log(response);
         const message = response.data.message
@@ -109,7 +112,43 @@ export default new Vuex.Store({
           text: message
         })
       }
-    }
+    },
+    alertBookmark ({commit}, message) {
+      const Toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        iconColor: 'green',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'success',
+        title: message
+      })
+    },
+    async addToBookmark ({commit, dispatch}, {id, title}) {
+      try {
+        const response = await axios ({
+          url: baseUrl + `/public/favourites/${id}`,
+          headers : {access_token: localStorage.access_token},
+          method: "post"
+        })
+        await dispatch("fetchFavourite")
+        dispatch('alertBookmark', `${title} successfuly bookmarked`)
+      } catch ({response}) {
+        const message = response.data.message
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: message
+        })
+      }
+    },
   },
   modules: {
   }

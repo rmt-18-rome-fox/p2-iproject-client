@@ -5,11 +5,11 @@
   <div class="card-body">
     <h5 class="card-title">{{recipe.title}}</h5>
     <p class="card-text">Ready in minutes: {{recipe.readyInMinutes}}</p>
-    <p class="card-text">Cuisines: {{recipe.cuisines[0]}}</p>
-    <p class="card-text">Summary: {{recipe.summary}}</p>
-    <p class="card-text">Cuisines: {{recipe.dishTypes[0]}}</p>
-    <p class="card-text">Cuisines: {{recipe.ingredients}}</p>
-    <p class="card-text">Cuisines: {{recipe.steps}}</p>
+    <p class="card-text">Cuisines: {{recipe.cuisines}}</p>
+    <!-- <pre class="card-text">Summary: {{recipe.summary}}</pre> -->
+    <p class="card-text">Dish Type: {{recipe.dishTypes.join(",")}}</p>
+    <p class="card-text">Ingredients: {{recipe.ingredients.join(",\n")}}</p>
+    <p class="card-text">Steps: {{recipe.steps.join("")}}</p>
   </div>
 </div>
 
@@ -26,8 +26,8 @@ name: "RecipeDetail",
     },
   },
   created() {
-    console.log("masuk created");
-    this.$store.dispatch("fetchRecipeDetail")
+    const id = this.$route.params.id
+    this.$store.dispatch("fetchRecipeDetail",id)
   }
 }
 </script>
