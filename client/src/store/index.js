@@ -190,10 +190,9 @@ export default new Vuex.Store({
     async refreshStatus(context, payload) {
 
       try {
-
         const access_token = localStorage.getItem(`access_token`)
 
-        const response = await axios.put(`${serverUrl}/status/${payload}`, {} , { headers: { access_token }})
+        const response = await axios.patch(`${serverUrl}/status/${payload}`, {} , { headers: { access_token }})
 
         context.commit("REFRESH_STATUS", response.data)
 
