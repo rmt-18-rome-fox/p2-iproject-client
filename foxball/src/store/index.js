@@ -11,6 +11,7 @@ export default new Vuex.Store({
     currentUser: '',
     messages: [],
     status: '',
+    standingTables: []
   },
   mutations: {
     LOGIN(state, payload) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     SOCKET_USERSTATUS(state, payload) {
       state.status = payload.status
+    },
+    FETCH_TABLE(state, payload) {
+      state.standingTables = payload
     }
   },
   actions: {
@@ -79,6 +83,38 @@ export default new Vuex.Store({
     },
     socket_gotMessage(context, payload) {
       context.commit('SOCKET_GOTMESSAGE', payload)
+    },
+    async fetchTable(context) {
+      try {
+        const response = await axios({
+          url: '/standing',
+          method: 'GET',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        console.log(response);
+        context.commit('FETCH_TABLE', response.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addPost(context, payload) {
+      try {
+        let form = new FormData();
+        form.append("caption", payload.caption);
+        form.append("imgUrl", payload.imgUrl);
+        await axios({
+          url: '/post',
+          method: 'POST',
+          data: form,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
     }
   },
   modules: {
