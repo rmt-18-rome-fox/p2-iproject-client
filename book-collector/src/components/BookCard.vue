@@ -20,8 +20,10 @@
     <b-card-text>
     {{book.subjects}}
     </b-card-text>
-
-    <b-button @click.prevent="" variant="primary">Book detail</b-button><br><br>
+    
+    <b-button variant="primary">
+        <router-link :to="{path: `/books/${book.id}`}">Book detail</router-link>
+    </b-button><br><br>
     <b-button @click.prevent="addBookmark" variant="primary">Add to bookmark</b-button>
 </b-card>
 </div>

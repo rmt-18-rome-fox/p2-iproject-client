@@ -9,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     books: [],
-    bookmarks: []
+    bookmarks: [],
+    book: []
   },
   mutations: {
     setBooks(state, payload){
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setBookmarks(state, payload){
       state.bookmarks = payload
+    },
+    setBookDetail(state, payload){
+      state.book = payload
     }
   },
   actions: {
@@ -45,7 +49,11 @@ export default new Vuex.Store({
       })
     },
     bookDetail(context, payload){
-      return axios.get(`${baseUrl}/books/${payload}`)
+      return axios.get(`${baseUrl}/books/${payload}`, {
+        headers:{
+          access_token: localStorage.access_token
+        }
+      })
     },
     addBookmark(context, payload){
       console.log(payload,"masuk sini");
