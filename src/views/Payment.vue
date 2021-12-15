@@ -17,9 +17,9 @@ export default {
             access_token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRpYWtoYXJpc21hQGdtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE2Mzk1NDk3NjV9.kfEYaJM8N9G7KqGUSsdKwk4iZun83LeKjuqRPX7--os'
           }
         })
-        console.log(result.data);
+        
         const amount = result.data.Organization.price
-        const data = [{
+        const stripe = [{
           price_data: {
             currency: 'idr',
             product_data: {
@@ -30,6 +30,12 @@ export default {
           },
           quantity: 1
         }]
+        const idPayment = 1
+
+        const data = {
+          idPayment,
+          stripe
+        }
 
         this.postStripe(data) 
       } catch (error) {
