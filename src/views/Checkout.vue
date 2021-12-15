@@ -152,8 +152,13 @@ export default {
             })
             .then(({ data }) => {
               this.$router.push("/transaction");
-              console.log(data);
               return this.$store.dispatch("patchTransaction", data.id);
+            })
+            .then((res) => {
+              this.$store.dispatch(
+                "deleteCartIfExist",
+                this.$store.state.book.id
+              );
             })
             .catch((err) => {
               Swal.fire({
@@ -163,7 +168,6 @@ export default {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              console.log(err);
             });
         }
       });

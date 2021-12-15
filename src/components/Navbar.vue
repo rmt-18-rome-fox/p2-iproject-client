@@ -72,7 +72,7 @@
                 </div>
               </b-dropdown-item>
               <b-dropdown-divider></b-dropdown-divider>
-              <b-dropdown-item>
+              <b-dropdown-item id="logoutSection">
                 <div
                   class="d-flex justify-content-between align-items-center"
                   @click.prevent="doLogout"
@@ -90,12 +90,29 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   name: "Navbar",
   methods: {
     doLogout() {
       localStorage.clear();
       this.$router.push("/auth/login");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: "Logout success",
+      });
     },
     toCart() {
       this.$router.push("/cart");
@@ -127,5 +144,9 @@ a.router-link-exact-active {
 
 a.router-link {
   text-decoration: none;
+}
+
+#logoutSection:hover {
+  color: red;
 }
 </style>
