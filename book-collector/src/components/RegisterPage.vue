@@ -36,6 +36,7 @@
 
       <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
+    <router-link to="/login">Already have an account?</router-link>
   </div>
 </template>
 
@@ -56,6 +57,7 @@ export default {
       this.$store.dispatch("goRegister", this.registerForm)
       .then(resp =>{
         console.log(resp);
+        this.$router.push("/login")
       })
       .catch(err =>{
         console.log(err);
