@@ -7,7 +7,6 @@
     img-top
     tag="article"
     style="max-width: 20rem;"
-    class="p-2 bd-highlight"
 >
     <b-card-text>
     Author's name: {{book.authors[0].name}}
