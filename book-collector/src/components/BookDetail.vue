@@ -1,6 +1,5 @@
 <template>
-<div>
-  <pre>{{book}}</pre>
+<div class="container mt-5">
   <b-card no-body class="overflow-hidden" style="max-width: 1240px;">
     <b-row no-gutters>
       <b-col md="6">
@@ -8,10 +7,11 @@
       </b-col>
       <b-col md="6">
         <b-card-body :title="book.title">
-          <b-card-text>
-            This is a wider card with supporting text as a natural lead-in to additional content.
-            This content is a little bit longer.
-          </b-card-text>
+          <b-card-sub-title class="mb-2">by {{book.authors[0].name}}</b-card-sub-title>
+          <p>Subjects :</p>
+          <b-list-group v-for="subject in book.subjects" :key="subject">
+            <b-list-group-item>{{subject}}</b-list-group-item>
+          </b-list-group>
         </b-card-body>
       </b-col>
     </b-row>
