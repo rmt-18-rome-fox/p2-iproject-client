@@ -1,7 +1,7 @@
 <template>
-  <div class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd">
+  <div class="navbar navbar-expand-lg bg-light">
       <h4 style="margin: 10px;">Kanban Board</h4>
-      <a style="margin: 10px;" href="" @click.prevent="logout">Logout</a>
+      <a style="margin: 10px" href="" @click.prevent="logout">Logout</a>
   </div>
 </template>
 
