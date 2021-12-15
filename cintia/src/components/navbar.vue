@@ -7,10 +7,16 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#" v-if="this.$store.state.user == true"
+          <b-nav-item
+            href="#"
+            v-if="this.$store.state.user == true"
+            @click="toMovies"
             >Movies</b-nav-item
           >
-          <b-nav-item href="#" v-if="this.$store.state.user == true"
+          <b-nav-item
+            href="#"
+            v-if="this.$store.state.user == true"
+            @click="toBookings"
             >Bookings</b-nav-item
           >
         </b-navbar-nav>
@@ -61,6 +67,12 @@ export default {
     logout() {
       this.$store.dispatch("aLogout");
       this.$router.push("/");
+    },
+    toBookings() {
+      this.$router.push("/bookings");
+    },
+    toMovies() {
+      this.$router.push("/movies");
     },
   },
 };
