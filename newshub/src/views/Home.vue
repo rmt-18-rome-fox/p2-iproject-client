@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+      <homecard v-for="article in publishedArticles" :key="article.id" v-bind:article="article"></homecard>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Homecard from '../components/Homecard.vue'
+import {mapActions, mapState} from 'vuex';
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+    name: "Home",
+    components: {Homecard},
+    computed: {
+        ...mapState(["publishedArticles"])
+    },
+    methods: {
+        ...mapActions(["getMainArticles"]),
+    },
+    created() {
+        this.getMainArticles()
+    }
 }
 </script>
+
+<style>
+
+</style>
