@@ -70,6 +70,28 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Transaction.vue"),
   },
+  {
+    path: "/sell",
+    name: "SellPage",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/SellPage.vue"),
+    children: [
+      {
+        path: "addBook",
+        name: "AddBookForm",
+        component: () =>
+          import(
+            /* webpackChunkName: "about" */ "../components/AddBookForm.vue"
+          ),
+      },
+      {
+        path: "/",
+        name: "SoldBooks",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../components/SoldBooks.vue"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

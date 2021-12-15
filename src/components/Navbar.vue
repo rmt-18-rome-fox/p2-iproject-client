@@ -74,7 +74,7 @@
               <b-dropdown-item v-if="role === 'seller'">
                 <div
                   class="d-flex justify-content-between align-items-center"
-                  @click.prevent="toTransaction"
+                  @click.prevent="toSellPage"
                 >
                   <font-awesome-icon :icon="['fas', 'store']" />
                   &nbsp; Sell Book
@@ -128,6 +128,9 @@ export default {
     },
     toTransaction() {
       this.$router.push("/transaction");
+    },
+    toSellPage() {
+      this.$router.push("/sell");
     },
   },
   computed: {
