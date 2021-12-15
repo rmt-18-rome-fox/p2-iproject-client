@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <router-link to="/auth/register">Back</router-link>
-    <h1>Register</h1>
-    <form class="row" @submit.prevent="doRegister">
-      <div class="col-6">
-        <label for="name">Name:</label>
+  <div class="container">
+    <div class="text-center my-3">
+      <router-link to="/auth/register">Back</router-link>
+    </div>
+    <h1 class="text-center">Register</h1>
+    <form class="row mt-4" @submit.prevent="doRegister">
+      <div class="col-6 mb-3">
+        <label for="name">Name</label>
         <input
           type="text"
           class="form-control"
@@ -28,7 +30,7 @@
         />
       </div>
 
-      <div class="col-6">
+      <div class="col-6 mb-5">
         <label for="city">Password</label>
         <input
           type="password"
@@ -37,8 +39,14 @@
           v-model="formRegister.password"
         />
       </div>
-      <div class="col-12">
-        <button type="submit" class="btn btn-success">Register</button>
+      <div class="col-12 text-center">
+        <button
+          type="submit"
+          class="btn btn-dark"
+          style="background-color: #463e87; letter-spacing: 1px"
+        >
+          Register
+        </button>
       </div>
     </form>
   </div>
@@ -98,4 +106,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

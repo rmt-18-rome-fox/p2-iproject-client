@@ -1,27 +1,35 @@
 <template>
-  <div class="container">
-    <h1>Login</h1>
-    <div class="row my-5">
+  <div class="container text-center">
+    <h1 class="mt-4">Login</h1>
+    <div class="row my-4">
       <form style="width: 70%" class="mx-auto" @submit.prevent="doLogin">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
+            style="text-align: center !important"
             type="email"
             class="form-control"
             id="email"
             v-model="formData.email"
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="password" class="form-label">Password</label>
           <input
+            style="text-align: center !important"
             type="password"
             class="form-control"
             id="password"
             v-model="formData.password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button
+          type="submit"
+          class="btn btn-dark"
+          style="background-color: #463e87"
+        >
+          Login
+        </button>
       </form>
     </div>
     <div class="row d-flex justify-content-center">
@@ -66,5 +74,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

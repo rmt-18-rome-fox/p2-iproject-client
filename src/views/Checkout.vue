@@ -60,9 +60,12 @@
             </div>
             <div class="row">
               <div class="col-12 d-flex justify-content-center mb-5">
-                <b-button variant="outline-success">
-                  <font-awesome-icon :icon="['fas', 'money-check-alt']" />
-                  &nbsp; Continue To Payment
+                <b-button
+                  style="background-color: #463e87"
+                  @click.prevent="confirmPayment"
+                >
+                  <font-awesome-icon :icon="['fas', 'dot-circle']" />
+                  &nbsp; Pay With OVO
                 </b-button>
               </div>
             </div>
@@ -74,6 +77,8 @@
 </template>
 
 <script>
+import "animate.css";
+import Swal from "sweetalert2";
 import Navbar from "../components/Navbar.vue";
 export default {
   name: "Checkout",
@@ -103,6 +108,65 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    confirmPayment() {
+      Swal.fire({
+        title: "Confirm Payment",
+        text: `Total Price: 
+        ${new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR",
+        }).format(
+          this.$store.state.book.price + this.$store.state.shippingCost
+        )}`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#463e87",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Pay Now!",
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const cost =
+            this.$store.state.book.price + this.$store.state.shippingCost;
+          this.$store
+            .dispatch("confirmPayment", cost)
+            .then(({ data }) => {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Payment confirmed",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              return this.$store.dispatch("createTransaction", {
+                cost,
+                bookId: this.$route.params.bookId,
+              });
+            })
+            .then(({ data }) => {
+              this.$router.push("/transaction");
+              console.log(data);
+              return this.$store.dispatch("patchTransaction", data.id);
+            })
+            .catch((err) => {
+              Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Payment failed",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              console.log(err);
+            });
+        }
+      });
     },
   },
   created() {

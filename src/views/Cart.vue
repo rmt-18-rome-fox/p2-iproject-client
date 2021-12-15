@@ -7,7 +7,11 @@
           <h1 class="text-center">Cart</h1>
         </div>
         <div class="row mx-auto" style="width: 80%">
-          <div class="col-6 d-flex border" v-for="cart in carts" :key="cart.id">
+          <div
+            class="col-6 d-flex shadow-lg p-3 rounded"
+            v-for="cart in carts"
+            :key="cart.id"
+          >
             <div style="width: 50%">
               <b-img
                 width="200px"
