@@ -1,11 +1,11 @@
 <template>
   <!-- NavBar -->
   <div>
-      <div class="flex items-center justify-between h-15 fixed z-10 w-full px-5">
+      <div class="nav-div">
       
       <div class="flex items-center"><!-- LOGO --->
-        <img class="" src="https://img.icons8.com/external-justicon-lineal-justicon/64/000000/external-cloud-weather-justicon-lineal-justicon-2.png"/>
-        <h3 class="pl-5 text-gray-700 sm:text-sm md:text-xl font-extrabold">
+        <img class="h-15 w-20" src="https://img.icons8.com/external-justicon-lineal-justicon/64/000000/external-cloud-weather-justicon-lineal-justicon-2.png"/>
+        <h3 class="pl-5 text-gray-700 sm:text-xl md:text-4xl font-extrabold">
           Skypall
         </h3>
       </div>
@@ -13,8 +13,8 @@
       <div class="hidden md:block">
         <div class="flex items-center">
 
-          <router-link to="/" class="text-gray-700 text-xl font-extrabold btn mr-5 px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-50 hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50 transition ease-out duration-300"
-          >Menu</router-link>
+          <button class="text-white text-2xl font-extrabold btn mr-5 px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-50 hover:shadow-inner transform hover:scale-110 hover:bg-opacity-50 transition ease-out duration-300"
+          >Menu</button>
 
           <div class="ml-3 relative dropdown"
           
