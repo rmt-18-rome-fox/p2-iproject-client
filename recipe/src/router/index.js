@@ -5,7 +5,9 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Recipe from '../views/Recipe.vue'
 import RecipeDetail from '../components/RecipeDetail.vue'
-
+import Favourites from '../views/Favourites.vue'
+import FilteredRecipes from '../views/FilteredRecipes.vue'
+import Subscribe from '../views/Subscribe.vue'
 
 Vue.use(VueRouter)
 
@@ -31,10 +33,25 @@ const routes = [
         component: Recipe,
       },
       {
+        path: '/favourites',
+        name: 'Favourites',
+        component: Favourites,
+      },
+      {
+        path: '/search',
+        name: 'FilteredRecipes',
+        component: FilteredRecipes,
+      },
+      {
         path: '/recipe/:id',
         name: 'RecipeDetail',
         component: RecipeDetail
       },
+      {
+        path: '/subscribe',
+        name: 'Subscribe',
+        component: Subscribe
+      }
     ]
   },
   {

@@ -14,12 +14,6 @@
                             <input type="password" name="password" class="form-control" placeholder="Password" v-model="loginForm.password">
                         </div>
                         <div class="col-12">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                <label class="form-check-label" for="rememberMe"> Remember me</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
                             <button type="submit" class="btn btn-dark float-end">Login</button>
                         </div>
                     </form>

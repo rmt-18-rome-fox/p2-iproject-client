@@ -32,6 +32,7 @@ export default new Vuex.Store({
           data: loginForm
         })
         localStorage.setItem ("access_token", response.data.access_token)
+        localStorage.status = response.data.status
       } catch({response}) {
         const message = response.data.message
         swal.fire({
@@ -49,7 +50,6 @@ export default new Vuex.Store({
           data: registerForm
         })
       } catch ({response}) {
-        console.log(response);
         const message = response.data.message
         swal.fire({
           icon: 'error',
@@ -58,17 +58,16 @@ export default new Vuex.Store({
         })
       }
     },
-    async fetchRecipes ({commit}) {
-      console.log("masuk store");
+    async fetchRecipes ({commit}, query) {
       try {
+        const url = !query ? baseUrl + '/recipes' : baseUrl + `/recipes?searchTerm=${query}`
         const data = await axios ({
-          url: baseUrl + '/recipes',
+          url,
           method: "get",
         })
-        console.log(data,">>>>>>>>>>>>>");
+        console.log(data, "hasil fetch");
         commit('GET_RECIPES', data.data)
       } catch ({response}) {
-        console.log(response);
         const message = response.data.message
         swal.fire({
           icon: 'error',
@@ -78,15 +77,14 @@ export default new Vuex.Store({
       }
     },
     async fetchRecipeDetail ({commit},id) {
-      console.log(id);
       try {
         const recipe = await axios ({
           url: baseUrl + '/recipes/detail/'+ id,
           method: "get",
         })
+        console.log(recipe);
         commit('GET_RECIPE_DETAIL', recipe.data)
       } catch ({response}) {
-        console.log(response);
         const message = response.data.message
         swal.fire({
           icon: 'error',
@@ -97,14 +95,16 @@ export default new Vuex.Store({
     },
     async searchRecipes ({commit} , query) {
       try {
+        console.log("masuk", query);
         const queryUrl = []
         const recipes = await axios({
           url: baseUrl +`/recipes?searchTerm=${query}`,
           method: "get"
         })
-        console.log(recipes);
-        commit('GET_RECIPES', recipes.data.movies)
+        console.log(recipes," >>>>>>>>>>>>>>>>>>>.dari store");
+        commit('GET_RECIPES', recipes.data.recipes)
       } catch ({response}) {
+        console.log(response);
         const message = response.data.message
         swal.fire({
           icon: 'error',
@@ -122,8 +122,8 @@ export default new Vuex.Store({
         timer: 3000,
         timerProgressBar: true,
         didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', swal.stopTimer)
+        toast.addEventListener('mouseleave', swal.resumeTimer)
         }
       })
       Toast.fire({
@@ -134,14 +134,15 @@ export default new Vuex.Store({
     async addToBookmark ({commit, dispatch}, {id, title}) {
       try {
         const response = await axios ({
-          url: baseUrl + `/public/favourites/${id}`,
+          url: baseUrl + `/users/favourites/${id}`,
           headers : {access_token: localStorage.access_token},
           method: "post"
         })
-        await dispatch("fetchFavourite")
+        await dispatch("fetchRecipes")
         dispatch('alertBookmark', `${title} successfuly bookmarked`)
       } catch ({response}) {
-        const message = response.data.message
+        console.log(response,"//////////////////");
+        const message = response.data
         swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -149,6 +150,60 @@ export default new Vuex.Store({
         })
       }
     },
+    async fetchFavourite ({commit}) {
+      try {
+        const response = await axios ({
+          url: baseUrl + "/users/favourites",
+          method: "get",
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        commit('GET_BOOKMARKS', response.data)
+      } catch ({response}) {
+        const message = response.data.message
+        swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
+      })
+      }
+    },
+    async filter({commit} , filter) {
+      try {
+        console.log(filter);
+        const {searchTerm} = filter
+        const filterUrl= `/recipes?searchTerm=${searchTerm}`
+        
+        const response = await axios ({
+          method: 'get',
+          url:  baseUrl + `${filterUrl}`
+        })
+        commit('GET_RECIPES', response.data)
+      } catch ({response}) {
+        const {message} = response.data
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: message
+        })
+      }
+    },
+    async subscribe ({commit}) {
+      try{
+        const response = await axios ({
+          method: 'get',
+          url:  baseUrl + '/users/subscribe',
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        window.open(response.data.invoiceUrl, '_blank')
+
+      } catch (err) {
+
+      }
+    }
   },
   modules: {
   }

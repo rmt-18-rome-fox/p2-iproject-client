@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </form>
-                <p class="text-center mt-3 text-secondary">If you have account, Please <a href="#">Login Now</a></p>
+                <p class="text-center mt-3 text-secondary">If you have account, Please <router-link to="/login">Login Now</router-link></p>
             </div>
         </div>
     </div>

@@ -2,7 +2,6 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,10 +11,12 @@
         <router-link  class="nav-link text-black" v-if="isLoggedIn === false" to="/register"  tabindex="-1" aria-disabled="true" > Register </router-link>
         <router-link  class="nav-link text-black" v-if="isLoggedIn === true" to="/favourites" tabindex="-1" aria-disabled="true"> Favourite </router-link>
         <router-link  class="nav-link text-black" v-if="isLoggedIn === false" to="/login"  tabindex="-1" aria-disabled="true" > Login </router-link>
+        <router-link  class="nav-link text-black" v-if="isLoggedIn === true" to="/subscribe" tabindex="-1" aria-disabled="true"> Subscribe </router-link>
+        
         <a class="nav-link text-black"  tabindex="-1" v-if="isLoggedIn === true" aria-disabled="true"  @click="logout">Logout</a>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" @submit.prevent="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" v-model="searchTerm">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
     </div>
@@ -26,17 +27,20 @@
 
 <script>
 export default {
+
 name: "Navbar",
 data () {
   return {
-      isLoggedIn: !!localStorage.access_token
+      isLoggedIn: !!localStorage.access_token,
+      searchTerm:""
     }
 },
   methods : {
     logout () {
       localStorage.clear()
       this.$router.push('/login')
-    }
+    },
+
   }
 }
 </script>
