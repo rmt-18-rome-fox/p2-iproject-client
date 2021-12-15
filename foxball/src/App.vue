@@ -13,12 +13,26 @@ export default {
   components: {
     Sidebar,
   },
+  // sockets: {
+  //   connect() {
+  //     console.log("socket connected", this.$socket);
+  //   },
+  //   customEventServer(payload) {
+  //     console.log("customEventServer", payload);
+  //   },
+  //   disconnect() {
+  //     console.log("socket disconnected", this.$socket);
+  //   },
+  // },
   methods: {
     ...mapMutations({
       isLoggedIn: "LOGIN",
     }),
   },
   created() {
+    // this.$socket.client.emit("customEventClient", {
+    //   message: "Custom from client",
+    // });
     if (localStorage.getItem("access_token")) {
       this.isLoggedIn(true);
     }

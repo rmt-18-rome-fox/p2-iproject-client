@@ -42,7 +42,16 @@ export default new Vuex.Store({
       } catch (err) {
         console.log(err);
       }
-    }
+    },
+    socket_connect() {
+      console.log('connected', this._vm.$socket);
+    },
+    socket_disconnect() {
+      console.log('disconnected', this._vm.$socket);
+    },
+    socket_customEventServer(context, payload) {
+      console.log('customEventServer', payload);
+    },
   },
   modules: {
   }
