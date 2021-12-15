@@ -4,11 +4,35 @@
       class="flex flex-col w-80 shadow-lg bg-white rounded-3xl overflow-hidden"
     >
       <div class="flex items-center justify-center h-20 shadow-md">
-        <h1 class="text-3xl font-semibold uppercase text-indigo-500">
-          FOXBALLER
-        </h1>
+        <h1 class="text-3xl font-bold uppercase text-indigo-500">FOXBALLER</h1>
       </div>
-      <ul class="flex flex-col space-y-12">
+      <ul class="flex flex-col space-y-6">
+        <li>
+          <span class="flex flex-row items-center duration-200 text-Blue-500">
+            <span
+              class="inline-flex items-center justify-center h-12 w-12 text-lg"
+              ><i class="bx bx-home"></i
+            ></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-8 w-8 pr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span class="text-xl text-blue-500 font-medium"
+              >Hallo, @{{ username }}</span
+            >
+          </span>
+        </li>
+
         <li>
           <router-link
             to="/"
@@ -51,6 +75,50 @@
               />
             </svg>
             <span class="text-xl font-medium">Home</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link
+            to="/likes"
+            class="
+              flex flex-row
+              items-center
+              h-12
+              transform
+              hover:translate-x-2
+              transition-transform
+              ease-in
+              duration-200
+              text-gray-500
+              hover:text-gray-800
+            "
+          >
+            <span
+              class="
+                inline-flex
+                items-center
+                justify-center
+                h-12
+                w-12
+                text-lg text-gray-400
+              "
+              ><i class="bx bx-home"></i
+            ></span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-10 w-10 pr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+              />
+            </svg>
+            <span class="text-xl font-medium">iLikes</span>
           </router-link>
         </li>
         <li>
@@ -227,15 +295,31 @@
         </li>
       </ul>
       <div class="flex items-center justify-center h-20 shadow-md">
-        <a class="text-lg text-indigo-500 cursor-pointer">Profile</a>
+        <a class="cursor-pointer" @click="signout">Sign Out</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   name: "Sidebar",
+  data() {
+    return {
+      username: localStorage.getItem("username"),
+    };
+  },
+  methods: {
+    ...mapMutations({
+      loginMutations: "LOGIN",
+    }),
+    signout() {
+      localStorage.clear();
+      this.$router.push("/login");
+      this.loginMutations = false;
+    },
+  },
 };
 </script>
 

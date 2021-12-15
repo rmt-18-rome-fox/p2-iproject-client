@@ -6,6 +6,8 @@ import AddPost from '../views/AddPost.vue'
 import Standing from '../views/Standing.vue'
 import Chat from '../views/Chat.vue'
 import News from '../views/News.vue'
+import Likes from '../views/Likes.vue'
+import Register from '../views/Register.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +50,16 @@ const routes = [
     name: 'News',
     component: News
   },
+  {
+    path: '/likes',
+    name: 'Likes',
+    component: Likes
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
 ]
 
 const router = new VueRouter({
@@ -58,8 +70,20 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('access_token')
-  if(!token && to.name !== 'Login') {
+  if(!token && to.name === 'Home') {
     next({path: '/login'})
+  } else if(!token && to.name === 'AddPost') {
+    next({path: '/login'})
+  } else if(!token && to.name === 'Standing') {
+    next({path: '/login'})
+  } else if(!token && to.name === 'Chat') {
+    next({path: '/login'})
+  } else if(!token && to.name === 'News') {
+    next({path: '/login'})
+  } else if(!token && to.name === 'Likes') {
+    next({path: '/login'})
+  } else if(token && to.name === 'Register') {
+    next({path: '/'})
   } else if(token && to.name === 'Login') {
     next({path: '/'})
   } else {

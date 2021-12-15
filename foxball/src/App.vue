@@ -20,9 +20,6 @@ export default {
     ...mapActions(["customEventServer"]),
   },
   created() {
-    this.customEventServer({
-      msg: "From Client",
-    });
     if (localStorage.getItem("access_token")) {
       this.isLoggedIn(true);
     }

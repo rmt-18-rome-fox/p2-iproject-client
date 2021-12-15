@@ -27,7 +27,7 @@
           </p>
         </div>
         <div class="flex flex-col-reverse mb-1 mr-4 group cursor-pointer">
-          <a href="" class="flex"
+          <a @click.prevent="likePost(post.id)" class="flex"
             ><svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-10 w-10 opacity-30 hover:opacity-100 hover:text-pink-700"
@@ -51,6 +51,15 @@
 export default {
   name: "CardPost",
   props: ["post"],
+  methods: {
+    async likePost(payload) {
+      try {
+        await this.$store.dispatch("likedPost", payload);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
 
