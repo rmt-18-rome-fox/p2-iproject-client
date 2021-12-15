@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
-const baseUrl = `http://localhost:3000`;
+const baseUrl = `https://coffpow-dev.herokuapp.com`;
 
 Vue.use(Vuex);
 
@@ -166,7 +166,7 @@ export default new Vuex.Store({
     // ===================================================== ### EDIT PRODUCT ### =====================================================
     editProduct: function (context, payload) {
       return new Promise((resolve, reject) => {
-        console.log(payload);
+        // console.log(payload);
         axios({
           method: 'PUT',
           url: `${baseUrl}/admin/coffeepowder/${payload.id}`,
@@ -241,7 +241,7 @@ export default new Vuex.Store({
           },
         })
           .then(({ data }) => {
-            console.log(data.result.token);
+            // console.log(data.result.token);
             window.snap.pay(data.result.token);
             // commit('SET_CART_ORDERDETAIL', data);
             // router.push('/');
