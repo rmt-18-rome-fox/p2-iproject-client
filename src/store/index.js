@@ -86,15 +86,16 @@ export default new Vuex.Store({
     },
     getWeather (context) {
       console.log(`api Weather, onStore`)
-      let baseURL = `https://api.weatherbit.io/v2.0/current?lat=${localStorage.lat}&lon=${localStorage.lng}&key=59ec7c2558ec45389c94d725310cc41e&include=minutely`
+      let baseURL = `https://api.weatherbit.io/v2.0/current?lat=${localStorage.lat}&lon=${localStorage.lng}&key=66ca5f5a42ae4e19bb17a9d47dc0efc4&include=minutely`
       axios({
         method: "GET",
         url: baseURL,
         
       })
       .then (({data}) => {
-        context.commit('SET_WEATHER', data.data[0])
+        console.log(`weather onStore`)
         console.log("ini weather", data.data[0]);
+        context.commit('SET_WEATHER', data.data[0])
       })
       .catch ((err) => {
         console.log(err.response.data);
