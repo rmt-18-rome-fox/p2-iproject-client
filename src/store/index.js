@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     isLogin: false,
     topics: [],
+    quotes: "",
   },
   mutations: {
     SET_ISLOGIN(state, payload) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     SET_TOPICS (state, payload) {
       state.topics = payload
+    },
+    SET_QUOTES (state, payload) {
+      state.quotes = payload
     }
   },
   actions: {
@@ -57,7 +61,25 @@ export default new Vuex.Store({
       }).catch((err) => {
         console.log(err.response.data.message)
       });
-    }
+    },
+    getQuotes (context) {
+      console.log(`getQuotes onStore`)
+      // const tweets = context.state.tweets
+      axios({
+        method: "GET",
+        url: `/quotes`,
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+      .then (({data}) => {
+        context.commit('SET_QUOTES', data)
+        console.log(data, `getQuotes onStore`);
+      })
+      .catch ((err) => {
+        console.log(err.response.data);
+      })
+    },
   },
   
   modules: {

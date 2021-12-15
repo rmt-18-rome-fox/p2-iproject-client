@@ -12,7 +12,7 @@
     </div>
 
     <div class="post-bottom">
-      <div class="action">
+      <div @click.prevent="postQuote" class="action">
         <i class="fa fa-quote-left"></i>
         <span> Random Quote</span>
       </div>
@@ -71,7 +71,15 @@ export default {
       });
       recognition.start();
     },
+    postQuote () {
+      console.log(`hitten`)
+      this.topic = this.quotes
+      this.$store.dispatch("getQuotes")
+    }
   },
+  created () {
+    this.$store.dispatch("getQuotes")
+  }
 };
 </script>
 
