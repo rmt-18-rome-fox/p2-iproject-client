@@ -73,7 +73,3 @@ export default {
 };
 </script>
 
-// cari angka maksimal dari ingredient dan measure, coba akses satu2 objeknya, jadikan array of object baru v-for di templatenya
-
-// edamam
-// siapkan keyword yang agak umum dan searching berdasarkan keyword yang disediakan dan sembunyikan keywordnya

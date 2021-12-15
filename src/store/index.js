@@ -1,14 +1,18 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import VueAuthenticate from 'vue-authenticate'
 import axios from "axios"
 
 Vue.use(Vuex)
+Vue.use(VueAuthenticate), {
+  baseUrl: 'http://localhost:3000'
+}
 
 export default new Vuex.Store({
 	state: {
 		recipes: [],
 		apiUrl: "https://api.edamam.com/search",
-		ingredients: [],
+		isLoggedIn: false,
 	},
 	mutations: {
 		SET_RECIPES(state, payload) {
@@ -36,6 +40,13 @@ export default new Vuex.Store({
 				commit("SET_RECIPES", [])
 			}
 		},
+    // async doLogin({commit}) {
+    //   try {
+    //     let response = await axios.post()
+    //   } catch (err) {
+        
+    //   }
+    // }
 	},
 	modules: {},
 })
