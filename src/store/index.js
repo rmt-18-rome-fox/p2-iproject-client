@@ -22,6 +22,13 @@ export default new Vuex.Store({
         data: payload,
       });
     },
+    doRegister ( context, payload ) {
+      return axios({
+        method: "POST",
+        url: "/register",
+        data: payload,
+      });
+    },
     googleSignIn(context, payload) {
       return axios({
         method: "POST",
@@ -30,6 +37,7 @@ export default new Vuex.Store({
           id_token: payload,
         },
       });
+      
     },
   },
   
