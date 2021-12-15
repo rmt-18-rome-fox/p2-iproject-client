@@ -7,13 +7,12 @@
                     <h4 style="font-size: 2rem">{{game.title}}</h4>
                     <div class="d-flex flex-row">
                     </div>
-                    <div class="mt-1 mb-1 spec-1"><h5>Developer : {{game.developer}}</h5></div>
                     <div class="mt-1 mb-1 spec-1"><h5>Genre : {{game.genre}}</h5></div>
                     <h4 >{{game.short_description}}<br><br></h4>
                 </div>
                 <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                 
-                    <div class="d-flex flex-column mt-4"><button class="btn btn-primary btn-sm" type="button">Details</button><button @click.prevent="addFav(game.id)" class="btn btn-outline-primary btn-sm mt-2" type="button">Add to Favorite</button></div>
+                    <div class="d-flex flex-column mt-4"><button @click.prevent="detailGame(game.id)" class="btn btn-primary btn-sm" type="button">Details</button><button @click.prevent="addFav(game.id)" class="btn btn-outline-primary btn-sm mt-2" type="button">Add to Favorite</button></div>
                 </div>
             </div>
       
@@ -36,9 +35,10 @@ export default {
             this.$store.dispatch('addFavGame', payload)
             .then((data) => {
             data
+            this.$router.push('/favoritegame')
           Swal.fire({
             title: "Hooray!",
-            text: "Success Adding Bookmark!",
+            text: "Success Adding Favorite Game!",
             icon: "success",
           });
         })
@@ -48,8 +48,13 @@ export default {
             title: "Oops...",
             text: err.response.data.message,
           });
-        });
-        }
+        })
+      },
+      detailGame(id){
+           this.$store.dispatch('gameDetail', id)
+            this.$router.push(`/games/${id}`)
+      }
+        
     }
 
 }

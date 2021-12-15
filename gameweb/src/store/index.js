@@ -10,6 +10,7 @@ export default new Vuex.Store({
     isLogin : false,
     games: [],
     favGames : [],
+    detail :[]
   },
   mutations: {
     ISLOGIN(state,payload){
@@ -23,6 +24,12 @@ export default new Vuex.Store({
    },
    ADDFAV(state,payload){
      state.favGames.push(payload)
+   },
+   FAVGAMES(state,payload){
+     state.favGames = payload
+   },
+   GAMEDETAIL(state,payload){
+    state.detail = payload
    }
   },
   actions: {
@@ -115,6 +122,57 @@ export default new Vuex.Store({
         })
       })
     },
+    fetchFavorites(context){
+      let url = `${baseUrl}/favoritegames`
+      axios({
+        method :'GET',
+        url:url,
+        headers : {
+          access_token: localStorage.getItem("acces_token"),
+        }
+      })
+      .then(({data})=>{
+        context.commit('FAVGAMES', data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
+    gameDetail(context,payload){
+      let url = `${baseUrl}/games/${payload}`
+      axios({
+        method :'GET',
+        url:url,
+        headers : {
+          access_token: localStorage.getItem("acces_token"),
+        }
+      })
+      .then(({data})=>{
+        context.commit('GAMEDETAIL', data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
+    googleLogin(context,payload){
+      return new Promise ((resolve,reject)=>{
+        axios({
+              url : `${baseUrl}/googleAuth`,
+              method: 'POST',
+              data: {
+                  idToken : payload.getAuthResponse().id_token
+              }
+          })
+          .then(({data})=>{
+            resolve(data)
+            context.commit('ISLOGIN', true)
+        })
+        .catch(err=>{
+           reject(err)
+        })
+      }) 
+        
+  }
     
   },
   modules: {
