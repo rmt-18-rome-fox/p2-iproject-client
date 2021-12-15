@@ -49,6 +49,28 @@ export default new Vuex.Store({
     
       })
     },
+    Register (context,{username,email,password,phoneNumber}){
+      return new Promise((resolve,reject)=>{
+        heroAxios({
+          method: "post",
+          url: "/customer/register",
+          data: {
+            username,
+            email,
+            password,
+            phoneNumber,
+          },
+        })
+        .then(() =>{
+         
+          resolve()
+        })
+        .catch((err)=>{
+          
+          reject(err)
+        })
+      })
+    },
   },
   modules: {
   }
