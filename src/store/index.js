@@ -68,8 +68,8 @@ export default new Vuex.Store({
           .then(() => {
             Swal.fire({
               icon: 'success',
-              title: 'Hello!',
-              text: 'Welcome to the club!'
+              title: 'Welcome to the club!',
+              text: 'We have emailed you a warm welcome. Go check it out!'
             })
             resolve()
           })
