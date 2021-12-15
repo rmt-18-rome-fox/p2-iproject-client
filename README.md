@@ -1,8 +1,5 @@
 # client
 
-- Tampilin Map
-- Mapibox Marker
-
 ## Project setup
 ```
 npm install
