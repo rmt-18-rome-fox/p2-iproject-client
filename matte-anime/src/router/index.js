@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import MyWatchList from '../views/MyWatchList.vue'
+import MyWatchLists from '../views/MyWatchLists.vue'
+import AnimeDetail from '../views/AnimeDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -14,13 +15,18 @@ const routes = [
     component: Home,
   },
   {
+    path: '/anime-detail/:malId',
+    name: 'AnimeDetail',
+    component: AnimeDetail,
+  },
+  {
     beforeEnter(to, from, next){
       if(!localStorage.getItem("access_token")) next({name: "Home"})
       else next()
     },
-    path: '/my-watch-list',
-    name: 'MyWatchList',
-    component: MyWatchList
+    path: '/my-watch-lists',
+    name: 'MyWatchLists',
+    component: MyWatchLists
   },
   {
     beforeEnter(to, from, next){

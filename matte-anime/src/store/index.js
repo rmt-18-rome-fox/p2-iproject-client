@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    upComingAnimes: []
+    upComingAnimes: [],
+    choosenAnime: {},
+    watchLists: []
   },
   mutations: {
     SET_IS_LOGIN(state, payload){
@@ -16,6 +18,12 @@ export default new Vuex.Store({
     },
     SET_UP_COMING_ANIMES(state, payload){
       state.upComingAnimes = payload
+    },
+    SET_CHOOSEN_ANIME(state, payload){
+      state.choosenAnime = payload
+    },
+    SET_WATCH_LISTS(state, payload){
+      state.watchLists = payload
     }
   },
   actions: {
@@ -46,7 +54,7 @@ export default new Vuex.Store({
       })
     },
     fetchAnimes({commit}, payload){
-      jikanUrl.get('/season/later')
+      jikanUrl.get('/season/2021/winter')
       .then(({data}) => {
         console.log({ini: data.anime});
         commit("SET_UP_COMING_ANIMES", data.anime);
@@ -60,8 +68,30 @@ export default new Vuex.Store({
       jikanUrl.get(`/anime/${jikanAnimeId}`)
       .then(({data}) => {
         console.log({data});
+        commit("SET_CHOOSEN_ANIME", data)
       })
       .catch(({err}) => {
+        console.log({err});
+      })
+    },
+    addToWatchList({commit}, JikanAnimeId){
+      return new Promise((resolve, reject) => {
+        localUrl.post('/watchlists', {JikanAnimeId, priority: "Must Watch", }, {headers: {access_token: localStorage.getItem("access_token")}})
+        .then(({data}) => {
+          resolve()
+        })
+        .catch((err) => {
+          reject(err)
+        })
+      })
+    },
+    fetchWatchLists({commit}, payload) {
+      localUrl.get('watchlists', {headers: {access_token: localStorage.getItem("access_token")}})
+      .then(({data}) => {
+        console.log(data);
+        // commit("SET_WATCH_LISTS", d)
+      })
+      .catch((err) => {
         console.log({err});
       })
     }
