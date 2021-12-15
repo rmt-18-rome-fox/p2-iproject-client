@@ -75,7 +75,7 @@ export default {
         if(this.allError.msg) throw { err: this.allError }
         
         if (this.isLog === true) {
-            const success = `Hi, ${localStorage.getItem(`username`)} `
+            const success = `Hi, Welcome`
             this.alertSuccess(success)
             this.$router.push("/");
         } else {
