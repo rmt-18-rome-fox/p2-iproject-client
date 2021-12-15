@@ -2,6 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 const baseUrl = "http://localhost:5050";
+const headers = {
+  access_token: localStorage.access_token,
+};
 
 Vue.use(Vuex);
 
@@ -67,36 +70,28 @@ export default new Vuex.Store({
       return axios({
         method: "GET",
         url: `${baseUrl}/users/books`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     showDetail(context, id) {
       return axios({
         method: "GET",
         url: `${baseUrl}/users/books/${id}`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     fetchCart() {
       return axios({
         method: "GET",
         url: `${baseUrl}/customers/carts`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     addToCart(context, bookId) {
       return axios({
         method: "POST",
         url: `${baseUrl}/customers/carts/${bookId}`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     shipping(context, { sellerCityId, customerCityId }) {
@@ -110,9 +105,7 @@ export default new Vuex.Store({
         method: "POST",
         url: `${baseUrl}/apis/shipping`,
         data,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     confirmPayment(context, amount) {
@@ -120,18 +113,14 @@ export default new Vuex.Store({
         method: "POST",
         url: `${baseUrl}/apis/xendit/ovo`,
         data: { amount },
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
       });
     },
     createTransaction(context, { cost, bookId }) {
       return axios({
         method: "POST",
         url: `${baseUrl}/customers/transactions?bookId=${bookId}`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
         data: { amount: cost },
       });
     },
@@ -139,9 +128,14 @@ export default new Vuex.Store({
       return axios({
         method: "PATCH",
         url: `${baseUrl}/customers/transactions/${id}`,
-        headers: {
-          access_token: localStorage.access_token,
-        },
+        headers,
+      });
+    },
+    deleteCart(context, id) {
+      return axios({
+        method: "DELETE",
+        url: `${baseUrl}/customers/carts/${id}`,
+        headers,
       });
     },
   },

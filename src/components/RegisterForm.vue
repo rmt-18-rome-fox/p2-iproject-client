@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <div class="text-center my-3">
-      <router-link to="/auth/register">Back</router-link>
+    <div class="mt-4" id="navigator">
+      <router-link to="/auth/register">
+        <font-awesome-icon :icon="['fas', 'arrow-alt-circle-left']"
+      /></router-link>
     </div>
     <h1 class="text-center">Register</h1>
     <form class="row mt-4" @submit.prevent="doRegister">
@@ -30,7 +32,7 @@
         />
       </div>
 
-      <div class="col-6 mb-5">
+      <div class="col-6 mb-4">
         <label for="city">Password</label>
         <input
           type="password"
@@ -53,6 +55,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   name: "RegisterCustomerForm",
   data() {
@@ -88,10 +91,32 @@ export default {
         .then(({ data }) => {
           localStorage.user_id = data.id;
           localStorage.user_name = data.name;
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: "Account registered succesfully",
+          });
           this.$router.push("/auth/login");
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1000,
+          });
         });
     },
   },
@@ -106,4 +131,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#navigator > a {
+  color: #463e87 !important;
+  font-size: 34px;
+}
+</style>
