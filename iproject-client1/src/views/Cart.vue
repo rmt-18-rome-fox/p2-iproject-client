@@ -1,10 +1,13 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <div class="bg-container">
+    <div class="bg-container d-flex">
       <div class="main-container-cart d-flex flex-column">
         <!-- CARD -->
-        <CartCard v-for="item in orderDetail[0].CoffeePowders" :key="item.id" :item="item"></CartCard>
+        <CartCard v-for="item in orderDetail" :key="item.id" :item="item"></CartCard>
+      </div>
+      <div>
+        <button type="button" class="btn btn-success" @click.prevent="payMidtrans">Pay</button>
       </div>
     </div>
   </div>
@@ -24,11 +27,21 @@ export default {
     CartCard,
   },
   created() {
-    this.$store.dispatch('fetchOrderDetail');
+    this.$store.dispatch('checkPayment').then(() => {
+      this.$store.dispatch('fetchOrderDetail');
+    });
   },
   computed: {
     orderDetail: function () {
       return this.$store.state.orderDetail;
+    },
+  },
+  methods: {
+    payMidtrans() {
+      // window.snap.pay('d6630e05-b433-41c7-973f-8196bdd01058');
+      this.$store.dispatch('payMidtrans').then(() => {
+        // this.$router.push(`/formedit/${id}`);
+      });
     },
   },
 };

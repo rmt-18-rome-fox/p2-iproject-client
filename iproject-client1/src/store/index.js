@@ -203,6 +203,115 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
+    // ===================================================== ### ADD NEW CART ### =====================================================
+    addNewCart: function (context, id) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/orderdetail/${id}`,
+          method: 'post',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            // console.log(data);
+            // commit('SET_CART_ORDERDETAIL', data);
+            // router.push('/');
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
+    // ===================================================== ### PAY MIDTRANS ### =====================================================
+    payMidtrans: function () {
+      // console.log('HALO MIDTRANS');
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/paycharge`,
+          method: 'post',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(({ data }) => {
+            console.log(data.result.token);
+            window.snap.pay(data.result.token);
+            // commit('SET_CART_ORDERDETAIL', data);
+            // router.push('/');
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
+    // ===================================================== ### CHECK STATUS PAYMENT MIDTRANS ### =====================================================
+    checkPayment: function () {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/checkstatuspayment`,
+          method: 'get',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            // commit('SET_CART_ORDERDETAIL', data);
+            // router.push('/');
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
+    // ===================================================== ### PATCH ++ ORDER DETAIL ### =====================================================
+    patchPlusOrderDetail: function (context, orderDetailId) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/orderdetailplus/${orderDetailId}`,
+          method: 'patch',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            // commit('SET_CART_ORDERDETAIL', data);
+            // router.push('/');
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
+    // ===================================================== ### PATCH -- ORDER DETAIL ### =====================================================
+    patchMinusOrderDetail: function (context, orderDetailId) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `${baseUrl}/orderdetailminus/${orderDetailId}`,
+          method: 'patch',
+          headers: {
+            access_token: localStorage.getItem('access_token'),
+          },
+        })
+          .then(() => {
+            // commit('SET_CART_ORDERDETAIL', data);
+            // router.push('/');
+            resolve();
+          })
+          .catch((err) => {
+            console.log(err);
+            reject();
+          });
+      });
+    },
   },
 
   modules: {},

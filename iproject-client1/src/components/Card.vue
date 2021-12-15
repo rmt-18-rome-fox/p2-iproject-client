@@ -12,7 +12,7 @@
       <p>Price: {{ coffeePowder.price }}</p>
       <p>Grind Size: {{ coffeePowder.grindSize }}</p>
       <p>Roast Level: {{ coffeePowder.roastLevel }}</p>
-      <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'customer'">Buy</a>
+      <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'customer'" @click.prevent="addNewCart(coffeePowder.id)">Add to YourCart</a>
       <a href="#" class="btn-buy btn btn-primary mr-3" v-if="roleUser == 'admin'" @click.prevent="toFormUpdate(coffeePowder.id)">Edit</a>
       <!-- <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'admin'">Delete</a> -->
     </div>
@@ -35,6 +35,14 @@ export default {
     toFormUpdate(id) {
       this.$store.dispatch('toFormUpdate', id).then(() => {
         this.$router.push(`/formedit/${id}`);
+      });
+    },
+    addNewCart(id) {
+      this.$store.dispatch('addNewCart', id).then(() => {
+        this.$store.dispatch('fetchOrderDetail').then(() => {
+          this.$router.push(`/cart`);
+        });
+        console.log('KELAR ');
       });
     },
   },
