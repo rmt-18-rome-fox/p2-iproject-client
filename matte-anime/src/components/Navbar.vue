@@ -1,11 +1,16 @@
 <template>
-  <nav>
+  <nav class="flex flex-row justify-evenly bg-gray-500 h-10 items-center">
+    <div id="Identity" class="">
+      <p>MatteAnime</p>
+    </div>
+    <div class="">
+      <router-link to="/">Home</router-link>
+      <router-link to="/my-watch-lists">My WatchList</router-link>
+    </div>
+    <div class="">
     <router-link v-if="!isLogin" to="/login">Login</router-link>
-    <br>
-    <router-link to="/my-watch-lists">My WatchList</router-link>
-    <br>
     <span role="button" @click="doLogout" v-if="isLogin">Logout</span>
-    <br><br>
+    </div>
   </nav>
 </template>
 
@@ -27,6 +32,7 @@ export default {
     doLogout(){
       localStorage.clear()
       this.$store.commit("SET_IS_LOGIN", false)
+      this.$router.push('/')
       swal.fire('Logout')
     }
   }

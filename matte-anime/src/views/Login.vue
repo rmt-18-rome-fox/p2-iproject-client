@@ -29,8 +29,8 @@
 
         <div class="flex items-center justify-between">
           <div class="text-sm">
-            <p class="font-medium text-indigo-600 hover:text-indigo-500">
-              Don't have an account yet? <span role="button" class="text-blue-500" @click.prevent="toRegister">Register</span>
+            <p class="font-medium">
+              Don't have an account yet? <span role="button" class="text-blue-500 hover:text-blue-700" @click.prevent="toRegister">Register</span>
             </p>
           </div>
         </div>

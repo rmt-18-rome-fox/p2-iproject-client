@@ -107,6 +107,18 @@ export default new Vuex.Store({
           reject(err)
         })
       })
+    },
+    deleteWatchList({commit}, JikanAnimeId){
+      return new Promise((resolve, reject) => {
+        localUrl.delete(`watchlists/${JikanAnimeId}`, {headers: {access_token: localStorage.getItem("access_token")}})
+        .then((res) => {
+          resolve()
+        })
+        .catch((err) => {
+          console.log({err});
+          reject(err)
+        })
+      })
     }
   },
   modules: {

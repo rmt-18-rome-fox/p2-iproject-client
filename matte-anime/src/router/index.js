@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import MyWatchLists from '../views/MyWatchLists.vue'
 import AnimeDetail from '../views/AnimeDetail.vue'
+import swal from 'sweetalert2'
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,10 @@ const routes = [
   },
   {
     beforeEnter(to, from, next){
-      if(!localStorage.getItem("access_token")) next({name: "Home"})
+      if(!localStorage.getItem("access_token")) {
+        swal.fire('You have to login first to create WatchLists')
+        next({name: "Home"})
+      }
       else next()
     },
     path: '/my-watch-lists',
