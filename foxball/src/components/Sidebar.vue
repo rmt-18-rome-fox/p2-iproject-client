@@ -8,8 +8,8 @@
       </div>
       <ul class="flex flex-col space-y-12">
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/"
             class="
               flex flex-row
               items-center
@@ -49,7 +49,7 @@
               />
             </svg>
             <span class="text-xl font-medium">Home</span>
-          </a>
+          </router-link>
         </li>
         <li>
           <a
@@ -180,8 +180,8 @@
           </a>
         </li>
         <li>
-          <a
-            href="#"
+          <router-link
+            to="/add"
             class="
               flex flex-row
               items-center
@@ -221,7 +221,7 @@
               />
             </svg>
             <span class="text-xl font-medium">Post Now</span>
-          </a>
+          </router-link>
         </li>
       </ul>
       <div class="flex items-center justify-center h-20 shadow-md">
