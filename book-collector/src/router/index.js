@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/bookmarks',
     name: 'Bookmarks',
-    component: () => import('../components/HelloWorld.vue')
+    component: () => import('../components/Bookmark.vue')
   }
 ]
 
