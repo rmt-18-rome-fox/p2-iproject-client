@@ -46,6 +46,7 @@ export default {
   },
   methods: {
     doLogin() {
+      this.$store.state.loadingScreen = true;
       this.$store
         .dispatch("doLogin", this.formData)
         .then(({ data }) => {
@@ -57,6 +58,9 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          this.$store.state.loadingScreen = false;
         });
     },
   },

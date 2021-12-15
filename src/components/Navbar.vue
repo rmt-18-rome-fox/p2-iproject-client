@@ -96,6 +96,10 @@ export default {
 </script>
 
 <style scope>
+b-navbar {
+  z-index: 200;
+}
+
 a.router-link-exact-active {
   text-decoration: none;
 }
