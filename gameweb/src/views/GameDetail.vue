@@ -20,10 +20,11 @@
        <h5>Game Publisher: {{gameDetail.publisher}}</h5>
        <h5>Game Platform: {{gameDetail.platform}}</h5>
         <br>
+          <img :src="QRhandle.data.qrcode" style="width: 150px" />
+          <br><br>
       <h5>Description:</h5>
       <h5>{{ gameDetail.short_description }}</h5>
       <br /><br />
-      <img :src="QRhandle" style="width: 150px" />
     </div>
   </div>
 </template>
@@ -42,6 +43,9 @@ export default {
   computed: {
     gameDetail() {
       return this.$store.state.detail;
+    },
+      QRhandle() {
+      return this.$store.state.QRCODE;
     },
   },
 }

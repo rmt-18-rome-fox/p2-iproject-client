@@ -24,6 +24,22 @@
         <br /><br />
         <button class="btn btn-primary" type="submit">Filter</button>
       </form>
+      <br>
+      <div
+      class="container"
+      style="
+        background-color: #677DB7;
+        padding: 50px;
+        border-radius: 25px;
+        width: 600px;
+      "
+    >
+      <h2 style="color:white;">News Title : {{news[0].title}}</h2>
+      <p style="color:white;">Url Link : {{news[0].url}}</p>
+      <h4 style="color:white;">Source : {{news[0].source}}</h4>
+
+      </div>
+      <br>
     </div>
     <div class="container mt-5 mb-5">
       <MyCard v-for="game in games.Posts" :key="game.id" :game="game"></MyCard>
@@ -103,6 +119,9 @@ export default {
     Games() {
       this.$store.dispatch("fetchGames");
     },
+     News() {
+      this.$store.dispatch("fetchNews");
+    },
      genreChange(event) {
       const gamegenre = event.target.value;
       this.genre = gamegenre;
@@ -117,6 +136,7 @@ export default {
       this.$store
         .dispatch("filtered", filters)
         .then((data) => {
+          this.News()
           console.log(data.Posts, `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA`)
           if (data.TotalPage < this.page || data.TotalGames === 0) {
             this.page = 1;
@@ -154,6 +174,7 @@ export default {
       this.$store
         .dispatch("filtered", filters)
         .then((data) => {
+           this.News()
           if (data.TotalPage < this.page || data.TotalGames === 0) {
             this.page = 1;
             Swal.fire({
@@ -188,6 +209,7 @@ export default {
       this.$store
         .dispatch("filtered", filters)
         .then((data) => {
+           this.News()
           if (data.TotalPage < this.page || data.TotalGames === 0) {
             this.page = 1;
             Swal.fire({
@@ -212,10 +234,14 @@ export default {
   },
   created() {
     this.Games();
+    this.News()
   },
   computed: {
     games() {
       return this.$store.state.games;
+    },
+     news() {
+      return this.$store.state.News;
     },
   },
 };

@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isLogin : false,
     games: [],
     favGames : [],
-    detail :[]
+    detail :[],
+    QRCODE : [],
+    News : []
   },
   mutations: {
     ISLOGIN(state,payload){
@@ -30,6 +32,13 @@ export default new Vuex.Store({
    },
    GAMEDETAIL(state,payload){
     state.detail = payload
+   },
+   QRCODE(state,payload){
+     state.QRCODE = payload
+     console.log(state.QRCODE, `BABABAAB`)
+   },
+   FETCHRANDOMNEWS(state,payload){
+    state.News = payload
    }
   },
   actions: {
@@ -149,6 +158,22 @@ export default new Vuex.Store({
       })
       .then(({data})=>{
         context.commit('GAMEDETAIL', data)
+        return data
+      })
+      .then(data =>{
+        console.log(data.game_url, `adguafgufigfaigfiafi`)
+        axios({
+          method: 'GET',
+            url : `https://api.happi.dev/v1/qrcode`,
+            params : { data : data.game_url   },
+            headers: {
+              "x-happi-key" : "96eb91hwSj6YrnCSIJsO1qOyfXcnsmVWCgBnCDKD9h31i1B5TonjZXWI"
+            }
+       })
+       .then((data)=>{
+         console.log(data ,`AAAAAAAAAAAAAAAAAAA`)
+         context.commit('QRCODE', data) 
+       })
       })
       .catch(err=>{
         console.log(err)
@@ -172,8 +197,23 @@ export default new Vuex.Store({
         })
       }) 
         
+  },
+  fetchNews(context){ 
+    let url = `${baseUrl}/news`
+    axios({
+      method :'GET',
+      url:url,
+      headers : {
+        access_token: localStorage.getItem("acces_token"),
+      }
+    })
+    .then(({data})=>{
+      context.commit('FETCHRANDOMNEWS', data)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   }
-    
   },
   modules: {
   }
