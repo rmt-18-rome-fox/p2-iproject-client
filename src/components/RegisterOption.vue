@@ -1,12 +1,14 @@
 <template>
-  <div class="container text-center">
-    <div class="mt-4 mb-5">
-      <router-link to="/auth/login">Back To Login</router-link>
+  <div class="container">
+    <div class="mt-4 mb-2" id="navigator">
+      <router-link to="/auth/login">
+        <font-awesome-icon :icon="['fas', 'arrow-alt-circle-left']"
+      /></router-link>
     </div>
     <div>
-      <h1 class="mb-5">Register as</h1>
+      <h1 class="mb-5 text-center">Register as</h1>
       <div class="d-flex flex-column">
-        <div class="mb-3">
+        <div class="mb-3 text-center">
           <button
             type="button"
             class="btn btn-dark text-white"
@@ -15,8 +17,8 @@
             <router-link to="/auth/register/customer">Customer</router-link>
           </button>
         </div>
-        <p>Or</p>
-        <div>
+        <p class="text-center">Or</p>
+        <div class="text-center">
           <button
             type="button"
             class="btn btn-dark text-white"
@@ -39,6 +41,11 @@ export default {
 <style scoped>
 a {
   color: #fff;
+}
+
+#navigator > a {
+  color: #463e87 !important;
+  font-size: 34px;
 }
 
 a:hover {

@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import Navbar from "../components/Navbar.vue";
 export default {
   name: "BookDetail",
@@ -100,10 +101,31 @@ export default {
       this.$store
         .dispatch("addToCart", bookId)
         .then(({ data }) => {
-          console.log(data);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "success",
+            title: data,
+          });
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1000,
+          });
         });
     },
     doCheckout(id) {

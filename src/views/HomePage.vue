@@ -6,7 +6,7 @@
       <b-jumbotron
         header="Welcome to 8ook"
         lead="Space up your mind"
-        style="background: #e3f0f4"
+        style="background: #fff"
       >
         <b-img
           center

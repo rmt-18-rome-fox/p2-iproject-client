@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 export default {
   name: "LoginForm",
   data() {
@@ -54,7 +55,6 @@ export default {
   },
   methods: {
     doLogin() {
-      this.$store.state.loadingScreen = true;
       this.$store
         .dispatch("doLogin", this.formData)
         .then(({ data }) => {
@@ -65,12 +65,23 @@ export default {
           this.$router.push("/");
         })
         .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          this.$store.state.loadingScreen = false;
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1000,
+          });
         });
     },
   },
 };
 </script>
+
+<style scoped>
+a {
+  color: #463e87;
+  text-decoration: none;
+  font-weight: 700;
+}
+</style>
