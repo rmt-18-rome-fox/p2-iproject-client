@@ -17,6 +17,21 @@
                 ref="mapRef"
                 @dragend="handleDrag"
             ></GmapMap>
+            
+            <div class="post-weather">
+                <img
+                    :src="`https://www.weatherbit.io/static/img/icons/${weather.weather.icon}.png`"
+                    class="card-img-top"
+                    alt="..."
+                />
+                <div class="card-body">
+                    <h5 class="card-title">{{weather.city_name}}</h5>
+                    <p class="card-text">
+                        {{weather.weather.description}}
+                    </p>
+                </div>
+            </div>
+
 
         </div>
 </template>
@@ -44,9 +59,12 @@
                 this.myCoordinates = JSON.parse(localStorage.center);
             } else {
                 // get user's coordinates from browser request
+                this.$store.dispatch("getWeather")
                 this.$getLocation({})
                     .then(coordinates => {
                         this.myCoordinates = coordinates;
+                        localStorage.setItem("lat", coordinates.lat)
+                        localStorage.setItem("lng", coordinates.lng)
                     })
                     .catch(error => alert(error));
             }
@@ -86,6 +104,10 @@
                     lat: this.map.getCenter().lat().toFixed(4),
                     lng: this.map.getCenter().lng().toFixed(4)
                 }
+            },
+            weather () {
+                console.log(this.$store.state, "ambil ini");
+                return this.$store.state.weather
             }
         }
     }
