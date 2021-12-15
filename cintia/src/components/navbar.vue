@@ -21,7 +21,10 @@
             <template #button-content class="mx-4">
               <em>User</em>
             </template>
-            <b-dropdown-item href="#" v-if="this.$store.state.user == true"
+            <b-dropdown-item
+              @click="logout"
+              href="#"
+              v-if="this.$store.state.user == true"
               >Sign Out</b-dropdown-item
             >
             <b-dropdown-item
@@ -53,6 +56,10 @@ export default {
       this.$router.push("/register");
     },
     toHome() {
+      this.$router.push("/");
+    },
+    logout() {
+      this.$store.dispatch("aLogout");
       this.$router.push("/");
     },
   },

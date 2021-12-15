@@ -82,7 +82,7 @@ export default {
       this.$store
         .dispatch("aLogin", { email: this.email, password: this.password })
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/movies");
         })
         .catch((err) => {
           console.log(err);

@@ -37,3 +37,17 @@ const router = new VueRouter({
 });
 
 export default router;
+
+//navguard
+router.beforeEach((to, from, next) => {
+  if (to.name === "Movies" && !localStorage.access_token) {
+    next({ name: "Home" });
+  } else {
+    next();
+  }
+  if (to.name === "Login" && localStorage.access_token) {
+    next({ name: "Movies" });
+  } else {
+    next();
+  }
+});
