@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 Vue.use(Vuex)
 const basicUrl = 'https://archiline.herokuapp.com'
+// const basicUrl = 'http://localhost:3000'
 
 export default new Vuex.Store({
   state: {

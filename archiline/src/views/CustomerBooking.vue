@@ -75,11 +75,13 @@ export default {
             icon: 'success',
             title: 'Payment Success'
           })
+          // console.log(data)
         })
         .catch(err => {
+          // console.log(err)
           Swal.fire({
             title: 'Error',
-            text: err.response.data,
+            text: err.response.data.message,
             icon: 'error'
           })
         })
