@@ -1,18 +1,7 @@
 <template>
   <div id="app">
     <router-view />
-    <HFooter
-      style="
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height:5%;
-        background-color: #343a40;
-        color: white;
-        text-align: center;
-      "
-    ></HFooter>
+    <HFooter style="background-color: #343a40" class="mt-0"></HFooter>
   </div>
 </template>
 <script>
