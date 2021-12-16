@@ -13,7 +13,7 @@
                   {{datetime}}
             </div>
             <h3 class="text-center text-white text-3xl mt-2 font-bold">
-                  {{tempearture}} &deg;
+                  {{tempearture}} &deg;C
             </h3>
             <div class="flex mb-7">
               <div class="w-1/3 h-12"></div>
