@@ -24,6 +24,19 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 export default {
   created () {
     this.$store.dispatch('fetchArchitectProfile')
@@ -41,6 +54,10 @@ export default {
     onLogout () {
       localStorage.clear()
       this.$router.push({ path: '/login' })
+      Toast.fire({
+        icon: 'success',
+        title: 'Success Logout'
+      })
     }
   }
 }
