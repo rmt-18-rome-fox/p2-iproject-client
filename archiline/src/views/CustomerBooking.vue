@@ -1,6 +1,6 @@
 <template>
 <div style="min-height: 100vh; overflow: hidden; background-image: url(https://media.istockphoto.com/photos/white-texture-background-picture-id926993450?b=1&k=20&m=926993450&s=170667a&w=0&h=vxWViBkXgTQnSO4UTtU26hLlscn9FTKYS1Jx6f-_slI=)" class="mb-0">
-  <navbar></navbar>
+  <architect-navbar></architect-navbar>
       <div class="col-12 d-flex flex-column justify-content-center align-items-center" style="height: 80vh; ">
   <form class="d-flex flex-column justify-content-center align-items-center p-5" @submit.prevent="onBook" style="border: 1px solid black; border-radius: 20px; background-color: #2C2828; color:#EEEEEE;">
     <label for="startDate" class="mb-2" style="font-size: 40px">Start Date</label>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import ArchitectNavbar from '../components/ArchitectNavbar.vue'
 import Swal from 'sweetalert2'
 const Toast = Swal.mixin({
   toast: true,
@@ -38,7 +38,7 @@ const Toast = Swal.mixin({
 export default {
   name: 'CustomerBooking',
   components: {
-    Navbar
+    ArchitectNavbar
   },
   data () {
     return {
@@ -75,11 +75,13 @@ export default {
             icon: 'success',
             title: 'Payment Success'
           })
+          // console.log(data)
         })
         .catch(err => {
+          // console.log(err)
           Swal.fire({
             title: 'Error',
-            text: err.response.data,
+            text: err.response.data.message,
             icon: 'error'
           })
         })
