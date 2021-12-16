@@ -21,7 +21,9 @@ const routes = [
   },
   {
     beforeEnter(to, from, next){
-      if(!localStorage.getItem("access_token")) next({name: "Home"})
+      if(!localStorage.getItem("access_token")) {
+        next({name: "Login"})
+      }
       else next()
     },
     path: '/my-watch-lists',
