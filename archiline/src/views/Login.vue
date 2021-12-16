@@ -18,6 +18,19 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 export default {
   name: 'Login',
   data () {
@@ -48,9 +61,17 @@ export default {
           } else if (localStorage.getItem('role') === 'architect') {
             this.$router.push('/architect')
           }
+          Toast.fire({
+            icon: 'success',
+            title: 'Success Sign In'
+          })
         })
         .catch(err => {
-          console.log(err.response)
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         })
     },
     toRegister () {

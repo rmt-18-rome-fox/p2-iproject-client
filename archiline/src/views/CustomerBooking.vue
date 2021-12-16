@@ -22,6 +22,18 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export default {
   name: 'CustomerBooking',
@@ -59,9 +71,17 @@ export default {
       this.$store.dispatch('onBook', payload)
         .then((data) => {
           window.snap.pay(data.token)
+          Toast.fire({
+            icon: 'success',
+            title: 'Payment Success'
+          })
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         })
     }
   }
