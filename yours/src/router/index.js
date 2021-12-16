@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import LandingPage from "../views/LandingPage";
 import LoginPage from "../views/LoginPage";
 import RegisterPage from "../views/RegisterPage";
+import HomePage from "../views/HomePage";
 Vue.use(VueRouter);
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     path: "/register",
     name: "RegisterPage",
     component: RegisterPage,
+  },
+  {
+    path: "/home",
+    name: "HomePage",
+    component: HomePage,
   },
 ];
 

@@ -17,6 +17,9 @@ export default new Vuex.Store({
     doLogin(context, payload) {
       return axios.post("http://localhost:3000/users/login", payload);
     },
+    doRegister(context, payload) {
+      return axios.post("http://localhost:3000/users/register", payload);
+    },
   },
   modules: {},
 });

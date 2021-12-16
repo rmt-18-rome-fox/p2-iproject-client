@@ -11,7 +11,7 @@
           </div>
           <h3 class="title-text">Register</h3>
 
-          <form style="margin-top: 1.5rem" action="" method="post">
+          <form style="margin-top: 1.5rem" @submit.prevent="doRegister">
             <!-- name -->
             <div style="margin-bottom: 1rem">
               <label for="" class="d-block input-label">Name</label>
@@ -24,7 +24,7 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="text" name="" id="" placeholder="Your Name" autocomplete="on" required />
+                <input class="input-field border-0" type="text" name="" id="" placeholder="Your Name" autocomplete="on" required v-model="formRegister.name" />
               </div>
             </div>
             <!-- email -->
@@ -39,7 +39,7 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="email" name="" id="" placeholder="Your Email Address" autocomplete="on" required />
+                <input class="input-field border-0" type="email" name="" id="" placeholder="Your Email Address" autocomplete="on" required v-model="formRegister.email" />
               </div>
             </div>
             <!-- password -->
@@ -54,7 +54,7 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" required />
+                <input class="input-field border-0" type="password" name="" id="password-content-3-5" placeholder="Your Password" required v-model="formRegister.password" />
                 <div @click="togglePassword()">
                   <svg style="margin-left: 0.75rem; cursor: pointer" width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -80,10 +80,10 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <input class="input-field border-0" type="text" name="" id="" placeholder="Your Phone Number" autocomplete="on" required />
+                <input class="input-field border-0" type="text" name="" id="" placeholder="Your Phone Number" autocomplete="on" required v-model="formRegister.phoneNumber" />
               </div>
             </div>
-            address
+            <!-- address -->
             <div style="margin-bottom: 1rem">
               <label for="" class="d-block input-label">Address</label>
               <div class="d-flex w-100 div-input">
@@ -95,11 +95,11 @@
                     fill="#CACBCE"
                   />
                 </svg>
-                <textarea class="input-field border-0" type="text" name="" id="" placeholder="Your Address" autocomplete="on" required />
+                <textarea class="input-field border-0" type="text" name="" id="" placeholder="Your Address" autocomplete="on" required v-model="formRegister.address" />
               </div>
             </div>
             <div class="d-flex justify-content-end" style="margin-top: 0.75rem"></div>
-            <button class="btn btn-fill text-white d-block w-100" type="submit">Log In To My Account</button>
+            <button class="btn btn-fill text-white d-block w-100" type="submit">Submit</button>
           </form>
         </div>
       </div>
@@ -111,7 +111,18 @@
 
 <script>
 export default {
-  name: "LoginPage",
+  name: "RegisterPage",
+  data() {
+    return {
+      formRegister: {
+        name: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+        address: "",
+      },
+    };
+  },
   methods: {
     togglePassword() {
       var x = document.getElementById("password-content-3-5");
@@ -122,6 +133,16 @@ export default {
         x.type = "password";
         document.getElementById("icon-toggle").setAttribute("fill", "#CACBCE");
       }
+    },
+    doRegister() {
+      this.$store
+        .dispatch("doRegister", this.formRegister)
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
