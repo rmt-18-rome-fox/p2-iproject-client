@@ -104,7 +104,8 @@ export default {
         .then((resp) => {
           console.log(resp);
           localStorage.access_token = resp.data;
-          this.$store.commit("SET_ACCESS_TOKEN", localStorage.access_token);
+          // this.$store.commit("SET_ACCESS_TOKEN", localStorage.access_token);
+          this.$store.commit("IS_LOGIN", true);
           this.$router.push("/home");
         })
         .catch((err) => {

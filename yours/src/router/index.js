@@ -4,6 +4,7 @@ import LandingPage from "../views/LandingPage";
 import LoginPage from "../views/LoginPage";
 import RegisterPage from "../views/RegisterPage";
 import HomePage from "../views/HomePage";
+import PostDetail from "../views/PostDetail";
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     path: "/home",
     name: "HomePage",
     component: HomePage,
+  },
+  {
+    path: "/posts/:postId",
+    name: "PostDetail",
+    component: PostDetail,
   },
 ];
 
