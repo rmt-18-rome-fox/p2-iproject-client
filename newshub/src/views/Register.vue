@@ -17,7 +17,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button class="w-25 mt-2" type="submit" variant="success"
+      <b-button class="w-25 mt-2 mb-3" type="submit" variant="success"
         >Register</b-button
       >
     </b-form>

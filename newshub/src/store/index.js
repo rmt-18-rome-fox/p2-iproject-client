@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     fetchedNews: [],
-    isLoggedIn: "false",
+    isLoggedIn: false,
     userRole: "",
     publishedArticles: [],
     articleData: {},

@@ -20,7 +20,7 @@
       <b-button class="w-25 mt-2" type="submit" variant="primary"
         >Submit</b-button
       >
-      <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
+      <b-button class="w-25 mt-3 mb-3" variant="success" v-on:click="goToRegister"
         >Register</b-button
       >
       <!-- <GoogleLogin
