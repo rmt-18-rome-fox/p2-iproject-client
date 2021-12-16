@@ -31,6 +31,19 @@
 
 <script>
 import ArchitectNavbar from '../components/ArchitectNavbar.vue'
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
 export default {
   name: 'ArchitectHome',
   components: {
@@ -49,6 +62,17 @@ export default {
       this.$store.dispatch('deletePortofolio', payload)
         .then(() => {
           this.$store.dispatch('fetchArchitectPortofoliosByArchitect')
+          Toast.fire({
+            icon: 'success',
+            title: 'Success Delete Portofolio'
+          })
+        })
+        .catch(err => {
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         })
     },
     toEditForm (payload) {

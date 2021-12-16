@@ -21,6 +21,18 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import Swal from 'sweetalert2'
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export default {
   name: 'CustomerLogin',
@@ -38,9 +50,17 @@ export default {
       this.$store.dispatch('editProfileCustomer', this.profile)
         .then(() => {
           this.$router.push('/customer')
+          Toast.fire({
+            icon: 'success',
+            title: 'Success Edit Profile'
+          })
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            title: 'Error',
+            text: err.response.data,
+            icon: 'error'
+          })
         })
     },
     handleDataFile () {
