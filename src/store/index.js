@@ -15,7 +15,7 @@ export default new Vuex.Store({
 		recipes: [],
 		recipeDetail: {},
 		favorites: [],
-		// apiUrl: "https://api.edamam.com/search",
+		apiUrl: "https://api.edamam.com/search",
 		baseUrl: "https://ip-foodify.herokuapp.com",
 		isLoggedIn: false,
 	},
@@ -28,6 +28,9 @@ export default new Vuex.Store({
 		},
 		SET_RECIPES_BY_ID(state, payload) {
       state.recipeDetail = payload
+    },
+		SET_FAVORITES(state, payload) {
+      state.favorites = payload
     },
 	},
 	actions: {
@@ -51,19 +54,17 @@ export default new Vuex.Store({
 				commit("SET_RECIPES", [])
 			}
 		},
-		async getDetailsRecipe(context, payload) {
+		async getDetailsRecipe({state, commit}, payload) {
 			try {
-				let response = await axios.get(`https://api.edamam.com/search?app_id=77c1ea2e&app_key=b22bf21dd9e8f582274c54a7634b2a49&q=${payload}`, {
+				let response = await axios.get(`${state.apiUrl}?app_id=77c1ea2e&app_key=b22bf21dd9e8f582274c54a7634b2a49&q=${payload}`, {
 					params: {
 						q: "",
-						app_id: "77c1ea2e",
-						app_key: "b22bf21dd9e8f582274c54a7634b2a49",
 						from: 0,
 						to: 9,
 					},
 				})
 				// console.log(response.data.hits[0], "<<<< ini response")
-				context.commit("SET_RECIPES_BY_ID", response.data.hits[0].recipe)
+				commit("SET_RECIPES_BY_ID", response.data.hits[0].recipe)
 			} catch (err) {
 				console.log(err)
 			}
