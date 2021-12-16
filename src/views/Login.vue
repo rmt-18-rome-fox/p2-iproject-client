@@ -38,6 +38,7 @@ export default {
             this.$store.dispatch("login", this.user)
             .then(({data}) => {
                 localStorage.setItem("access_token", data.access_token);
+                this.$store.commit("set_is_logged_in", true);
                 this.$router.push("/mycharacters");
             });
         },

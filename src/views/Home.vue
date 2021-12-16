@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <!-- <img alt="Vue logo" src="../assets/logo.png" />
     <form @submit.prevent="doLogin">
       <input class="border border-black" type="email" v-model="loginForm.email"/>
       <input class="border border-black" type="password" v-model="loginForm.password"/>
@@ -15,14 +15,18 @@
       {{classes}}
       <br>-------<br>
       {{myCharacter}}
-    </div>
+    </div> -->
+    <navbar :isLoggedIn="isLoggedIn"></navbar>
+    <router-view />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import Navbar from "../components/Navbar.vue"
 
 export default {
+  components: {Navbar},
   name: "Home",
   data() {
     return {
