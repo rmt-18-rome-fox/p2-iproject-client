@@ -72,8 +72,6 @@ export default new Vuex.Store({
 
         context.commit("LOG_IN", true)
 
-        console.log(`hello?`)
-
         localStorage.access_token = response.data.access_token;
 
       } catch (err) {
@@ -134,7 +132,6 @@ export default new Vuex.Store({
         context.commit("TRY_ADD_ORDER", response.data)
 
       } catch (err) {
-        console.log(err.response.data)
         const errorLog = { msg: err.response.data.message, status: err.response.status }
         context.commit("ERROR_HANDLER", errorLog)
       }
