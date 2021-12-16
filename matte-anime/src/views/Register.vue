@@ -1,7 +1,7 @@
 <template>
   <div id="register-page">
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
+    <div class="max-w-md w-full box-content p-8 border-4 space-y-8">
       <div>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Register to MatteAnime
@@ -27,7 +27,7 @@
         </div>
 
         <div>
-          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             Submit
           </button>
         </div>
@@ -66,8 +66,26 @@ export default {
       this.$store.dispatch("doRegister", {email: this.email, password: this.password, fullName: this.fullName})
       .then((res) => {
         console.log('masuk swal');
-        swal.fire('Success Regist, Now You Can Login to MatteAnime')
+        swal.fire({
+          icon: 'success',
+          title: 'Success Regist',
+          text: 'Now You Can Login to MatteAnime'
+        })
         this.$router.push('/login')
+      })
+      .catch((err) => {
+        if(err.response.data.message){
+          swal.fire({
+            icon: 'error',
+            text: err.response.data.message
+          })
+        } else {
+          swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          })
+        }
       })
     }
   }
