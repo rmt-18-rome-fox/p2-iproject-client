@@ -180,7 +180,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["loginUser", "registerUser"]),
+    ...mapActions(["loginUser", "registerUser", "google"]),
    
 
     checkToken() {
@@ -203,50 +203,11 @@ export default {
       }
     },
 
-    onSuccess(googleUser) {
-      let url = `http://localhost:3000/public/authGoogle`;
-      //   let url = "https://movie-cms-h8.herokuapp.com";
-      axios({
-        url,
-        method: "POST",
-        data: {
-          idToken: googleUser.getAuthResponse().id_token,
-        },
-      })
-        .then(({ data }) => {
-          // this.checkToken();
-
-          localStorage.token = data.token;
-          localStorage.email = data.dataUser.email;
-          localStorage.role = data.dataUser.role;
-          this.googleLogin(true)
-
-          this.$router.push("/");
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener("mouseenter", Swal.stopTimer);
-              toast.addEventListener("mouseleave", Swal.resumeTimer);
-            },
-          });
-
-          Toast.fire({
-            icon: "success",
-            title: `Welcome, ${localStorage.email}!`,
-          });
-        })
-        .catch((err) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: err.response.data.msg,
-          });
-          // console.log(err);
-        });
+    async onSuccess(googleUser) {
+      await this.google(googleUser)
+          this.$router.push("/")
+          
+        
     },
 
     async successRegister() {
@@ -268,7 +229,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["isLogin"]),
+    ...mapState(["isLogin", "isLoginGL"]),
   },
 
   created() {
