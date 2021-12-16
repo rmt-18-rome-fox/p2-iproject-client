@@ -28,7 +28,7 @@ export default {
     name: "Navbar",
     computed: {
         isLoggedIn() {
-            return this.$store.state.isLoggedIn
+            return this.$store.state.isLoggedIn;
         }
     },
     methods: {
