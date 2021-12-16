@@ -22,25 +22,31 @@
           ></div>
           <input
             type="text"
-            name="price"
-            id="price"
+            name="search"
+            id="search"
             class="
               focus:ring-indigo-500 focus:border-indigo-500
               block
-              w-90
+              
               pl-7
               pr-12
               sm:text-sm
               border-gray-300
               rounded-md
+              justify-center
               justify-items-center
             "
             placeholder="e.g Pizza, Chicken..."
           />
-          <button class="border-1">Search</button>
+          <button class="rounded bg-orange-400 w-24">Search</button>
+          <div class="post-bottom">
+            <div class="action">
+              <i class="speech-to-text fas fa-microphone"></i>
+            </div>
+          </div>
         </div>
         <!-- Recipe Card -->
-        <div class="row">
+        <div class="grid gap-x-8 gap-y-4 grid-cols-3">
           <recipe-card
             v-for="(item, idx) in recipes"
             :key="idx"
@@ -62,6 +68,52 @@ export default {
     Navbar,
     RecipeCard,
   },
+  props: {
+    lang: {
+      type: String,
+      default: "en-US",
+    },
+  },
+  data: () => ({
+    runtimeTranscription: "",
+    transcription: [],
+  }),
+  methods: {
+    // speechToText() {
+    //   window.SpeechRecognition =
+    //     window.SpeechRecognition || window.webkitSpeechRecognition;
+    //   if (!SpeechRecognition && process.env.NODE_ENV !== "production") {
+    //     throw new Error(
+    //       "Speech Recognition does not exist on this browser. Use Chrome or Firefox"
+    //     );
+    //   }
+    //   if (!SpeechRecognition) {
+    //     return;
+    //   }
+    //   let recognition = new SpeechRecognition();
+    //   recognition.lang = this.lang;
+    //   recognition.interimResults = true;
+    //   recognition.addEventListener("result", (event) => {
+    //     const text = Array.from(event.results)
+    //       .map((result) => result[0])
+    //       .map((result) => result.transcript)
+    //       .join("");
+    //     this.runtimeTranscription = text;
+    //   });
+    //   recognition.addEventListener("end", () => {
+    //     if (this.runtimeTranscription !== "") {
+    //       this.transcription.push(this.runtimeTranscription);
+    //       this.$emit("onTranscriptionEnd", {
+    //         transcription: this.transcription,
+    //         lastSentence: this.runtimeTranscription,
+    //       });
+    //     }
+    //     this.runtimeTranscription = "";
+    //     recognition.start();
+    //   });
+    //   recognition.start();
+    // },
+  },
   created() {
     this.$store.dispatch("getRandomRecipes");
   },
@@ -70,5 +122,8 @@ export default {
       return this.$store.state.recipes;
     },
   },
+  mounted () {
+    this.speechToText()
+  }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex xl:w-1/4 md:w-1/2 p-4">
+  <div class="flex xl:w-full md:w-1/2 p-4">
     <div
       class="flex flex-col w-full justify-between bg-orange-100 p-6 rounded-lg"
     >
@@ -34,9 +34,31 @@
           <h2 class="leading-relaxed text-base">
             <strong> Ingredients: </strong>
           </h2>
-          <p v-for="(ingredient, i) in item.recipe.ingredientLines" :key="i" class="leading-relaxed text-base">
+          <p
+            v-for="(ingredient, i) in item.recipe.ingredientLines"
+            :key="i"
+            class="leading-relaxed text-base"
+          >
             {{ ingredient }}
           </p>
+        </div>
+        <div>
+          <h2 class="leading-relaxed text-base mt-3">
+            <strong> Nutritions: </strong>
+          </h2>
+          <ul>
+            <li >
+              <p class="leading-relaxed text-base mb-4">
+                {{ item.recipe.totalNutrients.ENERC_KCAL.label }}: {{item.recipe.totalNutrients.ENERC_KCAL.quantity}} {{item.recipe.totalNutrients.ENERC_KCAL.unit}}
+              </p>
+              <p class="leading-relaxed text-base mb-4">
+                {{ item.recipe.totalNutrients.FAT.label }}: {{item.recipe.totalNutrients.FAT.quantity}} {{item.recipe.totalNutrients.FAT.unit}}
+              </p>
+              <p class="leading-relaxed text-base mb-4">
+                {{ item.recipe.totalNutrients.CHOCDF.label }}: {{item.recipe.totalNutrients.CHOCDF.quantity}} {{item.recipe.totalNutrients.CHOCDF.unit}}
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
       <button
@@ -65,11 +87,6 @@
 export default {
   name: "RecipeCard",
   props: ["item"],
-  // data() {
-  //   return {
-  //     ingredientLines: this.data.ingredientLines
-  //   }
-  // }
 };
 </script>
 
