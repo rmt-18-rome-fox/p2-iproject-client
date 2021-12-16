@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-const baseUrl = "https://eight-book.herokuapp.com/";
+const baseUrl = "https://eight-book.herokuapp.com";
 // const headers = {
 //   access_token: localStorage.access_token,
 // };

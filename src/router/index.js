@@ -101,7 +101,9 @@ const router = new VueRouter({
 });
 
 // router.beforeEach((to, from, next) => {
-//   if (to.name !== "Login" && !isAuthenticated) next({ name: "Login" });
+//   const access_token = localStorage.access_token;
+//   if (to.name !== "LoginAndRegister" && !access_token)
+//     next({ name: "LoginForm" });
 //   else next();
 // });
 
