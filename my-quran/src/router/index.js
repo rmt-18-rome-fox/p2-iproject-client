@@ -42,7 +42,7 @@ const routes = [
     component: DetailBySurah
   },
   {
-    path: '/detailByJuzs',
+    path: '/detailByJuzs/:id',
     name: 'DetailByJuzs',
     component: DetailByJuzs
   },
