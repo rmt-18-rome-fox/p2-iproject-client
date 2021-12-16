@@ -1,29 +1,26 @@
 <template>
   <div id="app">
-    <navbar :isLoggedIn="isLoggedIn"></navbar>
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/mycharacters">My Character</router-link>
-    </div> -->
-    <router-view />
+    <!-- <navbar :isLoggedIn="isLoggedIn"></navbar>
+    <router-view /> -->
+    <Home />
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue"
+// import Navbar from "./components/Navbar.vue"
+import Home from "./views/Home.vue"
 export default {
-  components: {Navbar},
-  computed: {
-    isLoggedIn() {
-      return this.$store.state.isLoggedIn
-    }
-  },
-  created() {
-    if(localStorage.access_token) {
-      this.$store.commit("set_is_logged_in", true)
-    }
-  }
+  components: { Home},
+  // computed: {
+  //   isLoggedIn() {
+  //     return this.$store.state.isLoggedIn
+  //   }
+  // },
+  // created() {
+  //   if(localStorage.access_token) {
+  //     this.$store.commit("set_is_logged_in", true)
+  //   }
+  // }
 }
 </script>
 
