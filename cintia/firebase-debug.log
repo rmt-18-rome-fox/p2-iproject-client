@@ -1,0 +1,13 @@
+[debug] [2021-12-16T09:07:37.297Z] ----------------------------------------------------------------------
+[debug] [2021-12-16T09:07:37.298Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Name\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2021-12-16T09:07:37.299Z] CLI Version:   9.23.0
+[debug] [2021-12-16T09:07:37.299Z] Platform:      win32
+[debug] [2021-12-16T09:07:37.299Z] Node Version:  v14.17.5
+[debug] [2021-12-16T09:07:37.303Z] Time:          Thu Dec 16 2021 16:07:37 GMT+0700 (Western Indonesia Time)
+[debug] [2021-12-16T09:07:37.303Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-12-16T09:07:37.355Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-12-16T09:07:37.355Z] > authorizing via signed-in user (risangdevs@gmail.com)
+[debug] [2021-12-16T09:07:37.355Z] [iam] checking project cintia-cinema-tickecting-apps for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2021-12-16T09:07:37.357Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/cintia-cinema-tickecting-apps:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}

@@ -1,6 +1,6 @@
 <template>
   <!-- Login -->
-  <div class="container h-screen mx-auto">
+  <div class="container vh-100">
     <div class="grid grid-cols-10 h-screen place-items-center">
       <div
         class="col-start-2 col-span-8 sm:col-start-2 sm:col-span-8 place-items-center"
@@ -14,9 +14,7 @@
             <h2 class="text-dark text-opacity-80 text-2xl text-center mb-7">
               Register Now
             </h2>
-            <div
-              class="card px-1 py-5 rounded-md"
-            >
+            <div class="card px-1 py-5 rounded-md">
               <form class="mt-6 mb-6 space-y-6">
                 <div class="mb-5 col-12">
                   <label

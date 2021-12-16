@@ -1,6 +1,6 @@
 <template>
   <!-- Login -->
-  <div class="container h-screen mx-auto">
+  <div class="container vh-100">
     <div class="grid grid-cols-10 h-screen place-items-center">
       <div
         class="col-start-2 col-span-8 sm:col-start-2 sm:col-span-8 place-items-center"
