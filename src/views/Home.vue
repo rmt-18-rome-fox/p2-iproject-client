@@ -73,8 +73,10 @@
       v-if="this.$store.state.pageToogle === true"
     ></mapping-box>
 
-
-    <HFooter v-if="this.$store.state.pageToogle === false"></HFooter>
+    <div class="grid">
+    <HFooter
+    v-if="this.$store.state.pageToogle === false"></HFooter>
+    </div>
   </div>
 </template>
 

@@ -14,14 +14,14 @@
 body {
   /* font-family: 'Reaver', sans-serif; */
   font-family: 'Ubuntu', sans-serif;
-  display: block;
+  /* display: block;
   margin: 0;
   letter-spacing: 2px;
   background-color: black;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-image: url('https://picsum.photos/id/54/2200/1200');
+  background-image: url('https://picsum.photos/id/54/2200/1200'); */
 }
 
 .topnav {
