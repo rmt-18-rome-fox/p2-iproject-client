@@ -7,10 +7,10 @@
           <div>
 
             <h3 class="text-center text-white text-2xl font-bold">
-                  {{city_name}}, Indonesia
+                  {{city_name}}, {{country_code}}
             </h3>
             <div class="text-center text-gray-300 text-xl font-medium">
-                  15 December 2021*
+                  {{datetime}}
             </div>
             <h3 class="text-center text-white text-3xl mt-2 font-bold">
                   {{tempearture}} &deg;
@@ -40,6 +40,12 @@ export default {
     city_name () {
       return this.$store.state.weatherToday.city
     },
+    country_code () {
+      return this.$store.state.weatherToday.country
+    },
+    datetime () {
+      return this.$store.state.weatherToday.time
+    },
     tempearture () {
       return this.$store.state.weatherToday.temp
     },
@@ -48,7 +54,13 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("getIpClient")
+    this.$store
+    .dispatch("getIpClient")
+    .then(() => {
+      // console.log(data);
+    }).catch((err) => {
+      console.log(err);
+    });
   },
 }
 </script>
