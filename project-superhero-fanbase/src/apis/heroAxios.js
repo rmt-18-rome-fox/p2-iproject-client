@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const heroAxios = axios.create({
-    baseURL:"http://localhost:10000"
+    baseURL:"https://herosrome.herokuapp.com"
 
 })
 

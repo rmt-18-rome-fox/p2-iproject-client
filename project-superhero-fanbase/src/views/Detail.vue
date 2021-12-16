@@ -42,7 +42,7 @@
                         <h5 class="display-4 text-center"> Chatbox </h5> 
                     
                             <div  id="chatBox">
-                                <div class="response" v-for="(el,index) in chats" :key="el.user + index">
+                                <div class="response my-5" v-for="(el,index) in chats" :key="el.user + index">
                                     <div id="AutoMessage">
                                         <strong>{{el.user}}</strong>
                                         <br>{{el.message}}

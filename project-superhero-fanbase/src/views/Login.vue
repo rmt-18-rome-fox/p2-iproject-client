@@ -35,10 +35,22 @@ export default {
     methods: {
         login: function(){
             this.$store.dispatch('login',{email: this.email,password: this.password})
-            this.$store.dispatch('setUsername',this.email)
             .then(()=>{
+                this.$store.dispatch('setUsername',this.email)
                 this.$router.push("/")
+                 this.$swal({
+                icon: 'success',
+                title: 'SUCCES LOGIN',
+                text: `WELCOME IN HEOESROAM`,
+              })
               
+            })
+              .catch((err) =>{
+              this.$swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data.message,
+              })
             })
         },
     },    

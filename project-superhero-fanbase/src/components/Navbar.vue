@@ -41,7 +41,11 @@ export default {
             localStorage.clear()
             this.$store.commit('SET_IS_LOGIN')
             this.$router.push("/login")
-              
+            this.$swal({
+                icon: 'success',
+                title: 'SUCCES LOG OUT',
+                text: `THANKS YOU, I HOPE YOU CAME AGAIN`,
+              })  
                  
         }
     }
