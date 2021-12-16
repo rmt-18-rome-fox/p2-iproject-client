@@ -74,7 +74,7 @@ export default {
     
   }, 
   created (){
-      this.fetchHero()
+      this.$store.dispatch('fetchHero')
         
   }
 }

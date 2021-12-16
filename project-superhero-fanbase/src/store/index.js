@@ -10,7 +10,8 @@ export default new Vuex.Store({
     hero: [],
     heroId: [],
     currentUser: "",
-    chats: []
+    chats: [],
+    isLogin: false
   },
   mutations: {
     SET_HERO(state,payload){
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     SOCKET_RECEIVEMESSAGEFROMSERVER(state,payload){
       console.log("chat from server >>>>>>>>>>>>>>",payload)
       state.chats = payload
+    },
+    SET_IS_LOGIN(state,payload){
+      state.isLogin = payload
     }
   },
   actions: {
@@ -94,7 +98,7 @@ export default new Vuex.Store({
           },
         })
         .then(({data}) =>{
-          console.log(data.user.email,"data login >>>>>>>>>>>>>>>>>")
+          context.commit("SET_IS_LOGIN", true)
           localStorage.setItem("access_token", data.access_token)
           localStorage.setItem("email", data.user.email)
           
