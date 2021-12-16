@@ -52,7 +52,42 @@ const routes = [
     path: '/customer/architect/portofolios/:architectId',
     name: 'CustomerArchitectPortofolios',
     component: () => import('../views/CustomerArchitectPortofolios.vue')
+  },
+  {
+    path: '/architect',
+    name: 'Architect',
+    component: () => import('../views/ArchitectHome.vue')
+  },
+  {
+    path: '/architect/portofolio/add',
+    name: 'ArchitectAddPortofolio',
+    component: () => import('../views/ArchitectAddPortofolio.vue')
+  },
+  {
+    path: '/architect/portofolio/:portofolioId',
+    name: 'ArchitectEditPortofolio',
+    component: () => import('../views/ArchitectEditPortofolio.vue')
+  },
+  {
+    path: '/customer/profile',
+    name: 'CustomerProfile',
+    component: () => import('../views/CustomerProfile.vue')
+  },
+  {
+    path: '/architect/profile',
+    name: 'ArchitectProfile',
+    component: () => import('../views/ArchitectProfile.vue')
   }
+  // {
+  //   path: '/architect/chat',
+  //   name: 'ArchitectChat',
+  //   component: () => import('../views/ArchitectChat.vue')
+  // },
+  // {
+  //   path: '/customer/chat',
+  //   name: 'CustomerChat',
+  //   component: () => import('../views/CustomerChat.vue')
+  // }
 ]
 
 const router = new VueRouter({

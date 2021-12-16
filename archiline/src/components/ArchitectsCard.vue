@@ -2,7 +2,7 @@
   <div>
   <div
     style="max-width: 20rem; height: 47vh; border-radius: 10px; overflow:hidden;"
-    class="m-0 mb-2 border"
+    class="m-0 mb-2 border shadow rounded"
   >
     <div style="height: 20vh" class="mb-3">
         <img :src="architect.Profile.imageUrl" class="w-100 h-100"/>
@@ -12,9 +12,9 @@
        {{architect.Profile.description}}
     </div>
 
-    <b-button href="#" variant="primary" class="m-1" @click.prevent="toDetail(architect.id)">See Details</b-button>
-    <b-button href="#" variant="primary" class="m-1" @click.prevent="toPortofolio(architect.id)">See Portofolio</b-button>
-    <b-button href="#" variant="primary" class="m-1 w-75" @click.prevent="toBook(architect.id)">Book Consultation</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1" @click.prevent="toDetail(architect.id)">See Details</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1" @click.prevent="toPortofolio(architect.id)">See Portofolio</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1 w-75" @click.prevent="toBook(architect.id)">Book Consultation</b-button>
   </div>
 </div>
 </template>
@@ -23,6 +23,9 @@
 export default {
   name: 'ArchitectCard',
   props: ['architect'],
+  created () {
+    this.$store.dispatch('fetchCustomerProfile')
+  },
   methods: {
     toBook (payload) {
       this.$router.push({ path: `/customer/consultation/${payload}` })
@@ -32,6 +35,11 @@ export default {
     },
     toPortofolio (payload) {
       this.$router.push({ path: `/customer/architect/portofolios/${payload}` })
+    }
+  },
+  computed: {
+    profile () {
+      return this.$store.state.customerProfile
     }
   }
 }

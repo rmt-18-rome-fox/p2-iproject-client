@@ -1,7 +1,7 @@
 <template>
-<div>
+<div style="overflow: hidden; background-image: url(https://media.istockphoto.com/photos/white-texture-background-picture-id926993450?b=1&k=20&m=926993450&s=170667a&w=0&h=vxWViBkXgTQnSO4UTtU26hLlscn9FTKYS1Jx6f-_slI=)">
   <navbar></navbar>
-  <h1>WELCOME TO ARCHILINE, HERE ARE SOME OF OUR FEATURED ARCHITECTS</h1>
+  <h1 style="font-family: Nexa; font-size: 4em">Welcome to ArchiLine</h1>
     <div>
     <b-carousel
       id="carousel-1"
@@ -22,11 +22,8 @@
         style="height: 70vh"
       ></b-carousel-slide>
     </b-carousel>
-    <p class="mt-4">
-      Slide #: {{ slide }}<br>
-      Sliding: {{ sliding }}
-    </p>
   </div>
+    <h1 style="font-family: Nexa; font-size: 3em" class="mt-3">Here are some of our Featured Architect</h1>
 </div>
 
 </template>
@@ -59,6 +56,9 @@ export default {
     },
     onSlideEnd (slide) {
       this.sliding = false
+    },
+    toArchitect (payload) {
+      this.$router.push({ path: `/customer/architect/${payload}` })
     }
   }
 }
