@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-light rounded d-flex justify-content-center mx-auto" style="max-width: 400px; margin-top: 18rem">
+  <div class="container bg-light rounded d-flex justify-content-center mx-auto" style="max-width: 400px; margin-top: 16rem">
     <div class="register-form">
       <div style="margin: 10px"><br>
         <h2 style="text-align: center">Register</h2>

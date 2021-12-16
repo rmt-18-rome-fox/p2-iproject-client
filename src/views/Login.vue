@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-light rounded d-flex justify-content-center" style="max-width: 400px; margin-top: 15rem;">
+  <div class="container bg-light rounded d-flex justify-content-center" style="max-width: 400px; margin-top: 16rem;">
     <div class="login-form">
       <div style="margin: 10px;"><br>
           <h2 style="text-align: center">Login</h2>
@@ -14,10 +14,10 @@
               <input v-model="password" type="password" id="password" class="form-control" placeholder="Enter password">
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <a style="margin-left: 70px;" class="btn btn-success" href="https://github.com/login/oauth/authorize?client_id=ade64a4c4836b49e76eb">Github Sign-in</a>
       </form><br>
 
-      <a href="https://github.com/login/oauth/authorize?client_id=ade64a4c4836b49e76eb" class="btn btn-black">Github Sign-in</a>
-      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin><br><br>
+      <!-- <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin><br><br> -->
       <p>Feel like you don't belong? Register <a href="/register" @click.prevent="showRegister">here</a></p><br>
     </div>
   </div>
