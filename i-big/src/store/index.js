@@ -5,11 +5,14 @@ import Swal from "sweetalert2";
 
 Vue.use(Vuex)
 
-let baseUrl = "http://localhost:3000";
+// let baseUrl = "http://localhost:3000";
+let baseUrl = "https://i-big.herokuapp.com/";
+
 
 export default new Vuex.Store({
   state: {
     isLogin : false,
+    isLoginGL : false,
     isRegister: false,
     product : [],
     cart : [],
@@ -20,6 +23,11 @@ export default new Vuex.Store({
   mutations: {
     ISLOGIN(state, payload) {
       state.isLogin = payload
+    },
+
+    ISLOGIN_GL(state, payload) {
+      state.isLoginGL = payload
+      console.log(state.isLoginGL);
     },
 
     ISREGISTER(state, payload) {
@@ -364,6 +372,52 @@ Low Fat :
       }
       
     },
+
+    async google(context, payload) {
+      try {
+        let url = `${baseUrl}/public/authGoogle`;
+        //let url = "https://movie-cms-h8.herokuapp.com";
+
+        const response = await axios({
+          url,
+          method: "POST",
+          data: {
+          idToken: payload.getAuthResponse().id_token,
+        },
+        })
+
+        console.log(response.data);
+        context.commit("ISLOGIN_GL", true)
+
+        localStorage.token = data.token;
+        localStorage.email = data.dataUser.email;
+        localStorage.role = data.dataUser.role;
+
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener("mouseenter", Swal.stopTimer);
+            toast.addEventListener("mouseleave", Swal.resumeTimer);
+          },
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: `Welcome, ${localStorage.email}!`,
+        });
+
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.msg,
+        });
+      }
+    }
   },
   modules: {
   }
