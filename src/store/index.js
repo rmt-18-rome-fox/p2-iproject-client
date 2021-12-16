@@ -49,7 +49,7 @@ export default new Vuex.Store({
           lon: sendData.longitude
         }
         
-        this.dispatch("getCurrentWeather", dataIp)
+        this.dispatch("getCurrentWeather", dataIp.city)
         localStorage.setItem("city", dataIp.city)
       } catch (err) {
         console.log(err);
@@ -60,7 +60,7 @@ export default new Vuex.Store({
         newAxios({
           url: `/weather/current`,
           method: "POST",
-          data: {...payload}
+          data: {city: payload}
         })
         .then(({data}) => {
           context.commit("MUTATE_WEATHER", data)

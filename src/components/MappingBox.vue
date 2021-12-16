@@ -22,10 +22,13 @@ export default {
   components: {
     
   },
+  created() {
+    
+  },
   mounted() {
     mapboxgl.accessToken = this.accessToken;
 
-    const map = new mapboxgl.Map({
+    new mapboxgl.Map({
       container: "mapContainer",
       style: "mapbox://styles/faris95/ckx87oikk6hst14mxt5px67fl",
       center: [106.82706696700369, -6.175200397041986],
@@ -36,8 +39,8 @@ export default {
       // ],
     });
     
-    const nav = new mapboxgl.NavigationControl();
-    map.addControl(nav, "top-right");
+    // const nav = new mapboxgl.NavigationControl();
+    // map.addControl(nav, "top-right");
     // const marker = new mapboxgl.Marker()
     // .setLngLat([103.811279, 1.345399])
     // .addTo(map);
@@ -48,9 +51,9 @@ export default {
 
 <style>
 .basemap {
-  position: absolute;
+  /* position: absolute; */
+  /* position: relative; */
   width: 100vw;
-  height: 50vh;
-  bottom: 0;
+  height: 80vh;
 }
 </style>
