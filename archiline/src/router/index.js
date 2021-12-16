@@ -99,7 +99,9 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const accessToken = localStorage.getItem('access_token')
   const role = localStorage.getItem('role')
-  if (to.name === 'Blank') next({ name: 'Login' })
+  if (to.name === 'Blank' && !accessToken) next({ name: 'Login' })
+  else if (to.name === 'Blank' && accessToken && role === 'customer') next({ name: 'CustomerHome' })
+  else if (to.name === 'Blank' && accessToken && role === 'architect') next({ name: 'ArchitectHome' })
   else if ((to.name !== 'Login') && !accessToken) {
     if (to.name === 'Register') {
       next()
