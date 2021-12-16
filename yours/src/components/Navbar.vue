@@ -23,16 +23,16 @@
             </li>
           </ul>
           <div class="d-flex" style="margin-left: 10%">
-            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="!access_token">Login</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="!isLogin">Login</a>
           </div>
           <div class="d-flex" style="margin-left: 1%">
-            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toRegister" v-if="!access_token">Register</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toRegister" v-if="!isLogin">Register</a>
           </div>
           <div class="d-flex" style="margin-left: 10%">
-            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toHome" v-if="access_token">Home</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toHome" v-if="isLogin">Home</a>
           </div>
           <div class="d-flex" style="margin-left: 1%">
-            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="doLogout" v-if="access_token">Logout</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="doLogout" v-if="isLogin">Logout</a>
           </div>
         </div>
       </div>
@@ -55,12 +55,16 @@ export default {
     },
     doLogout() {
       localStorage.removeItem("access_token");
+      this.$store.commit("IS_LOGIN", false);
       this.$router.push("/");
     },
   },
   computed: {
-    access_token() {
-      return localStorage.getItem("access_token");
+    // access_token() {
+    //   return localStorage.getItem("access_token");
+    // },
+    isLogin() {
+      return this.$store.state.isLogin;
     },
   },
 };

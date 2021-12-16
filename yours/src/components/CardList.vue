@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="profile-card-2" v-for="postUser in postUsers" :key="postUser.id">
+        <div class="profile-card-2" v-for="postUser in postUsers" :key="postUser.id" @click.prevent="toPostDetail(postUser.id)">
           <img :src="postUser.imageUrl" class="img img-responsive" />
           <div class="profile-name">{{ postUser.title }}</div>
 
@@ -45,6 +45,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    toPostDetail(postId) {
+      this.$router.push(`/posts/${postId}`);
     },
   },
   created() {
