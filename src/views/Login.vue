@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-light rounded d-flex justify-content-center" style="max-width: 400px; margin-top: 16rem;">
+  <div class="container bg-light rounded d-flex justify-content-center" style="max-width: 400px; margin-top: 15rem;">
     <div class="login-form">
       <div style="margin: 10px;"><br>
           <h2 style="text-align: center">Login</h2>
@@ -16,6 +16,7 @@
           <button type="submit" class="btn btn-primary">Submit</button>
       </form><br>
 
+      <a href="https://github.com/login/oauth/authorize?client_id=ade64a4c4836b49e76eb" class="btn btn-black">Github Sign-in</a>
       <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin><br><br>
       <p>Feel like you don't belong? Register <a href="/register" @click.prevent="showRegister">here</a></p><br>
     </div>
@@ -67,10 +68,8 @@ export default {
     showRegister: function () {
         this.$router.push('register')
     },
-    githubLogin: function () {
-      this.$store.dispatch('githubLogin', {
-        code: this.$route.query.code
-      })
+    authGithub: function () {
+      this.$store.dispatch('authGithub')
     },
     onSuccess: function (googleUser) {
       this.$store.dispatch('googleLogin', {
@@ -89,6 +88,7 @@ export default {
     }
   },
   created: function () {
+    console.log(this.$router.query);
   }
 }
 </script>

@@ -232,6 +232,53 @@ export default new Vuex.Store({
             reject(error)
           })
       })
+    },
+    authGithub: function (context, payload) {
+      console.log(payload.code);
+      return new Promise((resolve, reject) => {
+        axios({
+          url: 'http://localhost:8000/login/auth-github',
+          method: 'post',
+          data: {
+            code: payload.code
+          }
+        })
+          .then(resp => {
+            localStorage.setItem('access_token', resp.data.access_token)
+            context.commit('SET_LOGIN', true)
+            Swal.fire({
+              icon: 'success',
+              title: 'Hello!',
+              text: `Welcome back!`
+            })
+            resolve()
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    postAuthGithub: function (code) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: 'http://localhost:8000/login/auth-github',
+          method: 'post',
+          data: {
+            code: code,
+            client_id: '5b3c8f13cf108325a665',
+            client_secret: 'd42cee4924ef5bd85e869a5211a3eab5b0c86406',
+            redirect_uri: 'http://localhost:8080/login/auth-github'
+        },
+        })
+          .then(resp => {
+            console.log(resp)
+            resolve()
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
+      })
     }
   },
   modules: {
