@@ -13,9 +13,8 @@
       <div>
         <!-- <button type="button" class="btn btn-success" @click.prevent="payMidtrans">Pay</button> -->
       </div>
+      <div v-if="orderDetail.length > 0" class="footer w-100 d-flex justify-content-center"><button type="button" class="btn btn-success" @click.prevent="payMidtrans">Click Here To Pay</button></div>
     </div>
-
-    <div v-if="orderDetail.length > 0" class="footer w-100 d-flex justify-content-center"><button type="button" class="btn btn-success" @click.prevent="payMidtrans">Click Here To Pay</button></div>
   </div>
   <!-- <img src="coffeePowder.imageUrl" alt="" srcset="" height="200" /> -->
   <!-- <a href="#" class="btn-buy btn btn-primary" v-if="roleUser == 'customer'">Buy</a>
@@ -58,7 +57,7 @@ export default {
 <style>
 .bg-container {
   /* background-color: #fcf1cf; */
-  /* min-height: 100vh; */
+  min-height: 90vh;
   padding-top: 100px;
 
   /* width: 100%; */
