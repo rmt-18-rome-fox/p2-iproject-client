@@ -14,6 +14,16 @@
 import Navbar from "./components/Navbar.vue"
 export default {
   components: {Navbar},
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn
+    }
+  },
+  created() {
+    if(localStorage.access_token) {
+      this.$store.commit("set_is_logged_in", true)
+    }
+  }
 }
 </script>
 
