@@ -1,7 +1,8 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-const baseUrl = "https://p2-basiccharcreation.herokuapp.com/";
+// const baseUrl = "https://p2-basiccharcreation.herokuapp.com";
+const baseUrl = "http://localhost:3000";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -121,6 +122,9 @@ export default new Vuex.Store({
         url: `${baseUrl}/user/characters`,
         data: {
           ...payload,
+        },
+        headers: {
+          access_token: localStorage.access_token,
         },
       });
     },

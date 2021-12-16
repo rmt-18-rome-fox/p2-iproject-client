@@ -7,7 +7,7 @@
   navbar navbar-expand-lg navbar-light px-10 flex items-center justify-center py-4">
 <div class=" items-center flex w-full justify-between px-8">
     <div class="flex space-x-5">
-    <h5>Character Creation (basic)</h5>
+    <h5><router-link to="/"> Creation (basic)</router-link></h5>
     <ul class="flex space-x-5">
         <li>
             <router-link to="/" v-if="isLoggedIn">Home</router-link>
