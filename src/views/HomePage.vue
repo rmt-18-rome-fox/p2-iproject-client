@@ -1,5 +1,5 @@
 <template>
-<div class="flex flex-col items-center pt-20">
+<div class="flex flex-col items-center pt-24">
     <img src="../../public/dndbghero.png" alt="hero image" width="60%" height="60%"/>
 
      <div class="w-full space-x-10 -mt-20">

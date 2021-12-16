@@ -35,6 +35,13 @@ const routes = [
     path: "/create",
     name: "CreateCharacter",
     component: CreateCharacter,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.access_token) {
+        next({ name: "Login" });
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/register",
