@@ -12,11 +12,14 @@
     </div>
 
     <div class="card mb-3">
-      <h5 class="card-header">Featured</h5>
+      <h5 class="card-header">Add Comment</h5>
       <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <textarea>With supporting text below as a natural lead-in to additional content.</textarea>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <form @submit.prevent="addComment">
+          <input class="form-control" aria-label="With textarea" v-model="comment" placeholder="Add your comment" />
+          <div class="d-flex mt-3" style="margin-left: 8%">
+            <button type="submit" class="btn btn-get-started btn-get-started-yellow">Add Comment</button>
+          </div>
+        </form>
       </div>
     </div>
     <div class="card mb-5" v-for="comment in comments" :key="comment.id">
@@ -40,6 +43,7 @@ export default {
     return {
       post: {},
       comments: [],
+      comment: "",
     };
   },
   methods: {
@@ -87,6 +91,21 @@ export default {
         .then((resp) => {
           console.log(resp);
           this.$router.push(`/home`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    addComment() {
+      const params = {
+        postId: +this.$route.params.postId,
+        access_token: localStorage.getItem("access_token"),
+        comment: this.comment,
+      };
+      this.$store
+        .dispatch("addComment", params)
+        .then(() => {
+          this.$router.push("/home");
         })
         .catch((err) => {
           console.log(err);

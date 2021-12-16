@@ -56,6 +56,17 @@ export default new Vuex.Store({
         },
       });
     },
+    addComment(context, payload) {
+      // console.log(payload.comment);
+      return axios.post(`http://localhost:3000/posts/${payload.postId}/comments`, {
+        headers: {
+          access_token: payload.access_token,
+        },
+        data: {
+          comment: payload.comment,
+        },
+      });
+    },
   },
   modules: {},
 });
