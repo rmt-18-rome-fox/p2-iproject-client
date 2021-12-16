@@ -14,7 +14,9 @@ export default new Vuex.Store({
     portofolioDetail: {},
     portofoliosByArchitect: [],
     portofolioEditForm: {},
-    tags: []
+    tags: [],
+    customerProfile: {},
+    architectProfile: {}
   },
   mutations: {
     SET_FEATURED_ARCHITECT (state, payload) {
@@ -43,6 +45,12 @@ export default new Vuex.Store({
     },
     SET_TAGS (state, payload) {
       state.tags = payload
+    },
+    SET_CUSTOMER_PROFILE (state, payload) {
+      state.customerProfile = payload
+    },
+    SET_ARCHITECT_PROFILE (state, payload) {
+      state.architectProfile = payload
     }
   },
   actions: {
@@ -187,6 +195,7 @@ export default new Vuex.Store({
           }
         })
           .then(data => {
+            console.log(data.data)
             context.commit('SET_ARCHITECT_PORTOFOLIOS', data.data)
             resolve()
           })
@@ -351,6 +360,93 @@ export default new Vuex.Store({
         })
           .then(data => {
             context.commit('SET_TAGS', data.data)
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+
+    fetchCustomerProfile (context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/customer/profile`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            console.log(data.data, '<<<<<<<<<<< ini data data')
+            context.commit('SET_CUSTOMER_PROFILE', data.data)
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    editProfileCustomer (context, payload) {
+      return new Promise((resolve, reject) => {
+        const form = new FormData()
+        form.append('name', payload.name)
+        form.append('phoneNumber', payload.phoneNumber)
+        form.append('address', payload.address)
+        form.append('file', payload.file)
+        axios({
+          method: 'PUT',
+          url: `${basicUrl}/customer/profile`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
+          data: form
+        })
+          .then(data => {
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    fetchArchitectProfile (context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          method: 'GET',
+          url: `${basicUrl}/architect/profile`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(data => {
+            console.log(data.data, '<<<<<<<<<<< ini data data')
+            context.commit('SET_ARCHITECT_PROFILE', data.data)
+            resolve(data.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    editProfileArchitect (context, payload) {
+      return new Promise((resolve, reject) => {
+        const form = new FormData()
+        form.append('name', payload.name)
+        form.append('phoneNumber', payload.phoneNumber)
+        form.append('address', payload.address)
+        form.append('description', payload.description)
+        form.append('price', payload.price)
+        form.append('file', payload.file)
+        axios({
+          method: 'PUT',
+          url: `${basicUrl}/architect/profile`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          },
+          data: form
+        })
+          .then(data => {
             resolve(data.data)
           })
           .catch(err => {

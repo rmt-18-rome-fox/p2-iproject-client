@@ -1,21 +1,23 @@
 <template>
-<div>
+<div style="min-height: 100vh; overflow: hidden; background-image: url(https://media.istockphoto.com/photos/white-texture-background-picture-id926993450?b=1&k=20&m=926993450&s=170667a&w=0&h=vxWViBkXgTQnSO4UTtU26hLlscn9FTKYS1Jx6f-_slI=)" class="mb-0">
   <navbar></navbar>
-  <h1>INI DI CUSTOMER BOOKING</h1>
-  <form class="d-flex flex-column" style="width: 100vw" @submit.prevent="onBook">
-    <label for="startDate">Start Date</label>
-    <datetime type="datetime" name="startDate" id="startDate" v-model="startDate" class="w-25" style="margin: auto"></datetime>
+      <div class="col-12 d-flex flex-column justify-content-center align-items-center" style="height: 80vh; ">
+  <form class="d-flex flex-column justify-content-center align-items-center p-5" @submit.prevent="onBook" style="border: 1px solid black; border-radius: 20px; background-color: #2C2828; color:#EEEEEE;">
+    <label for="startDate" class="mb-2" style="font-size: 40px">Start Date</label>
+    <datetime type="datetime" name="startDate" id="startDate" v-model="startDate" class="w-5" style="margin: auto"></datetime>
     <!-- <input type="date" name="startDate" id="startDate" v-model="startDate" class="w-25" style="margin: auto"> -->
-    <label for="session">Session (1 session is 1 hour)</label>
-    <input type="integer" name="session" id="session" v-model="session" class="w-25" style="margin: auto">
-    <label for="notes">Notes</label>
-    <input type="text" name="notes" id="notes" v-model="notes" class="w-25" style="margin: auto">
-    <label for="price">Price</label>
-    <input type="integer" name="price" id="price" :value="bookFormData.Profile.price" disabled class="w-25" style="margin: auto">
-    <button type="submit" class="btn btn-primary w-25 mt-4" style="margin: auto">Proceed to Payment</button>
+    <label for="session" class="mb-2" style="font-size: 40px">Session (1 session is 1 hour)</label>
+    <input type="integer" name="session" id="session" v-model="session" style="width: 20vw; font-size: 20px" class="mb-2 p-2">
+    <label for="notes" class="mb-2" style="font-size: 40px">Notes</label>
+    <input type="text" name="notes" id="notes" v-model="notes" style="width: 20vw; font-size: 20px" class="mb-2 p-2">
+    <label for="price" class="mb-2" style="font-size: 40px">Price</label>
+    <input type="integer" name="price" id="price" :value="bookFormData.Profile.price" disabled style="width: 20vw; font-size: 20px" class="mb-2 p-2">
+    <button type="submit" class="btn btn-primary mt-3" style="width: 20vw; font-size: 20px">Proceed to Payment</button>
     <!-- {{bookFormData}} -->
   </form>
 </div>
+</div>
+
 </template>
 
 <script>

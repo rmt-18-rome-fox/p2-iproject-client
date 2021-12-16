@@ -67,6 +67,16 @@ const routes = [
     path: '/architect/portofolio/:portofolioId',
     name: 'ArchitectEditPortofolio',
     component: () => import('../views/ArchitectEditPortofolio.vue')
+  },
+  {
+    path: '/customer/profile',
+    name: 'CustomerProfile',
+    component: () => import('../views/CustomerProfile.vue')
+  },
+  {
+    path: '/architect/profile',
+    name: 'ArchitectProfile',
+    component: () => import('../views/ArchitectProfile.vue')
   }
   // {
   //   path: '/architect/chat',

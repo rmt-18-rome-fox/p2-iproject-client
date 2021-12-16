@@ -2,7 +2,7 @@
 <div>
   <div
     style="max-width: 20rem; height: 48vh; border-radius: 10px; overflow:hidden;"
-    class="m-0 mb-2 border"
+    class="m-0 mb-2 border shadow rounded"
   >
     <div style="height: 20vh" class="mb-2">
         <img :src="portofolio.imageUrl" class="w-100 h-100"/>
@@ -12,9 +12,9 @@
     <div style="height: 8vh; overflow-y: scroll" class="mb-2 px-2">
        {{portofolio.description}}
     </div>
-    <b-button href="#" variant="primary" class="m-1" @click.prevent="toArchitectDetail(portofolio.User.id)">See Architect</b-button>
-    <b-button href="#" variant="primary" class="m-1" @click.prevent="toPortofolioDetail(portofolio.User.id)">See Details</b-button>
-    <b-button href="#" variant="primary" class="m-1 w-75" @click.prevent="toBook(portofolio.User.id)">Book Consultation</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1" @click.prevent="toArchitectDetail(portofolio.User.id)">See Architect</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1" @click.prevent="toPortofolioDetail(portofolio.id)">See Details</b-button>
+    <b-button href="#" variant="outline-dark" class="m-1 w-75" @click.prevent="toBook(portofolio.User.id)">Book Consultation</b-button>
   </div>
 </div>
 </template>
