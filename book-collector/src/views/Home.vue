@@ -14,8 +14,8 @@
         @click.prevent="doSearch"
       >search</button>
     </div>
-    <nav v-if="!isSearch">
-      <ul class="pagination">
+    <nav>
+      <ul class="pagination" v-if="!isSearch">
         <li class="page-item"><button @click.prevent="getPage(0)" class="page-link">Previous</button></li>
         <li class="page-item"
           v-for="index in pagination"
