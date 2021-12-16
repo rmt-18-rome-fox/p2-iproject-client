@@ -9,15 +9,18 @@
         ></FavCard>
       </div>
   </div>
+   <HFooter></HFooter>
   </div>
 </template>
 
 <script>
 import FavCard from '../components/FavCard.vue'
+import HFooter from 'vue-hacktiv8-footer'
 export default {
  name: "FavoriteGame",
  components : {
-     FavCard
+     FavCard,
+     HFooter
  },
  methods: {
     showBookmark() {

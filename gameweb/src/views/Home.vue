@@ -95,6 +95,7 @@
         </div>
       </div>
     </div>
+    <HFooter></HFooter>
   </div>
 </template>
 
@@ -102,6 +103,7 @@
 // @ is an alias to /src
 import MyCard from "@/components/MyCard.vue";
 import Swal from "sweetalert2";
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: "Home",
@@ -114,6 +116,7 @@ export default {
   },
   components: {
     MyCard,
+     HFooter
   },
   methods: {
     Games() {
