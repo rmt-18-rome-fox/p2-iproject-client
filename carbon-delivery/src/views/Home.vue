@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div>
     <Map />
   </div>
 </template>
 
 <script>
-import Map from './components/Map.vue'
+import Map from '../components/Map.vue'
 
 export default {
   name: "Home",
@@ -14,3 +14,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>
