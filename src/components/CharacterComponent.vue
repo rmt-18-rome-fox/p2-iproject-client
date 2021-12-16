@@ -120,7 +120,10 @@ export default {
         deleteChar(id) {
             this.$store.dispatch("deleteChar", id)
             .then(() => {
-                this.$router.push("/mycharacters")
+                return this.$store.dispatch("getMyCharacters");
+            })
+            .then(({data}) => {
+                this.$store.commit("set_my_characters", data)
             })
         },
         toPrev() {
