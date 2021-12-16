@@ -14,7 +14,7 @@ export default new Vuex.Store({
 	state: {
 		recipes: [],
 		apiUrl: "https://api.edamam.com/search",
-		baseUrl: "https://ip-foodify.herokuapp.com/",
+		baseUrl: "https://ip-foodify.herokuapp.com",
 		isLoggedIn: false,
 	},
 	mutations: {
