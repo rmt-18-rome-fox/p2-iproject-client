@@ -14,6 +14,16 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue'),
   },
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    component: () => import('../views/Favorite.vue'),
+  },
+  {
+    path: '/recipe-details',
+    name: 'RecipeDetails',
+    component: () => import('../views/RecipeDetails.vue'),
+  },
 ]
 
 const router = new VueRouter({

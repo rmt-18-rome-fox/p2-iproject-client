@@ -20,11 +20,15 @@
           {{ item.recipe.dishType[0] }}
         </h3>
         <h2
-          class="text-lg text-gray-900 text-center font-medium title-font mb-4"
+          class="text-lg text-gray-900 text-center font-medium title-font"
         >
           {{ item.recipe.label }}
         </h2>
-        <h2 class="leading-relaxed text-base">
+
+        <!-- ---------------------------------------------------------- -->
+        <!-- SISANYA TARO DI HALAMAN DETAIL -->
+        
+        <!-- <h2 class="leading-relaxed text-base">
           <strong> Area: </strong>
         </h2>
         <p class="leading-relaxed text-base mb-4">
@@ -59,7 +63,7 @@
               </p>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
       <button
         class="

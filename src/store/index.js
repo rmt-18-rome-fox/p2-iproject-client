@@ -21,6 +21,9 @@ export default new Vuex.Store({
 		SET_RECIPES(state, payload) {
 			state.recipes = payload
 		},
+		SET_IS_LOGGED_IN(state, payload) {
+			state.isLoggedIn = payload
+		},
 	},
 	actions: {
 		async getRandomRecipes({ state, commit }) {

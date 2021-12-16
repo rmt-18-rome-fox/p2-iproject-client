@@ -1,9 +1,25 @@
 <template>
   <div id="app">
+    <div id="nav" class="bg-orange-100 h-15 w-400">
+      <navbar />
+    </div>
     <router-view />
   </div>
 </template>
 
+<script>
+import Navbar from "./components/Navbar.vue";
+
+export default {
+  name: "App",
+  components: { Navbar },
+  created() {
+    if (localStorage.getItem("access_token")) {
+      this.$store.commit("SET_IS_LOGGED_IN", true);
+    }
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
