@@ -20,6 +20,17 @@
                         </div>
                         <div>
                             <div class="pb-4">
+                                <label class="block pb-2 text-sm font-bold text-gray-700" for="gender">
+                                    gender
+                                </label>
+                                <input
+                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-600"
+                                    id="gender"
+                                    type="text"
+                                    v-model="myChar.gender"
+                                />
+                            </div>
+                            <div class="pb-4">
                                 <label class="block pb-2 text-sm font-bold text-gray-700" for="race">
                                     Race
                                 </label>
@@ -67,9 +78,9 @@
                         <div class="mb-6 text-center w-48 pt-4">
                             <button
                                 class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="button" @click="addCharacter"
+                                type="button" @click="toNext"
                             >
-                                Add Character
+                                Next
                             </button>
                         </div>
                         </div>
@@ -86,16 +97,10 @@ export default {
     name: "CreateCharacterComponent",
     data() {
         return {
-            myChar: {
-                name: "",
-                race: "",
-                className: "",
-                spells: [],
-                spell: "",
-            },
             selectedSpell: "",
         }
     },
+    props: ["myChar"],
     computed: {
         spellList() {
             return this.$store.state.spells
@@ -108,9 +113,12 @@ export default {
             this.myChar.spells.push(this.selectedSpell);
         },
         addCharacter() {
-            this.myChar.spell = this.myChar.spells.join(",");
-            console.log(this.myChar);
             this.$store.dispatch("addCharacter", this.myChar);
+        },
+        toNext() {
+            this.myChar.spell = this.myChar.spells.join(",");
+            console.log(this.myChar.spell);
+            this.$emit("toNext", 2);
         }
     }
 }
