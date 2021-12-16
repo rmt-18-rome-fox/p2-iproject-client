@@ -1,20 +1,18 @@
 <template>
   <div id="app">
+    <div id="nav">
+      <navbar></navbar>
+    </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-// import Home from './views/Home.vue'
-// import Login from './views/Login.vue'
-// import Register from './views/Register.vue'
-// import DetailBySurah from './views/DetailBySurah.vue'
+import Navbar from './components/Navbar.vue'
+
 export default {
   components: {
-    // Home,
-    // Login,
-    // Register,
-    // DetailBySurah
+    Navbar
   }
 }
 </script>
@@ -28,7 +26,10 @@ export default {
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  background-color: white;
 }
 
 #nav a {

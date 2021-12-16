@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-const baseUrl = 'https://my-quran-webapp.herokuapp.com'
+// const baseUrl = 'https://my-quran-webapp.herokuapp.com'
+const baseUrl = 'http://localhost:3000'
 
 export default new Vuex.Store({
   state: {
@@ -30,6 +31,12 @@ export default new Vuex.Store({
       state.allJuzs = data.juzs
     },
     GET_DETAIL_JUZS(state, data) {
+      state.detailSurah = data
+    },
+    PAGINATION_BY_JUZS(state, data) {
+      state.detailSurah = data
+    },
+    PAGINATIION_BY_CHAPTER(state, data) {
       state.detailSurah = data
     }
   },
@@ -129,6 +136,39 @@ export default new Vuex.Store({
       })
       .then(({data}) => {
         context.commit('GET_DETAIL_JUZS', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    paginationByJuzs(context, payload) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/juzz/${payload.juzsNumber}?page=${payload.page}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('PAGINATION_BY_JUZS', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    paginationByChapter(context, payload) {
+      let {page, chapterNumber} = payload
+      chapterNumber = chapterNumber.split(':')[0]
+
+      axios({
+        method: "GET",
+        url: `${baseUrl}/chapters/${chapterNumber}?page=${page}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('PAGINATIION_BY_CHAPTER', data)
       })
       .catch(err => {
         console.log(err)

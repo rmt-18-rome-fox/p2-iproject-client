@@ -13,6 +13,7 @@ export default {
     methods: {
         getDetailSurah(id) {
             this.$store.dispatch('detailSurahById', id)
+            this.$router.push(`/detailByJuzs/${id}`)
         }
     }
 }

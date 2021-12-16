@@ -1,6 +1,5 @@
 <template>
   <div class="h-screen">
-    <navbar></navbar>
     <div class="flex justify-center items-center border h-screen">
       <div class="h-2/3 border w-2/3 rounded-lg shadow-md flex bg-green-500">
         <div class="w-1/2 flex justify-center items-center rounded-md bg-white">
@@ -17,14 +16,14 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import Navbar from '../components/Navbar.vue'
+// import Navbar from '../components/Navbar.vue'
 import { mapState, mapMutations } from "vuex"
 
 export default {
   name: 'Home',
   components: {
     // HelloWorld
-    Navbar
+    // Navbar
   },
   methods: {
         ...mapMutations({
