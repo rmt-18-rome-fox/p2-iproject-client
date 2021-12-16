@@ -33,13 +33,15 @@ export default new Vuex.Store({
   actions: {
     async fetchNews(context, payload) {
       try {
-        let response = []
-        if(payload) {
-          response = await axios.get(`http://api.mediastack.com/v1/news?access_key=082efd54ede2e28fbf9f1690cd147412&languages=en&keywords=${payload}`);
-        } else {
-          response = await axios.get("http://api.mediastack.com/v1/news?access_key=082efd54ede2e28fbf9f1690cd147412&languages=en");
-        }
+        // console.log(payload, "111<<<<");
+        // let response = []
+        // if(payload) {
+        //   response = await axios.get(`http://api.mediastack.com/v1/news?access_key=082efd54ede2e28fbf9f1690cd147412&languages=en&keywords=${payload}`);
+        // } else {
+        //   response = await axios.get("http://api.mediastack.com/v1/news?access_key=082efd54ede2e28fbf9f1690cd147412&languages=en");
+        // }
         // console.log("masuk sini <<<<11111");
+        const response = await axiosArticles.post("/articles/mediastack", {payload: payload});
         
         context.commit("MUTATE_FETCHNEWS", response.data);
       } catch (err) {
