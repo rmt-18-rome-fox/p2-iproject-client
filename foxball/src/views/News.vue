@@ -76,7 +76,7 @@ export default {
     ...mapState(["arrNews"]),
   },
   created() {
-    // this.fetchNews();
+    this.fetchNews();
   },
 };
 </script>
