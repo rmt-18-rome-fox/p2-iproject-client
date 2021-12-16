@@ -41,7 +41,7 @@
               <font-awesome-icon
                 style="font-size: 26px; color: green"
                 :icon="['fas', 'check-circle']"
-                v-if="transaction.status === 'Success'"
+                v-if="transaction.status === 'SUCCEEDED'"
               />
               <font-awesome-icon
                 style="font-size: 26px; color: orange"

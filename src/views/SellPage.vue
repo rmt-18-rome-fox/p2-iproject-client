@@ -1,8 +1,10 @@
 <template>
-  <div class="container">
+  <div>
     <Navbar></Navbar>
-    <h1>Sell page</h1>
-    <router-view></router-view>
+    <div class="container">
+      <h1 class="text-center my-5">My Store</h1>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
