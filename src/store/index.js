@@ -86,7 +86,6 @@ export default new Vuex.Store({
           }
         })
         .then(({data}) => {
-          console.log(data,"<< DATA FORECAST");
           context.commit("MUTATE_FORECAST_WEATHER", data)
           
           resolve(data)
