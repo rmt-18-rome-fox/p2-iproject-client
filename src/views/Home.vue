@@ -1,0 +1,81 @@
+<template>
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <form @submit.prevent="doLogin">
+      <input class="border border-black" type="email" v-model="loginForm.email"/>
+      <input class="border border-black" type="password" v-model="loginForm.password"/>
+      <button type="submit">login</button>
+    </form>
+    <div><p class="font-bold text-2xl">hello</p></div>
+    <div v-if="isLoggedIn">
+      {{races}}
+      <br>-------<br>
+      {{spells}}
+      <br>-------<br>
+      {{classes}}
+      <br>-------<br>
+      {{myCharacter}}
+    </div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: "Home",
+  data() {
+    return {
+      loginForm: {
+        email: "",
+        password: "",
+      }
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+    myCharacter() {
+      return this.$store.state.myCharacter
+    },
+    races() {
+      return this.$store.state.races
+    },
+    spells() {
+      return this.$store.state.spells
+    },
+    classes() {
+      return this.$store.state.classes
+    }
+  },
+  methods: {
+    doLogin() {
+      this.$store.dispatch("login",this.loginForm)
+      .then((response) => {
+          console.log(response.data);
+          localStorage.setItem("access_token", response.data.access_token);
+          this.$store.commit("set_access_token", response.data.access_token);
+          return this.$store.dispatch("getMyCharacter");
+          // this.$router.push("/");
+      })
+      .then((response) => {
+        console.log(response.data);
+        this.$store.commit("set_my_character", response.data);
+        this.$store.commit("set_is_logged_in", true);
+      })
+      .catch(err => {
+          console.log(err)
+      })  
+    }
+  },
+  created() {
+    this.$store.dispatch("getRaces");
+    this.$store.dispatch("getSpells");
+    this.$store.dispatch("getClasses");
+    if(localStorage.access_token) {
+      this.$store.commit("set_is_logged_in", true)
+    }
+  }
+};
+</script>
