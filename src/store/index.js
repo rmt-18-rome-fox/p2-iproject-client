@@ -2,7 +2,8 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Swal from 'sweetalert2'
-let baseURL = 'https://halita-kanban.herokuapp.com'
+// let baseURL = 'https://halita-kanban.herokuapp.com'
+let baseURL = 'http://localhost:8000'
 
 Vue.use(Vuex)
 
@@ -237,7 +238,7 @@ export default new Vuex.Store({
       console.log(payload.code);
       return new Promise((resolve, reject) => {
         axios({
-          url: 'http://localhost:8000/login/auth-github',
+          url: `${baseURL}/login/auth-github`,
           method: 'post',
           data: {
             code: payload.code

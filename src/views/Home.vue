@@ -91,6 +91,7 @@ export default {
     }
   },
   created: function () {
+    console.log(this.$cookie, 'COOKIE');
     this.$store.dispatch('getNotes')
       .then(() => {
         this.fresh = this.freshNotes
