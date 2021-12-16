@@ -13,7 +13,7 @@
       <div class="hidden md:block">
         <div class="flex items-center">
 
-          <button class="text-white text-2xl font-extrabold btn mr-5 px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-50 hover:shadow-inner transform hover:scale-110 hover:bg-opacity-50 transition ease-out duration-300"
+          <button class="text-gray-700 text-2xl font-extrabold btn mr-5 px-3 py-2 rounded-md hover:bg-gray-700 hover:text-yellow-50 hover:shadow-inner transform hover:scale-110 hover:bg-opacity-50 transition ease-out duration-300"
           >Menu</button>
 
           <div class="ml-3 relative dropdown"
