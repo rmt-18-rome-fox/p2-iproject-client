@@ -41,9 +41,6 @@
                   <br>
       <!-- Remind Passowrd -->
       <p>
-        <a id="github-button" class="btn btn-block btn-social btn-github">
-  <i class="fa fa-github"></i> Sign in with Github
-</a>
         Doesnt Have an Account?
         <a href="#!" class="fw-bold text-body"
         @click.prevent="toRegister"

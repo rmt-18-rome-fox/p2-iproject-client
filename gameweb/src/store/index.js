@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-let baseUrl = "http://localhost:10000"
+let baseUrl = "https://iproject-gameweb.herokuapp.com"
 Vue.use(Vuex)
 
 export default new Vuex.Store({
