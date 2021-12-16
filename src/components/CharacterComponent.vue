@@ -1,14 +1,14 @@
 <template>
 <div>
     <div class="container mx-auto">
-        <div class="flex justify-center px-6 my-12 border bg-gray-300">
+        <div class="flex justify-center px-6 my-12">
             <!-- Row -->
-            <div class="w-full xl:w-3/4 lg:w-11/12 flex">
+            <div class="w-full max-w-7xl flex border rounded-lg">
                 <!-- Col -->
                 <div
-                    class="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
+                    class="h-auto bg-gray-400 flex w-5/12 bg-cover rounded-l-lg items-center justify-center"
                 >
-                 <img :src="myChar.imageUrl" alt="Girl in a jacket" width="80%" height="80%"> 
+                 <img :src="myChar.imageUrl" alt="Avatar image" width="80%" height="80%"> 
                 </div>
                 <!-- Col -->
                 <div class="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
@@ -50,41 +50,26 @@
                                 />
                             </div>
                         </div>
-                        <div class="mb-4 md:flex md:justify-between">
+                        <div class="mb-4 flex items-center justify-center">
                             <div class="mb-4 md:mr-2 md:mb-0">
                                 <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
                                     Spells
                                 </label>
-                                <p class="text-xs italic">{{myChar.spell}}</p>
                                 <ul v-for="el in myChar.spell" :key="el.id">
                                     <li>{{el}}</li>
                                 </ul>
                             </div>
                         </div>
-                        <div class="mb-6 text-center">
+                        <hr class="mb-6 border-t" />
+                        <div class="flex items-center justify-center">
+                        <div class="mb-6 text-center w-48">
                             <button
-                                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="button"
+                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                type="button" @click="deleteChar(myChar.id)"
                             >
-                                Register Account
+                                Delete Character
                             </button>
                         </div>
-                        <hr class="mb-6 border-t" />
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="#"
-                            >
-                                Forgot Password?
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a
-                                class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-                                href="./index.html"
-                            >
-                                Already have an account? Login!
-                            </a>
                         </div>
                     </form>
                 </div>
@@ -97,7 +82,12 @@
 <script>
 export default {
     name: "CharacterComponent",
-    props: ["myChar"]
+    props: ["myChar"],
+    methods: {
+        deleteChar(id) {
+            this.$store.dispatch("deleteChar", id)
+        }
+    }
 }
 </script>
 
