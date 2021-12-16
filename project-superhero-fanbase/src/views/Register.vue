@@ -49,7 +49,19 @@ export default {
             this.$store.dispatch('Register',{username:this.username,email: this.email,password: this.password, phoneNumber: this.phoneNumber})
             .then(()=>{
                 this.$router.push("/login")
+                this.$swal({
+                icon: 'success',
+                title: 'SUCCES ',
+                text: `THANKS YOU FOR SIGNUP`,
+              })
                  
+            })
+              .catch((err) =>{
+              this.$swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data.message,
+              })
             })
            
         }

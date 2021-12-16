@@ -65,6 +65,13 @@ export default {
              .then(() =>{
                  this.$router.push("/")
              })
+               .catch((err) =>{
+              this.$swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: err.response.data.message,
+              })
+            })
             
         },
 

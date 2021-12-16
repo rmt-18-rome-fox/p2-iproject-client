@@ -47,7 +47,11 @@ export default {
             this.$store.dispatch('detailHero',id)
             .then(() =>{
                 this.$router.push(`/detail/${id}`)
-                 
+                 this.$swal({
+                icon: 'info',
+                title: 'INFO',
+                text: `DETAIL HEROES`,
+              })
             })
         },
          formatDate() {
