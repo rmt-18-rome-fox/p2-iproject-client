@@ -43,7 +43,7 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             console.log({ err });
-            reject(err)
+            reject(err);
           });
       });
     },
@@ -57,7 +57,7 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             console.log({ err });
-            reject(err)
+            reject(err);
           });
       });
     },
@@ -157,6 +157,22 @@ export default new Vuex.Store({
             reject(err);
           });
       });
+    },
+    readSynopsis({ commit }, text) {
+      return new Promise((resolve, reject) => {
+        localUrl
+          .post("/synopsis-reader", { text })
+          .then(({data}) => {
+            console.log({data});
+            const audio = new Audio(data.data)
+            audio.play()
+            resolve()
+          })
+          .catch((err) => {
+            console.log({ err });
+            reject()
+          });
+      })
     },
   },
   modules: {},

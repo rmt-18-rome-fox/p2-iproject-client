@@ -35,12 +35,12 @@ export default {
           document.documentElement.scrollTop + window.innerHeight >=
           document.documentElement.offsetHeight - 1;
 
-        console.log({
-          bottomOfWindow,
-          scroll: document.documentElement.scrollTop,
-          innerHeight: window.innerHeight,
-          offsetHeight: document.documentElement.offsetHeight,
-        });
+        // console.log({
+        //   bottomOfWindow,
+        //   scroll: document.documentElement.scrollTop,
+        //   innerHeight: window.innerHeight,
+        //   offsetHeight: document.documentElement.offsetHeight,
+        // });
         if (bottomOfWindow) {
           this.$store.dispatch("fetchAnimesNext", this.$store.state.pageJikan + 1)
         }
