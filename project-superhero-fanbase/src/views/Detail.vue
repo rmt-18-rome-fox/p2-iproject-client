@@ -18,6 +18,7 @@
                                 <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary"></span> </div>
                                     <h3 class="card-text text-muted"><b>{{heroId.result2[0].name}}</b></h3>
                                     <h3 class="card-text text-muted"><b>{{heroId.result2[0].work.base}}</b></h3>
+                                     <h3 class="card-text text-muted"><b>{{heroId.result2[0].biography.publisher}}</b></h3>
                                     <p class="card-text text-muted"></p>
                                 </div>
                             </div>
@@ -86,6 +87,7 @@ export default {
         image(){
             return this.$store.state.heroId.result2[0].image.url
         },
+       
      
     
 

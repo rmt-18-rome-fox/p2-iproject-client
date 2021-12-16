@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Detail from '../views/Detail.vue'
-import Calender from '../views/Calender.vue'
 import Form from '../components/Form.vue'
 
 Vue.use(VueRouter)
@@ -13,12 +12,26 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    beforeEnter: (to,from,next) =>{
+      if(!localStorage.getItem("access_token")){
+        next({name: "Login"})
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to,from,next) =>{
+      if(localStorage.getItem("access_token")){
+        next({name: "Home"})
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/register',
@@ -28,17 +41,26 @@ const routes = [
   {
     path: '/detail/:id',
     name: 'Detail',
-    component: Detail
-  },
-  {
-    path: '/calender',
-    name: 'Calender',
-    component: Calender
+    component: Detail,
+    beforeEnter: (to,from,next) =>{
+      if(!localStorage.getItem("access_token")){
+        next({name: "Login"})
+      }else{
+        next()
+      }
+    }
   },
   {
     path: '/form',
     name: 'Form',
-    component: Form
+    component: Form,
+    beforeEnter: (to,from,next) =>{
+      if(!localStorage.getItem("access_token")){
+        next({name: "Login"})
+      }else{
+        next()
+      }
+    }
   }
 ]
 
