@@ -295,7 +295,7 @@
         </li>
       </ul>
       <div class="flex items-center justify-center h-20 shadow-md">
-        <a class="cursor-pointer" @click="signout">Sign Out</a>
+        <a class="cursor-pointer" @click.prevent="signout">Sign Out</a>
       </div>
     </div>
   </div>
@@ -316,8 +316,8 @@ export default {
     }),
     signout() {
       localStorage.clear();
+      this.loginMutations(false);
       this.$router.push("/login");
-      this.loginMutations = false;
     },
   },
 };

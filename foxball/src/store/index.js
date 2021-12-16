@@ -68,6 +68,34 @@ export default new Vuex.Store({
         });
       }
     },
+    async googleSuccess(context, payload) {
+      try {
+        const response = await axios({
+          url: '/authGoogle',
+          method: "post",
+          data: {
+            idToken: payload.getAuthResponse().id_token,
+          },
+        })
+        localStorage.setItem('access_token', response.data.access_token)
+        localStorage.setItem('username', response.data.dataFromGoogle.username)
+        context.commit('LOGIN', true);
+        Swal.fire({
+          title: `Hello ${response.data.dataFromGoogle.username}`,
+          text: "Welcome!",
+          icon: "success",
+          confirmButtonText: "Continue Sign In!",
+        });
+      } catch (err) {
+        context.commit('LOGIN', false);
+        Swal.fire({
+          title: "Error!",
+          text: err.response.data.message,
+          icon: "error",
+          confirmButtonText: "Check Again!",
+        });
+      }
+    },
     async fetchPost(context) {
       try {
         const response = await axios.get('/post', {
@@ -253,7 +281,8 @@ export default new Vuex.Store({
           confirmButtonText: "Check Again!",
         });
       }
-    }
+    },
+    
   },
   modules: {
   }

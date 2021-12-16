@@ -103,7 +103,13 @@
           </button>
         </form>
         <div class="flex grid grid-cols-1 py-3">
-          <p class="text-sm text-black-600 mb-6">Or Sign In with Twitter</p>
+          <p class="text-sm text-black-600 mb-6">Or Sign In with Google</p>
+          <GoogleLogin
+            class="justify-self-center"
+            :params="params"
+            :renderParams="renderParams"
+            :onSuccess="onSuccess"
+          ></GoogleLogin>
         </div>
         <div class="flex justify-center py-3">
           <p class="text-sm text-black-600 mb-6">Don't have an account ?</p>
@@ -125,22 +131,45 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import GoogleLogin from "vue-google-login";
 export default {
   name: "Login",
+  components: {
+    GoogleLogin,
+  },
   data() {
     return {
       formLogin: {
         username: "",
         password: "",
       },
+      params: {
+        client_id:
+          "465913921187-kk0ildre45gk6e1gq9h7upses9hcqoke.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 150,
+        height: 40,
+        longtitle: false,
+        theme: "dark",
+      },
     };
   },
   methods: {
-    ...mapActions(["logginIn"]),
+    ...mapActions(["logginIn", "googleSuccess"]),
     async toLogin() {
       await this.logginIn(this.formLogin);
       if (this.isLogin === true) {
         this.$router.push("/");
+      }
+    },
+    async onSuccess(googleUser) {
+      // console.log(googleUser);
+      // This only gets the user information: id, name, imageUrl and email
+      // console.log(googleUser.getBasicProfile());
+      await this.googleSuccess(googleUser);
+      if (this.isLogin === true) {
+        await this.$router.push("/");
       }
     },
   },
