@@ -33,16 +33,17 @@ export default new Vuex.Store({
   },
   actions: {
     calculate({ dispatch }, { originQuery, destQuery, weight }) {
-      const path = `https://api.mapbox.com/directions/v5/mapbox/driving/${originQuery[0]}%2C${originQuery[1]}%3B${destQuery[0]}%2C${destQuery[1]}?alternatives=true&continue_straight=true&geometries=geojson&overview=simplified&steps=false&access_token=pk.eyJ1IjoiaWh6YW5hbnRhbWEiLCJhIjoiY2t4NW02Y3B3MDNhajJ2bzNtZzllcmhyYiJ9.keA6mU1OUSS8JqO9U9n8hg`;
-      const carbon_interface_token = "bT4U08ocSLa5cd6Qp6nnA";
-
       return new Promise((resolve, reject) => {
         axios({
           method: "GET",
-          url: path,
+          url: `${baseUrl}/api/mapbox`,
           headers: {
-            Authorization: `Bearer ${carbon_interface_token}`,
+            access_token: localStorage.getItem('access_token'),
           },
+          data: {
+            originQuery,
+            destQuery
+          }
         })
           .then(({ data }) => {
             let distance = data.routes[0].distance / 1000;
@@ -65,25 +66,18 @@ export default new Vuex.Store({
       });
     },
     getCarbonFootprint({ commit }, {distance, weight, origin, destination}) {
-      const path = `https://www.carboninterface.com/api/v1/estimates`;
-      const payload = {
-        type: "shipping",
-        weight_value: weight, //tambahkan weight
-        weight_unit: "kg",
-        distance_value: distance,
-        distance_unit: "km",
-        transport_method: distance > 1000 ? "plane" : "truck",
-      };
+      
       return new Promise((resolve, reject) => {
         axios({
-          method: "POST",
-          url: path,
+          method: "GET",
+          url: `${baseUrl}/api/carbon-interface`,
           headers: {
-            Authorization: "Bearer bT4U08ocSLa5cd6Qp6nnA",
+            access_token: localStorage.getItem('access_token'),
           },
           data: {
-            ...payload,
-          },
+            weight,
+            distance
+          }
         })
           .then((response) => {
             const routeDetail = {
@@ -92,7 +86,7 @@ export default new Vuex.Store({
               origin, 
               destination 
             }
-            console.log("emitted carbon:" ,routeDetail.carbonEmitted)
+            console.log('migration success')
             commit('SET_MOST_RECENT_DATA', routeDetail)
             resolve(response);
           })
