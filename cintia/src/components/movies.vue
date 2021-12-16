@@ -1,6 +1,6 @@
 <template>
   <!-- MoviesCard -->
-  <div class="container vh-100">
+  <div class="container vh-90">
     <div class="d-flex justify-content-center mx-1 my-5 flex-wrap">
       <div
         class="card"

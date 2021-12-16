@@ -1,6 +1,6 @@
 <template>
   <!-- Booking Card -->
-  <div>
+  <div class="container vh-90">
     <div
       class="d-flex justify-content-center"
       style="margin: 20px"

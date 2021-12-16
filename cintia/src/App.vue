@@ -1,9 +1,28 @@
 <template>
   <div id="app">
     <router-view />
+    <HFooter
+      style="
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height:5%;
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+      "
+    ></HFooter>
   </div>
 </template>
-
+<script>
+import HFooter from "vue-hacktiv8-footer";
+export default {
+  components: {
+    HFooter,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
