@@ -16,41 +16,37 @@
                                 id="name"
                                 type="text"
                                 v-model="myChar.name"
+                                required
                             />
                         </div>
                         <div>
                             <div class="pb-4">
                                 <label class="block pb-2 text-sm font-bold text-gray-900" for="gender">
-                                    gender
+                                    Gender
                                 </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-600"
-                                    id="gender"
-                                    type="text"
-                                    v-model="myChar.gender"
-                                />
+                                <select name="Gender"  class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" v-model="myChar.gender">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
                             </div>
                             <div class="pb-4">
                                 <label class="block pb-2 text-sm font-bold text-gray-900" for="race">
                                     Race
                                 </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-600"
-                                    id="race"
-                                    type="text"
-                                    v-model="myChar.race"
-                                />
+                                <select name="race"  class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" v-model="myChar.race">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option v-for="(el,id) in races.results" :key="id" :value="el.name">{{el.name}}</option>
+                                </select>
                             </div>
                             <div class="pb-4">
                                 <label class="block mb-2 text-sm font-bold text-gray-900" for="className">
                                     Class
                                 </label>
-                                <input
-                                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow-sm appearance-none focus:outline-none focus:shadow-outline focus:bg-white focus:border-blue-600"
-                                    id="className"
-                                    type="text"
-                                    v-model="myChar.className"
-                                />
+                                <select name="className"  class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" v-model="myChar.className">
+                                    <option value="" disabled selected>Select your option</option>
+                                    <option v-for="(el,id) in classes.results" :key="id" :value="el.name">{{el.name}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="flex items-start justify-between w-full pb-4 space-x-10">
@@ -59,6 +55,7 @@
                                     List of Spells
                                 </label>
                                 <select name="spellPick"  class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" v-model="selectedSpell">
+                                    <option value="" disabled selected>Select your option</option>
                                     <option v-for="(el,id) in spellList.results" :key="id" :value="el.name">{{el.name}}</option>
                                 </select>
                                 <button type="button" @click="addSpell" class="mt-3 px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:underline active:underline">addSpell</button>
@@ -104,7 +101,13 @@ export default {
     computed: {
         spellList() {
             return this.$store.state.spells
-        }
+        },
+        classes() {
+            return this.$store.state.classes
+        },
+        races() {
+            return this.$store.state.races
+        },
     },
     methods: {
         addSpell() {
