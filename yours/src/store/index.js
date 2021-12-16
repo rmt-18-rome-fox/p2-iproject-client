@@ -49,6 +49,13 @@ export default new Vuex.Store({
         },
       });
     },
+    doDeletePost(context, payload) {
+      return axios.delete(`http://localhost:3000/posts/${payload.postId}`, {
+        headers: {
+          access_token: payload.access_token,
+        },
+      });
+    },
   },
   modules: {},
 });

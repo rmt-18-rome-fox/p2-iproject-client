@@ -6,6 +6,9 @@
         <h5 class="card-title">{{ post.title }}</h5>
         <p class="card-text">{{ post.description }}</p>
       </div>
+      <div class="d-flex" style="margin-left: 10%">
+        <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="doDeletePost()">Delete</a>
+      </div>
     </div>
 
     <div class="card mb-3">
@@ -37,7 +40,6 @@ export default {
     return {
       post: {},
       comments: [],
-      commentId: null,
     };
   },
   methods: {
@@ -69,6 +71,21 @@ export default {
       this.$store
         .dispatch("doDeleteComment", params)
         .then(() => {
+          this.$router.push(`/home`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    doDeletePost() {
+      const params = {
+        postId: +this.$route.params.postId,
+        access_token: localStorage.getItem("access_token"),
+      };
+      this.$store
+        .dispatch("doDeletePost", params)
+        .then((resp) => {
+          console.log(resp);
           this.$router.push(`/home`);
         })
         .catch((err) => {
