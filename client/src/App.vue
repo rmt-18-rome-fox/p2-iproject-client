@@ -8,12 +8,13 @@
           />
     </transition>
     <FooterComponent></FooterComponent>
+    <HFooter style="background-color: #282d32" class="mt-0"></HFooter>
     
   </div>
 </template>
 
 <script>
-
+import HFooter from 'vue-hacktiv8-footer'
 import { mapMutations } from "vuex";
 import NavigateBar from "./components/NavigateBar.vue"
 import FooterComponent from "./components/FooterComponent.vue"
@@ -24,7 +25,8 @@ export default {
   // },
   components: {
     NavigateBar,
-    FooterComponent
+    FooterComponent,
+    HFooter
   },
   computed: {
   
