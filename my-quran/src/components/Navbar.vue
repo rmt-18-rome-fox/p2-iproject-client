@@ -6,7 +6,7 @@
         </div>
         <div class="flex items-center">
             <a class="mx-5 font-bold" href=""><router-link to="/prayerTimes">Prayer Times</router-link></a>
-            <p class="underline font-bold mx-5">salam, Admin</p>
+            <p class="underline font-bold mx-5">salam, {{user.email}}</p>
             <button class="border rounded-lg bg-green-500 text-white px-2 py-1 mx-5" @click.prevent="fnLogout">Logout</button>
         </div>
     </div>
@@ -18,6 +18,9 @@ import Swal from 'sweetalert2'
 
 export default {
     name: "Navbar",
+    created() {
+        this.getUser()
+    },
     methods: {
         ...mapMutations({
             login: "LOGIN"
@@ -31,10 +34,13 @@ export default {
             localStorage.clear()
             this.login(false)
             this.$router.push("/login")
+        },
+        getUser() {
+            this.$store.dispatch('getUser')
         }
     },
     computed: {
-        ...mapState(['isLogin'])
+        ...mapState(['isLogin', 'user'])
     }
 }
 </script>

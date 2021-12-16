@@ -13,19 +13,18 @@
         </div>
         <div class="flex items-center py-2">
             <a><img class="h-5 w-5 mx-2 opacity-50" src="../assets/heart.png" alt=""></a>
-            <a><img class="h-5 w-5 mx-2 opacity-50" src="../assets/send.png" alt=""></a>
+            <button>
+                <ShareNetwork
+                    network="facebook"
+                    url="https://news.vuejs.org/issues/180"
+                    :title="ayahData.text_indopak"
+                    :description="ayahData.translations[0].text"
+                    quote="Don't forget to allah"
+                    hashtags="vuejs,vite,quoteOfTheDay">
+                    Share on Facebook
+                </ShareNetwork>
+            </button>
         </div>
-        <!-- <div>
-            <ShareNetwork
-                network="facebook"
-                url="https://news.vuejs.org/issues/180"
-                title="Say hi to Vite! A brand new, extremely fast development setup for Vue."
-                description="This week, I’d like to introduce you to 'Vite', which means 'Fast'. It’s a brand new development setup created by Evan You."
-                quote="The hot reload is so fast it\'s near instant. - Evan You"
-                hashtags="vuejs,vite">
-                Share on Facebook
-            </ShareNetwork>
-        </div> -->
     </div>
 </template>
 

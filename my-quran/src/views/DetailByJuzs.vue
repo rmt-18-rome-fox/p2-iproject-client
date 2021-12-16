@@ -5,6 +5,17 @@
         <div class="w-2/12 h-screen fixed right-0 overflow-auto border shadow-md rounded-md text-center">
             <juzs-card v-for="juzs in allJuzs" :key="juzs.id" :juzsData="juzs"></juzs-card>
         </div>
+        <div class="w-10/12 mt-3">
+            <select class="w-10/12 px-5 py-3 border rounded-lg mr-10" name="" id="" v-model="translate">
+                <option class="" value="" disabled>Choose Translate...</option>
+                <option class="" value="english">English</option>
+                <option class="" value="indonesian">Indonesia</option>
+                <option class="" value="japanese">Japanese</option>
+                <option class="" value="german">Germany</option>
+                <option class="" value="russian">Russian</option>
+            </select>
+            <button class="border px-5 py-3 rounded-lg bg-green-500 text-white" @click.prevent="filter(detailSurah.pagination.current_page)">filter</button>
+        </div>
         <div id="main" class="w-10/12 px-5">
             <ayah-card v-for="ayah in detailSurah.verses" :key="ayah.id" :ayahData="ayah"></ayah-card>
         </div>
@@ -31,6 +42,11 @@ export default {
         // SurahCard,
         Navbar
     },
+    data () {
+        return {
+            translate: ''
+        }
+    },
     created() {
 
     },
@@ -41,6 +57,14 @@ export default {
                 juzsNumber: this.detailSurah.verses[0].juz_number
             }
             this.$store.dispatch('paginationByJuzs', payload)
+        },
+        filter(page) {
+            let payload = {
+                page,
+                juzsNumber: this.detailSurah.verses[0].juz_number,
+                translate: this.translate
+            }
+            this.$store.dispatch('filterByJuzs', payload)
         }
     },
     computed: {
