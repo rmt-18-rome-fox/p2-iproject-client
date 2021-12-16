@@ -4,68 +4,48 @@
     <navbar></navbar>
     <!-- Home Page -->
     <div class="container mx-auto my-10">
-      <div class="md:flex flex-wrap">
-        <!-- Recipe Card -->
-        <div class="flex xl:w-1/4 md:w-1/2 p-4">
+      <div class="flex-wrap">
+        <label for="price" class="block text-sm font-medium text-gray-700"
+          >Search recipes</label
+        >
+        <div class="mt-1 relative rounded-md shadow-sm">
           <div
             class="
-              flex flex-col
-              w-full
-              justify-between
-              bg-gray-100
-              p-6
-              rounded-lg
+              absolute
+              inset-y-0
+              left-0
+              pl-3
+              flex
+              items-center
+              pointer-events-none
             "
-          >
-            <div>
-              <img
-                class="rounded w-auto mb-6 mx-auto"
-                src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-                alt="content"
-              />
-              <h3
-                class="
-                  tracking-widest
-                  text-green-500 text-center text-xs
-                  font-medium
-                  title-font
-                "
-              >
-                Recipes
-              </h3>
-              <h2
-                class="
-                  text-lg text-gray-900 text-center
-                  font-medium
-                  title-font
-                  mb-4
-                "
-              >
-                Pizza
-              </h2>
-              <p class="leading-relaxed text-base">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias soluta suscipit neque deserunt velit nobis labore a, magnam inventore earum, culpa facilis. Sequi ratione eum numquam facilis pariatur nam? Excepturi.
-              </p>
-            </div>
-            <button
-              class="
-                flex
-                mx-auto
-                mt-4
-                text-white
-                bg-green-500
-                border-0
-                py-2
-                px-8
-                focus:outline-none
-                hover:bg-green-600
-                rounded
-                text-lg
-              "
-            >
-              Add to Favorites 
-            </button>
-          </div>
+          ></div>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            class="
+              focus:ring-indigo-500 focus:border-indigo-500
+              block
+              w-90
+              pl-7
+              pr-12
+              sm:text-sm
+              border-gray-300
+              rounded-md
+              justify-items-center
+            "
+            placeholder="e.g Pizza, Chicken..."
+          />
+          <button class="border-1">Search</button>
+        </div>
+        <!-- Recipe Card -->
+        <div class="grid gap-x-8 gap-y-4 grid-cols-3">
+          <recipe-card
+            v-for="(item, idx) in recipes"
+            :key="idx"
+            :item="item"
+          ></recipe-card>
         </div>
       </div>
     </div>
@@ -74,10 +54,22 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import RecipeCard from "../components/RecipeCard.vue";
+
 export default {
   name: "Home",
   components: {
     Navbar,
+    RecipeCard,
+  },
+  created() {
+    this.$store.dispatch("getRandomRecipes");
+  },
+  computed: {
+    recipes() {
+      return this.$store.state.recipes;
+    },
   },
 };
 </script>
+
