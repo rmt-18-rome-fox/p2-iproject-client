@@ -122,7 +122,7 @@ export default {
     Navbar,
   },
   created() {
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
     this.$store.dispatch('fetchCoffeePowdersById', +this.$route.params.id).then(() => {
       //   console.log(this.$store.state.coffeePowdersById, 'AAAAAAAAAAAAA');
       //   this.$store.state.coffeePowdersById;

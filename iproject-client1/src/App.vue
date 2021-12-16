@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <router-view id="page" />
+    <HFooter></HFooter>
   </div>
 </template>
 
 <script>
+import HFooter from 'vue-hacktiv8-footer';
 export default {
   name: 'App',
   created() {
     if (localStorage.getItem('access_token')) {
       this.$store.commit('SET_IS_LOGIN', true);
     }
+  },
+  components: {
+    HFooter,
   },
 };
 </script>
