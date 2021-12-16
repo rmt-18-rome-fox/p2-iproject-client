@@ -97,10 +97,8 @@ export default {
 .canvas-style {
   cursor: crosshair;
   width: 100% !important;
-  height: 500px !important;
+  height: 100% !important;
   border: 5px solid black;
-  display: block;
   margin: auto;
-  box-shadow: 0 10px 8px -8px black;
 }
 </style>
