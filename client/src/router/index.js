@@ -42,6 +42,11 @@ const routes = [
     component: () => import('../views/CheckOut.vue')
   },
   {
+    path: '/thankyou',
+    name: 'ThankYou',
+    component: () => import('../views/FinishShop.vue')
+  },
+  {
     path: '/404',
     name: 'NotFound',
     // route level code-splitting

@@ -119,7 +119,7 @@ export default {
     },
     onFailure(error){
       this.$router.push("/register");
-      console.log('OH NOES', error)
+      console.log(error)
     },
   },
   computed: {
