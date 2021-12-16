@@ -14,7 +14,7 @@
         @click.prevent="doSearch"
       >search</button>
     </div>
-    <nav>
+    <nav v-if="!isSearch">
       <ul class="pagination">
         <li class="page-item"><button @click.prevent="getPage(0)" class="page-link">Previous</button></li>
         <li class="page-item"
@@ -25,6 +25,7 @@
         <li class="page-item"><button @click.prevent="getPage(1)" class="page-link">Next</button></li>
       </ul>
     </nav>
+    <h1 v-if="isSearch">Book result</h1>
     <b-row>
       <div
       class="col-md-3"
@@ -45,13 +46,15 @@ export default {
     return{
       search: "",
       currentPage: 0,
-      pagination: 0
+      pagination: 0,
+      isSearch: false
     }
   },
   methods:{
     fetchBooks(){
       this.$store.dispatch("fetchBooks")
       .then((resp) =>{
+        this.isSearch = false
         this.currentPage = resp.data.currentPage
         this.pagination = this.currentPage + 4
         this.$store.commit("setBooks", resp.data.books)
@@ -63,6 +66,7 @@ export default {
     doSearch(){
       this.$store.dispatch("doSearchBook", this.search)
       .then((resp) =>{
+        this.isSearch = true
         this.currentPage = resp.data.currentPage
         this.pagination = this.currentPage + 4
         this.$store.commit("setBooks", resp.data.books)
@@ -74,6 +78,7 @@ export default {
     doPagination(page){
       this.$store.dispatch("getPagination", page)
       .then((resp) =>{
+        this.isSearch = false
         this.currentPage = resp.data.currentPage
         this.pagination = +this.currentPage + 4
         this.$store.commit("setBooks", resp.data.books)

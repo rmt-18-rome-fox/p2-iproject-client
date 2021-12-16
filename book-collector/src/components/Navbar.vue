@@ -25,7 +25,8 @@
         <li class="nav-item">
           <a @click.prevent="doLogout"
             class="nav-link"
-            v-if="token">Logout</a>
+            v-if="token"
+            style="cursor: pointer">Logout</a>
         </li>
       </ul>
     </div>
@@ -36,27 +37,18 @@
 <script>
 export default {
   name:"Navbar",
-  data(){
-    return{
-      token: false
-    }
-  },
   methods:{
-    checkToken(){
-      if(localStorage.access_token){
-        this.token = true
-      }else{
-        this.token = false
-      }
-    },
     doLogout(){
       localStorage.clear()
+      this.$store.commit("setToken", false)
       this.$router.push("/login")
       this.checkToken()
     }
   },
-  created(){
-    this.checkToken()
+  computed:{
+    token(){
+      return this.$store.state.isLogin
+    }
   }
 }
 </script>

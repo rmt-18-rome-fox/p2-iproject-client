@@ -1,6 +1,8 @@
 <template>
   <div class="container mt-5">
-    <b-form @submit.prevent="doLogin">
+    <h1>Login Page</h1>
+    <b-form class="loginForm"
+      @submit.prevent="doLogin">
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -25,13 +27,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="dark">Submit</b-button>
+      <b-button type="submit" variant="dark" class="mt-2">Submit</b-button>
     </b-form>
     <router-link to="/register">Don't have an account? Sign up!</router-link>
   </div>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
     name: "LoginPage",
     data(){
@@ -46,11 +49,22 @@ export default {
         doLogin(){
             this.$store.dispatch("goLogin", this.loginForm)
             .then((resp) =>{
-                localStorage.setItem("access_token", resp.data.access_token)
-                this.$router.push("/books")
+              Swal.fire(
+                'Welcome!',
+                `Login success`,
+                'success'
+              )
+              localStorage.setItem("access_token", resp.data.access_token)
+              this.$store.commit("setToken", true)
+              this.$router.push("/books")
             })
             .catch(err =>{
               console.log(err);
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+              })
             })
         }
     }
@@ -59,7 +73,6 @@ export default {
 
 <style>
 .loginForm{
-    margin: 50px;
     width: 50vh;
 }
 </style>

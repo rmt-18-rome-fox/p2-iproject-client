@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
-const baseUrl = "http://localhost:3000"
+const baseUrl = "https://iproject-siska.herokuapp.com"
 
 Vue.use(Vuex)
 
@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     books: [],
     bookmarks: [],
-    book: []
+    book: [],
+    isLogin: false
   },
   mutations: {
     setBooks(state, payload){
@@ -21,11 +22,15 @@ export default new Vuex.Store({
     },
     setBookDetail(state, payload){
       state.book = payload
+    },
+    setToken(state, payload){
+      state.isLogin = payload
     }
   },
   actions: {
     goRegister(context, payload){
       console.log(payload);
+
       return axios.post(`${baseUrl}/register`, payload)
     },
     goLogin(context, payload){

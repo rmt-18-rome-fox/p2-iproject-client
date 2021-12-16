@@ -1,17 +1,21 @@
 <template>
 <div class="container">
-    <div class="mb-3 mt-5">
-    <label class="form-label">Enter a word:</label>
-    <textarea
-        class="form-control"
-        rows="3"
-        v-model="text"
-    ></textarea>
-    <button
-        type="button"
-        class="btn btn-outline-primary mt-2"
-        @click.prevent="doSubmit">submit</button>
-    </div>
+    <b-card img-src="https://www.awesomeinventions.com/wp-content/uploads/2015/11/funny-face-cat.jpg" img-alt="Card image" img-left class="mb-3 mt-5">
+      <b-card-text>
+        <div class="mb-3 mt-5">
+            <label class="form-label">Enter a word:</label>
+            <textarea
+                class="form-control"
+                rows="3"
+                v-model="text"
+            ></textarea>
+            <button
+                type="button"
+                class="btn btn-outline-primary mt-2"
+                @click.prevent="doSubmit">submit</button>
+        </div>
+      </b-card-text>
+    </b-card>
 </div>
 </template>
 

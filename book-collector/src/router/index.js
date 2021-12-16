@@ -51,7 +51,8 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.access_token
   
-  if(isAuthenticated && to.name == 'LoginPage' || to.name == 'RegisterPage'){
+  if(isAuthenticated && to.name == 'LoginPage' ||
+    to.name == 'RegisterPage' && isAuthenticated){
     next({name: 'Books'})
   }
   if(to.name == 'Bookmarks' && !isAuthenticated){

@@ -1,6 +1,8 @@
 <template>
   <div class="container mt-5">
-    <b-form @submit.prevent="doRegister">
+    <h1>Register Page</h1>
+    <b-form class="registerForm"
+      @submit.prevent="doRegister">
       <b-form-group
         id="input-group-1"
         label="Email address:"
@@ -34,13 +36,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="dark">Submit</b-button>
+      <b-button type="submit" variant="dark" class="mt-2">Submit</b-button>
     </b-form>
     <router-link to="/login">Already have an account?</router-link>
   </div>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   name: "RegisterPage",
   data(){
@@ -57,10 +60,20 @@ export default {
       this.$store.dispatch("goRegister", this.registerForm)
       .then(resp =>{
         console.log(resp);
+        Swal.fire(
+          'Good job!',
+          `Register ${resp.data.name} success`,
+          'success'
+        )
         this.$router.push("/login")
       })
       .catch(err =>{
         console.log(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        })
       })
     }
   }
@@ -69,7 +82,6 @@ export default {
 
 <style>
 .registerForm{
-    margin: 50px;
     width: 50vh;
 }
 </style>
