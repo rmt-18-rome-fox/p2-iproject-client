@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 Vue.use(Vuex)
 
 // let baseUrl = "http://localhost:3000";
-let baseUrl = "https://i-big.herokuapp.com/";
+let baseUrl = "https://i-big.herokuapp.com";
 
 
 export default new Vuex.Store({
