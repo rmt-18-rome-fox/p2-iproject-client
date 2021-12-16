@@ -12,7 +12,8 @@ export default new Vuex.Store({
     listSurah: [],
     detailSurah: [],
     prayerTimes: [],
-    allJuzs: []
+    allJuzs: [],
+    user: {}
   },
   mutations: {
     LOGIN(state, data) {
@@ -38,6 +39,15 @@ export default new Vuex.Store({
     },
     PAGINATIION_BY_CHAPTER(state, data) {
       state.detailSurah = data
+    },
+    FILTER_BY_CHAPTER(state, data) {
+      state.detailSurah = data
+    },
+    FILTER_BY_JUZS(state, data) {
+      state.detailSurah = data
+    },
+    GET_USER(state, data) {
+      state.user = data
     }
   },
   actions: {
@@ -169,6 +179,53 @@ export default new Vuex.Store({
       })
       .then(({data}) => {
         context.commit('PAGINATIION_BY_CHAPTER', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    filterByChapter(context, payload) {
+      let {page, chapterNumber, translate} = payload
+      chapterNumber = chapterNumber.split(':')[0]
+      axios({
+        method: "GET",
+        url: `${baseUrl}/chapters/${chapterNumber}?page=${page}&translate=${translate}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('FILTER_BY_CHAPTER', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    filterByJuzs(context, payload) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/juzz/${payload.juzsNumber}?page=${payload.page}&translate=${payload.translate}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('FILTER_BY_JUZS', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    getUser(context) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/users`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_USER', data)
       })
       .catch(err => {
         console.log(err)
