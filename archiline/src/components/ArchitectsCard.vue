@@ -24,7 +24,7 @@ export default {
   name: 'ArchitectCard',
   props: ['architect'],
   created () {
-    this.$store.dispatch('fetchCustomerProfile')
+    this.$store.dispatch('fetchArchitectProfile')
   },
   methods: {
     toBook (payload) {
@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     profile () {
-      return this.$store.state.customerProfile
+      return this.$store.state.architectProfile
     }
   }
 }
