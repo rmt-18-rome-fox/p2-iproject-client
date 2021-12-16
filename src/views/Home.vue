@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home bg-fixed bg-herobg w-full min-h-screen bg-no-repeat bg-cover">
     <!-- <img alt="Vue logo" src="../assets/logo.png" />
     <form @submit.prevent="doLogin">
       <input class="border border-black" type="email" v-model="loginForm.email"/>

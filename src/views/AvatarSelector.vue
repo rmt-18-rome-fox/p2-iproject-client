@@ -1,6 +1,6 @@
 <template>
 <div class="flex items-center justify-center py-10">
-  <div class="border max-w-6xl rounded-lg shadow">
+  <div class="border max-w-6xl rounded-lg shadow bg-white bg-opacity-80">
       <!-- {{imageResult}} -->
       <div class="w-full flex justify-center py-5 max-h-[850px]">
             <div class="w-full flex flex-wrap items-center justify-center gap-5 overflow-y-scroll">
@@ -9,13 +9,13 @@
       </div>
       <div class="flex space-x-10 justify-center pb-5">
         <button
-            class="w-32 px-4 py-2 font-bold text-white bg-blue-300 rounded-lg hover:bg-blue-400 focus:outline-none focus:shadow-outline"
+            class="w-32 px-4 py-2 font-bold text-white bg-blue-400 rounded-lg hover:underline active:underline"
             type="button" @click="toPrev"
         >
             Previous
         </button>
         <button
-            class="w-32 px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+            class="w-32 px-4 py-2 font-bold text-white bg-blue-600 rounded-lg hover:underline active:underline"
             type="button" @click="toNext"
         >
             Next

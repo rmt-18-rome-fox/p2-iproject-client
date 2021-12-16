@@ -3,12 +3,12 @@
     <div class="container mx-auto">
         <div class="flex justify-center px-6 my-12">
             <!-- Row -->
-            <div class="w-full max-w-4xl flex justify-center border rounded-lg">
+            <div class="w-full max-w-4xl flex justify-center border rounded-lg bg-white bg-opacity-80">
                 <!-- Col -->
                 <div class="w-[800px] p-5 rounded-lg lg:rounded-l-none">
-                    <form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                    <form class="px-8 pt-6 pb-8 mb-4 rounded">
                         <div class="pb-4">
-                            <label class="block pb-2 text-sm font-bold text-gray-700" for="name">
+                            <label class="block pb-2 text-sm font-bold text-gray-900" for="name">
                                 Name
                             </label>
                             <input
@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             <div class="pb-4">
-                                <label class="block pb-2 text-sm font-bold text-gray-700" for="gender">
+                                <label class="block pb-2 text-sm font-bold text-gray-900" for="gender">
                                     gender
                                 </label>
                                 <input
@@ -31,7 +31,7 @@
                                 />
                             </div>
                             <div class="pb-4">
-                                <label class="block pb-2 text-sm font-bold text-gray-700" for="race">
+                                <label class="block pb-2 text-sm font-bold text-gray-900" for="race">
                                     Race
                                 </label>
                                 <input
@@ -42,7 +42,7 @@
                                 />
                             </div>
                             <div class="pb-4">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="className">
+                                <label class="block mb-2 text-sm font-bold text-gray-900" for="className">
                                     Class
                                 </label>
                                 <input
@@ -55,21 +55,21 @@
                         </div>
                         <div class="flex items-start justify-between w-full pb-4 space-x-10">
                             <div class="w-1/2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="spellPick">
+                                <label class="block mb-2 text-sm font-bold text-gray-900" for="spellPick">
                                     List of Spells
                                 </label>
                                 <select name="spellPick"  class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" v-model="selectedSpell">
                                     <option v-for="(el,id) in spellList.results" :key="id" :value="el.name">{{el.name}}</option>
                                 </select>
-                                <button type="button" @click="addSpell" class="mt-3 px-4 py-2 font-bold text-white bg-blue-300 rounded-lg hover:bg-blue-400 focus:outline-none focus:shadow-outline">addSpell</button>
+                                <button type="button" @click="addSpell" class="mt-3 px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:underline active:underline">addSpell</button>
                             </div>
                             <div class="w-1/2">
-                                <label class="block mb-2 text-sm font-bold text-gray-700" for="spells">
+                                <label class="block mb-2 text-sm font-bold text-gray-900" for="spells">
                                     Spells Picked
                                 </label>
-                            <div class="h-40 overflow-y-scroll border rounded shadow-sm">
+                            <div class="h-40 overflow-y-scroll border rounded shadow-sm bg-white text-left py-1 px-4">
                                 <ul v-for="el in myChar.spells" :key="el.id">
-                                    <li>{{el}}</li>
+                                    <li class="border-b py-1">{{el}}</li>
                                 </ul>
                             </div>
                             </div>
@@ -77,7 +77,7 @@
                         <div class="flex items-center justify-center">
                         <div class="mb-6 text-center w-48 pt-4">
                             <button
-                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                class="w-full px-4 py-3 font-bold text-white bg-blue-600 rounded-lg hover:underline active:underline"
                                 type="button" @click="toNext"
                             >
                                 Next
