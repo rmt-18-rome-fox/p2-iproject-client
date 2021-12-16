@@ -2,7 +2,7 @@
   <div>
   <div class="d-flex justify-content-around m-4">
     <RecipeDetail> </RecipeDetail>
-    <div class="d-flex flex-column ml-4 notes-container pt-2">
+    <div class="d-flex flex-column ml-4 notes-container pt-2 mt-4">
       <h3 class="text-light"><b>Notes</b></h3>
       <form  @submit.prevent="inputNotes">
         <textarea v-model="recipe.notes"  placeholder="notes..."> </textarea>
@@ -28,14 +28,11 @@ export default {
   },
   methods : {
     async inputNotes () {
-
-      await this.$store.dispatch("inputNotes", this.recipe)
-        // this.$router.push('/favourite')
+      this.$store.dispatch("inputNotes", this.recipe)
     }
   },
   computed : {
     recipe () {
-      console.log(this.$store.state.selectedFavourite, ">>>> computed>>>>>>>>>>>>");
       return this.$store.state.selectedFavourite
     }
   },

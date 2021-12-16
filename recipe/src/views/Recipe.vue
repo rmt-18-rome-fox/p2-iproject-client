@@ -8,7 +8,7 @@
     <p v-if="!checkAvailability(recipe)" style="color:red "> Premium Content</p>
     <span class="button" v-if="checkAvailability(recipe)">  <i class="fa fa-bookmark" aria-hidden="true" style="float:right" @click.prevent="bookmark(recipe)"></i></span>
     <h5 class="card-title">{{recipe.title}}</h5>
-    <p class="card-text">Cuisines: {{recipe.cuisines.join(", ")}}</p>
+    <p class="card-text">Cuisines: {{recipe.cuisines.join(", ") || "-"}}</p>
     <p class="card-text">Dish Type: {{recipe.dishTypes.join(", ")}}</p>
     <p class="card-text">Score: {{recipe.spoonacularScore}}</p>
 
@@ -80,6 +80,9 @@ components: {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.button {
+  cursor: pointer
 }
 </style>>
 

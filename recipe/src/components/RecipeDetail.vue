@@ -1,6 +1,6 @@
 <template>
 <!-- <div class="d-flex justify-content-center m-4"> -->
-  <div class="card shadow-lg mx-auto pt-4" style="width: 60rem; padding:2rem ">
+  <div class="card shadow-lg mx-auto pt-4 mt-4" style="width: 60rem; padding:2rem ">
     <img width="230px" height="400px" :src="recipe.image" class="card-img-top" alt="recipe image">
     <div class="card-body">
       <h3 class="card-title"><b>{{recipe.title}}</b></h3>

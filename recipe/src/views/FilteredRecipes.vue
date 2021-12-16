@@ -1,6 +1,6 @@
 <template>
-<div>
-<div class="card"  v-for="recipe in recipesList" :key="recipe.id" style="width: 18rem;">
+<div class="filtered-container">
+<div class="card p-2 m-2 shadow-lg"  v-for="recipe in recipesList" :key="recipe.id" style="width: 18rem;">
   <img width="100px" height="250px" :src="recipe.image" class="card-img-top" alt="recipe image">
   <div class="card-body">
     <span class="button">  <i class="fa fa-bookmark" aria-hidden="true" style="float:right" @click.prevent="bookmark(recipe)"></i></span>
@@ -48,12 +48,17 @@ components: {
   },
   created () {
     const {query: {searchTerm}} = this.$route
-    console.log(searchTerm, "di filterdeRecipies.............");
     this.$store.dispatch("fetchRecipes", searchTerm )
   }
 }
 </script>
 
-<style>
+<style scoped>
+.filtered-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+}
 
 </style>

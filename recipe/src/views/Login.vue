@@ -17,14 +17,7 @@
                             <button type="submit" class="btn btn-dark">Login</button>
                             <!-- <button type="submit" class="btn btn-dark btn-xs">Facebook</button> -->
                         </div>
-                        <div class="card social-block">
-                          <div class="card-body">
-                            <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook" role="button">
-                            <i class="fab fa-facebook"></i>
-                            Sign Up wth Facebook
-                            </a>
-                          </div>
-                        </div>
+                        
                     </form>
                     <hr class="mt-4">
                     <div class="col-12">
