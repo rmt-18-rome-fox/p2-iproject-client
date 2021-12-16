@@ -20,6 +20,13 @@ export default new Vuex.Store({
     doRegister(context, payload) {
       return axios.post("http://localhost:3000/users/register", payload);
     },
+    fetchPosts(context, payload) {
+      return axios.get("http://localhost:3000/posts/", {
+        headers: {
+          access_token: payload,
+        },
+      });
+    },
   },
   modules: {},
 });
