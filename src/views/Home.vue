@@ -1,23 +1,8 @@
 <template>
   <div class="home bg-fixed bg-herobg w-full min-h-screen bg-no-repeat bg-cover">
-    <!-- <img alt="Vue logo" src="../assets/logo.png" />
-    <form @submit.prevent="doLogin">
-      <input class="border border-black" type="email" v-model="loginForm.email"/>
-      <input class="border border-black" type="password" v-model="loginForm.password"/>
-      <button type="submit">login</button>
-    </form>
-    <div><p class="font-bold text-2xl">hello</p></div>
-    <div v-if="isLoggedIn">
-      {{races}}
-      <br>-------<br>
-      {{spells}}
-      <br>-------<br>
-      {{classes}}
-      <br>-------<br>
-      {{myCharacter}}
-    </div> -->
     <navbar :isLoggedIn="isLoggedIn"></navbar>
-    <router-view />
+    <router-view class="flex-grow" />
+    
   </div>
 </template>
 

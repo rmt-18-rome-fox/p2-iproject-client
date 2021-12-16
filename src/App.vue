@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <Home />
+    <HFooter />
   </div>
 </template>
 
 <script>
 import Home from "./views/Home.vue"
+import HFooter from 'vue-hacktiv8-footer'
 export default {
-  components: { Home},
+  components: { Home, HFooter },
 }
 </script>
 
