@@ -64,4 +64,9 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.name === 'Dashboard' && localStorage.getItem("role", "user")) next({ name: 'Home' })
+  else next()
+})
+
 export default router

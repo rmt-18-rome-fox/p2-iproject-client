@@ -1,6 +1,6 @@
 <template>
   <b-navbar id="navbar" class="container-fluid" toggleable="lg" type="dark">
-    <b-navbar-brand href="#">NewsHub</b-navbar-brand>
+    <b-navbar-brand href="">NewsHub</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -8,7 +8,7 @@
       <b-navbar-nav>
         <!-- this is router-link, using to="/" -->
         <b-nav-item to="/" >Home</b-nav-item>
-        <b-nav-item to="/dashboard" @click="changeMutateArticle">Dashboard</b-nav-item>
+        <b-nav-item to="/dashboard" v-if="userRole === 'admin'">Dashboard</b-nav-item>
         <!-- <b-nav-item href="#">Link</b-nav-item> -->
         <!-- <b-nav-item href="#" disabled>Disabled</b-nav-item> -->
       </b-navbar-nav>
@@ -18,9 +18,9 @@
         <!-- <b-nav-item to="/favorites" v-if="isLoggedIn">My Favourites</b-nav-item>
           <b-nav-item to="/favorites" disabled v-if="!isLoggedIn">My Favourites</b-nav-item> -->
         <!-- <b-nav-item href="#" v-on:click.prevent="doLogout" v-if="isLoggedIn">Sign Out</b-nav-item> -->
-        <b-nav-item href="#" v-on:click.prevent="goToLogin">Sign In</b-nav-item> &nbsp; 
-        <b-nav-item href="#" v-on:click.prevent="goToAdminLogin">Sign In Admin</b-nav-item> &nbsp; 
-        <b-nav-item href="#" v-on:click.prevent="signOutHandler"
+        <b-nav-item href="#" v-on:click.prevent="goToLogin" v-if="!isLoggedIn">Sign In</b-nav-item> &nbsp; 
+        <b-nav-item href="#" v-on:click.prevent="goToAdminLogin" v-if="!isLoggedIn">Sign In Admin</b-nav-item> &nbsp; 
+        <b-nav-item href="#" v-on:click.prevent="signOutHandler" v-if="isLoggedIn"
           >Sign Out</b-nav-item
         >
         <!-- <b-nav-form>
@@ -48,15 +48,24 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapMutations, mapActions, mapState} from "vuex";
 
 export default {
   name: "Navbar",
+  data() {
+    return {
+      role : ""
+    }
+  },
+  computed: {
+    ...mapState(["isLoggedIn", "userRole"])
+  },
   methods: {
+      ...mapActions(["fetchNews"]),
       ...mapMutations({
       loginData: "MUTATE_ISLOGGEDIN",
-      mutateArticleData: "MUTATE_ALTERNATIVENEWS"
-
+      mutateAlternativeNews: "MUTATE_ALTERNATIVENEWS",
+      mutateUserRole: "MUTATE_USERROLE"
     }),
     goToLogin() {
       this.$router.push({ name: "Login" });
@@ -68,11 +77,16 @@ export default {
     },
     goToAdminLogin() {
         this.$router.push({ name: "adminLogin" });
-    },
-    changeMutateArticle() {
-        this.mutateArticleData(false)
     }
   },
+  created() {
+    if (localStorage.getItem("access_data")){
+      this.loginData(true)
+    }
+    if (localStorage.getItem("role") === "admin"){
+      this.mutateUserRole("admin")
+    }
+  }
 };
 </script>
 

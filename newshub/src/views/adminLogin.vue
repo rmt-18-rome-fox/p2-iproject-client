@@ -4,7 +4,7 @@
       class="d-flex flex-column justify-content-center align-items-center"
       v-on:submit.prevent="formSubmitHandler"
     >
-      <div><h3>Sign In</h3></div>
+      <div><h3>Admin Sign In</h3></div>
 
       <b-form-group class="w-25" label="Email address:" label-for="input-1">
         <b-form-input id="input-1" v-model="dataUser.email"></b-form-input>
@@ -20,7 +20,14 @@
       <b-button class="w-25 mt-2" type="submit" variant="primary"
         >Submit</b-button
       >
-     <b-button class="w-25 mt-3" variant="success" v-on:click="goToRegister"
+      <GoogleLogin
+        class="w-25 mt-3"
+        :params="params"
+        :renderParams="renderParams"
+        :onSuccess="onSuccess"
+        :onFailure="onFailure"
+      ></GoogleLogin>
+      <b-button class="w-25 mt-3 mb-3" variant="success" v-on:click="goToRegister"
         >Register</b-button
       >
       <!-- <GoogleLogin
@@ -35,36 +42,56 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex';
+import { mapActions, mapState } from "vuex";
+import GoogleLogin from "vue-google-login";
 
 export default {
-    name: "adminLogin",
-    data() {
-        return {
-            dataUser: {
-                email: "",
-                password: ""
-            }
-        }
+  name: "adminLogin",
+  components: {GoogleLogin},
+  data() {
+    return {
+      params: {
+        client_id:
+          "1091053908048-05b7ncohe74ca7ovdbv5bf1c80vkq825.apps.googleusercontent.com",
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true,
+      },
+      dataUser: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  computed: {
+    ...mapState(["isLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(["doLogin", "loginWithGoogle"]),
+    async formSubmitHandler() {
+      await this.doLogin(this.dataUser);
+      if (this.isLoggedIn === true) {
+        this.$router.push("/dashboard");
+      }
     },
-    computed: {
-        ...mapState(["isLoggedIn"])
+    goToRegister() {
+      this.$router.push({ name: "adminRegister" });
     },
-    methods: {
-        ...mapActions(["doLogin"]),
-        async formSubmitHandler() {
-           await this.doLogin(this.dataUser) 
-           if (this.isLoggedIn === true) {
-               this.$router.push("/dashboard");
-           }
-        },
-        goToRegister() {
-          this.$router.push({ name: "adminRegister" });
-        }
-    }
-}
+    async onSuccess(googleUser) {
+      // console.log(googleUser.vc.id_token, "<<<<<<2222");
+      // console.log(googleUser.Au.pv);
+      await this.loginWithGoogle(googleUser.vc.id_token)
+      // await this.$emit("google-login", googleUser.wc.id_token);
+      this.$router.push({ name: "Dashboard" });
+    },
+    onFailure() {
+      
+      console.log("google login failed");
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

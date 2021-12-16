@@ -35,12 +35,12 @@
       </div>
 
       <div class="col-10">
-        <div class="mt-3" v-if="!alternativeNews">
+        <b-row cols="3" class="mt-3" v-if="!alternativeNews">
           <card v-for="article in fetchedNews.data" :key="article.url" v-bind:article="article" ></card>
-        </div>
-        <div class="mt-3" v-if="alternativeNews">
+        </b-row >
+        <b-row cols="3" class="mt-3" v-if="alternativeNews">
           <card v-for="article in fetchedNews" :key="article.url" v-bind:article="article" ></card>
-        </div>
+        </b-row >
           
         <!-- <b-row cols="3">
           
@@ -52,7 +52,7 @@
 
 <script>
 import card from "../components/Card.vue"
-import {mapActions, mapState} from "vuex";
+import {mapActions, mapState, mapMutations} from "vuex";
 
 
 export default {
@@ -61,24 +61,32 @@ export default {
     data() {
         return {
             keywords: "",
-            alternativeNews: false,
+            // alternativeNews: false,
         }
     },
     computed: {
-        ...mapState(["fetchedNews"])
+        ...mapState(["fetchedNews", "alternativeNews"])
     },
     methods: {
         ...mapActions(["fetchNews", "alternativeFetchNews"]),
+        ...mapMutations({
+          mutateAlternativeNews: "MUTATE_ALTERNATIVENEWS"
+        }),
         filterHandler() {
             // console.log(this.keywords);
             this.fetchNews(this.keywords)
+            this.mutateAlternativeNews(false)
+            // this.alternativeNews = false
         },
         async alternativeFetch() {
           await this.alternativeFetchNews(),
-          this.alternativeNews = true
+          this.mutateAlternativeNews(true)
+          // this.alternativeNews = true
         }
     },
     async created() {
+      // this.alternativeNews = false
+      this.mutateAlternativeNews(false)
         await this.fetchNews()
     }
 }
