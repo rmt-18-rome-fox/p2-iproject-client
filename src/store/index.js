@@ -1,7 +1,7 @@
 import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://p2-basiccharcreation.herokuapp.com/";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
