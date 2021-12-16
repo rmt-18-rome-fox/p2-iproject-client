@@ -69,7 +69,6 @@ export default new Vuex.Store({
           url,
           method: "get",
         })
-        console.log(data, "hasil fetch");
         commit('GET_RECIPES', data.data)
       } catch ({response}) {
         const message = response.data.message
@@ -86,7 +85,6 @@ export default new Vuex.Store({
           url: baseUrl + '/recipes/detail/'+ id,
           method: "get",
         })
-        console.log(recipe);
         commit('GET_RECIPE_DETAIL', recipe.data)
       } catch ({response}) {
         const message = response.data.message
@@ -99,7 +97,6 @@ export default new Vuex.Store({
     },
     async searchRecipes ({commit} , query) {
       try {
-        console.log("masuk", query);
         const queryUrl = []
         const recipes = await axios({
           url: baseUrl +`/recipes?searchTerm=${query}`,
@@ -107,7 +104,6 @@ export default new Vuex.Store({
         })
         commit('GET_RECIPES', recipes.data.recipes)
       } catch ({response}) {
-        console.log(response);
         const message = response.data.message
         swal.fire({
           icon: 'error',
@@ -144,7 +140,6 @@ export default new Vuex.Store({
         await dispatch("fetchRecipes")
         dispatch('alertBookmark', `${title} successfuly bookmarked`)
       } catch ({response}) {
-        console.log(response,"//////////////////");
         const message = response.data
         swal.fire({
           icon: 'error',
@@ -209,7 +204,6 @@ export default new Vuex.Store({
         localStorage.status = "Premium"
         dispatch('alertBookmark', `you're now premium member`)
       } catch ({response}) {
-        console.log(response,">>>>>>>>>>>error");
         const {message} = response.data
         swal.fire({
           icon: 'error',
@@ -221,7 +215,6 @@ export default new Vuex.Store({
 
     async fetchFavouriteByRecipeId ({commit}, recipeId) {
       try {
-        console.log(recipeId,"recipeid di store");
         const response = await axios({
           url: baseUrl + `/users/favourites/recipe/${recipeId}`,
           method: 'GET',
@@ -229,7 +222,6 @@ export default new Vuex.Store({
             access_token: localStorage.access_token
           }
         })
-        console.log(response," di store response");
         commit('SET_SELECTED_FAVOURITE', response.data)
 
       } catch({response}) {
@@ -244,7 +236,6 @@ export default new Vuex.Store({
     },
     async deleteFavourite ({dispatch}, id) {
       try {
-        console.log(id);
         const response = await axios ({
           url: baseUrl + "/users/delete/" +id,
           method: "delete",
@@ -259,7 +250,6 @@ export default new Vuex.Store({
           text: 'Success delete data'
         })
       } catch ({response}) {
-        console.log(response);
         const message = response.data.message
         swal.fire({
         icon: 'error',
@@ -270,7 +260,6 @@ export default new Vuex.Store({
     },
     async inputNotes ({dispatch},{notes,id}) {
       try {
-        console.log(notes,id,"store iput notes>>>>>>>>>");
         const {data} = await axios ({
           url: baseUrl + "/users/favourites/" + id,
           data : {notes},

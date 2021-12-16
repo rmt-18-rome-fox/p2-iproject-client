@@ -30,12 +30,12 @@
                             <label>Address<span class="text-danger"></span></label>
                             <input type="text" name="password" class="form-control" placeholder="Enter Address" v-model="registerForm.address">
                         </div>
-                          <div class="col-md-4">
+                          <div class="col-md-4 d-flex flex-column">
                            <button class="btn btn-primary float-end">Signup Now</button>
+                            <p class="text-center mt-3 text-secondary">If you have account, Please <router-link to="/login">Login Now</router-link></p>
                         </div>
                     </div>
                 </form>
-                <p class="text-center mt-3 text-secondary">If you have account, Please <router-link to="/login">Login Now</router-link></p>
             </div>
         </div>
     </div>

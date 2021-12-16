@@ -33,7 +33,7 @@ data () {
   return {
       isLoggedIn: !!localStorage.access_token,
       searchTerm:"",
-      status: localStorage.status,
+      status: localStorage.status  || "Guest",
     }
 },
   methods : {
