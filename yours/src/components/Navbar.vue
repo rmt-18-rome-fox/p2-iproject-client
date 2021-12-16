@@ -26,13 +26,13 @@
             <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="!access_token">Login</a>
           </div>
           <div class="d-flex" style="margin-left: 1%">
-            <a class="btn btn-get-started btn-get-started-yellow" href="#" v-if="!access_token">Register</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toRegister" v-if="!access_token">Register</a>
           </div>
           <div class="d-flex" style="margin-left: 10%">
-            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toLogin" v-if="access_token">Home</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="toHome" v-if="access_token">Home</a>
           </div>
           <div class="d-flex" style="margin-left: 1%">
-            <a class="btn btn-get-started btn-get-started-yellow" href="#" v-if="access_token">Logout</a>
+            <a class="btn btn-get-started btn-get-started-yellow" @click.prevent="doLogout" v-if="access_token">Logout</a>
           </div>
         </div>
       </div>
@@ -46,6 +46,16 @@ export default {
   methods: {
     toLogin() {
       this.$router.push("/login");
+    },
+    toRegister() {
+      this.$router.push("/register");
+    },
+    toHome() {
+      this.$router.push("/home");
+    },
+    doLogout() {
+      localStorage.removeItem("access_token");
+      this.$router.push("/");
     },
   },
   computed: {
