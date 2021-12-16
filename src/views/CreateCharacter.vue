@@ -1,31 +1,35 @@
 <template>
   <div>
-      <create-character-component></create-character-component>
+      <create-character-component :myChar="myChar" @toNext="toNext" v-if="page === 1"></create-character-component>
+      <AvatarSelector :myChar="myChar" v-if="page === 2" @toNext="toNext" @toPrev="toPrev"/>
+      <CharacterComponent :myChar="myChar" v-if="page === 3" :adding="true" @addCharacter="addCharacter" @toPrev="toPrev"/>
   </div>
 </template>
 
 <script>
 import axios from "axios"
 import CreateCharacterComponent from '../components/CreateCharacterComponent.vue'
+import CharacterComponent from '../components/CharacterComponent.vue'
+import AvatarSelector from './AvatarSelector.vue'
 export default {
-  components: { CreateCharacterComponent },
+  components: { CreateCharacterComponent, AvatarSelector, CharacterComponent },
     name: "CreateCharacter",
     data() {
         return {
-            character: {
+            myChar: {
                 name: "",
                 gender: "",
                 race: "",
                 className: "",
-                spells: "",
-            },            
+                spells: [],
+                spell: "",
+                imageUrl: "",
+            },                      
             schools: [],
+            page: 1,
         }
     },
     computed: {
-        imageResult() {
-            return this.$store.state.imageResult
-        },
         classes() {
             return this.$store.state.classes
         },
@@ -37,15 +41,8 @@ export default {
         },
     },
     methods: {
-        findImage() {
-            const imageQuerry= `${this.character.race} ${this.character.className} ${this.character.gender}`;
-            this.$state.dispatch("findImage", imageQuerry)
-            .then(({data}) => {
-                this.$store.commit("set_image_result", data) 
-            })
-        },
         addCharacter() {
-            this.$state.dispatch("addCharacter", this.character)
+            this.$store.dispatch("addCharacter", this.myChar)
             .then(() => {
                 this.$router.push("/MyCharacters")
             })
@@ -58,13 +55,20 @@ export default {
             .then(({data}) => {
                 this.schools = data.results;
             })
-        }
+        },
+        toNext(id) {
+            this.page = id;
+        },
+        toPrev(id) {
+            this.page = id;
+        },
     },
     created() {
         this.fetchSchools();
         this.$store.dispatch("getRaces");
         this.$store.dispatch("getSpells");
         this.$store.dispatch("getClasses");
+        this.page = 1;
     }
 }
 </script>

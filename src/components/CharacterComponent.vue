@@ -81,9 +81,21 @@
                         <div class="text-center w-48">
                             <button
                                 class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
-                                type="button" @click="deleteChar(myChar.id)"
+                                type="button" @click="deleteChar(myChar.id)" v-if="!adding"
                             >
                                 Delete Character
+                            </button>
+                            <button
+                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                type="button" @click="toPrev" v-if="adding"
+                            >
+                                Previous
+                            </button>
+                            <button
+                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                type="button" @click="toAdd" v-if="adding"
+                            >
+                                Create Character
                             </button>
                         </div>
                         </div>
@@ -98,13 +110,19 @@
 <script>
 export default {
     name: "CharacterComponent",
-    props: ["myChar"],
+    props: ["myChar", "adding"],
     methods: {
         deleteChar(id) {
             this.$store.dispatch("deleteChar", id)
             .then(() => {
                 this.$router.push("/mycharacters")
             })
+        },
+        toPrev() {
+            this.$emit("toPrev", 2);
+        },
+        toAdd() {
+            this.$emit("addCharacter");
         }
     }
 }
