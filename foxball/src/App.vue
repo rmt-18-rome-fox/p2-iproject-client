@@ -1,5 +1,15 @@
 <template>
-  <div id="app" class="bg-green-800 min-h-screen bg-opacity-25">
+  <div
+    id="app"
+    class="
+      bg-gradient-to-r
+      from-blue-500
+      via-blue-300
+      to-blue-500
+      min-h-screen
+      bg-opacity-25
+    "
+  >
     <Sidebar class="pt-6" v-if="isLogin === true"></Sidebar>
     <router-view />
   </div>

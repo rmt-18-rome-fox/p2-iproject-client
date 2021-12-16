@@ -3,9 +3,9 @@
     class="
       body-bg
       bg-gradient-to-b
-      from-blue-100
-      via-blue-200
-      to-green-600
+      from-blue-200
+      via-blue-400
+      to-green-800
       min-h-screen
       pt-12
       md:pt-20

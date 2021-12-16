@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const Axios = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://foxballer-be-hwh.herokuapp.com'
 })
 
 export default Axios

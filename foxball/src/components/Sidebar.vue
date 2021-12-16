@@ -303,6 +303,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "Sidebar",
   data() {
@@ -315,9 +316,21 @@ export default {
       loginMutations: "LOGIN",
     }),
     signout() {
-      localStorage.clear();
-      this.loginMutations(false);
-      this.$router.push("/login");
+      Swal.fire({
+        title: "Signing Out",
+        text: "Are you sure for leaving me?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, i'm out!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.clear();
+          this.loginMutations(false);
+          this.$router.push("/login");
+        }
+      });
     },
   },
 };

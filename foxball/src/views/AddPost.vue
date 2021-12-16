@@ -106,7 +106,6 @@ export default {
         caption: this.caption,
         imgUrl: this.imgUrl,
       };
-      console.log(payload);
       await this.addPost(payload);
       this.$router.push("/");
     },
