@@ -35,6 +35,7 @@
 
 <script>
 import router from "../router/index"
+import Swal from 'sweetalert2'
 
 export default {
     name: "Register",
@@ -56,6 +57,7 @@ export default {
             })
             .then(()=>{
                 router.push('/login')
+                Swal.fire("Good job!", "You clicked the button!", "success register!");
             })
         }
     }

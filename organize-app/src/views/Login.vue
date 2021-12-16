@@ -51,7 +51,7 @@
 </template>
 
 <script>
-// import router from "../router/index"
+import Swal from "sweetalert2";
 // import facebookLogin from 'facebook-login-vuejs';
 
 export default {
@@ -70,9 +70,10 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push('/');
-        })
-        // .catch(() => {});
+          this.$router.push("/");
+          Swal.fire("Good job!", "You clicked the button!", "success login");
+        });
+      // .catch(() => {});
     },
   },
 };

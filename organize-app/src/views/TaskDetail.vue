@@ -14,7 +14,7 @@
         </li>
         <li class="list-group-item">Task created by : {{ taskDetail.User.name }}</li>
       </ul>
-      
+      <button class="btn btn-primary" @click="onClickPlay">Read Description Voice</button>
     </div>
   </div>
 </template>
@@ -37,6 +37,12 @@ export default {
       return this.$store.state.taskDetail;
     },
   },
+  methods: {
+      onClickPlay(){
+          console.log(this.taskDetail.description)
+          this.$store.dispatch('getVoice', this.taskDetail.description)
+      }
+  }
 };
 </script>
 

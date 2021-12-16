@@ -9,7 +9,8 @@
       <input v-model="CategoryId" type="text" class="form-control" />
     </div>
     <br />
-    <div class="col-12">
+  
+    <div class="col-12 my-4">
       <label for="description" class="form-label">Description Task</label>
       <input v-model="description" type="text" class="form-control" />
     </div>
@@ -26,14 +27,16 @@
     </div>
     <div style="text-align:left;">
     <h6>Category Id List for Add Task:</h6>
-    <h6>Category Id 1 : To-Do</h6>
-    <h6>Category Id 2 : Doing </h6>
-    <h6>Category Id 3 : Done </h6>
+    <h6>Category Id To-Do : 1</h6>
+    <h6>Category Id Doing : 2 </h6>
+    <h6>Category Id Done : 3 </h6>
 </div>
   </form>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
   name: "AddTask",
   data() {
@@ -55,7 +58,8 @@ export default {
         })
         .then((res) => {
             console.log({res})
-            this.$router.push('/')
+            this.$router.push('/');
+            Swal.fire("Good job!", "You clicked the button!", "success add task!");
         })
         .catch((err) => {
             console.log({err})

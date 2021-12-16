@@ -3,8 +3,8 @@
     <!-- <h5>TES</h5> -->
     <div class="row row-cols-4 d-flex justify-content-between">
       <div v-for="task in tasks" :key="task.id" class="col">
-        <div class="card">
-          <img :src="task.imgUrl" class="card-img-top" alt="Tasks Image" />
+        <div class="card mb-4">
+          <img :src="task.imgUrl" class="card-img-top" alt="Tasks Image" width="200px" height="200px" style="object-fit: cover;"/>
           <div class="card-body">
             <h5 class="card-title">{{ task.title }}</h5>
             <h5 class="card-category">Category: {{ task.Category.name }}</h5>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import swal from 'sweetalert2'
+
 export default {
   name: "TaskCard",
   computed: {
@@ -48,6 +50,7 @@ export default {
     deleteTask(deleteId){
         this.$store.dispatch('deleteTask', deleteId).then(()=>{
             this.$store.dispatch('getTasks')
+            swal.fire("Good job!", "success delete task!");
         })
             // this.$store.dispatch()
         
