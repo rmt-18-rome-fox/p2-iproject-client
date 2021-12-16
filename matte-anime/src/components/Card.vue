@@ -2,7 +2,7 @@
   <div class="bg-black py-4 justify-center px-4 rounded-xl shadow-md text-white">
     <div class="flex-1 mx-auto">
       <img @click.prevent="animeDetail(anime.mal_id)" :src="anime.image_url" class="w-50 h-50 rounded-2xl cursor-pointer">
-      <p class="cursor-pointer hover:text-blue-600 " @click.prevent="animeDetail(anime.mal_id)">{{anime.title}}</p>
+      <p class="cursor-pointer hover:text-blue-600" @click.prevent="animeDetail(anime.mal_id)">{{anime.title}}</p>
       <p>episodes: {{anime.episodes}}</p>
       <p>rank: {{anime.episodes}}</p>
       <p>score: {{anime.score}}</p>
@@ -39,6 +39,7 @@ export default {
             icon: 'error',
             text: err.response.data.message
           })
+          this.$router.push('/my-watch-lists')
         } else if(!localStorage.getItem("access_token")) this.$router.push('/login')
         else swal.fire({
             icon: 'error',

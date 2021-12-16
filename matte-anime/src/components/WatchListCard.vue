@@ -1,8 +1,8 @@
 <template>
   <div class="bg-black py-4 justify-center px-4 rounded-xl shadow-md text-white">
     <div class="flex-1 mx-auto">
-      <img @click.prevent="animeDetail(anime.JikanAnimeId)" :src="anime.image_url" class="w-48 h-48 rounded-2xl">
-      <p @click.prevent="animeDetail(anime.JikanAnimeId)">{{anime.title}}</p>
+      <img @click.prevent="animeDetail(anime.JikanAnimeId)" :src="anime.image_url" class="w-48 h-48 rounded-2xl cursor-pointer">
+      <p class="cursor-pointer hover:text-blue-600" @click.prevent="animeDetail(anime.JikanAnimeId)">{{anime.title}}</p>
       <br>
       <p class="text-green-500 px-2 py-4">{{anime.priority}}</p>
       <br>
@@ -22,11 +22,10 @@ export default {
   name: "WatchListCard",
   props: ["anime"],
   methods: {
-    animeDetail(JikanAnimeId){
-      // swal.fire(`${JikanAnimeId}`)
-    }
-  },
-  methods: {
+    animeDetail(id){
+      this.$store.dispatch("animeDetail", id)
+      this.$router.push(`/anime-detail/${id}`)
+    },
     updateStatus(status, JikanAnimeId){
       this.$store.dispatch("updateStatus", {status, JikanAnimeId})
       .then((res) => {
