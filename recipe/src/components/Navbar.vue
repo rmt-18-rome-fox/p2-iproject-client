@@ -34,7 +34,6 @@ data () {
       isLoggedIn: !!localStorage.access_token,
       searchTerm:"",
       status: localStorage.status,
-      status : "Premium"
     }
 },
   methods : {

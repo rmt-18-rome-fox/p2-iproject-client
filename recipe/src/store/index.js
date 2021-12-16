@@ -4,7 +4,7 @@ import swal from  'sweetalert2'
 import axios from 'axios'
 
 Vue.use(Vuex)
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://foodrecipes-rome.herokuapp.com'
 
 export default new Vuex.Store({
   state: {
