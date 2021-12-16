@@ -34,17 +34,21 @@
 
     <!-- MAP -->
 
-    <!-- WEATHER NEXT -->
-    <main class="relative z-0 flex-1 pb-8 px-6 bg-white">
+    <!-- WEATHER FORECAST -->
+    <main 
+      v-if="this.$store.state.pageToogle === false"
+    class="relative z-0 flex-1 pb-8 px-6 bg-white">
       <div class="grid pb-10  mt-4 ">
 
        <div 
 
         class="topnav rounded-t-lg font-bold" id="myTopnav">
-        <a href="#home" class="active">Home</a>
-        <a href="#page1">Page 1</a>
-        <a href="#page2">Page 2</a>
-        <a href="#page3">Page 3</a>
+        <a class="active">Home</a>
+        <a 
+          @click="getForecast"
+          href="#page1">Forecast</a>
+        <a href="#page2">History</a>
+        <a href="#page3">Data</a>
         <button 
           href="javascript:void(0);" 
           class="icon"   
@@ -55,104 +59,44 @@
 
         <div class="grid grid-cols-1 gap-2 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 mt-1">
 
-          <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out background-card">
-            <div class="absolute inset-0 bg-pink-900 bg-opacity-75 transition duration-300 ease-in-out"></div>
-              <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
-                <div>
-
-                  <h3 class="text-center text-white text-2xl font-bold">
-                        Jakarta, Indonesia
-                  </h3>
-                  <div class="text-center text-gray-300 text-xl font-medium">
-                        15 December 2021
-                  </div>
-                  <h3 class="text-center text-white text-3xl mt-2 font-bold">
-                        49 &deg;
-                  </h3>
-                  <div class="flex mb-7">
-                    <div class="w-1/3 h-12"></div>
-                    <div class="text-center w-2/3  h-12 pt-5 pr-4 uppercase text-white text-xl font-bold ">
-                        Party Cloudy
-                    </div>
-                    <div class="w-1/3 h-12 pl-5"><img class="w-15 h-20" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/000000/external-cloud-weather-justicon-lineal-color-justicon.png"/></div>
-                  </div>
-              
-                </div>
-              </div>
-          </div>
-
-          <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out background-card">
-            <div class="absolute inset-0 bg-yellow-600 bg-opacity-75 transition duration-300 ease-in-out"></div>
-              <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
-                <div>
-
-                  <h3 class="text-center text-white text-2xl font-bold">
-                        Jakarta, Indonesia
-                  </h3>
-                  <div class="text-center text-gray-300 text-xl font-medium">
-                        15 December 2021
-                  </div>
-                  <h3 class="text-center text-white text-3xl mt-2 font-bold">
-                        49 &deg;
-                  </h3>
-                  <div class="flex mb-7">
-                    <div class="w-1/3 h-12"></div>
-                    <div class="text-center w-2/3  h-12 pt-5 pr-4 uppercase text-white text-xl font-bold ">
-                        Party Cloudy
-                    </div>
-                    <div class="w-1/3 h-12 pl-5"><img class="w-15 h-20" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/000000/external-cloud-weather-justicon-lineal-color-justicon.png"/></div>
-                  </div>
-              
-                </div>
-              </div>
-          </div>
-
-          <div class="relative w-full h-52 bg-cover bg-center group rounded-lg overflow-hidden shadow-lg transition duration-300 ease-in-out background-card">
-            <div class="absolute inset-0 bg-blue-900 bg-opacity-75 transition duration-300 ease-in-out"></div>
-              <div class="relative w-full h-full px-4 sm:px-6 lg:px-4 flex items-center justify-center">
-                <div>
-
-                  <h3 class="text-center text-white text-2xl font-bold">
-                        Jakarta, Indonesia
-                  </h3>
-                  <div class="text-center text-gray-300 text-xl font-medium">
-                        15 December 2021
-                  </div>
-                  <h3 class="text-center text-white text-3xl mt-2 font-bold">
-                        49 &deg;
-                  </h3>
-                  <div class="flex mb-7">
-                    <div class="w-1/3 h-12"></div>
-                    <div class="text-center w-2/3  h-12 pt-5 pr-4 uppercase text-white text-xl font-bold ">
-                        Party Cloudy
-                    </div>
-                    <div class="w-1/3 h-12 pl-5"><img class="w-15 h-20" src="https://img.icons8.com/external-justicon-lineal-color-justicon/64/000000/external-cloud-weather-justicon-lineal-color-justicon.png"/></div>
-                  </div>
-              
-                </div>
-              </div>
-          </div>
+          <weather-forecast
+            v-for="weather in dataForecast" :key="weather.id" :weather="weather"
+          ></weather-forecast>
 
         </div>
       </div>
+      
     </main>
 
-    <!-- TEST SEARCH -->
-    <HFooter></HFooter>
-  
+    <mapping-box
+      v-if="this.$store.state.pageToogle === true"
+    ></mapping-box>
+
+
+    <HFooter v-if="this.$store.state.pageToogle === false"></HFooter>
   </div>
 </template>
 
 <script>
 import CardReusable from '../components/reusable_components/CardReusable.vue';
 import HFooter from 'vue-hacktiv8-footer'
+import WeatherForecast from '../components/WeatherForecast.vue';
+import MappingBox from '../components/MappingBox.vue';
 
 
 export default {
   name: "Home",
   components: {
     CardReusable,
-    HFooter
+    HFooter,
+    WeatherForecast,
+    MappingBox,
+
+  },
+  computed: {
+    dataForecast() {
+      return this.$store.state.weatherForecast.data
+    }
   },
   methods:{
     menuList() {
@@ -162,6 +106,9 @@ export default {
       } else {
         x.className = "topnav";
       }
+    },
+    getForecast() {
+      this.$store.dispatch("getForecastWeather")
     }
   },
   created() {
