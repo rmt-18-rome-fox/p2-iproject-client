@@ -145,14 +145,16 @@ export default {
                 timer: 1500,
               });
 
+              const transactionId = data.id;
+
               return this.$store.dispatch("createTransaction", {
                 cost,
                 bookId: this.$route.params.bookId,
+                transactionId,
               });
             })
             .then(({ data }) => {
               this.$router.push("/transaction");
-              return this.$store.dispatch("patchTransaction", data.id);
             })
             .then((res) => {
               this.$store.dispatch(

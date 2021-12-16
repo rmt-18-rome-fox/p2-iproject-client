@@ -15,6 +15,7 @@ export default new Vuex.Store({
     book: [],
     carts: [],
     transactions: [],
+    sellerBooks: [],
     loadingScreen: false,
     shippingCost: "",
     estimatedTime: "",
@@ -45,6 +46,9 @@ export default new Vuex.Store({
     },
     SUCCESS_FETCH_TRANSACTIONS(state, transactions) {
       state.transactions = transactions;
+    },
+    SUCCESS_FETCH_SELLER_BOOKS(state, books) {
+      state.sellerBooks = books;
     },
   },
   actions: {
@@ -132,14 +136,17 @@ export default new Vuex.Store({
         },
       });
     },
-    createTransaction(context, { cost, bookId }) {
+    createTransaction(context, { cost, bookId, transactionId }) {
       return axios({
         method: "POST",
         url: `${baseUrl}/customers/transactions?bookId=${bookId}`,
         headers: {
           access_token: localStorage.access_token,
         },
-        data: { amount: cost },
+        data: {
+          amount: cost,
+          transactionId,
+        },
       });
     },
     patchTransaction(context, id) {
@@ -173,6 +180,35 @@ export default new Vuex.Store({
       return axios({
         method: "DELETE",
         url: `${baseUrl}/customers/carts?bookId=${id}`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    addBook(context, { title, author, price, publishedYear, genre, imageUrl }) {
+      const data = { title, author, price, publishedYear, genre, imageUrl };
+      return axios({
+        method: "POST",
+        url: `${baseUrl}/sellers/books`,
+        data,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    fetchSellerBooks() {
+      return axios({
+        method: "GET",
+        url: `${baseUrl}/sellers/books`,
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      });
+    },
+    deleteBook(context, id) {
+      return axios({
+        method: "DELETE",
+        url: `${baseUrl}/sellers/books/${id}`,
         headers: {
           access_token: localStorage.access_token,
         },

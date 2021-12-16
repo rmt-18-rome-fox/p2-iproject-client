@@ -53,7 +53,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" v-if="role === 'customer'">
               <div class="col-12">
                 <b-button
                   variant="outline-success"
@@ -138,6 +138,9 @@ export default {
   computed: {
     book() {
       return this.$store.state.book;
+    },
+    role() {
+      return localStorage.user_role;
     },
   },
 };
