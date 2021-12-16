@@ -1,7 +1,6 @@
 # client
 
-- Tampilin Map
-- Mapibox Marker
+Map Token = pk.eyJ1IjoiZmFyaXM5NSIsImEiOiJja3c1cmo1aHYwMGZ6Mm9udnUxNzYzbndoIn0.EWhEWTXkcy75SAgleMKHWg
 
 ## Project setup
 ```

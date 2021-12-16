@@ -31,7 +31,9 @@
       </div>
 
     </div>
-                     
+
+    <!-- MAP -->
+
     <!-- WEATHER NEXT -->
     <main class="relative z-0 flex-1 pb-8 px-6 bg-white">
       <div class="grid pb-10  mt-4 ">
@@ -135,19 +137,22 @@
       </div>
     </main>
 
-
     <!-- TEST SEARCH -->
+    <HFooter></HFooter>
   
   </div>
 </template>
 
 <script>
 import CardReusable from '../components/reusable_components/CardReusable.vue';
+import HFooter from 'vue-hacktiv8-footer'
+
 
 export default {
   name: "Home",
   components: {
-    CardReusable
+    CardReusable,
+    HFooter
   },
   methods:{
     menuList() {
@@ -159,6 +164,9 @@ export default {
       }
     }
   },
+  created() {
+    
+  }
   
 }
 </script>
