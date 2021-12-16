@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
@@ -39,13 +40,19 @@
       </p>
     </div>
   </div>
+  <HFooter></HFooter>
+</div>
 </template>
 
 <script>
 import Swal from "sweetalert2";
+import HFooter from 'vue-hacktiv8-footer'
 
 export default {
   name: "Register",
+  components : {
+        HFooter
+  },
   data() {
     return {
       email: "",

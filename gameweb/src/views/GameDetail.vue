@@ -26,12 +26,18 @@
       <h5>{{ gameDetail.short_description }}</h5>
       <br /><br />
     </div>
+    <br>
+      <HFooter></HFooter>
   </div>
 </template>
 
 <script>
+import HFooter from 'vue-hacktiv8-footer'
 export default {
     name: 'GameDetail',
+    components : {
+         HFooter
+    },
     methods: {
       detailGame() {
         this.$store.dispatch("gameDetail", this.$route.params.id);
