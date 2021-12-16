@@ -5,6 +5,10 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import DetailBySurah from '../views/DetailBySurah.vue'
 import DetailByJuzs from '../views/DetailByJuzs.vue'
+import ListSurah from '../views/ListSurah.vue'
+import PrayerTimes from '../views/PrayerTimes.vue'
+import ListJuzs from '../views/ListJuzs.vue'
+
 
 Vue.use(VueRouter)
 
@@ -33,7 +37,7 @@ const routes = [
     component: Register
   },
   {
-    path: '/detailBySurah',
+    path: '/detailBySurah/:id',
     name: 'DetailBySurah',
     component: DetailBySurah
   },
@@ -41,7 +45,23 @@ const routes = [
     path: '/detailByJuzs',
     name: 'DetailByJuzs',
     component: DetailByJuzs
+  },
+  {
+    path: '/listSurah',
+    name: 'ListSurah',
+    component: ListSurah
+  },
+  {
+    path: '/prayerTimes',
+    name: 'PrayerTimes',
+    component: PrayerTimes
+  },
+  {
+    path: '/listJuzs',
+    name: 'ListJuzs',
+    component: ListJuzs
   }
+
 ]
 
 const router = new VueRouter({

@@ -3,16 +3,35 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://my-quran-webapp.herokuapp.com'
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    listSurah: [],
+    detailSurah: [],
+    prayerTimes: [],
+    allJuzs: []
   },
   mutations: {
     LOGIN(state, data) {
       state.isLogin = data
     },
+    GET_LIST_SURAH(state, data) {
+      state.listSurah = data.chapters
+    },
+    GET_DETAIL_SURAH(state, data) {
+      state.detailSurah = data
+    },
+    GET_PRAYER_TIMES(state, data) {
+      state.prayerTimes = data.data
+    },
+    GET_All_JUZS(state, data) {
+      state.allJuzs = data.juzs
+    },
+    GET_DETAIL_JUZS(state, data) {
+      state.detailSurah = data
+    }
   },
   actions: {
     login(context, payload) {
@@ -40,7 +59,84 @@ export default new Vuex.Store({
         })
       })
     },
+    fetchListSurah(context) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/chapters`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_LIST_SURAH', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    fetchSurahById(context, id) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/chapters/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_DETAIL_SURAH', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    fetchPrayerTimes(context) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/prayerTimes`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_PRAYER_TIMES', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    getJuzs(context) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/juzz`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_All_JUZS', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    detailSurahById(context, id) {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/juzz/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+      .then(({data}) => {
+        context.commit('GET_DETAIL_JUZS', data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
   },
+  
   modules: {
   }
 })
