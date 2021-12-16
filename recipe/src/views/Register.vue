@@ -5,7 +5,7 @@
             <div class="signup-form">
                 <form action="" class="mt-5 border p-4 bg-light shadow" @submit.prevent="register">
                     <h4 class="mb-5 text-secondary">Create Your Account</h4>
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <div class="mb-3 col-md-12">
                             <label>Name<span class="text-danger"></span></label>
                             <input type="text" name="fname" class="form-control" placeholder="Enter Name" v-model="registerForm.name">
@@ -30,7 +30,7 @@
                             <label>Address<span class="text-danger"></span></label>
                             <input type="text" name="password" class="form-control" placeholder="Enter Address" v-model="registerForm.address">
                         </div>
-                        <div class="col-md-12">
+                          <div class="col-md-4">
                            <button class="btn btn-primary float-end">Signup Now</button>
                         </div>
                     </div>

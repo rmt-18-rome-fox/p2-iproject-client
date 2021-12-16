@@ -8,6 +8,7 @@ import RecipeDetail from '../components/RecipeDetail.vue'
 import Favourites from '../views/Favourites.vue'
 import FilteredRecipes from '../views/FilteredRecipes.vue'
 import Subscribe from '../views/Subscribe.vue'
+import FavouriteDetail from '../components/FavouriteDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
         path: '/favourites',
         name: 'Favourites',
         component: Favourites,
+      },
+      {
+        path: '/favourites/:id',
+        name: 'FavouriteDetail',
+        component: FavouriteDetail
       },
       {
         path: '/search',

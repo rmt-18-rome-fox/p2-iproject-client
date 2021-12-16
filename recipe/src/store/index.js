@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     recipes: [],
     recipe: [],
-    bookmarks: []
+    bookmarks: [],
+    selectedFavourite: {}
   },
   mutations: {
     GET_RECIPES (state, recipes) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     GET_BOOKMARKS (state, bookmarks) {
       state.bookmarks = bookmarks
     },
+    SET_SELECTED_FAVOURITE (state, recipe) {
+      state.selectedFavourite = recipe
+    }
   },
   actions: {
     async login(data, loginForm) {
@@ -187,7 +191,7 @@ export default new Vuex.Store({
         })
       }
     },
-    async subscribe ({commit}, dispatch) {
+    async subscribe ({commit, dispatch}) {
       try{
         const response = await axios ({
           method: 'get',
@@ -214,30 +218,78 @@ export default new Vuex.Store({
         })
       }
     },
+
+    async fetchFavouriteByRecipeId ({commit}, recipeId) {
+      try {
+        console.log(recipeId,"recipeid di store");
+        const response = await axios({
+          url: baseUrl + `/users/favourites/recipe/${recipeId}`,
+          method: 'GET',
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        console.log(response," di store response");
+        commit('SET_SELECTED_FAVOURITE', response.data)
+
+      } catch({response}) {
+        const message = response.data.message
+        swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
+        })
+
+      }
+    },
     async deleteFavourite ({dispatch}, id) {
       try {
+        console.log(id);
         const response = await axios ({
-          url: baseUrl + "/users/delete",
+          url: baseUrl + "/users/delete/" +id,
           method: "delete",
           headers: {
             access_token: localStorage.access_token
           }
         })
-        Swal.fire({
+        await dispatch('fetchFavourite')
+        swal.fire({
           icon: 'success',
           title: 'success',
-          text: message.data.message
+          text: 'Success delete data'
         })
-        await dispatch('fetchFavourite')
+      } catch ({response}) {
+        console.log(response);
+        const message = response.data.message
+        swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: message
+        })
+      }
+    },
+    async inputNotes ({dispatch},{notes,id}) {
+      try {
+        console.log(notes,id,"store iput notes>>>>>>>>>");
+        const {data} = await axios ({
+          url: baseUrl + "/users/favourites/" + id,
+          data : {notes},
+          method: 'patch',
+          headers: {
+            access_token: localStorage.access_token
+          }
+        })
+        dispatch('alertBookmark', data.msg)
       } catch ({response}) {
         const message = response.data.message
         swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: message
-      })
+        })
+
       }
-    },
+    }
   },
   modules: {
   }

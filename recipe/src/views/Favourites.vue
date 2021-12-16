@@ -2,12 +2,12 @@
 <div class="main-container" style="display: flex; flex-direction: column ; ">
   <div class="recipes-container">
     <div class="card shadow-lg"  v-for="recipe in recipesList" :key="recipe.id" style="width: 18rem;">
-      <img width="100px" height="250px" :src="recipe.image" class="card-img-top" alt="recipe image">
+      <img width="100px" height="250px" :src="recipe.recipes.image" class="card-img-top" alt="recipe image">
       <div class="card-body">
-        <h5 class="card-title">{{recipe.title}}</h5>
-        <p class="card-text">Cuisines: {{recipe.cuisines.join(", ")}}</p>
-        <p class="card-text">Dish Type: {{recipe.dishTypes.join(", ")}}</p>
-        <a class="btn btn-primary" @click.prevent="$router.push({ path: `/recipe/${recipe.id}` })">Detail</a>
+        <h5 class="card-title">{{recipe.recipes.title}}</h5>
+        <p class="card-text">Cuisines: {{recipe.recipes.cuisines.join(", ")}}</p>
+        <p class="card-text">Dish Type: {{recipe.recipes.dishTypes.join(", ")}}</p>
+        <a class="btn btn-primary" @click.prevent="seeFavouriteDetail(recipe)">Detail</a>
         <a class="btn btn-danger" @click.prevent="deleteFavourite(recipe.id)">Delete</a>
       </div>
     </div>
@@ -27,6 +27,11 @@ components: {
     },
     deleteFavourite(id) {
       this.$store.dispatch("deleteFavourite", id)
+    },
+    seeFavouriteDetail(recipe) {
+      // this.$store.commit ('SET_SELECTED_FAVOURITE', recipe)
+      console.log(recipe,">>>>>>>>>>>>>>");
+      this.$router.push ({ path:`/favourites/${recipe.RecipeId}`})
     }
   },
   computed: {

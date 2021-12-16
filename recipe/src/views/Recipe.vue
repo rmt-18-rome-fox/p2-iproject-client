@@ -12,7 +12,7 @@
     <p class="card-text">Dish Type: {{recipe.dishTypes.join(", ")}}</p>
     <p class="card-text">Score: {{recipe.spoonacularScore}}</p>
 
-    <a  v-if="checkAvailability(recipe)" class="btn btn-primary" @click.prevent="$router.push({ path: `/recipe/${recipe.id}` })">Detail</a>
+    <a  v-if="checkAvailability(recipe)" class="btn btn-primary" @click.prevent="$router.push({ path:`/recipe/${recipe.id}`})">Detail</a>
   </div>
 
   </div>
