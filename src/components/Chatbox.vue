@@ -6,7 +6,7 @@
     </div>
     <div>
       <input v-model="chat">
-      <button @click="sendMessage">Send</button>
+      <button class="btn btn-outline-dark" @click="sendMessage">Send</button>
     </div>
   </div>
 </template>
@@ -25,13 +25,15 @@ export default {
     }
   },
   sockets: {
-    message: function (data) {
-      this.$store.commit('PUSH_MESSAGES', data)
+    chat: function (data) {
+      this.$store.commit('PUSH_MESSAGES_CLIENT', data)
     }
   },
   methods: {
     sendMessage: function () {
       this.$store.commit('PUSH_MESSAGES', this.chat)
+      const payload = `${this.$store.state.identifier}: ${this.chat}`
+      this.$socket.emit('chat', payload)
       this.chat = ''
     }
   }
@@ -40,7 +42,7 @@ export default {
 
 <style>
 .textbox {
-  border: 1px solid black;
+  border: 5px solid black;
   width: 280px;
   height: 330px;
   margin: 10px;

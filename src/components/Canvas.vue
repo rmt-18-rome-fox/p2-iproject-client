@@ -5,6 +5,11 @@
       :id="canvasId"
       v-on:mousedown="mouseDown"
     />
+    <div class="input">
+      <button class="btn btn-outline-dark" @click="reset">Reset</button>
+      <!-- <input @change="uploadImage" class="form-control" type="file" id="formFile" accept="image/*"> -->
+      <button class="btn btn-outline-dark" @click="finish()">Save board</button>
+    </div>
   </div>
 </template>
 
@@ -16,7 +21,8 @@ export default {
   props: ['canvasId'],
   data: () => ({
     path: null,
-    scope: null
+    scope: null,
+    canvasUrl: ''
   }),
   sockets: {
     connect: function () {
@@ -84,7 +90,20 @@ export default {
       } else {
         this.path = null
       }
+    },
+    finish () {
+      const canvas = this.$el.childNodes[0]
+      this.canvasUrl = canvas.toDataURL('image/jpg')
+      console.log(this.canvasUrl)
+      this.$store.commit('SET_CANVASURL', this.canvasUrl)
+      this.$store.dispatch('postMeeting')
     }
+    // uploadImage: function (e) {
+    //   // ini nerima file terus masukin ke image
+    //   const file = e.target.files[0]
+    //   this.image = file
+    //   this.imageUrl = URL.createObjectURL(file)
+    // }
   },
   mounted () {
     this.scope = new paper.PaperScope()
@@ -99,6 +118,12 @@ export default {
   width: 100% !important;
   height: 100% !important;
   border: 5px solid black;
-  margin: auto;
+  margin: 10px auto;
+}
+#formFile {
+  width: 250px;
+}
+.input {
+  display: flex;
 }
 </style>

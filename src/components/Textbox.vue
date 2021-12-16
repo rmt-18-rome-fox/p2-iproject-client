@@ -3,7 +3,8 @@
     <p class="message"
       v-for="(msg, idx) in messages"
       :key="idx"
-    >{{ identifier }}: {{ msg }} </p>
+    >({{ time }})
+    {{ msg }} </p>
   </div>
 </template>
 
@@ -16,6 +17,12 @@ export default {
     },
     identifier: function () {
       return this.$store.state.identifier
+    },
+    time: function () {
+      const date = new Date()
+      const hour = date.getHours() + 1
+      const minute = date.getMinutes() + 11
+      return `${hour}:${minute}`
     }
   }
 }

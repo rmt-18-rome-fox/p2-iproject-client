@@ -2,7 +2,7 @@
   <div>
     <div>
       <input v-model="identifier">
-      <button @click="updateIdentifier">Update</button>
+      <button class="btn btn-outline-dark" @click="updateIdentifier">Update</button>
     </div>
   </div>
 </template>
@@ -18,6 +18,8 @@ export default {
   methods: {
     updateIdentifier: function () {
       this.$store.commit('SET_IDENTIFIER', this.identifier)
+    },
+    finish: function () {
     }
   }
 }
