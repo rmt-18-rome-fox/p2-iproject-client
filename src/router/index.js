@@ -20,7 +20,7 @@ const routes = [
     component: () => import('../views/Favorite.vue'),
   },
   {
-    path: '/recipe-details',
+    path: '/recipe-details/:label',
     name: 'RecipeDetails',
     component: () => import('../views/RecipeDetails.vue'),
   },

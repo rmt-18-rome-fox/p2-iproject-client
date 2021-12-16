@@ -19,51 +19,9 @@
         >
           {{ item.recipe.dishType[0] }}
         </h3>
-        <h2
-          class="text-lg text-gray-900 text-center font-medium title-font"
-        >
+        <h2 class="text-lg text-gray-900 text-center font-medium title-font">
           {{ item.recipe.label }}
         </h2>
-
-        <!-- ---------------------------------------------------------- -->
-        <!-- SISANYA TARO DI HALAMAN DETAIL -->
-        
-        <!-- <h2 class="leading-relaxed text-base">
-          <strong> Area: </strong>
-        </h2>
-        <p class="leading-relaxed text-base mb-4">
-          {{ item.recipe.cuisineType[0] }}
-        </p>
-        <div>
-          <h2 class="leading-relaxed text-base">
-            <strong> Ingredients: </strong>
-          </h2>
-          <p
-            v-for="(ingredient, i) in item.recipe.ingredientLines"
-            :key="i"
-            class="leading-relaxed text-base"
-          >
-            {{ ingredient }}
-          </p>
-        </div>
-        <div>
-          <h2 class="leading-relaxed text-base mt-3">
-            <strong> Nutritions: </strong>
-          </h2>
-          <ul>
-            <li >
-              <p class="leading-relaxed text-base mb-4">
-                {{ item.recipe.totalNutrients.ENERC_KCAL.label }}: {{item.recipe.totalNutrients.ENERC_KCAL.quantity}} {{item.recipe.totalNutrients.ENERC_KCAL.unit}}
-              </p>
-              <p class="leading-relaxed text-base mb-4">
-                {{ item.recipe.totalNutrients.FAT.label }}: {{item.recipe.totalNutrients.FAT.quantity}} {{item.recipe.totalNutrients.FAT.unit}}
-              </p>
-              <p class="leading-relaxed text-base mb-4">
-                {{ item.recipe.totalNutrients.CHOCDF.label }}: {{item.recipe.totalNutrients.CHOCDF.quantity}} {{item.recipe.totalNutrients.CHOCDF.unit}}
-              </p>
-            </li>
-          </ul>
-        </div> -->
       </div>
       <button
         class="
@@ -83,6 +41,25 @@
       >
         Add to Favorites
       </button>
+      <button
+        @click="goToRecipeDetail(item.recipe.label)"
+        class="
+          flex
+          mx-auto
+          mt-4
+          text-white
+          bg-green-500
+          border-0
+          py-2
+          px-8
+          focus:outline-none
+          hover:bg-green-600
+          rounded
+          text-lg
+        "
+      >
+        Get Recipes
+      </button>
     </div>
   </div>
 </template>
@@ -91,6 +68,14 @@
 export default {
   name: "RecipeCard",
   props: ["item"],
+  methods: {
+    goToRecipeDetail(payload) {
+      this.$store.dispatch("getDetailsRecipe", payload).then(() => {
+        this.$router.push(`/recipe-details/${payload}`)
+      })
+      console.log(payload, "<<<< ini index recipe")
+    },
+  },
 };
 </script>
 

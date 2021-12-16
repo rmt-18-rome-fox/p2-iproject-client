@@ -6,7 +6,7 @@
         <label for="price" class="block text-sm font-medium text-gray-700"
           >Search recipes</label
         >
-        <div class="mt-1 relative rounded-md ">
+        <div class="mt-1 relative rounded-md">
           <div
             class="
               absolute
@@ -24,6 +24,7 @@
               name="search"
               id="search"
               class="
+                border
                 focus:ring-indigo-500 focus:border-indigo-500
                 block
                 pl-7
@@ -38,11 +39,6 @@
             />
           </center>
           <button class="rounded bg-orange-400 w-24">Search</button>
-          <div class="post-bottom">
-            <div class="action">
-              <i class="speech-to-text fas fa-microphone"></i>
-            </div>
-          </div>
         </div>
         <!-- Recipe Card -->
         <div class="grid mt-5 gap-x-8 gap-y-4 grid-cols-3">
@@ -65,18 +61,7 @@ export default {
   components: {
     RecipeCard,
   },
-  props: {
-    lang: {
-      type: String,
-      default: "en-US",
-    },
-  },
-  data: () => ({
-    runtimeTranscription: "",
-    transcription: [],
-  }),
-  methods: {
-  },
+  methods: {},
   created() {
     this.$store.dispatch("getRandomRecipes");
   },

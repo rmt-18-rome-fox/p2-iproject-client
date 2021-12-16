@@ -13,7 +13,9 @@ Vue.use(VueSpeech)
 export default new Vuex.Store({
 	state: {
 		recipes: [],
-		apiUrl: "https://api.edamam.com/search",
+		recipeDetail: {},
+		favorites: [],
+		// apiUrl: "https://api.edamam.com/search",
 		baseUrl: "https://ip-foodify.herokuapp.com",
 		isLoggedIn: false,
 	},
@@ -24,6 +26,9 @@ export default new Vuex.Store({
 		SET_IS_LOGGED_IN(state, payload) {
 			state.isLoggedIn = payload
 		},
+		SET_RECIPES_BY_ID(state, payload) {
+      state.recipeDetail = payload
+    },
 	},
 	actions: {
 		async getRandomRecipes({ state, commit }) {
@@ -33,8 +38,8 @@ export default new Vuex.Store({
 				let response = await axios.get(`${state.baseUrl}/foodify`, {
 					params: {
 						q: item,
-						app_id: "5b6623d5",
-						app_key: "46674aa2193dbb7b88ffd897331e661a",
+						app_id: "77c1ea2e",
+						app_key: "b22bf21dd9e8f582274c54a7634b2a49",
 						from: 0,
 						to: 9,
 					},
@@ -46,6 +51,23 @@ export default new Vuex.Store({
 				commit("SET_RECIPES", [])
 			}
 		},
+		async getDetailsRecipe(context, payload) {
+			try {
+				let response = await axios.get(`https://api.edamam.com/search?app_id=77c1ea2e&app_key=b22bf21dd9e8f582274c54a7634b2a49&q=${payload}`, {
+					params: {
+						q: "",
+						app_id: "77c1ea2e",
+						app_key: "b22bf21dd9e8f582274c54a7634b2a49",
+						from: 0,
+						to: 9,
+					},
+				})
+				// console.log(response.data.hits[0], "<<<< ini response")
+				context.commit("SET_RECIPES_BY_ID", response.data.hits[0].recipe)
+			} catch (err) {
+				console.log(err)
+			}
+		}
 		// async doLogin({commit}) {
 		//   try {
 		//     let response = await axios.post()
