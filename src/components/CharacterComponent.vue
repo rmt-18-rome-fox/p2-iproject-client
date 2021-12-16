@@ -69,8 +69,13 @@
                                 <label class="block mb-2 text-sm font-bold text-gray-700 " for="password">
                                     Spells
                                 </label>
-                                <div class="h-[194px] pl-3 overflow-y-scroll border rounded shadow-sm w-full text-center">
+                                <div class="h-[194px] pl-3 overflow-y-scroll border rounded shadow-sm w-full text-center" v-if="!adding">
                                     <ul v-for="el in myChar.spell" :key="el.id">
+                                        <li class="border-b mb-1">{{el}}</li>
+                                    </ul>
+                                </div>
+                                <div class="h-[194px] pl-3 overflow-y-scroll border rounded shadow-sm w-full text-center" v-if="adding">
+                                    <ul v-for="el in myChar.spells" :key="el.id">
                                         <li class="border-b mb-1">{{el}}</li>
                                     </ul>
                                 </div>

@@ -113,11 +113,11 @@ export default {
             this.myChar.spells.push(this.selectedSpell);
         },
         addCharacter() {
-            this.myChar.spell = this.myChar.spells.join(",");
-            console.log(this.myChar);
             this.$store.dispatch("addCharacter", this.myChar);
         },
         toNext() {
+            this.myChar.spell = this.myChar.spells.join(",");
+            console.log(this.myChar.spell);
             this.$emit("toNext", 2);
         }
     }
