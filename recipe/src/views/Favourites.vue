@@ -30,7 +30,6 @@ components: {
     },
     seeFavouriteDetail(recipe) {
       // this.$store.commit ('SET_SELECTED_FAVOURITE', recipe)
-      console.log(recipe,">>>>>>>>>>>>>>");
       this.$router.push ({ path:`/favourites/${recipe.RecipeId}`})
     }
   },
