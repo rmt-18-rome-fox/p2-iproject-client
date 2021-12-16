@@ -3,7 +3,7 @@
     <header class="container bg-primary text-white">
         <div class="row">
             <div class="col-12 py-4 text-center">
-                <h1 class="display-1">HEROES</h1>
+                <h1 class="display-1">SUPER HERO EVENT</h1>
             </div>
         </div>
     </header>
@@ -13,9 +13,9 @@
                  
             </div>    
             <div class="col-md-8 py-5">
-                  <div class="row">
+                 
                     <Cards v-for="el in hero" :key="el.id" :el="el"></Cards>
-                </div>
+              
             </div>
         </div>
     </main>
@@ -51,13 +51,26 @@ export default {
   computed: {
         hero (){
             return this.$store.state.hero
-        }
+        },
+        
+
   },
   methods :{
-    fetchHero () {
-              
-              this.$store.dispatch('fetchHero')
+      fetchHero () {
+          
+          this.$store.dispatch('fetchHero')
           },
+          formatDate() {
+              // console.log(this.history.createdAt)
+              let timeData = new Date(this.el.date) 
+              const timeDate = timeData.getDate()
+              const timeMonth = timeData.getMonth() + 1
+              const timeYear = timeData.getFullYear()
+              const timeHour = timeData.getHours()
+              const timeMinute = timeData.getMinutes()
+              const timeSecond = timeData.getSeconds()
+              return `${timeDate}/${timeMonth}/${timeYear}, ${timeHour}:${timeMinute}:${timeSecond}`
+          }
     
   }, 
   created (){

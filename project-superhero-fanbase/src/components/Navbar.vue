@@ -6,6 +6,10 @@
           <div class="navbar-nav">
               <router-link to="/" class="nav-item nav-link" >HOME</router-link> 	
            </div>
+              <div class="navbar-nav">
+              <router-link to="/form" class="nav-item nav-link" >ADD SCHEDULE</router-link> 	
+           </div>
+           
            <div class="navbar-nav ml-auto action-buttons">
               <div class="nav-item dropdown">
                 <router-link to="/Login" class="btn btn-primary" >Login</router-link> 

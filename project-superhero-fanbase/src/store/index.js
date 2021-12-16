@@ -8,12 +8,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     hero: [],
+    heroId: [],
     currentUser: "",
     chats: []
   },
   mutations: {
     SET_HERO(state,payload){
       state.hero = payload
+    },
+    SET_HEROID(state,payload){
+      state.heroId = payload
     },
     SET_CURENTUSER(state,payload){
       state.currentUser = payload
@@ -38,8 +42,7 @@ export default new Vuex.Store({
 
       
     },
-    detailHero (context,{id}){
-      console.log({id}, '>>>>>>>>>>>>>>>>>>>>>>> payload')
+    detailHero (context,id){
       return new Promise((resolve,reject)=>{
         heroAxios({
         method:"get",
@@ -47,7 +50,7 @@ export default new Vuex.Store({
         
         })
         .then((response) =>{
-         console.log(response.data, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> data cuy")
+          context.commit('SET_HEROID',response.data)
           resolve()
           
         })
@@ -130,7 +133,30 @@ export default new Vuex.Store({
       // state.chats = payload
       console.log(payload, "chat from server >>>>>>>>>>>>>>")
       context.commit("SOCKET_RECEIVEMESSAGEFROMSERVER", payload)
-    }
+    },
+    AddEvent(context,payload){
+      console.log(payload)
+      return new Promise((resolve,reject)=>{
+        heroAxios({
+          method: 'post',
+          url: '/hero',
+          data: payload,
+           headers: {
+            access_token: localStorage.getItem('access_token'),
+          
+          },
+
+      })
+        .then(() =>{
+         
+          resolve()
+        })
+        .catch((err)=>{
+          
+          reject(err)
+        })
+      })
+    },
   },
   modules: {
   }
