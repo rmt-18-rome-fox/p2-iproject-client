@@ -26,7 +26,7 @@
             <a
               href="#"
               class="btn btn-primary"
-              @click="payNow"
+              @click="payNow(booking.movie.id)"
               v-if="booking.isPaid === false"
               >Pay Now</a
             >
@@ -40,7 +40,6 @@
               v-if="redirect&&!booking.isPaid"
               :href="redirect"
               target="_blank"
-              @click="paidSuccess(booking.movie.id)"
             >
               <h6 style="margin-top: 10px">
                 Click this to continue payment
@@ -82,9 +81,9 @@ export default {
           console.log(err);
         });
     },
-    payNow() {
+    payNow(id) {
       this.$store
-        .dispatch("aPayNow")
+        .dispatch("aPayNow",id)
         .then((res) => {
           console.log(res);
           this.redirect = res.redirect_url;

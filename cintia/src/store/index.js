@@ -149,13 +149,16 @@ export default new Vuex.Store({
           });
       });
     },
-    aPayNow({ state }) {
+    aPayNow({ state }, id) {
       return new Promise((resolve, reject) => {
         const config = {
           method: "post",
           url: `${state.baseUrl}/payments/midtrans`,
           headers: {
             access_token: localStorage.access_token,
+          },
+          data: {
+            MovieId: id,
           },
         };
         axios(config)
