@@ -3,7 +3,7 @@
     <div class="container mx-auto">
         <div class="flex justify-center px-6 my-12">
             <!-- Row -->
-            <div class="w-full max-w-4xl flex border rounded-lg">
+            <div class="w-full max-w-4xl flex border rounded-lg shadow">
                 <!-- Col -->
                 <div
                     class="h-auto bg-gray-300 flex w-5/12 bg-cover rounded-l-lg items-center justify-center"
@@ -83,21 +83,21 @@
                         </div>
                         </div>
                         <div class="flex items-center justify-center">
-                        <div class="text-center w-48">
+                        <div class="text-center w-full flex space-x-5 justify-center">
                             <button
-                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                class="w-48 px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                 type="button" @click="deleteChar(myChar.id)" v-if="!adding"
                             >
                                 Delete Character
                             </button>
                             <button
-                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                class="w-32 px-4 py-2 font-bold text-white bg-blue-300 rounded-lg hover:bg-blue-400 focus:outline-none focus:shadow-outline"
                                 type="button" @click="toPrev" v-if="adding"
                             >
                                 Previous
                             </button>
                             <button
-                                class="w-full px-4 py-3 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                                class="px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700 focus:outline-none focus:shadow-outline"
                                 type="button" @click="toAdd" v-if="adding"
                             >
                                 Create Character

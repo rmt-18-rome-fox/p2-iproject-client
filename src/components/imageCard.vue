@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="flex items-center justify-center">
       <a href="#" @click.prevent="selectImage(imgUrl)">
-      <img :src="imgUrl" alt="Avatar image" width="15%" height="15%" />
+      <img :src="imgUrl" alt="Avatar image" width="200px" height="300px"/>
       </a>
   </div>
 </template>
