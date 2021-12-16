@@ -1,6 +1,6 @@
 <template>
 <div style="min-height: 100vh; overflow: hidden; background-image: url(https://media.istockphoto.com/photos/white-texture-background-picture-id926993450?b=1&k=20&m=926993450&s=170667a&w=0&h=vxWViBkXgTQnSO4UTtU26hLlscn9FTKYS1Jx6f-_slI=)" class="mb-0">
-    <navbar></navbar>
+    <architect-navbar></architect-navbar>
     <div class="col-12 d-flex flex-column justify-content-center align-items-center" style="height: 89vh; ">
         <form class="d-flex flex-column justify-content-center align-items-center px-5 py-2" @submit.prevent="onSubmit" style="border: 1px solid black; border-radius: 20px; background-color: #2C2828; color:#EEEEEE">
             <label for="name" class="mb-2" style="font-size: 35px">Name</label>
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
+import ArchitectNavbar from '../components/ArchitectNavbar.vue'
 
 export default {
   name: 'ArchitectProfile',
   components: {
-    Navbar
+    ArchitectNavbar
   },
   created () {
     this.$store.dispatch('fetchArchitectProfile')
