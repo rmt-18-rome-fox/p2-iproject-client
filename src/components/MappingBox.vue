@@ -58,11 +58,14 @@ export default {
     })
 
     map.on('click', (e) => {
-      console.log(`A dblclick event has occurred at ${e.lngLat}`);
-      const marker = new mapboxgl.Marker()
+      const marker = new mapboxgl.Marker({ "color": "#d50000" })
       marker.setLngLat([e.lngLat.lng, e.lngLat.lat])
       marker.addTo(map)
       this.$store.dispatch("setLocation", e.lngLat)
+      this.$store.dispatch("getCurrentWeather", {
+        lng: e.lngLat.lng,
+        lat: e.lngLat.lat
+      })
       // if(this.swClick === true) {
       //   console.log("<<< REMOVE");
       //   // marker.remove()
@@ -78,14 +81,22 @@ export default {
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
     });
-    // console.log(geocoder,"<<<<");
+    geocoder.on("result", (item) => {
+      const newlngLat = {
+        lng: item.result.geometry.coordinates[0],
+        lat: item.result.geometry.coordinates[1]
+      }
+      this.$store.dispatch("setLocation", newlngLat)
+      this.$store.dispatch("getCurrentWeather", {
+        lng: newlngLat.lng,
+        lat: newlngLat.lat
+      })
+    })
+    
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map))
 
     const nav = new mapboxgl.NavigationControl();
     map.addControl(nav, "top-right");
-    new mapboxgl.Marker()
-    .setLngLat([this.onLat, this.onLan])
-    .addTo(map);
 
     const geolocate = new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -101,24 +112,31 @@ export default {
 
 <style>
 .basemap {
-  /* position: absolute; */
-  height: 50rem;
-  width: 100%;
+  position: absolute;
+  height: 40rem;
+  width: 50%;
   top:0;
+  margin-left: 25%;
+  margin-top: 160px;
 }
 .mapboxgl-popup {
-max-width: 400px;
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  max-width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 .geocoder {
-position: absolute;
-z-index: 1;
-width: 50%;
-left: 50%;
-margin-left: -25%;
-top: 10px;
+  position: absolute;
+  z-index: 1;
+  width: 50%;
+  left: 50%;
+  margin-left: -25%;
+  top: 100px;
 }
 .mapboxgl-ctrl-geocoder {
-min-width: 100%;
+  min-width: 100%;
+  height: 50px;
+  border: 3px solid green;
+}
+.mapboxgl-ctrl-geocoder--input {
+   text-align:center;
 }
 </style>

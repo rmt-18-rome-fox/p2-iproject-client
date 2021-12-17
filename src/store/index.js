@@ -29,9 +29,6 @@ export default new Vuex.Store({
     MUTATE_SET_LOCATION(state, payload) {
       state.setLocation = payload
     },
-    MUTATE_SET_LOCATION2(state, payload) {
-      state.setLocation2 = payload
-    },
     MUTATE_SW_PAGE(state) {
       state.pageToogle = !state.pageToogle
     },
@@ -45,25 +42,6 @@ export default new Vuex.Store({
     },
     setLocation(context, payload) {
       context.commit("MUTATE_SET_LOCATION", payload)
-    },
-    getLocation(context, payload) {
-      return new Promise((resolve, reject) => {
-        axios({
-          url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?access_token=pk.eyJ1IjoiZmFyaXM5NSIsImEiOiJja3c1cmo1aHYwMGZ6Mm9udnUxNzYzbndoIn0.EWhEWTXkcy75SAgleMKHWg`,
-          method: "GET",
-        })
-        .then(({data}) => {
-          // context.commit("MUTATE_SET_LOCATION2", data)
-          
-          resolve(data)
-        })
-        .catch((err) => {
-          console.log(err.response.data.message);
-          reject(err)
-        })
-
-      })
-      
     },
     async getIpClient() {
       try {
@@ -79,7 +57,7 @@ export default new Vuex.Store({
           lon: sendData.longitude
         }
         
-        this.dispatch("getCurrentWeather", dataIp.city)
+        this.dispatch("getCurrentWeather", {city:dataIp.city})
         localStorage.setItem("city", dataIp.city)
       } catch (err) {
         console.log(err);
@@ -90,7 +68,7 @@ export default new Vuex.Store({
         newAxios({
           url: `/weather/current`,
           method: "POST",
-          data: {city: payload}
+          data: payload
         })
         .then(({data}) => {
           context.commit("MUTATE_WEATHER", data)

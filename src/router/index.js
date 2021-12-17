@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/save',
+    path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
     meta: {
@@ -19,15 +19,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
-    path: '/',
+    path: '/map',
     name: 'MappingBox',
     component: () => import(/* webpackChunkName: "map" */ '../components/MappingBox.vue')
   },
-  {
-    path: '/map',
-    name: 'TestMap',
-    component: () => import(/* webpackChunkName: "map" */ '../components/TestMap.vue')
-  }
 ]
 
 const router = new VueRouter({

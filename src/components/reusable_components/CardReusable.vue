@@ -54,13 +54,13 @@ export default {
     }
   },
   created() {
-    // this.$store
-    // .dispatch("getIpClient")
-    // .then(() => {
-    //   // console.log(data);
-    // }).catch((err) => {
-    //   console.log(err);
-    // });
+    this.$store
+    .dispatch("getIpClient")
+    .then(() => {
+      // console.log(data);
+    }).catch((err) => {
+      console.log(err);
+    });
   },
 }
 </script>
