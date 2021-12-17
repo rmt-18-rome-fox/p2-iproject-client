@@ -11,7 +11,7 @@ const options = {
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000',
+  connection: 'http://allhandsondeck-v0.herokuapp.com',
   vuex: {
     store,
     actionPrefix: 'SOCKET_',
