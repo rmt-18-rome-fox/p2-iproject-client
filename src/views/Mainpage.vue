@@ -16,10 +16,10 @@
     <div class="card mb-3" style="width: 100%;" v-for="book in bookinglist" v-bind:key="book.id">
         <div class="row g-0">
             <div class="col-md-4">
-            <img :src="book.imageUrl">
+              <img :src="book.imageUrl" class="col-md-12">
             </div>
             <div class="col-md-8">
-            <div class="card-body">
+              <div class="card-body">
                 <h5 class="card-title">{{ book.name }}</h5>
                 <p class="card-text">{{ formatRupiah(book.price) }} / day</p>
                 <div>
@@ -27,7 +27,7 @@
                 <a class="btn btn-success" href="#" v-on:click.prevent="goChat(book.id)">Chat Now</a>
                 </div>
                 <p class="card-text"><small class="text-muted">Date Created {{ dateFormating(book.createdAt) }}</small></p>
-            </div>
+              </div>
             </div>
         </div>
     </div>

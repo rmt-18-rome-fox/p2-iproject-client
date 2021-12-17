@@ -75,11 +75,12 @@ export default {
         .catch(err => console.log(err))
     },
     onSuccess (googleUser) {
+      const basic = googleUser.getBasicProfile()
       const payload = googleUser
       this.$store.dispatch('authGoogle', payload)
         .then((data) => {
-          localStorage.setItem('email', googleUser.getBasicProfile().nv)
-          this.$store.dispatch('setUsername', googleUser.getBasicProfile().nv)
+          localStorage.setItem('email', basic.getEmail())
+          this.$store.dispatch('setUsername', basic.getEmail())
           this.$router.push('/mainpage')
         })
         .catch((err) => {
