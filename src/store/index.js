@@ -9,6 +9,8 @@ export default new Vuex.Store({
   state: {
     cityIsFound: false,
     citySearch: "",
+    setLocation: {},
+    setLocation2: {},
     weatherToday: [],
     weatherForecast: [],
     ipClient: {},
@@ -24,6 +26,12 @@ export default new Vuex.Store({
     MUTATE_SEARCH(state, payload) {
       state.citySearch = payload
     },
+    MUTATE_SET_LOCATION(state, payload) {
+      state.setLocation = payload
+    },
+    MUTATE_SET_LOCATION2(state, payload) {
+      state.setLocation2 = payload
+    },
     MUTATE_SW_PAGE(state) {
       state.pageToogle = !state.pageToogle
     },
@@ -34,6 +42,28 @@ export default new Vuex.Store({
   actions: {
     swPage(context) {
       context.commit("MUTATE_SW_PAGE")
+    },
+    setLocation(context, payload) {
+      context.commit("MUTATE_SET_LOCATION", payload)
+    },
+    getLocation(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?access_token=pk.eyJ1IjoiZmFyaXM5NSIsImEiOiJja3c1cmo1aHYwMGZ6Mm9udnUxNzYzbndoIn0.EWhEWTXkcy75SAgleMKHWg`,
+          method: "GET",
+        })
+        .then(({data}) => {
+          // context.commit("MUTATE_SET_LOCATION2", data)
+          
+          resolve(data)
+        })
+        .catch((err) => {
+          console.log(err.response.data.message);
+          reject(err)
+        })
+
+      })
+      
     },
     async getIpClient() {
       try {
