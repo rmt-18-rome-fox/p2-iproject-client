@@ -26,12 +26,6 @@ export default {
   methods: {
     logout: function () {
       localStorage.clear()
-      /* eslint-disable */
-      // const auth2 = gapi.auth2.getAuthInstance()
-      // auth2.signOut().then(function () {
-      //   Swal.fire('You have signed out.')
-      // })
-      /* eslint-enable */
       Swal.fire('You have signed out.')
       this.$store.commit('SET_LOGIN')
       this.$router.push('login')

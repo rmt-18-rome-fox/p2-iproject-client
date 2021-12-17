@@ -235,7 +235,6 @@ export default new Vuex.Store({
       })
     },
     authGithub: function (context, payload) {
-      console.log(payload.code);
       return new Promise((resolve, reject) => {
         axios({
           url: `${baseURL}/login/auth-github`,
@@ -255,28 +254,6 @@ export default new Vuex.Store({
             resolve()
           })
           .catch(err => {
-            reject(err)
-          })
-      })
-    },
-    postAuthGithub: function (code) {
-      return new Promise((resolve, reject) => {
-        axios({
-          url: 'http://localhost:8000/login/auth-github',
-          method: 'post',
-          data: {
-            code: code,
-            client_id: '5b3c8f13cf108325a665',
-            client_secret: 'd42cee4924ef5bd85e869a5211a3eab5b0c86406',
-            redirect_uri: 'http://localhost:8080/login/auth-github'
-        },
-        })
-          .then(resp => {
-            console.log(resp)
-            resolve()
-          })
-          .catch(err => {
-            console.log(err)
             reject(err)
           })
       })
