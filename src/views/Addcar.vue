@@ -62,7 +62,7 @@ export default {
       formData.append('urlPicture', this.formPostCar.file)
       console.log(formData)
       axios
-        .post('http://localhost:3000/car', formData, {
+        .post('https://sewaja-mobil.herokuapp.com/car', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             access_token: localStorage.getItem('access_token')

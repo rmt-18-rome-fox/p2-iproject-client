@@ -38,7 +38,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios({
           method: 'post',
-          url: 'http://localhost:3000/login',
+          url: 'https://sewaja-mobil.herokuapp.com/login',
           data: {
             email: payload.email,
             password: payload.password
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     registerUser (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/register', payload)
+        axios.post('https://sewaja-mobil.herokuapp.com/register', payload)
           .then(data => resolve(data))
           .catch(err => reject(err))
       })
@@ -61,7 +61,7 @@ export default new Vuex.Store({
     fetchBooking (context, payload) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/car',
+        url: 'https://sewaja-mobil.herokuapp.com/car',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -75,7 +75,7 @@ export default new Vuex.Store({
     bookingCar (context, payload) {
       axios({
         method: 'post',
-        url: `http://localhost:3000/book/${payload.id}`,
+        url: `https://sewaja-mobil.herokuapp.com/book/${payload.id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -93,7 +93,7 @@ export default new Vuex.Store({
     fetchCurrentBook (context, payload) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/book',
+        url: 'https://sewaja-mobil.herokuapp.com/book',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -106,7 +106,7 @@ export default new Vuex.Store({
     authGoogle (context, payload) {
       const googletoken = { idToken: payload.getAuthResponse().id_token }
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:3000/authGoogle', googletoken)
+        axios.post('https://sewaja-mobil.herokuapp.com/authGoogle', googletoken)
           .then((data) => {
             localStorage.setItem('access_token', data.data.access_token)
             context.commit('ISLOGIN', true)
@@ -120,7 +120,7 @@ export default new Vuex.Store({
     fetchCarId (context, payload) {
       axios({
         method: 'get',
-        url: `http://localhost:3000/car/${payload}`,
+        url: `https://sewaja-mobil.herokuapp.com/car/${payload}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
