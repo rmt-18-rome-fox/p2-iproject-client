@@ -33,6 +33,7 @@ export default {
     },
     methods: {
         toLogin() {
+            console.log("click")
             this.$router.push("/login");
         },
         logout() {
