@@ -1,6 +1,9 @@
 <template>
   <div>
-      <CharacterComponent v-for="myChar in myCharacters" :key="myChar.id" :myChar="myChar"/>
+      <CharacterComponent v-for="myChar in myCharacters" :key="myChar.id" :myChar="myChar"/> 
+      <div class="py-10">
+          <button class="px-5 py-3 bg-yellowdnd rounded-lg text-reddnd font-bold" @click="toAddChara">Add a Character</button>
+      </div>
   </div>
 </template>
 
@@ -12,6 +15,11 @@ export default {
     computed: {
         myCharacters() {
             return this.$store.state.myCharacters
+        }
+    },
+    methods: {
+        toAddChara() {
+            this.$router.push("/create")
         }
     },
     created() {

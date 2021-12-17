@@ -16,6 +16,7 @@
             <div class="text-sm font-medium text-gray-500">
                 Not registered? <a href="#" class="text-blue-700 hover:underline" @click.prevent="toRegister">Create account</a>
             </div>
+            <p v-if="error" class="text-red-500 text-sm font-bold">{{errMsg}}</p>
 		  </form>
 	    </div>
       </div>
@@ -31,15 +32,23 @@ export default {
                 email: "",
                 password: "",
             },
+            errMsg: "",
+            error: false,
         }
     },
     methods: {
         login() {
             this.$store.dispatch("login", this.user)
             .then(({data}) => {
+                this.error = false;
                 localStorage.setItem("access_token", data.access_token);
                 this.$store.commit("set_is_logged_in", true);
-                this.$router.push("/mycharacters");
+                this.$router.push("/");
+            })
+            .catch((err) => {
+                console.log(err.response.data.message);
+                this.errMsg = err.response.data.message;
+                this.error = true;
             });
         },
         toRegister() {
