@@ -18,13 +18,6 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
-    beforeEnter: (to, from, next) => {
-      if (localStorage.access_token) {
-        next({ name: "HomePage" });
-      } else {
-        next();
-      }
-    },
   },
   {
     path: "/mycharacters",
@@ -61,6 +54,14 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if ((to.name == "Login" || to.name == "Register") && localStorage.access_token) {
+    next({ name: "HomePage" });
+  } else {
+    next();
+  }
 });
 
 export default router;
