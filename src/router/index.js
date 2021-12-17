@@ -52,6 +52,7 @@ router.beforeEach((to, from, next) => {
   const accessToken = localStorage.getItem('access_token')
   if (to.name === 'Login' && accessToken) next({ name: 'Mainpage' })
   else if (to.name === 'Mainpage' && !accessToken) next({ name: 'Login' })
+  else if (to.path === '/' && !accessToken) next({ name: 'Login' })
   else next()
 })
 
