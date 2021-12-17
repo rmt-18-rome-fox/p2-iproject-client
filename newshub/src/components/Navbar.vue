@@ -17,7 +17,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item href="#" v-on:click.prevent="goToAdminLogin" v-if="!isLoggedIn">Sign In Admin</b-nav-item> &nbsp; 
         <b-nav-item href="#" v-on:click.prevent="goToLogin" v-if="!isLoggedIn">Sign In</b-nav-item> &nbsp; 
-        <b-nav-item href="#" v-on:click.prevent="signOutHandler" 
+        <b-nav-item href="#" v-on:click.prevent="signOutHandler" v-if="isLoggedIn"
           >Sign Out</b-nav-item
         >
       </b-navbar-nav>
@@ -59,7 +59,8 @@ export default {
     }
   },
   created() {
-    if (localStorage.getItem("access_data")){
+    if (localStorage.getItem("access_token")){
+      console.log('masuk sini<<<<');
       this.loginData(true)
     }
     if (localStorage.getItem("role") === "admin"){
