@@ -2,7 +2,7 @@
   <div>
 
     <navigation-bar></navigation-bar>
-
+    
     <router-view/>
   </div>
 </template>
@@ -14,10 +14,11 @@ export default ({
   name: "App",
   components: { 
     NavigationBar,
-    
   },
+  
 })
 </script>
 
 <style>
+
 </style>

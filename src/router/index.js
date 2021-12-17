@@ -22,7 +22,7 @@ const routes = [
     path: '/map',
     name: 'MappingBox',
     component: () => import(/* webpackChunkName: "map" */ '../components/MappingBox.vue')
-  }
+  },
 ]
 
 const router = new VueRouter({

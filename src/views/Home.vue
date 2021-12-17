@@ -3,7 +3,7 @@
     <div class="w-full">
 
       <div role="main" class="w-full flex flex-col h-screen  justify-center mt-5">
-          <div class="w-full sm:w-1/2 lg:w-1/3 bg-gray-100 rounded-3xl m-auto">
+          <div class="w-full sm:w-1/2 lg:w-1/3 bg-gray-100 rounded-3xl m-auto mb-10">
           
            
             <!-- SEARCH -->
@@ -73,8 +73,10 @@
       v-if="this.$store.state.pageToogle === true"
     ></mapping-box>
 
-
-    <HFooter v-if="this.$store.state.pageToogle === false"></HFooter>
+    <div class="grid">
+    <HFooter
+    v-if="this.$store.state.pageToogle === false"></HFooter>
+    </div>
   </div>
 </template>
 
@@ -117,7 +119,7 @@ export default {
       this.$store.dispatch("getForecastWeather")
     },
     getCurrentWeather() {
-      this.$store.dispatch("getCurrentWeather", this.input_city)
+      this.$store.dispatch("getCurrentWeather", {city: this.input_city})
     },
     clearText() {
       this.input_city=''

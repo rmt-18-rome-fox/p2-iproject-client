@@ -9,6 +9,8 @@ export default new Vuex.Store({
   state: {
     cityIsFound: false,
     citySearch: "",
+    setLocation: {},
+    setLocation2: {},
     weatherToday: [],
     weatherForecast: [],
     ipClient: {},
@@ -24,6 +26,9 @@ export default new Vuex.Store({
     MUTATE_SEARCH(state, payload) {
       state.citySearch = payload
     },
+    MUTATE_SET_LOCATION(state, payload) {
+      state.setLocation = payload
+    },
     MUTATE_SW_PAGE(state) {
       state.pageToogle = !state.pageToogle
     },
@@ -34,6 +39,9 @@ export default new Vuex.Store({
   actions: {
     swPage(context) {
       context.commit("MUTATE_SW_PAGE")
+    },
+    setLocation(context, payload) {
+      context.commit("MUTATE_SET_LOCATION", payload)
     },
     async getIpClient() {
       try {
@@ -49,7 +57,7 @@ export default new Vuex.Store({
           lon: sendData.longitude
         }
         
-        this.dispatch("getCurrentWeather", dataIp.city)
+        this.dispatch("getCurrentWeather", {city:dataIp.city})
         localStorage.setItem("city", dataIp.city)
       } catch (err) {
         console.log(err);
@@ -60,7 +68,7 @@ export default new Vuex.Store({
         newAxios({
           url: `/weather/current`,
           method: "POST",
-          data: {city: payload}
+          data: payload
         })
         .then(({data}) => {
           context.commit("MUTATE_WEATHER", data)
