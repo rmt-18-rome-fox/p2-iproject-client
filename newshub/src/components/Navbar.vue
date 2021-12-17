@@ -66,6 +66,9 @@ export default {
     if (localStorage.getItem("role") === "admin"){
       this.mutateUserRole("admin")
     }
+    if (localStorage.getItem("role") === "user"){
+      this.mutateUserRole("user")
+    }
   }
 };
 </script>
