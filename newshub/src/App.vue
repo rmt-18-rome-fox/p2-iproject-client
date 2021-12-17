@@ -13,10 +13,21 @@
 <script>
 import Navbar from "./components/Navbar.vue";
 import HFooter from "vue-hacktiv8-footer";
+import {mapMutations} from "vuex";
 
 export default {
   name: "App",
   components: { Navbar, HFooter },
+  methods: {
+    ...mapMutations({
+      mutateIsLoggedIn: "MUTATE_ISLOGGEDIN"
+    }),
+    created() {
+    if (localStorage.getItem("access_token")){
+      this.mutateIsLoggedIn(true)
+    }
+  },
+  }
 };
 </script>
 

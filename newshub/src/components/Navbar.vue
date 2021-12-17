@@ -17,7 +17,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item href="#" v-on:click.prevent="goToAdminLogin" v-if="!isLoggedIn">Sign In Admin</b-nav-item> &nbsp; 
         <b-nav-item href="#" v-on:click.prevent="goToLogin" v-if="!isLoggedIn">Sign In</b-nav-item> &nbsp; 
-        <b-nav-item href="#" v-on:click.prevent="signOutHandler" v-if="isLoggedIn"
+        <b-nav-item href="#" v-on:click.prevent="signOutHandler" 
           >Sign Out</b-nav-item
         >
       </b-navbar-nav>

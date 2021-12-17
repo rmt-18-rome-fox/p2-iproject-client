@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://server-newshub.herokuapp.com/";
+const API_URL = "https://project-newshub.web.app/";
 
 const instance = axios.create({
   baseURL: API_URL,
