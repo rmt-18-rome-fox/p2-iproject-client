@@ -8,12 +8,14 @@
     tag="article"
     style="max-width: 20rem;"
     class="mb-2 mx-2 mt-1"
+    v-if="!deleted"
   >
     <!-- <b-card-text>
       {{article.title}}
     </b-card-text> -->
 
     <b-button variant="success" @click="detailsHandler">Details</b-button>
+    <b-button class="ml-1" variant="danger" @click="deleteHandler" v-if="userRole === 'admin'">Delete</b-button>
   </b-card>
 
   <!-- <b-card no-body class="overflow-hidden" style="max-width: 540px;">
@@ -32,12 +34,25 @@
 </template>
 
 <script>
-
+import {mapActions, mapState} from "vuex";
 
 export default {
     name: "Homecard",
     props: ["article"],
+    data() {
+      return {
+        deleted: false
+      }
+    },
+    computed: {
+      ...mapState(["userRole"])
+    },
     methods: {
+      ...mapActions(["deleteArticle"]),
+      async deleteHandler() {
+      await this.deleteArticle(this.article.id)
+      this.deleted = true
+    },
         detailsHandler() {
             this.$router.push({name: "ArticleDetail", params: {id: this.article.id}})
         }

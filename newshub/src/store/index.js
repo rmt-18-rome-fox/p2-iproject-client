@@ -35,6 +35,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    async deleteArticle(context, payload) {
+      try {
+        await axiosArticles.delete(`/articles/${payload}`, {
+          headers: {
+            access_token: localStorage.getItem("access_token")
+          }
+        })
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async loginWithGoogle(context, payload) {
       try {
         const response = await axiosArticles.post("/admins/authgoogle", {
