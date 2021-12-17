@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h1>Allhandsondeck</h1>
     <div class="container">
       <Container></Container>
     </div>
@@ -76,5 +77,8 @@ button {
 input {
   margin: 10px;
   width: 60%;
+}
+h1 {
+  margin-left: 100px;
 }
 </style>

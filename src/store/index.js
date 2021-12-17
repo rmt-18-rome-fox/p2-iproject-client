@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     messages: [],
     identifier: 'Guest',
-    canvasUrl: ''
+    canvasUrl: '',
+    loading: false
   },
   mutations: {
     PUSH_MESSAGES: function (state, payload) {
@@ -23,28 +24,38 @@ export default new Vuex.Store({
     },
     SET_CANVASURL: function (state, payload) {
       state.canvasUrl = payload
+    },
+    SET_LOADING: function (state, payload = false) {
+      state.loading = payload
     }
   },
   actions: {
     postMeeting: function (context, payload) {
-      const { state } = context
-
-      axie({
-        method: 'post',
-        url: '/meetings',
-        data: {
-          identifier: state.identifier,
-          messages: state.messages,
-          image: state.canvasUrl
-        }
+      const { state, commit } = context
+      return new Promise(function (resolve, reject) {
+        commit('SET_LOADING', true)
+        axie({
+          method: 'post',
+          url: '/meetings',
+          data: {
+            identifier: state.identifier,
+            messages: state.messages,
+            image: state.canvasUrl
+          }
+        })
+          .then(response => {
+            state.identifier = ''
+            state.messages = []
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+          .finally(() => {
+            commit('SET_LOADING')
+          })
       })
-        .then(response => {
-          state.identifier = ''
-          state.messages = []
-        })
-        .catch(error => {
-          console.log(error)
-        })
     }
   },
   modules: {

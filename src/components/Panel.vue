@@ -18,6 +18,11 @@ export default {
   methods: {
     updateIdentifier: function () {
       this.$store.commit('SET_IDENTIFIER', this.identifier)
+      this.$fire({
+        text: `Your identifier is set to ${this.identifier}`,
+        type: 'success',
+        timer: 2000
+      })
     },
     finish: function () {
     }

@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueSocketIO from 'vue-socket.io'
+import VueSimpleAlert from 'vue-simple-alert'
 
 const options = {
   withCredentials: true
@@ -21,6 +22,8 @@ Vue.use(new VueSocketIO({
 }))
 
 Vue.config.productionTip = false
+
+Vue.use(VueSimpleAlert)
 
 new Vue({
   router,

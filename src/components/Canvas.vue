@@ -7,8 +7,7 @@
     />
     <div class="input">
       <button class="btn btn-outline-dark" @click="reset">Reset</button>
-      <!-- <input @change="uploadImage" class="form-control" type="file" id="formFile" accept="image/*"> -->
-      <button class="btn btn-outline-dark" @click="finish()">Save board</button>
+      <button class="btn btn-outline-dark" @click="finish">Save board</button>
     </div>
   </div>
 </template>
@@ -94,16 +93,23 @@ export default {
     finish () {
       const canvas = this.$el.childNodes[0]
       this.canvasUrl = canvas.toDataURL('image/jpg')
-      console.log(this.canvasUrl)
       this.$store.commit('SET_CANVASURL', this.canvasUrl)
       this.$store.dispatch('postMeeting')
+        .then(response => {
+          this.$fire({
+            text: `${response.data.message}, link below`,
+            footer: response.data.link,
+            type: 'success'
+          })
+        })
+        .catch(error => {
+          this.$fire({
+            text: error.response.data.message,
+            type: 'error',
+            timer: 2500
+          })
+        })
     }
-    // uploadImage: function (e) {
-    //   // ini nerima file terus masukin ke image
-    //   const file = e.target.files[0]
-    //   this.image = file
-    //   this.imageUrl = URL.createObjectURL(file)
-    // }
   },
   mounted () {
     this.scope = new paper.PaperScope()
