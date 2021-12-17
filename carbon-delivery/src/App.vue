@@ -2,13 +2,15 @@
   <div>
     <Navbar />
     <router-view />
-    <HFooter class="" />
+    <div class="absolute bottom-0 w-full">
+      <HFooter class="bg-red-500" />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
-import HFooter from 'vue-hacktiv8-footer'
+import HFooter from './components/vue-hacktiv-footer.vue'
 
 export default {
   components: {

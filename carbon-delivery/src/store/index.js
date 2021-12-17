@@ -33,9 +33,10 @@ export default new Vuex.Store({
   },
   actions: {
     calculate({ dispatch }, { originQuery, destQuery, weight }) {
+      console.log('ini querynya:', originQuery, destQuery)
       return new Promise((resolve, reject) => {
         axios({
-          method: "GET",
+          method: "POST",
           url: `${baseUrl}/api/mapbox`,
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -45,11 +46,9 @@ export default new Vuex.Store({
             destQuery
           }
         })
-          .then(({ data }) => {
-            let distance = data.routes[0].distance / 1000;
-            const origin = data.routes[0].legs[0].summary.split(',')[0]
-            const destination = data.routes[0].legs[0].summary.split(',')[1]
-            return dispatch("getCarbonFootprint", {distance, weight, origin, destination});
+          .then(({data}) => {
+            data.weight =  weight
+            return dispatch("getCarbonFootprint", data);
           })
           .then((response) => {
             console.log("masuk", response);
@@ -61,15 +60,16 @@ export default new Vuex.Store({
             resolve(carbonEmitted);
           })
           .catch((err) => {
+            console.log('err message: ', err)
             reject(err)
           });
       });
     },
     getCarbonFootprint({ commit }, {distance, weight, origin, destination}) {
-      
+      console.log({distance, weight, origin, destination})
       return new Promise((resolve, reject) => {
         axios({
-          method: "GET",
+          method: "POST",
           url: `${baseUrl}/api/carbon-interface`,
           headers: {
             access_token: localStorage.getItem('access_token'),
@@ -86,12 +86,11 @@ export default new Vuex.Store({
               origin, 
               destination 
             }
-            console.log('migration success')
             commit('SET_MOST_RECENT_DATA', routeDetail)
             resolve(response);
           })
           .catch((err) => {
-            reject(err);
+            reject(err.response.data.message);
           });
       });
     },

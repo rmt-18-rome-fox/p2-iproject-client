@@ -7,6 +7,9 @@
         <div v-if="unfilled || weightInvalid" class="self-center p-1 text-sm w-2/3 justify-self-center text-center bg-red-300 rounded-lg text-gray-900">
             {{unfilled ? `Fill in the locations first :)` : `:)`}}
         </div>
+        <div v-if="reqLimit" class="self-center p-1 text-sm w-2/3 justify-self-center text-center bg-red-300 rounded-lg text-gray-900">
+            The server has reached a maximum request limit. Sorry for the inconvenience
+        </div>
         </transition>
         <label class="row-start-2 text-white text-center"
           >Shipment weight (Kg)</label
@@ -79,7 +82,8 @@ export default {
       carbonEmitted: 0,
       sayLogin: false,
       weightInvalid: false,
-      postedHistory: false
+      postedHistory: false,
+      reqLimit: false
     };
   },
   computed: {
@@ -149,6 +153,7 @@ export default {
         this.load = true;
         this.sayLogin = false
         this.postedHistory = false
+        this.reqLimit = false
   
         this.originCoord = localStorage.getItem("originCoord");
         this.destinationCoord = localStorage.getItem("destCoord");
@@ -166,14 +171,20 @@ export default {
             weight,
           };
 
-          this.$store.dispatch("calculate", payload).then((carbonEmitted) => {
+          this.$store.dispatch("calculate", payload)
+          .then((carbonEmitted) => {
             this.carbonEmitted = carbonEmitted;
             this.load = false;
             this.success = true;
             setTimeout(() => {
               this.sayLogin = true
             }, 1500);
-          });
+          })
+          .catch((err) => {
+            console.log('message for server :', err)
+            this.load = false
+            this.reqLimit = true
+          })
         }
 
       }
