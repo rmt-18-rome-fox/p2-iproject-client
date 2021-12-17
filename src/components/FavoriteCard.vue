@@ -6,7 +6,7 @@
       <div>
         <img
           class="rounded w-auto mb-6 mx-auto"
-          src="https://www.edamam.com/web-img/b4a/b4ae00d32a239d3d78019cce21ae2c88.jpg"
+          :src="item.image"
           alt="content"
         />
         <h3
@@ -17,12 +17,10 @@
             title-font
           "
         >
-          Main Course
+          {{ item.dishType }}
         </h3>
-        <h2
-          class="text-lg text-gray-900 text-center font-medium title-font"
-        >
-          Foodify
+        <h2 class="text-lg text-gray-900 text-center font-medium title-font">
+          {{ item.label }}
         </h2>
       </div>
       <button
@@ -41,7 +39,7 @@
           text-lg
         "
       >
-        Delete 
+        Delete
       </button>
     </div>
   </div>
@@ -50,7 +48,8 @@
 <script>
 export default {
   name: "FavoriteCard",
-  // props: ["item"],
+
+  props: ["item"],
 };
 </script>
 

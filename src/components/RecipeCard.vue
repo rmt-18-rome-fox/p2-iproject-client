@@ -24,6 +24,13 @@
         </h2>
       </div>
       <button
+        @click="
+          addFavourite({
+            label: item.recipe.label,
+            image: item.recipe.image,
+            dishType: item.recipe.dishType[0],
+          })
+        "
         class="
           flex
           mx-auto
@@ -71,9 +78,16 @@ export default {
   methods: {
     goToRecipeDetail(payload) {
       this.$store.dispatch("getDetailsRecipe", payload).then(() => {
-        this.$router.push(`/recipe-details/${payload}`)
-      })
-      console.log(payload, "<<<< ini index recipe")
+        this.$router.push(`/recipe-details/${payload}`);
+      });
+      console.log(payload, "<<<< ini index recipe");
+    },
+    addFavourite({ label, image, dishType }) {
+      this.$store
+        .dispatch("postFavourite", { label, image, dishType })
+        .then(() => {
+          this.$router.push(`/favorite/${label}`);
+        });
     },
   },
 };

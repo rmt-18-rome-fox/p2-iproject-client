@@ -56,6 +56,7 @@
           <dt class="text-sm text-left ml-auto font-medium text-gray-500">
             Ingredients :
           </dt>
+          <button @click="readIngredients(recipeDetail.ingredientLines)">Read Ingredients</button>
           <ul>
             <li
               v-for="(item, idx) in recipeDetail.ingredientLines"
@@ -131,6 +132,14 @@ export default {
       return this.$store.state.recipeDetail;
     },
   },
+  methods: {
+    readIngredients(text) {
+      this.$store.dispatch("readIngredients", text)
+    }
+  },
+  created() {
+    this.$store.dispatch("getDetailsRecipe")
+  }
 };
 </script>
 

@@ -3,6 +3,7 @@ import Vuex from "vuex"
 // import VueAuthenticate from 'vue-authenticate'
 import VueSpeech from "vue-speech"
 import axios from "axios"
+import router from "../router/index"
 
 Vue.use(Vuex)
 Vue.use(VueSpeech)
@@ -16,7 +17,8 @@ export default new Vuex.Store({
 		recipeDetail: {},
 		favorites: [],
 		apiUrl: "https://api.edamam.com/search",
-		baseUrl: "https://ip-foodify.herokuapp.com",
+		// baseUrl: "https://ip-foodify.herokuapp.com",
+		baseUrl: "http://localhost:3000",
 		isLoggedIn: false,
 	},
 	mutations: {
@@ -27,11 +29,11 @@ export default new Vuex.Store({
 			state.isLoggedIn = payload
 		},
 		SET_RECIPES_BY_ID(state, payload) {
-      state.recipeDetail = payload
-    },
+			state.recipeDetail = payload
+		},
 		SET_FAVORITES(state, payload) {
-      state.favorites = payload
-    },
+			state.favorites = payload
+		},
 	},
 	actions: {
 		async getRandomRecipes({ state, commit }) {
@@ -54,7 +56,7 @@ export default new Vuex.Store({
 				commit("SET_RECIPES", [])
 			}
 		},
-		async getDetailsRecipe({state, commit}, payload) {
+		async getDetailsRecipe({ state, commit }, payload) {
 			try {
 				let response = await axios.get(`${state.apiUrl}?app_id=77c1ea2e&app_key=b22bf21dd9e8f582274c54a7634b2a49&q=${payload}`, {
 					params: {
@@ -68,14 +70,52 @@ export default new Vuex.Store({
 			} catch (err) {
 				console.log(err)
 			}
-		}
-		// async doLogin({commit}) {
-		//   try {
-		//     let response = await axios.post()
-		//   } catch (err) {
-
-		//   }
-		// }
+		},
+		async postFavourite({ state }, { label, image, dishType }) {
+			try {
+				let response = await axios.post(
+					`${state.baseUrl}/favourites`,
+					{
+						label,
+						image,
+						dishType,
+					},
+					{ headers: { access_token: localStorage.access_token } }
+				)
+			} catch (err) {
+				console.log({ err })
+			}
+		},
+		doLogin({ state }, payload) {
+			return axios.post(`${state.baseUrl}/login`, payload)
+		},
+		async getFavourites({ state, commit }) {
+			try {
+				let response = await axios.get(`${state.baseUrl}/favourites`, {
+					headers: { access_token: localStorage.access_token },
+				})
+				console.log(response.data, "<<<< response dari get favorite")
+				commit("SET_FAVORITES", response.data)
+			} catch (err) {
+				console.log(err)
+			}
+		},
+		async readIngredients({ state }, text) {
+			try {
+				let response = await axios.get(
+					`${state.baseUrl}/foodify/recipe-reader`,
+					{
+						headers: { access_token: localStorage.access_token },
+					},
+					{ text }
+				)
+				console.log(text);
+				let audio = new Audio(response.data)
+				audio.play()
+			} catch (err) {
+				console.log(err)
+			}
+		},
 	},
 	modules: {},
 })

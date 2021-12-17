@@ -15,7 +15,7 @@ const routes = [
     component: () => import('../views/Login.vue'),
   },
   {
-    path: '/favorite',
+    path: '/favorite/:label',
     name: 'Favorite',
     component: () => import('../views/Favorite.vue'),
   },
