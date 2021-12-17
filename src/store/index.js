@@ -2,8 +2,8 @@ import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Swal from 'sweetalert2'
-// let baseURL = 'https://halita-kanban.herokuapp.com'
-let baseURL = 'http://localhost:8000'
+let baseURL = 'https://halita-kanban.herokuapp.com'
+// let baseURL = 'http://localhost:8000'
 
 Vue.use(Vuex)
 
