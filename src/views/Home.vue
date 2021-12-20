@@ -77,7 +77,12 @@ export default {
     onMove: function (payload, payload2) {
       const noteId = payload.draggedContext.element.id
       const oldStatus = payload.draggedContext.element.status
-      const newStatus = payload2.originalTarget.className.split(' ')[1] || payload2.originalTarget.id
+      let newStatus
+      if (!payload2.originalTarget) {
+        newStatus = payload2.target.className.split(' ')[1] || payload2.target.id
+      } else {
+        newStatus = payload2.originalTarget.className.split(' ')[1] || payload2.originalTarget.id
+      }
       
       if (oldStatus !== newStatus) {
         this.$store.dispatch('patchNote', {
@@ -91,7 +96,6 @@ export default {
     }
   },
   created: function () {
-    console.log(this.$cookie, 'COOKIE');
     this.$store.dispatch('getNotes')
       .then(() => {
         this.fresh = this.freshNotes
