@@ -1,0 +1,123 @@
+/* 
+      main color: 
+        - Coklat tua: #4b450e
+        - Ijo army: #bfd973 
+        - Warna kulit (bg): #fcf1cf
+        - Kuning semi-tua: #dbb736
+        - Putih: #fff
+
+    */
+body {
+  color: #fff;
+}
+
+/* CSS LOGIN FORM */
+
+.semi-body-login {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fcf1cf;
+}
+.container1-login {
+  justify-content: center;
+  align-items: center;
+}
+.container2-login {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.main-container-login {
+  background-color: #bfd973;
+  width: 75vw;
+  height: 75vh;
+  border-radius: 40px;
+}
+.container2-login h1 {
+  color: #4b450e;
+}
+.container2-login .btn-signin {
+  background-color: #4b450e;
+  border-color: #4b450e;
+}
+.container2-login .btn-signin:hover {
+  background-color: #dbb736;
+  border-width: 1px;
+  color: #4b450e;
+  font-weight: bold;
+}
+.container2-login .to-register {
+  color: #4b450e;
+}
+.container2-login .to-register:hover {
+  font-weight: bold;
+}
+
+/* CSS REGISTER FORM */
+
+.semi-body-register {
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  background-color: #fcf1cf;
+}
+.container1-register {
+  justify-content: center;
+  align-items: center;
+}
+.container2-register {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.main-container-register {
+  background-color: #bfd973;
+  width: 75vw;
+  /* height: 75vh; */
+  border-radius: 40px;
+}
+.container2-register h1 {
+  color: #4b450e;
+}
+.container2-register .btn-signin {
+  background-color: #4b450e;
+  border-color: #4b450e;
+}
+.container2-register .btn-signin:hover {
+  background-color: #dbb736;
+  border-width: 1px;
+  color: #4b450e;
+  font-weight: bold;
+}
+.container2-register .to-login {
+  color: #4b450e;
+}
+.container2-register .to-login:hover {
+  font-weight: bold;
+}
+
+/* CSS NAVBAR */
+.navbar {
+  background-color: #bfd973;
+  color: blue;
+}
+
+/* CSS HOME PAGE */
+.main-container-home {
+  background-color: #fcf1cf;
+  color: #4b450e;
+  /* height: 100vh; */
+}
+
+.main-container-home .btn-buy {
+  background-color: #4b450e;
+  border-color: #4b450e;
+}
+
+.main-container-home .btn-buy:hover {
+  background-color: #dbb736;
+  color: #4b450e;
+  border-color: #dbb736;
+  font-weight: bold;
+}
