@@ -3,7 +3,7 @@
     <div v-if="anime.title" class="w-5/6 containter text-white mx-auto pt-4 p-4 flex-col justify-center flex bg-black mt-10 rounded-3xl">
       <h1 class="text-center mt-10">{{anime.title}}</h1>
       <div class="flex justify-center">
-        <img :src="anime.image_url" class="rounded-3xl mt-10 my-20" alt="" style="height: 500px;">
+        <img :src="anime.images.jpg.image_url" class="rounded-3xl mt-10 my-20" alt="" style="height: 500px;">
       </div>
       <div>
         <p>Synopsis</p>
@@ -33,7 +33,7 @@
           <iframe
           width="540"
           height="270"
-          :src="anime.trailer_url"
+          :src="anime.trailer.embed_url"
           title="MatteAnime"
           frameborder="2"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -41,7 +41,7 @@
           ></iframe>
         </div>
       </div>
-      <button class="bg-yellow-400 text-black rounded-xl mb-5  hover:bg-yellow-600 px-4 py-2" @click.prevent="addToWatchList(anime.mal_id, anime.title, anime.image_url)">WatchList</button>
+      <button class="bg-yellow-400 text-black rounded-xl mb-5  hover:bg-yellow-600 px-4 py-2" @click.prevent="addToWatchList(anime.mal_id, anime.title, anime.images.jpg.image_url)">WatchList</button>
     </div>
   </div>
 </template>
@@ -86,14 +86,11 @@ export default {
     },
     readSynopsis(text){
       this.$store.dispatch("readSynopsis", text)
-      .then((res) => {
-        console.log('succes');
-      })
       .catch((err) => {
         swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Something went wrong!',
+          text: 'Playing synopsis failed',
         })
       })
     }

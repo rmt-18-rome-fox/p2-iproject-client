@@ -46,13 +46,6 @@ export default {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight >=
           document.documentElement.offsetHeight - 1;
-
-        console.log({
-          bottomOfWindow,
-          scroll: document.documentElement.scrollTop,
-          innerHeight: window.innerHeight,
-          offsetHeight: document.documentElement.offsetHeight
-        });
         if (bottomOfWindow) {
           axios.get(`https://randomuser.me/api/`).then((response) => {
             this.users.push(response.data.results[0]);

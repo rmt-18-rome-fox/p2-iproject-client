@@ -36,13 +36,11 @@ export default new Vuex.Store({
         localUrl
           .post("/login", { email, password })
           .then(({ data }) => {
-            console.log({ data });
             localStorage.setItem("access_token", data.access_token);
             commit("SET_IS_LOGIN", true);
             resolve();
           })
           .catch((err) => {
-            console.log({ err });
             reject(err);
           });
       });
@@ -52,49 +50,48 @@ export default new Vuex.Store({
         localUrl
           .post("/register", { email, password, fullName })
           .then(({ data }) => {
-            console.log({ data });
             resolve();
           })
           .catch((err) => {
-            console.log({ err });
             reject(err);
           });
       });
     },
     fetchAnimes({ commit }, payload) {
-      jikanUrl
-        .get("/top/anime/1")
+      return new Promise((resolve, reject) => {
+        jikanUrl
+        .get(`/top/anime?limit=24&page=1`)
         .then(({ data }) => {
-          console.log({ ini: data.top });
-          commit("SET_TOP_ANIMES", data.top);
+          commit("SET_TOP_ANIMES", data.data);
         })
         .catch((err) => {
-          console.log({ err });
+          reject(err)
         });
+      })
     },
     fetchAnimesNext({ commit }, pageJikan) {
-      jikanUrl
-        .get(`/top/anime/${pageJikan}`)
-        .then(({ data }) => {
-          console.log({ ini: data.top });
-          // commit("SET_TOP_ANIMES", data.top);
-          commit("PUSH_TOP_ANIMES", data.top);
-        })
-        .catch((err) => {
-          console.log({ err });
-        });
+      return new Promise((resolve, reject) => {
+        jikanUrl
+          .get(`/top/anime?limit=24&page=${pageJikan}`)
+          .then(({ data }) => {
+            commit("PUSH_TOP_ANIMES", data.data);
+          })
+          .catch((err) => {
+            reject(err)
+          });
+      })
     },
     animeDetail({ commit }, jikanAnimeId) {
-      console.log("masuk");
-      jikanUrl
-        .get(`/anime/${jikanAnimeId}`)
-        .then(({ data }) => {
-          console.log({ data });
-          commit("SET_CHOOSEN_ANIMES", data);
-        })
-        .catch(({ err }) => {
-          console.log({ err });
-        });
+      return new Promise((resolve, reject) => {
+        jikanUrl
+          .get(`/anime/${jikanAnimeId}`)
+          .then(({ data }) => {
+            commit("SET_CHOOSEN_ANIMES", data.data);
+          })
+          .catch(({ err }) => {
+            reject(err)
+          });
+      })
     },
     addToWatchList({ commit }, { JikanAnimeId, title, image_url }) {
       return new Promise((resolve, reject) => {
@@ -118,11 +115,9 @@ export default new Vuex.Store({
           headers: { access_token: localStorage.getItem("access_token") },
         })
         .then(({ data }) => {
-          // console.log({data});
           commit("SET_WATCH_LISTS", data);
         })
         .catch((err) => {
-          console.log({ err });
         });
     },
     updateStatus({ commit }, { status, JikanAnimeId }) {
@@ -134,11 +129,9 @@ export default new Vuex.Store({
             { headers: { access_token: localStorage.getItem("access_token") } }
           )
           .then((res) => {
-            console.log({ res });
             resolve();
           })
           .catch((err) => {
-            console.log({ err });
             reject(err);
           });
       });
@@ -153,7 +146,6 @@ export default new Vuex.Store({
             resolve();
           })
           .catch((err) => {
-            console.log({ err });
             reject(err);
           });
       });
@@ -163,13 +155,11 @@ export default new Vuex.Store({
         localUrl
           .post("/synopsis-reader", { text })
           .then(({data}) => {
-            console.log({data});
             const audio = new Audio(data.data)
             audio.play()
             resolve()
           })
           .catch((err) => {
-            console.log({ err });
             reject()
           });
       })

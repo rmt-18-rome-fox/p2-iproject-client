@@ -65,7 +65,6 @@ export default {
     doRegister(){
       this.$store.dispatch("doRegister", {email: this.email, password: this.password, fullName: this.fullName})
       .then((res) => {
-        console.log('masuk swal');
         swal.fire({
           icon: 'success',
           title: 'Success Regist',

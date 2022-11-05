@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 import facebookLogin from 'facebook-login-vuejs';
 
 export default {
@@ -71,9 +71,7 @@ export default {
     doLogin(){
       this.$store.dispatch("doLogin", {email: this.email, password:this.password})
       .then((res) => {
-        console.log({res});
-        console.log('masuk swal');
-        swal.fire({
+        Swal.fire({
           icon: 'success',
           text: 'Success Login'
           })
@@ -81,13 +79,13 @@ export default {
       })
       .catch((err) => {
         if(err.response.data.message){
-          swal.fire({
+          Swal.fire({
             icon: 'error',
             text: err.response.data.message
           })
         }
         else {
-          swal.fire({
+          Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!'
