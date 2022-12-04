@@ -52,7 +52,7 @@ export default {
     },
   },
   beforeMount() {
-    this.$store.dispatch("fetchAnimes", this.$store.state.pageJikan + 1)
+    this.$store.dispatch("fetchAnimes", this.$store.state.pageJikan)
   },
   mounted() {
     this.getNextUser();

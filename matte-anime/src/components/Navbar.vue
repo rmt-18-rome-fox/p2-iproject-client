@@ -94,13 +94,6 @@ export default {
       this.$store.commit('SET_IS_LOGIN', false)
     }
   },
-  // data () {
-  //   return {
-  //     search: '',
-  //     sortBy: 'sortBy',
-  //     category: 0
-  //   }
-  // },
   methods: {
     doLogout () {
       localStorage.clear()
@@ -111,15 +104,6 @@ export default {
         text:'You hasbeen Logout'
         })
     },
-    // doCategory () {
-    //   this.$store.dispatch('fetchNews', { page: 1, categoryId: this.category })
-    // },
-    // doSortBy () {
-    //   this.$store.dispatch('fetchNews', { page: 1, orderBy: this.sortBy })
-    // },
-    // doSearch () {
-    //   this.$store.dispatch('fetchNews', { page: 1, search: this.search })
-    // }
   },
   computed: {
     isLogin () {

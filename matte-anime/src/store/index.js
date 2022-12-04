@@ -29,6 +29,9 @@ export default new Vuex.Store({
     SET_WATCH_LISTS(state, payload) {
       state.watchLists = payload;
     },
+    SET_PAGE_JIKAN(state, payload) {
+      state.pageJikan = payload;
+    },
   },
   actions: {
     doLogin({ commit }, { email, password }) {
@@ -75,6 +78,7 @@ export default new Vuex.Store({
           .get(`/top/anime?limit=24&page=${pageJikan}`)
           .then(({ data }) => {
             commit("PUSH_TOP_ANIMES", data.data);
+            commit("SET_PAGE_JIKAN", pageJikan)
           })
           .catch((err) => {
             reject(err)
